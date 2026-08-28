@@ -1,0 +1,1960 @@
+{
+  "module": "conversations",
+  "endpoints": [
+    {
+      "name": "conversations_search_conversation",
+      "module": "conversations",
+      "method": "GET",
+      "path": "/conversations/search",
+      "version": "2021-04-15",
+      "summary": "Search Conversations",
+      "description": "Search Conversations Returns a list of all conversations matching the search criteria along with the sort and filter options selected. [GET /conversations/search] Scopes: conversations.readonly.",
+      "scopes": [
+        "conversations.readonly"
+      ],
+      "access": "unknown",
+      "operationClass": "read",
+      "deprecated": false,
+      "pathFields": [],
+      "queryFields": [
+        "locationId",
+        "contactId",
+        "assignedTo",
+        "followers",
+        "mentions",
+        "query",
+        "sort",
+        "startAfterDate",
+        "id",
+        "limit",
+        "lastMessageType",
+        "lastMessageAction",
+        "lastMessageDirection",
+        "status",
+        "sortBy",
+        "sortScoreProfile",
+        "scoreProfile",
+        "scoreProfileMin",
+        "scoreProfileMax",
+        "startDate",
+        "endDate"
+      ],
+      "bodyFields": [],
+      "bodyWrapped": false,
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "locationId": {
+            "type": "string",
+            "description": "Location Id"
+          },
+          "contactId": {
+            "type": "string",
+            "description": "Contact Id"
+          },
+          "assignedTo": {
+            "type": "string",
+            "description": "User IDs that conversations are assigned to. Multiple IDs can be provided as comma-separated values. Use \"unassigned\" to fetch conversations not assigned to any user."
+          },
+          "followers": {
+            "type": "string",
+            "description": "User IDs of followers to filter conversations by. Multiple IDs can be provided as comma-separated values."
+          },
+          "mentions": {
+            "type": "string",
+            "description": "User Id of the mention. Multiple values are comma separated."
+          },
+          "query": {
+            "type": "string",
+            "description": "Search paramater as a string"
+          },
+          "sort": {
+            "enum": [
+              "asc",
+              "desc"
+            ],
+            "type": "string",
+            "description": "Sort paramater - asc or desc"
+          },
+          "startAfterDate": {
+            "description": "Search to begin after the specified date - should contain the sort value of the last document"
+          },
+          "id": {
+            "type": "string",
+            "description": "Id of the conversation"
+          },
+          "limit": {
+            "type": "number",
+            "description": "Limit of conversations - Default is 20"
+          },
+          "lastMessageType": {
+            "enum": [
+              "TYPE_CALL",
+              "TYPE_SMS",
+              "TYPE_RCS",
+              "TYPE_EMAIL",
+              "TYPE_SMS_REVIEW_REQUEST",
+              "TYPE_WEBCHAT",
+              "TYPE_SMS_NO_SHOW_REQUEST",
+              "TYPE_CAMPAIGN_SMS",
+              "TYPE_CAMPAIGN_CALL",
+              "TYPE_CAMPAIGN_EMAIL",
+              "TYPE_CAMPAIGN_VOICEMAIL",
+              "TYPE_FACEBOOK",
+              "TYPE_CAMPAIGN_FACEBOOK",
+              "TYPE_CAMPAIGN_MANUAL_CALL",
+              "TYPE_CAMPAIGN_MANUAL_SMS",
+              "TYPE_GMB",
+              "TYPE_CAMPAIGN_GMB",
+              "TYPE_REVIEW",
+              "TYPE_INSTAGRAM",
+              "TYPE_WHATSAPP",
+              "TYPE_CUSTOM_SMS",
+              "TYPE_CUSTOM_EMAIL",
+              "TYPE_CUSTOM_PROVIDER_SMS",
+              "TYPE_CUSTOM_PROVIDER_EMAIL",
+              "TYPE_IVR_CALL",
+              "TYPE_ACTIVITY_CONTACT",
+              "TYPE_ACTIVITY_INVOICE",
+              "TYPE_ACTIVITY_PAYMENT",
+              "TYPE_ACTIVITY_OPPORTUNITY",
+              "TYPE_LIVE_CHAT",
+              "TYPE_LIVE_CHAT_INFO_MESSAGE",
+              "TYPE_ACTIVITY_APPOINTMENT",
+              "TYPE_FACEBOOK_COMMENT",
+              "TYPE_INSTAGRAM_COMMENT",
+              "TYPE_CUSTOM_CALL",
+              "TYPE_INTERNAL_COMMENT",
+              "TYPE_ACTIVITY_EMPLOYEE_ACTION_LOG",
+              "TYPE_TIKTOK",
+              "TYPE_TIKTOK_COMMENT",
+              "TYPE_ACTIVITY_WHATSAPP",
+              "TYPE_FORM_SUBMISSION",
+              "TYPE_SMS_REACTION"
+            ],
+            "type": "string",
+            "description": "Type of the last message in the conversation as a string"
+          },
+          "lastMessageAction": {
+            "enum": [
+              "automated",
+              "manual"
+            ],
+            "type": "string",
+            "description": "Action of the last outbound message in the conversation as string."
+          },
+          "lastMessageDirection": {
+            "enum": [
+              "inbound",
+              "outbound"
+            ],
+            "type": "string",
+            "description": "Direction of the last message in the conversation as string."
+          },
+          "status": {
+            "enum": [
+              "all",
+              "read",
+              "unread",
+              "starred",
+              "recents"
+            ],
+            "type": "string",
+            "description": "The status of the conversation to be filtered - all, read, unread, starred"
+          },
+          "sortBy": {
+            "enum": [
+              "last_manual_message_date",
+              "last_message_date",
+              "score_profile",
+              "overdue_at",
+              "due_at"
+            ],
+            "type": "string",
+            "description": "The sorting of the conversation to be filtered as - manual messages or all messages"
+          },
+          "sortScoreProfile": {
+            "type": "string",
+            "description": "Id of score profile on which sortBy.ScoreProfile should sort on"
+          },
+          "scoreProfile": {
+            "type": "string",
+            "description": "Id of score profile on which conversations should get filtered out, works with scoreProfileMin & scoreProfileMax"
+          },
+          "scoreProfileMin": {
+            "type": "number",
+            "description": "Minimum value for score"
+          },
+          "scoreProfileMax": {
+            "type": "number",
+            "description": "Maximum value for score"
+          },
+          "startDate": {
+            "type": "number",
+            "description": "Start date filter for dateAdded field (Unix timestamp in milliseconds)"
+          },
+          "endDate": {
+            "type": "number",
+            "description": "End date filter for dateAdded field (Unix timestamp in milliseconds)"
+          }
+        },
+        "required": [
+          "locationId"
+        ]
+      }
+    },
+    {
+      "name": "conversations_get_conversation",
+      "module": "conversations",
+      "method": "GET",
+      "path": "/conversations/{conversationId}",
+      "version": "2021-04-15",
+      "summary": "Get Conversation",
+      "description": "Get Conversation Get the conversation details based on the conversation ID [GET /conversations/{conversationId}] Scopes: conversations.readonly.",
+      "scopes": [
+        "conversations.readonly"
+      ],
+      "access": "unknown",
+      "operationClass": "read",
+      "deprecated": false,
+      "pathFields": [
+        "conversationId"
+      ],
+      "queryFields": [],
+      "bodyFields": [],
+      "bodyWrapped": false,
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "conversationId": {
+            "type": "string",
+            "description": "Conversation ID as string"
+          }
+        },
+        "required": [
+          "conversationId"
+        ]
+      }
+    },
+    {
+      "name": "conversations_update_conversation",
+      "module": "conversations",
+      "method": "PUT",
+      "path": "/conversations/{conversationId}",
+      "version": "2021-04-15",
+      "summary": "Update Conversation",
+      "description": "Update Conversation Update the conversation details based on the conversation ID [PUT /conversations/{conversationId}] Scopes: conversations.write.",
+      "scopes": [
+        "conversations.write"
+      ],
+      "access": "unknown",
+      "operationClass": "write",
+      "deprecated": false,
+      "contentType": "application/json",
+      "pathFields": [
+        "conversationId"
+      ],
+      "queryFields": [],
+      "bodyFields": [
+        "locationId",
+        "unreadCount",
+        "starred",
+        "feedback"
+      ],
+      "bodyWrapped": false,
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "conversationId": {
+            "type": "string",
+            "description": "Conversation ID as string"
+          },
+          "locationId": {
+            "type": "string",
+            "description": "Location ID as string"
+          },
+          "unreadCount": {
+            "type": "number",
+            "description": "Count of unread messages in the conversation"
+          },
+          "starred": {
+            "type": "boolean",
+            "description": "Starred status of the conversation."
+          },
+          "feedback": {
+            "type": "object"
+          }
+        },
+        "required": [
+          "conversationId",
+          "locationId"
+        ]
+      }
+    },
+    {
+      "name": "conversations_delete_conversation",
+      "module": "conversations",
+      "method": "DELETE",
+      "path": "/conversations/{conversationId}",
+      "version": "2021-04-15",
+      "summary": "Delete Conversation",
+      "description": "Delete Conversation Delete the conversation details based on the conversation ID [DELETE /conversations/{conversationId}] Scopes: conversations.write.",
+      "scopes": [
+        "conversations.write"
+      ],
+      "access": "unknown",
+      "operationClass": "delete",
+      "deprecated": false,
+      "pathFields": [
+        "conversationId"
+      ],
+      "queryFields": [],
+      "bodyFields": [],
+      "bodyWrapped": false,
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "conversationId": {
+            "type": "string",
+            "description": "Conversation ID as string"
+          }
+        },
+        "required": [
+          "conversationId"
+        ]
+      }
+    },
+    {
+      "name": "conversations_get_all_custom_subtypes",
+      "module": "conversations",
+      "method": "GET",
+      "path": "/conversations/preferences/custom-subtypes",
+      "version": "2021-04-15",
+      "summary": "Get All Custom Subtypes",
+      "description": "Get All Custom Subtypes Get all custom subtypes for a location [GET /conversations/preferences/custom-subtypes]",
+      "scopes": [],
+      "access": "unknown",
+      "operationClass": "read",
+      "deprecated": false,
+      "pathFields": [],
+      "queryFields": [
+        "locationId"
+      ],
+      "bodyFields": [],
+      "bodyWrapped": false,
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "locationId": {
+            "type": "string",
+            "description": "Location Id"
+          }
+        },
+        "required": [
+          "locationId"
+        ]
+      }
+    },
+    {
+      "name": "conversations_create_custom_subtype",
+      "module": "conversations",
+      "method": "POST",
+      "path": "/conversations/preferences/custom-subtypes",
+      "version": "2021-04-15",
+      "summary": "Create Custom Subtype",
+      "description": "Create Custom Subtype Create a new custom subtype for a location. Requires agency or account admin role. [POST /conversations/preferences/custom-subtypes]",
+      "scopes": [],
+      "access": "unknown",
+      "operationClass": "write",
+      "deprecated": false,
+      "contentType": "application/json",
+      "pathFields": [],
+      "queryFields": [
+        "locationId"
+      ],
+      "bodyFields": [
+        "name",
+        "description",
+        "channel",
+        "language"
+      ],
+      "bodyWrapped": false,
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "locationId": {
+            "type": "string",
+            "description": "Location Id"
+          },
+          "name": {
+            "type": "string",
+            "description": "Name of the custom subtype (max 100 characters)",
+            "maxLength": 100
+          },
+          "description": {
+            "type": "string",
+            "description": "Description of the custom subtype (max 100 characters)",
+            "maxLength": 100
+          },
+          "channel": {
+            "type": "string",
+            "description": "Communication channel",
+            "enum": [
+              "email",
+              "sms"
+            ]
+          },
+          "language": {
+            "type": "string",
+            "description": "Language code"
+          }
+        },
+        "required": [
+          "locationId",
+          "name",
+          "channel",
+          "language"
+        ]
+      }
+    },
+    {
+      "name": "conversations_update_custom_subtype",
+      "module": "conversations",
+      "method": "PUT",
+      "path": "/conversations/preferences/custom-subtypes/{id}",
+      "version": "2021-04-15",
+      "summary": "Update Custom Subtype",
+      "description": "Update Custom Subtype Update or archive a custom subtype. Requires agency or account admin role. [PUT /conversations/preferences/custom-subtypes/{id}]",
+      "scopes": [],
+      "access": "unknown",
+      "operationClass": "write",
+      "deprecated": false,
+      "contentType": "application/json",
+      "pathFields": [
+        "id"
+      ],
+      "queryFields": [
+        "locationId"
+      ],
+      "bodyFields": [
+        "name",
+        "description",
+        "archived",
+        "resubscription_legal_form_id"
+      ],
+      "bodyWrapped": false,
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "Custom Subtype Id"
+          },
+          "locationId": {
+            "type": "string",
+            "description": "Location Id"
+          },
+          "name": {
+            "type": "string",
+            "description": "Name of the custom subtype (max 100 characters)",
+            "maxLength": 100
+          },
+          "description": {
+            "type": "string",
+            "description": "Description of the custom subtype (max 100 characters)",
+            "maxLength": 100
+          },
+          "archived": {
+            "type": "boolean",
+            "description": "Whether the custom subtype is archived"
+          },
+          "resubscription_legal_form_id": {
+            "type": "string",
+            "description": "Resubscription legal form ID (optional when archiving)"
+          }
+        },
+        "required": [
+          "id",
+          "locationId"
+        ]
+      }
+    },
+    {
+      "name": "conversations_get_contact_unsubscription_status",
+      "module": "conversations",
+      "method": "GET",
+      "path": "/conversations/preferences/unsubscriptions/status",
+      "version": "2021-04-15",
+      "summary": "Get Contact Unsubscription Status",
+      "description": "Get Contact Unsubscription Status Get all subscription statuses for a contact (all emails or specific email) [GET /conversations/preferences/unsubscriptions/status]",
+      "scopes": [],
+      "access": "unknown",
+      "operationClass": "read",
+      "deprecated": false,
+      "pathFields": [],
+      "queryFields": [
+        "locationId",
+        "contactId",
+        "email"
+      ],
+      "bodyFields": [],
+      "bodyWrapped": false,
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "locationId": {
+            "type": "string",
+            "description": "Location Id"
+          },
+          "contactId": {
+            "type": "string",
+            "description": "Contact Id"
+          },
+          "email": {
+            "type": "string",
+            "description": "Email address (optional - if not provided, gets all emails for contact)"
+          }
+        },
+        "required": [
+          "locationId",
+          "contactId"
+        ]
+      }
+    },
+    {
+      "name": "conversations_user_subscription_change",
+      "module": "conversations",
+      "method": "POST",
+      "path": "/conversations/preferences/unsubscriptions/user-change",
+      "version": "2021-04-15",
+      "summary": "User Subscription Change",
+      "description": "User Subscription Change Process subscription change initiated by a user (admin/agent). Supports individual custom subscription changes and resub all functionality. Legal forms are automatically created for user-initiated resubscribe actions on custom subscriptions. [POST /conversations/preferences/unsubscriptions/user-change]",
+      "scopes": [],
+      "access": "unknown",
+      "operationClass": "write",
+      "deprecated": false,
+      "contentType": "application/json",
+      "pathFields": [],
+      "queryFields": [],
+      "bodyFields": [
+        "locationId",
+        "contactId",
+        "email",
+        "subscription_action",
+        "legal_reason",
+        "legal_description"
+      ],
+      "bodyWrapped": false,
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "locationId": {
+            "type": "string",
+            "description": "Location Id"
+          },
+          "contactId": {
+            "type": "string",
+            "description": "Contact Id"
+          },
+          "email": {
+            "type": "string",
+            "description": "Email address"
+          },
+          "subscription_action": {
+            "type": "object",
+            "properties": {
+              "type": {
+                "type": "string",
+                "description": "Type of subscription action",
+                "enum": [
+                  "default",
+                  "custom",
+                  "resub_all"
+                ]
+              },
+              "subtype_name": {
+                "type": "string",
+                "description": "Subscription type name (required for default types: \"One on One\")",
+                "enum": [
+                  "One on One"
+                ]
+              },
+              "subtype_id": {
+                "type": "string",
+                "description": "Custom subscription type ID (required for custom types)"
+              },
+              "subtype_status": {
+                "type": "string",
+                "description": "Subscription status",
+                "enum": [
+                  "subscribed",
+                  "unsubscribed"
+                ]
+              }
+            },
+            "required": [
+              "type",
+              "subtype_status"
+            ],
+            "description": "Subscription action details"
+          },
+          "legal_reason": {
+            "type": "string",
+            "description": "Legal reason for the change (required only for resubscribe and resub_all actions)"
+          },
+          "legal_description": {
+            "type": "string",
+            "description": "Legal description/details"
+          }
+        },
+        "required": [
+          "locationId",
+          "contactId",
+          "email",
+          "subscription_action"
+        ]
+      }
+    },
+    {
+      "name": "conversations_get_email_by_id",
+      "module": "conversations",
+      "method": "GET",
+      "path": "/conversations/messages/email/{id}",
+      "version": "2021-07-28",
+      "summary": "Get email by Id",
+      "description": "Get email by Id [GET /conversations/messages/email/{id}]",
+      "scopes": [],
+      "access": "unknown",
+      "operationClass": "read",
+      "deprecated": false,
+      "pathFields": [],
+      "queryFields": [],
+      "bodyFields": [],
+      "bodyWrapped": false,
+      "inputSchema": {
+        "type": "object",
+        "properties": {}
+      }
+    },
+    {
+      "name": "conversations_cancel_scheduled_email_message",
+      "module": "conversations",
+      "method": "DELETE",
+      "path": "/conversations/messages/email/{emailMessageId}/schedule",
+      "version": "2021-07-28",
+      "summary": "Cancel a scheduled email message.",
+      "description": "Cancel a scheduled email message. Post the messageId for the API to delete a scheduled email message. <br /> [DELETE /conversations/messages/email/{emailMessageId}/schedule]",
+      "scopes": [],
+      "access": "unknown",
+      "operationClass": "delete",
+      "deprecated": false,
+      "pathFields": [
+        "emailMessageId"
+      ],
+      "queryFields": [],
+      "bodyFields": [],
+      "bodyWrapped": false,
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "emailMessageId": {
+            "type": "string",
+            "description": "Email Message Id"
+          }
+        },
+        "required": [
+          "emailMessageId"
+        ]
+      }
+    },
+    {
+      "name": "conversations_export_messages_by_location",
+      "module": "conversations",
+      "method": "GET",
+      "path": "/conversations/messages/export",
+      "version": "2021-04-15",
+      "summary": "Export messages by location ID",
+      "description": "Export messages by location ID Export messages for a specific location with cursor-based pagination support. Response includes messageType (string), source, and subType fields. The channel parameter is optional - if not provided, all non-email message types will be returned including activity messages (opportunity updates, appointments, etc.). [GET /conversations/messages/export] Scopes: conversations/message.readonly.",
+      "scopes": [
+        "conversations/message.readonly"
+      ],
+      "access": "unknown",
+      "operationClass": "read",
+      "deprecated": false,
+      "pathFields": [],
+      "queryFields": [
+        "locationId",
+        "limit",
+        "cursor",
+        "sortBy",
+        "sortOrder",
+        "conversationId",
+        "contactId",
+        "channel",
+        "startDate",
+        "endDate"
+      ],
+      "bodyFields": [],
+      "bodyWrapped": false,
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "locationId": {
+            "type": "string",
+            "description": "Location ID to filter messages by"
+          },
+          "limit": {
+            "minimum": 10,
+            "maximum": 500,
+            "type": "number",
+            "description": "(default: 100)"
+          },
+          "cursor": {
+            "type": "string",
+            "description": "Cursor for pagination. Pass the nextCursor from previous response to get next page."
+          },
+          "sortBy": {
+            "enum": [
+              "createdAt",
+              "updatedAt"
+            ],
+            "type": "string",
+            "description": "(default: \"createdAt\")"
+          },
+          "sortOrder": {
+            "enum": [
+              "asc",
+              "desc"
+            ],
+            "type": "string",
+            "description": "(default: \"desc\")"
+          },
+          "conversationId": {
+            "type": "string",
+            "description": "Filter messages by conversation ID"
+          },
+          "contactId": {
+            "type": "string",
+            "description": "Filter messages by contact ID"
+          },
+          "channel": {
+            "enum": [
+              "Call",
+              "SMS",
+              "Email",
+              "WhatsApp",
+              "Instagram",
+              "Facebook"
+            ],
+            "type": "string",
+            "description": "Filter by message channel. If not provided, all non-email message types will be returned including activity messages (opportunity updates, appointments, etc.)"
+          },
+          "startDate": {
+            "type": "string",
+            "description": "Start date to filter messages by"
+          },
+          "endDate": {
+            "type": "string",
+            "description": "End date to filter messages by"
+          }
+        },
+        "required": [
+          "locationId"
+        ]
+      }
+    },
+    {
+      "name": "conversations_get_message",
+      "module": "conversations",
+      "method": "GET",
+      "path": "/conversations/messages/{id}",
+      "version": "2021-04-15",
+      "summary": "Get message by message id",
+      "description": "Get message by message id . [GET /conversations/messages/{id}] Scopes: conversations/message.readonly.",
+      "scopes": [
+        "conversations/message.readonly"
+      ],
+      "access": "unknown",
+      "operationClass": "read",
+      "deprecated": false,
+      "pathFields": [],
+      "queryFields": [],
+      "bodyFields": [],
+      "bodyWrapped": false,
+      "inputSchema": {
+        "type": "object",
+        "properties": {}
+      }
+    },
+    {
+      "name": "conversations_get_messages",
+      "module": "conversations",
+      "method": "GET",
+      "path": "/conversations/{conversationId}/messages",
+      "version": "2021-04-15",
+      "summary": "Get messages by conversation id",
+      "description": "Get messages by conversation id . [GET /conversations/{conversationId}/messages] Scopes: conversations/message.readonly.",
+      "scopes": [
+        "conversations/message.readonly"
+      ],
+      "access": "unknown",
+      "operationClass": "read",
+      "deprecated": false,
+      "pathFields": [
+        "conversationId"
+      ],
+      "queryFields": [
+        "lastMessageId",
+        "limit",
+        "type"
+      ],
+      "bodyFields": [],
+      "bodyWrapped": false,
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "conversationId": {
+            "type": "string",
+            "description": "Conversation ID as string"
+          },
+          "lastMessageId": {
+            "type": "string",
+            "description": "Message ID of the last message in the list as a string"
+          },
+          "limit": {
+            "type": "number",
+            "description": "Number of messages to be fetched from the conversation. Default limit is 20"
+          },
+          "type": {
+            "enum": [
+              "TYPE_CALL",
+              "TYPE_SMS",
+              "TYPE_RCS",
+              "TYPE_EMAIL",
+              "TYPE_FACEBOOK",
+              "TYPE_GMB",
+              "TYPE_INSTAGRAM",
+              "TYPE_WHATSAPP",
+              "TYPE_ACTIVITY_APPOINTMENT",
+              "TYPE_ACTIVITY_CONTACT",
+              "TYPE_ACTIVITY_INVOICE",
+              "TYPE_ACTIVITY_PAYMENT",
+              "TYPE_ACTIVITY_OPPORTUNITY",
+              "TYPE_LIVE_CHAT",
+              "TYPE_INTERNAL_COMMENTS",
+              "TYPE_ACTIVITY_EMPLOYEE_ACTION_LOG",
+              "TYPE_TIKTOK",
+              "TYPE_ACTIVITY_WHATSAPP",
+              "TYPE_FORM_SUBMISSION"
+            ],
+            "type": "string",
+            "description": "Types of message to fetched separated with comma"
+          }
+        },
+        "required": [
+          "conversationId"
+        ]
+      }
+    },
+    {
+      "name": "conversations_send_a_new_message",
+      "module": "conversations",
+      "method": "POST",
+      "path": "/conversations/messages",
+      "version": "2021-04-15",
+      "summary": "Send a new message",
+      "description": "Send a new message Post the necessary fields for the API to send a new message. [POST /conversations/messages] Scopes: conversations/message.write.",
+      "scopes": [
+        "conversations/message.write"
+      ],
+      "access": "unknown",
+      "operationClass": "write",
+      "deprecated": false,
+      "contentType": "application/json",
+      "pathFields": [],
+      "queryFields": [],
+      "bodyFields": [
+        "type",
+        "subType",
+        "contactId",
+        "appointmentId",
+        "attachments",
+        "emailFrom",
+        "emailCc",
+        "emailBcc",
+        "html",
+        "message",
+        "subject",
+        "replyMessageId",
+        "templateId",
+        "threadId",
+        "scheduledTimestamp",
+        "conversationProviderId",
+        "emailTo",
+        "customSubtypeId",
+        "emailReplyMode",
+        "fromNumber",
+        "toNumber",
+        "forward",
+        "status",
+        "usesNativeSchedulingAi",
+        "optimizationPeriod"
+      ],
+      "bodyWrapped": false,
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "type": {
+            "type": "string",
+            "enum": [
+              "SMS",
+              "RCS",
+              "Email",
+              "WhatsApp",
+              "IG",
+              "FB",
+              "Custom",
+              "Live_Chat",
+              "TIKTOK"
+            ],
+            "description": "Type of message being sent"
+          },
+          "subType": {
+            "type": "object",
+            "description": "Type of message being sent"
+          },
+          "contactId": {
+            "type": "string",
+            "description": "ID of the contact receiving the message"
+          },
+          "appointmentId": {
+            "type": "string",
+            "description": "ID of the associated appointment"
+          },
+          "attachments": {
+            "description": "Array of attachment URLs",
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "emailFrom": {
+            "type": "string",
+            "description": "Email address to send from"
+          },
+          "emailCc": {
+            "description": "Array of CC email addresses",
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "emailBcc": {
+            "description": "Array of BCC email addresses",
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "html": {
+            "type": "string",
+            "description": "HTML content of the message"
+          },
+          "message": {
+            "type": "string",
+            "description": "Text content of the message"
+          },
+          "subject": {
+            "type": "string",
+            "description": "Subject line for email messages"
+          },
+          "replyMessageId": {
+            "type": "string",
+            "description": "ID of message being replied to"
+          },
+          "templateId": {
+            "type": "string",
+            "description": "ID of message template"
+          },
+          "threadId": {
+            "type": "string",
+            "description": "ID of message thread. For email messages, this is the message ID that contains multiple email messages in the thread"
+          },
+          "scheduledTimestamp": {
+            "type": "number",
+            "description": "UTC Timestamp (in seconds) at which the message should be scheduled"
+          },
+          "conversationProviderId": {
+            "type": "string",
+            "description": "ID of conversation provider"
+          },
+          "emailTo": {
+            "type": "string",
+            "description": "Email address to send to, if different from contact's primary email. This should be a valid email address associated with the contact."
+          },
+          "customSubtypeId": {
+            "type": "string",
+            "description": "Custom subtype ID for email unsubscription preferences. Only applies to email messages."
+          },
+          "emailReplyMode": {
+            "type": "string",
+            "enum": [
+              "reply",
+              "reply_all"
+            ],
+            "description": "Mode for email replies"
+          },
+          "fromNumber": {
+            "type": "string",
+            "description": "Phone number used as the sender number for outbound messages"
+          },
+          "toNumber": {
+            "type": "string",
+            "description": "Recipient phone number for outbound messages"
+          },
+          "forward": {
+            "type": "object",
+            "properties": {
+              "isForwarded": {
+                "type": "boolean",
+                "description": "Specify if this is a forwarded email"
+              },
+              "forwardWholeThread": {
+                "type": "boolean",
+                "description": "Specify if forwarding the whole thread or just a single email"
+              },
+              "messageId": {
+                "type": "string",
+                "description": "Message ID of the email thread being forwarded (source) - REQUIRED for forwarding"
+              },
+              "emailMessageId": {
+                "type": "string",
+                "description": "Email Message ID of the specific email being forwarded (source) - Required for single email forward, ignored for thread forward"
+              },
+              "sourceContactId": {
+                "type": "string",
+                "description": "Contact ID where the forwarded email originated from (source) - Auto-populated if not provided"
+              },
+              "sourceConversationId": {
+                "type": "string",
+                "description": "Conversation ID where the forwarded email originated from (source) - Auto-populated if not provided"
+              },
+              "toEmail": {
+                "type": "string",
+                "description": "Email address to forward to (destination)"
+              },
+              "recipientContactId": {
+                "type": "string",
+                "description": "Contact ID of recipient when forwarding (destination)"
+              },
+              "recipientConversationId": {
+                "type": "string",
+                "description": "Conversation ID of recipient when forwarding (destination)"
+              }
+            },
+            "required": [
+              "isForwarded"
+            ],
+            "description": "Forwarding configuration for emails"
+          },
+          "status": {
+            "type": "string",
+            "description": "Message status",
+            "enum": [
+              "delivered",
+              "failed",
+              "pending",
+              "read"
+            ]
+          },
+          "usesNativeSchedulingAi": {
+            "type": "boolean",
+            "description": "Whether the scheduled email uses native AI for the email scheduling "
+          },
+          "optimizationPeriod": {
+            "type": "string",
+            "description": "Optimization period in hours (24h, 48h, or 72h)",
+            "enum": [
+              "24h",
+              "48h",
+              "72h"
+            ]
+          }
+        },
+        "required": [
+          "type",
+          "subType",
+          "contactId",
+          "status"
+        ]
+      }
+    },
+    {
+      "name": "conversations_add_an_inbound_message",
+      "module": "conversations",
+      "method": "POST",
+      "path": "/conversations/messages/inbound",
+      "version": "2021-04-15",
+      "summary": "Add an inbound message",
+      "description": "Add an inbound message Post the necessary fields for the API to add a new inbound message. <br /> [POST /conversations/messages/inbound] Scopes: conversations/message.write.",
+      "scopes": [
+        "conversations/message.write"
+      ],
+      "access": "unknown",
+      "operationClass": "write",
+      "deprecated": false,
+      "contentType": "application/json",
+      "pathFields": [],
+      "queryFields": [],
+      "bodyFields": [
+        "type",
+        "attachments",
+        "message",
+        "conversationId",
+        "contactId",
+        "conversationProviderId",
+        "html",
+        "subject",
+        "emailFrom",
+        "emailTo",
+        "emailCc",
+        "emailBcc",
+        "emailMessageId",
+        "altId",
+        "direction",
+        "date",
+        "call"
+      ],
+      "bodyWrapped": false,
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "type": {
+            "type": "string",
+            "description": "Message Type",
+            "enum": [
+              "SMS",
+              "RCS",
+              "Email",
+              "WhatsApp",
+              "GMB",
+              "IG",
+              "FB",
+              "Custom",
+              "WebChat",
+              "Live_Chat",
+              "Call",
+              "IVR_Call",
+              "Campaign_Call",
+              "Campaign_VoiceMail",
+              "TIKTOK",
+              "ALL_IN_ONE_CHAT",
+              "FORM_SUBMISSION"
+            ]
+          },
+          "attachments": {
+            "description": "Array of attachments",
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "message": {
+            "type": "string",
+            "description": "Message Body"
+          },
+          "conversationId": {
+            "type": "string",
+            "description": "Conversation Id"
+          },
+          "contactId": {
+            "type": "string",
+            "description": "Contact Id"
+          },
+          "conversationProviderId": {
+            "type": "string",
+            "description": "Conversation Provider Id"
+          },
+          "html": {
+            "type": "string",
+            "description": "HTML Body of Email"
+          },
+          "subject": {
+            "type": "string",
+            "description": "Subject of the Email"
+          },
+          "emailFrom": {
+            "type": "string",
+            "description": "Email address to send from. This field is associated with the contact record and cannot be dynamically changed."
+          },
+          "emailTo": {
+            "type": "string",
+            "description": "Recipient email address. This field is associated with the contact record and cannot be dynamically changed."
+          },
+          "emailCc": {
+            "description": "List of email address to CC",
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "emailBcc": {
+            "description": "List of email address to BCC",
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "emailMessageId": {
+            "type": "string",
+            "description": "Send the email message id for which this email should be threaded. This is for replying to a specific email"
+          },
+          "altId": {
+            "type": "string",
+            "description": "external mail provider's message id"
+          },
+          "direction": {
+            "type": "object",
+            "description": "Message direction, if required can be set manually, default is outbound (default: \"outbound\")"
+          },
+          "date": {
+            "format": "date-time",
+            "type": "string",
+            "description": "Date of the inbound message"
+          },
+          "call": {
+            "type": "object",
+            "properties": {
+              "to": {
+                "type": "string",
+                "description": "Phone number of the receiver"
+              },
+              "from": {
+                "type": "string",
+                "description": "Phone number of the dialer"
+              },
+              "status": {
+                "type": "string",
+                "description": "Call status",
+                "enum": [
+                  "pending",
+                  "completed",
+                  "answered",
+                  "busy",
+                  "no-answer",
+                  "failed",
+                  "canceled",
+                  "voicemail"
+                ]
+              }
+            },
+            "description": "Phone call dialer and receiver information"
+          }
+        },
+        "required": [
+          "type",
+          "conversationId",
+          "contactId",
+          "conversationProviderId"
+        ]
+      }
+    },
+    {
+      "name": "conversations_add_an_outbound_message",
+      "module": "conversations",
+      "method": "POST",
+      "path": "/conversations/messages/outbound",
+      "version": "2021-04-15",
+      "summary": "Add an external outbound call",
+      "description": "Add an external outbound call Post the necessary fields for the API to add a new outbound call. [POST /conversations/messages/outbound] Scopes: conversations/message.write.",
+      "scopes": [
+        "conversations/message.write"
+      ],
+      "access": "unknown",
+      "operationClass": "write",
+      "deprecated": false,
+      "contentType": "application/json",
+      "pathFields": [],
+      "queryFields": [],
+      "bodyFields": [
+        "type",
+        "attachments",
+        "conversationId",
+        "conversationProviderId",
+        "altId",
+        "date",
+        "call"
+      ],
+      "bodyWrapped": false,
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "type": {
+            "type": "string",
+            "description": "Message Type",
+            "enum": [
+              "Call"
+            ]
+          },
+          "attachments": {
+            "description": "Array of attachments",
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "conversationId": {
+            "type": "string",
+            "description": "Conversation Id"
+          },
+          "conversationProviderId": {
+            "type": "string",
+            "description": "Conversation Provider Id"
+          },
+          "altId": {
+            "type": "string",
+            "description": "external mail provider's message id"
+          },
+          "date": {
+            "format": "date-time",
+            "type": "string",
+            "description": "Date of the outbound message"
+          },
+          "call": {
+            "type": "object",
+            "properties": {
+              "to": {
+                "type": "string",
+                "description": "Phone number of the receiver"
+              },
+              "from": {
+                "type": "string",
+                "description": "Phone number of the dialer"
+              },
+              "status": {
+                "type": "string",
+                "description": "Call status",
+                "enum": [
+                  "pending",
+                  "completed",
+                  "answered",
+                  "busy",
+                  "no-answer",
+                  "failed",
+                  "canceled",
+                  "voicemail"
+                ]
+              }
+            },
+            "description": "Phone call dialer and receiver information"
+          }
+        },
+        "required": [
+          "type",
+          "conversationId",
+          "conversationProviderId"
+        ]
+      }
+    },
+    {
+      "name": "conversations_send_review_reply",
+      "module": "conversations",
+      "method": "POST",
+      "path": "/conversations/messages/review-reply",
+      "version": "2021-04-15",
+      "summary": "Send a review reply to Google My Business",
+      "description": "Send a review reply to Google My Business Post a reply to a customer review on Google My Business [POST /conversations/messages/review-reply] Scopes: conversations/message.write.",
+      "scopes": [
+        "conversations/message.write"
+      ],
+      "access": "unknown",
+      "operationClass": "write",
+      "deprecated": false,
+      "contentType": "application/json",
+      "pathFields": [],
+      "queryFields": [],
+      "bodyFields": [
+        "conversationId",
+        "locationId",
+        "message"
+      ],
+      "bodyWrapped": false,
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "conversationId": {
+            "type": "string",
+            "description": "Conversation ID (must have reviewId)"
+          },
+          "locationId": {
+            "type": "string",
+            "description": "Location ID"
+          },
+          "message": {
+            "type": "string",
+            "description": "Review reply message text"
+          }
+        },
+        "required": [
+          "conversationId",
+          "locationId",
+          "message"
+        ]
+      }
+    },
+    {
+      "name": "conversations_cancel_scheduled_message",
+      "module": "conversations",
+      "method": "DELETE",
+      "path": "/conversations/messages/{messageId}/schedule",
+      "version": "2021-04-15",
+      "summary": "Cancel a scheduled message.",
+      "description": "Cancel a scheduled message. Post the messageId for the API to delete a scheduled message. <br /> [DELETE /conversations/messages/{messageId}/schedule] Scopes: conversations/message.write.",
+      "scopes": [
+        "conversations/message.write"
+      ],
+      "access": "unknown",
+      "operationClass": "delete",
+      "deprecated": false,
+      "pathFields": [
+        "messageId"
+      ],
+      "queryFields": [],
+      "bodyFields": [],
+      "bodyWrapped": false,
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "messageId": {
+            "type": "string",
+            "description": "Message Id"
+          }
+        },
+        "required": [
+          "messageId"
+        ]
+      }
+    },
+    {
+      "name": "conversations_upload_file_attachments",
+      "module": "conversations",
+      "method": "POST",
+      "path": "/conversations/messages/upload",
+      "version": "2021-04-15",
+      "summary": "Upload file attachments",
+      "description": "Upload file attachments Post the necessary fields for the API to upload files. The files need to be a buffer with the key \"fileAttachment\". <br /><br /> The allowed file types are: <br/> <ul><li>JPG</li><li>JPEG</li><li>PNG</li><li>MP4</li><li>MPEG</li><li>ZIP</li><li>RAR</li><li>PDF</li><li>DOC</li><li>DOCX</li><li>TXT</li><li>MP3</li><li>WAV</li></ul> <br /><br /> The API will return an object with the URLs [POST /conversations/messages/upload] Scopes: conversations/message.write.",
+      "scopes": [
+        "conversations/message.write"
+      ],
+      "access": "unknown",
+      "operationClass": "write",
+      "deprecated": false,
+      "contentType": "multipart/form-data",
+      "pathFields": [],
+      "queryFields": [],
+      "bodyFields": [
+        "conversationId",
+        "contactId",
+        "locationId",
+        "attachmentUrls",
+        "chatServiceSid",
+        "isGroupSms"
+      ],
+      "bodyWrapped": false,
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "conversationId": {
+            "type": "string",
+            "description": "Conversation Id"
+          },
+          "contactId": {
+            "type": "string",
+            "description": "Contact Id"
+          },
+          "locationId": {
+            "type": "string"
+          },
+          "attachmentUrls": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "chatServiceSid": {
+            "type": "string",
+            "description": "Twilio chat service SID for group SMS uploads"
+          },
+          "isGroupSms": {
+            "type": "string",
+            "description": "Flag to indicate group SMS upload flow. When true, only 1 file upload is allowed per request."
+          }
+        },
+        "required": [
+          "conversationId",
+          "contactId",
+          "locationId",
+          "attachmentUrls"
+        ]
+      }
+    },
+    {
+      "name": "conversations_initiate_file_upload",
+      "module": "conversations",
+      "method": "POST",
+      "path": "/conversations/messages/upload/initiate",
+      "version": "2021-04-15",
+      "summary": "Initiate file upload to GCS",
+      "description": "Initiate file upload to GCS Generates a signed URL for direct file upload to Google Cloud Storage. Returns a signed URL valid for 15 minutes. Upload file via PUT request, then call /complete to finalize. [POST /conversations/messages/upload/initiate] Scopes: conversations/message.write.",
+      "scopes": [
+        "conversations/message.write"
+      ],
+      "access": "unknown",
+      "operationClass": "write",
+      "deprecated": false,
+      "contentType": "application/json",
+      "pathFields": [],
+      "queryFields": [],
+      "bodyFields": [
+        "locationId",
+        "conversationId",
+        "filename",
+        "contentType",
+        "fileSize",
+        "channel"
+      ],
+      "bodyWrapped": false,
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "locationId": {
+            "type": "string",
+            "description": "Location ID"
+          },
+          "conversationId": {
+            "type": "string",
+            "description": "Conversation ID"
+          },
+          "filename": {
+            "type": "string",
+            "description": "Original filename with extension"
+          },
+          "contentType": {
+            "type": "string",
+            "description": "MIME type of the file"
+          },
+          "fileSize": {
+            "type": "number",
+            "description": "File size in bytes (optional, for pre-validation)"
+          },
+          "channel": {
+            "type": "string",
+            "description": "Channel type for size limits (WHATSAPP for 100MB limit, others for 5MB)"
+          }
+        },
+        "required": [
+          "locationId",
+          "conversationId",
+          "filename",
+          "contentType",
+          "channel"
+        ]
+      }
+    },
+    {
+      "name": "conversations_complete_file_upload",
+      "module": "conversations",
+      "method": "POST",
+      "path": "/conversations/messages/upload/complete",
+      "version": "2021-04-15",
+      "summary": "Complete file upload",
+      "description": "Complete file upload Validates the uploaded file in GCS and returns the public URL. Call this endpoint after successfully uploading the file to the signed URL. [POST /conversations/messages/upload/complete] Scopes: conversations/message.write.",
+      "scopes": [
+        "conversations/message.write"
+      ],
+      "access": "unknown",
+      "operationClass": "write",
+      "deprecated": false,
+      "contentType": "application/json",
+      "pathFields": [],
+      "queryFields": [],
+      "bodyFields": [
+        "uploadId",
+        "filePath",
+        "locationId",
+        "conversationId",
+        "filename"
+      ],
+      "bodyWrapped": false,
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "uploadId": {
+            "type": "string",
+            "description": "Upload ID from request response"
+          },
+          "filePath": {
+            "type": "string",
+            "description": "File path from request response"
+          },
+          "locationId": {
+            "type": "string",
+            "description": "Location ID"
+          },
+          "conversationId": {
+            "type": "string",
+            "description": "Conversation ID"
+          },
+          "filename": {
+            "type": "string",
+            "description": "Original filename (for response mapping)"
+          }
+        },
+        "required": [
+          "uploadId",
+          "filePath",
+          "locationId",
+          "conversationId",
+          "filename"
+        ]
+      }
+    },
+    {
+      "name": "conversations_update_message_status",
+      "module": "conversations",
+      "method": "PUT",
+      "path": "/conversations/messages/{messageId}/status",
+      "version": "2021-04-15",
+      "summary": "Update message status",
+      "description": "Update message status Post the necessary fields for the API to update message status. [PUT /conversations/messages/{messageId}/status] Scopes: conversations/message.write.",
+      "scopes": [
+        "conversations/message.write"
+      ],
+      "access": "unknown",
+      "operationClass": "write",
+      "deprecated": false,
+      "contentType": "application/json",
+      "pathFields": [
+        "messageId"
+      ],
+      "queryFields": [],
+      "bodyFields": [
+        "status",
+        "error",
+        "emailMessageId",
+        "recipients"
+      ],
+      "bodyWrapped": false,
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "messageId": {
+            "type": "string",
+            "description": "Message Id"
+          },
+          "status": {
+            "type": "string",
+            "description": "Message status",
+            "enum": [
+              "delivered",
+              "failed",
+              "pending",
+              "read"
+            ]
+          },
+          "error": {
+            "type": "object",
+            "properties": {
+              "code": {
+                "type": "string",
+                "description": "Error Code"
+              },
+              "type": {
+                "type": "string",
+                "description": "Error Type"
+              },
+              "message": {
+                "type": "string",
+                "description": "Error Message"
+              }
+            },
+            "required": [
+              "code",
+              "type",
+              "message"
+            ],
+            "description": "Error object from the conversation provider"
+          },
+          "emailMessageId": {
+            "type": "string",
+            "description": "Email message Id"
+          },
+          "recipients": {
+            "description": "Email delivery status for additional email recipients.",
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          }
+        },
+        "required": [
+          "messageId",
+          "status"
+        ]
+      }
+    },
+    {
+      "name": "conversations_add_message_attachments",
+      "module": "conversations",
+      "method": "PUT",
+      "path": "/conversations/messages/{messageId}/attachments",
+      "version": "2021-04-15",
+      "summary": "Add message attachments",
+      "description": "Add message attachments Set attachments on an existing message (replaces existing). Maximum 5 URLs. Supported for TYPE_CUSTOM_CALL (34) and TYPE_CALL (1) with subType EXTERNAL_CALL. [PUT /conversations/messages/{messageId}/attachments] Scopes: conversations/message.write.",
+      "scopes": [
+        "conversations/message.write"
+      ],
+      "access": "unknown",
+      "operationClass": "write",
+      "deprecated": false,
+      "contentType": "application/json",
+      "pathFields": [
+        "messageId"
+      ],
+      "queryFields": [],
+      "bodyFields": [
+        "attachments"
+      ],
+      "bodyWrapped": false,
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "messageId": {
+            "type": "string",
+            "description": "Message Id"
+          },
+          "attachments": {
+            "description": "Array of attachment URLs to set on the message (replaces existing). Maximum 5 URLs.",
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          }
+        },
+        "required": [
+          "messageId",
+          "attachments"
+        ]
+      }
+    },
+    {
+      "name": "conversations_get_message_recording",
+      "module": "conversations",
+      "method": "GET",
+      "path": "/conversations/messages/{messageId}/locations/{locationId}/recording",
+      "version": "2021-04-15",
+      "summary": "Get Recording by Message ID",
+      "description": "Get Recording by Message ID Get the recording for a message by passing the message id [GET /conversations/messages/{messageId}/locations/{locationId}/recording] Token: location. Scopes: conversations/message.readonly.",
+      "scopes": [
+        "conversations/message.readonly"
+      ],
+      "access": "location",
+      "operationClass": "read",
+      "deprecated": false,
+      "pathFields": [
+        "locationId",
+        "messageId"
+      ],
+      "queryFields": [],
+      "bodyFields": [],
+      "bodyWrapped": false,
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "locationId": {
+            "type": "string",
+            "description": "Location ID as string"
+          },
+          "messageId": {
+            "type": "string",
+            "description": "Message ID as string"
+          }
+        },
+        "required": [
+          "locationId",
+          "messageId"
+        ]
+      }
+    },
+    {
+      "name": "conversations_get_message_transcription",
+      "module": "conversations",
+      "method": "GET",
+      "path": "/conversations/locations/{locationId}/messages/{messageId}/transcription",
+      "version": "2021-04-15",
+      "summary": "Get transcription by Message ID",
+      "description": "Get transcription by Message ID Get the recording transcription for a message by passing the message id [GET /conversations/locations/{locationId}/messages/{messageId}/transcription] Token: location. Scopes: conversations/message.readonly.",
+      "scopes": [
+        "conversations/message.readonly"
+      ],
+      "access": "location",
+      "operationClass": "read",
+      "deprecated": false,
+      "pathFields": [
+        "locationId",
+        "messageId"
+      ],
+      "queryFields": [],
+      "bodyFields": [],
+      "bodyWrapped": false,
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "locationId": {
+            "type": "string",
+            "description": "Location ID as string"
+          },
+          "messageId": {
+            "type": "string",
+            "description": "Message ID as string"
+          }
+        },
+        "required": [
+          "locationId",
+          "messageId"
+        ]
+      }
+    },
+    {
+      "name": "conversations_download_message_transcription",
+      "module": "conversations",
+      "method": "GET",
+      "path": "/conversations/locations/{locationId}/messages/{messageId}/transcription/download",
+      "version": "2021-04-15",
+      "summary": "Download transcription by Message ID",
+      "description": "Download transcription by Message ID Download the recording transcription for a message by passing the message id [GET /conversations/locations/{locationId}/messages/{messageId}/transcription/download] Token: location. Scopes: conversations/message.readonly.",
+      "scopes": [
+        "conversations/message.readonly"
+      ],
+      "access": "location",
+      "operationClass": "read",
+      "deprecated": false,
+      "pathFields": [
+        "locationId",
+        "messageId"
+      ],
+      "queryFields": [],
+      "bodyFields": [],
+      "bodyWrapped": false,
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "locationId": {
+            "type": "string",
+            "description": "Location ID as string"
+          },
+          "messageId": {
+            "type": "string",
+            "description": "Message ID as string"
+          }
+        },
+        "required": [
+          "locationId",
+          "messageId"
+        ]
+      }
+    },
+    {
+      "name": "conversations_live_chat_agent_typing",
+      "module": "conversations",
+      "method": "POST",
+      "path": "/conversations/providers/live-chat/typing",
+      "version": "2021-04-15",
+      "summary": "Agent/Ai-Bot is typing a message indicator for live chat",
+      "description": "Agent/Ai-Bot is typing a message indicator for live chat Agent/AI-Bot will call this when they are typing a message in live chat message [POST /conversations/providers/live-chat/typing] Token: location. Scopes: conversations/livechat.write.",
+      "scopes": [
+        "conversations/livechat.write"
+      ],
+      "access": "location",
+      "operationClass": "write",
+      "deprecated": false,
+      "contentType": "application/json",
+      "pathFields": [],
+      "queryFields": [],
+      "bodyFields": [
+        "locationId",
+        "isTyping",
+        "visitorId",
+        "conversationId"
+      ],
+      "bodyWrapped": false,
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "locationId": {
+            "type": "string",
+            "description": "Location Id"
+          },
+          "isTyping": {
+            "type": "string",
+            "description": "Typing status"
+          },
+          "visitorId": {
+            "type": "string",
+            "description": "visitorId is the Unique ID assigned to each Live chat visitor. visitorId will be added soon in <a href=\"https://highlevel.stoplight.io/docs/integrations/00c5ff21f0030-get-contact\" target=\"_blank\">GET Contact API</a>"
+          },
+          "conversationId": {
+            "type": "string",
+            "description": "Conversation Id"
+          }
+        },
+        "required": [
+          "locationId",
+          "isTyping",
+          "visitorId",
+          "conversationId"
+        ]
+      }
+    },
+    {
+      "name": "conversations_create_conversation",
+      "module": "conversations",
+      "method": "POST",
+      "path": "/conversations/",
+      "version": "2021-04-15",
+      "summary": "Create Conversation",
+      "description": "Create Conversation Creates a new conversation with the data provided [POST /conversations/] Scopes: conversations.write.",
+      "scopes": [
+        "conversations.write"
+      ],
+      "access": "unknown",
+      "operationClass": "write",
+      "deprecated": false,
+      "contentType": "application/json",
+      "pathFields": [],
+      "queryFields": [],
+      "bodyFields": [
+        "locationId",
+        "contactId"
+      ],
+      "bodyWrapped": false,
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "locationId": {
+            "type": "string",
+            "description": "Location ID as string"
+          },
+          "contactId": {
+            "type": "string",
+            "description": "Contact ID as string"
+          }
+        },
+        "required": [
+          "locationId",
+          "contactId"
+        ]
+      }
+    }
+  ]
+}

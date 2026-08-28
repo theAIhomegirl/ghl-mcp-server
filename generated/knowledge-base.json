@@ -1,0 +1,615 @@
+{
+  "module": "knowledge-base",
+  "endpoints": [
+    {
+      "name": "knowledge_base_list",
+      "module": "knowledge-base",
+      "method": "GET",
+      "path": "/knowledge-bases/faqs",
+      "version": "2021-04-15",
+      "summary": "Get all FAQs by knowledge base with pagination support",
+      "description": "Get all FAQs by knowledge base with pagination support Retrieves FAQs for a knowledge base. Supports pagination using limit and lastFaqId parameters. [GET /knowledge-bases/faqs] Token: location.",
+      "scopes": [],
+      "access": "location",
+      "operationClass": "read",
+      "deprecated": false,
+      "pathFields": [],
+      "queryFields": [
+        "knowledgeBaseId",
+        "locationId",
+        "limit",
+        "lastFaqId"
+      ],
+      "bodyFields": [],
+      "bodyWrapped": false,
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "knowledgeBaseId": {
+            "type": "string",
+            "description": "knowledge base ID as string"
+          },
+          "locationId": {
+            "type": "string",
+            "description": "location ID as string"
+          },
+          "limit": {
+            "type": "number",
+            "description": "(default: 10)"
+          },
+          "lastFaqId": {
+            "type": "string",
+            "description": "Last FAQ ID for pagination (cursor-based)"
+          }
+        },
+        "required": [
+          "knowledgeBaseId",
+          "locationId"
+        ]
+      }
+    },
+    {
+      "name": "knowledge_base_create",
+      "module": "knowledge-base",
+      "method": "POST",
+      "path": "/knowledge-bases/faqs",
+      "version": "2021-04-15",
+      "summary": "Create a new FAQ inside knowledge base",
+      "description": "Create a new FAQ inside knowledge base [POST /knowledge-bases/faqs] Token: location.",
+      "scopes": [],
+      "access": "location",
+      "operationClass": "write",
+      "deprecated": false,
+      "contentType": "application/json",
+      "pathFields": [],
+      "queryFields": [],
+      "bodyFields": [
+        "locationId",
+        "question",
+        "answer",
+        "knowledgeBaseId"
+      ],
+      "bodyWrapped": false,
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "locationId": {
+            "type": "string",
+            "description": "location ID as string"
+          },
+          "question": {
+            "type": "string",
+            "description": "faq question as a string"
+          },
+          "answer": {
+            "type": "string",
+            "description": "faq answer as a string"
+          },
+          "knowledgeBaseId": {
+            "type": "string",
+            "description": "knowledge base ID as string"
+          }
+        },
+        "required": [
+          "locationId",
+          "question",
+          "answer",
+          "knowledgeBaseId"
+        ]
+      }
+    },
+    {
+      "name": "knowledge_base_update",
+      "module": "knowledge-base",
+      "method": "PUT",
+      "path": "/knowledge-bases/faqs/{id}",
+      "version": "2021-04-15",
+      "summary": "Update an existing knowledge base FAQ",
+      "description": "Update an existing knowledge base FAQ [PUT /knowledge-bases/faqs/{id}] Token: location.",
+      "scopes": [],
+      "access": "location",
+      "operationClass": "write",
+      "deprecated": false,
+      "contentType": "application/json",
+      "pathFields": [
+        "id"
+      ],
+      "queryFields": [],
+      "bodyFields": [
+        "question",
+        "answer"
+      ],
+      "bodyWrapped": false,
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "faq ID as string"
+          },
+          "question": {
+            "type": "string",
+            "description": "faq question as a string"
+          },
+          "answer": {
+            "type": "string",
+            "description": "faq answer as a string"
+          }
+        },
+        "required": [
+          "id",
+          "question",
+          "answer"
+        ]
+      }
+    },
+    {
+      "name": "knowledge_base_delete",
+      "module": "knowledge-base",
+      "method": "DELETE",
+      "path": "/knowledge-bases/faqs/{id}",
+      "version": "2021-04-15",
+      "summary": "Delete an existing knowledge base FAQ",
+      "description": "Delete an existing knowledge base FAQ [DELETE /knowledge-bases/faqs/{id}] Token: location.",
+      "scopes": [],
+      "access": "location",
+      "operationClass": "delete",
+      "deprecated": false,
+      "pathFields": [
+        "id"
+      ],
+      "queryFields": [],
+      "bodyFields": [],
+      "bodyWrapped": false,
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "faq ID as string"
+          }
+        },
+        "required": [
+          "id"
+        ]
+      }
+    },
+    {
+      "name": "knowledge_base_getallwebsiteurlsdatabyknowledgebase",
+      "module": "knowledge-base",
+      "method": "GET",
+      "path": "/knowledge-bases/crawler",
+      "version": "2021-04-15",
+      "summary": "Get all trained page links by knowledge base",
+      "description": "Get all trained page links by knowledge base [GET /knowledge-bases/crawler] Token: location.",
+      "scopes": [],
+      "access": "location",
+      "operationClass": "read",
+      "deprecated": false,
+      "pathFields": [],
+      "queryFields": [
+        "knowledgeBaseId",
+        "locationId",
+        "page",
+        "pageLength",
+        "query"
+      ],
+      "bodyFields": [],
+      "bodyWrapped": false,
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "knowledgeBaseId": {
+            "type": "string",
+            "description": "knowledge base ID as string"
+          },
+          "locationId": {
+            "type": "string",
+            "description": "location ID as string"
+          },
+          "page": {
+            "type": "number",
+            "description": "Page number"
+          },
+          "pageLength": {
+            "type": "number",
+            "description": "Records per page"
+          },
+          "query": {
+            "type": "string",
+            "description": "query to filter on url links"
+          }
+        },
+        "required": [
+          "knowledgeBaseId",
+          "locationId"
+        ]
+      }
+    },
+    {
+      "name": "knowledge_base_discoverwebsite",
+      "module": "knowledge-base",
+      "method": "POST",
+      "path": "/knowledge-bases/crawler",
+      "version": "2021-04-15",
+      "summary": "Start crawling and discover pages for training",
+      "description": "Start crawling and discover pages for training [POST /knowledge-bases/crawler] Token: location.",
+      "scopes": [],
+      "access": "location",
+      "operationClass": "write",
+      "deprecated": false,
+      "contentType": "application/json",
+      "pathFields": [],
+      "queryFields": [],
+      "bodyFields": [
+        "locationId",
+        "url",
+        "option",
+        "knowledgeBaseId"
+      ],
+      "bodyWrapped": false,
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "locationId": {
+            "type": "string",
+            "description": "Location ID as string"
+          },
+          "url": {
+            "type": "string",
+            "description": "Website URL as string"
+          },
+          "option": {
+            "type": "string",
+            "description": "Mode as string",
+            "enum": [
+              "Exact",
+              "Path",
+              "Domain"
+            ]
+          },
+          "knowledgeBaseId": {
+            "type": "string",
+            "description": "knowledge base ID as string"
+          }
+        },
+        "required": [
+          "locationId",
+          "url",
+          "option",
+          "knowledgeBaseId"
+        ]
+      }
+    },
+    {
+      "name": "knowledge_base_deletetrainedurlsforknowledgebase",
+      "module": "knowledge-base",
+      "method": "DELETE",
+      "path": "/knowledge-bases/crawler",
+      "version": "2021-04-15",
+      "summary": "Delete trained pages",
+      "description": "Delete trained pages [DELETE /knowledge-bases/crawler] Token: location.",
+      "scopes": [],
+      "access": "location",
+      "operationClass": "delete",
+      "deprecated": false,
+      "contentType": "application/json",
+      "pathFields": [],
+      "queryFields": [],
+      "bodyFields": [
+        "knowledgeBaseId",
+        "locationId",
+        "urlIds"
+      ],
+      "bodyWrapped": false,
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "knowledgeBaseId": {
+            "type": "string",
+            "description": "knowledge base ID as string"
+          },
+          "locationId": {
+            "type": "string",
+            "description": "location ID as string"
+          },
+          "urlIds": {
+            "description": "List of trained urls ids ( fetched from the Get all trained page links by knowledge base endpoint)",
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          }
+        },
+        "required": [
+          "knowledgeBaseId",
+          "locationId",
+          "urlIds"
+        ]
+      }
+    },
+    {
+      "name": "knowledge_base_getcrawlingstatusforlatestoperation",
+      "module": "knowledge-base",
+      "method": "GET",
+      "path": "/knowledge-bases/crawler/status",
+      "version": "2021-04-15",
+      "summary": "Get crawling status for the latest operation",
+      "description": "Get crawling status for the latest operation [GET /knowledge-bases/crawler/status] Token: location.",
+      "scopes": [],
+      "access": "location",
+      "operationClass": "read",
+      "deprecated": false,
+      "pathFields": [],
+      "queryFields": [
+        "locationId",
+        "operationId",
+        "knowledgeBaseId"
+      ],
+      "bodyFields": [],
+      "bodyWrapped": false,
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "locationId": {
+            "type": "string",
+            "description": "Location ID as string"
+          },
+          "operationId": {
+            "type": "string",
+            "description": "operation id as string"
+          },
+          "knowledgeBaseId": {
+            "type": "string",
+            "description": "knowledge base id"
+          }
+        },
+        "required": [
+          "locationId",
+          "operationId",
+          "knowledgeBaseId"
+        ]
+      }
+    },
+    {
+      "name": "knowledge_base_traindiscoveredurls",
+      "module": "knowledge-base",
+      "method": "POST",
+      "path": "/knowledge-bases/crawler/train",
+      "version": "2021-04-15",
+      "summary": "Train discovered website pages and ingest into the knowledge base",
+      "description": "Train discovered website pages and ingest into the knowledge base [POST /knowledge-bases/crawler/train] Token: location.",
+      "scopes": [],
+      "access": "location",
+      "operationClass": "write",
+      "deprecated": false,
+      "contentType": "application/json",
+      "pathFields": [],
+      "queryFields": [],
+      "bodyFields": [
+        "locationId",
+        "urlIds",
+        "knowledgeBaseId",
+        "operationId"
+      ],
+      "bodyWrapped": false,
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "locationId": {
+            "type": "string",
+            "description": "Location ID as string"
+          },
+          "urlIds": {
+            "description": "List of Object ids of the discovered urls",
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "knowledgeBaseId": {
+            "type": "string",
+            "description": "knowledge base id"
+          },
+          "operationId": {
+            "type": "string",
+            "description": "operation id as string"
+          }
+        },
+        "required": [
+          "locationId",
+          "urlIds",
+          "knowledgeBaseId",
+          "operationId"
+        ]
+      }
+    },
+    {
+      "name": "knowledge_base_getknowledgebasebyid",
+      "module": "knowledge-base",
+      "method": "GET",
+      "path": "/knowledge-bases/{knowledgeBaseId}",
+      "version": "2021-04-15",
+      "summary": "Get knowledge base by ID",
+      "description": "Get knowledge base by ID [GET /knowledge-bases/{knowledgeBaseId}] Token: location.",
+      "scopes": [],
+      "access": "location",
+      "operationClass": "read",
+      "deprecated": false,
+      "pathFields": [
+        "knowledgeBaseId"
+      ],
+      "queryFields": [],
+      "bodyFields": [],
+      "bodyWrapped": false,
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "knowledgeBaseId": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "knowledgeBaseId"
+        ]
+      }
+    },
+    {
+      "name": "knowledge_base_deleteknowledgebase",
+      "module": "knowledge-base",
+      "method": "DELETE",
+      "path": "/knowledge-bases/{knowledgeBaseId}",
+      "version": "2021-04-15",
+      "summary": "Delete a knowledge base",
+      "description": "Delete a knowledge base [DELETE /knowledge-bases/{knowledgeBaseId}] Token: location.",
+      "scopes": [],
+      "access": "location",
+      "operationClass": "delete",
+      "deprecated": false,
+      "pathFields": [
+        "knowledgeBaseId"
+      ],
+      "queryFields": [],
+      "bodyFields": [],
+      "bodyWrapped": false,
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "knowledgeBaseId": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "knowledgeBaseId"
+        ]
+      }
+    },
+    {
+      "name": "knowledge_base_updateknowledgebase",
+      "module": "knowledge-base",
+      "method": "PUT",
+      "path": "/knowledge-bases/{id}",
+      "version": "2021-04-15",
+      "summary": "Update a knowledge base",
+      "description": "Update a knowledge base [PUT /knowledge-bases/{id}] Token: location.",
+      "scopes": [],
+      "access": "location",
+      "operationClass": "write",
+      "deprecated": false,
+      "contentType": "application/json",
+      "pathFields": [
+        "id"
+      ],
+      "queryFields": [],
+      "bodyFields": [
+        "name",
+        "description"
+      ],
+      "bodyWrapped": false,
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "name": {
+            "type": "string",
+            "description": "field to update the name of the knowledge base"
+          },
+          "description": {
+            "type": "string",
+            "description": "field to update the description of the knowledge base"
+          }
+        },
+        "required": [
+          "id"
+        ]
+      }
+    },
+    {
+      "name": "knowledge_base_listallknowledgebasespaginated",
+      "module": "knowledge-base",
+      "method": "GET",
+      "path": "/knowledge-bases/",
+      "version": "2021-04-15",
+      "summary": "Get all knowledge bases for a location by location Id (paginated)",
+      "description": "Get all knowledge bases for a location by location Id (paginated) [GET /knowledge-bases/] Token: location.",
+      "scopes": [],
+      "access": "location",
+      "operationClass": "read",
+      "deprecated": false,
+      "pathFields": [],
+      "queryFields": [
+        "locationId",
+        "query",
+        "limit",
+        "lastKnowledgeBaseId"
+      ],
+      "bodyFields": [],
+      "bodyWrapped": false,
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "locationId": {
+            "type": "string"
+          },
+          "query": {
+            "type": "string",
+            "description": "search query for knowledge base name"
+          },
+          "limit": {
+            "type": "number",
+            "description": "(default: 20)"
+          },
+          "lastKnowledgeBaseId": {
+            "type": "string",
+            "description": "ID of the last knowledge base from the previous page (for pagination)"
+          }
+        },
+        "required": [
+          "locationId"
+        ]
+      }
+    },
+    {
+      "name": "knowledge_base_createknowledgebase",
+      "module": "knowledge-base",
+      "method": "POST",
+      "path": "/knowledge-bases/",
+      "version": "2021-04-15",
+      "summary": "Create a new knowledge base (max 15 knowledge bases per location)",
+      "description": "Create a new knowledge base (max 15 knowledge bases per location) [POST /knowledge-bases/] Token: location.",
+      "scopes": [],
+      "access": "location",
+      "operationClass": "write",
+      "deprecated": false,
+      "contentType": "application/json",
+      "pathFields": [],
+      "queryFields": [],
+      "bodyFields": [
+        "name",
+        "description",
+        "locationId"
+      ],
+      "bodyWrapped": false,
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string"
+          },
+          "description": {
+            "type": "string"
+          },
+          "locationId": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "name",
+          "locationId"
+        ]
+      }
+    }
+  ]
+}

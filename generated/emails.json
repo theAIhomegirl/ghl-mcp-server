@@ -1,0 +1,420 @@
+{
+  "module": "emails",
+  "endpoints": [
+    {
+      "name": "emails_fetch_campaigns",
+      "module": "emails",
+      "method": "GET",
+      "path": "/emails/schedule",
+      "version": "2021-07-28",
+      "summary": "Get Campaigns",
+      "description": "Get Campaigns [GET /emails/schedule] Token: location. Scopes: emails/schedule.readonly.",
+      "scopes": [
+        "emails/schedule.readonly"
+      ],
+      "access": "location",
+      "operationClass": "read",
+      "deprecated": false,
+      "pathFields": [],
+      "queryFields": [
+        "locationId",
+        "limit",
+        "offset",
+        "status",
+        "emailStatus",
+        "name",
+        "parentId",
+        "limitedFields",
+        "archived",
+        "campaignsOnly",
+        "showStats"
+      ],
+      "bodyFields": [],
+      "bodyWrapped": false,
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "locationId": {
+            "type": "string",
+            "description": "Location ID to fetch campaigns from"
+          },
+          "limit": {
+            "type": "number",
+            "description": "Maximum number of campaigns to return. Defaults to 10, maximum is 100"
+          },
+          "offset": {
+            "type": "number",
+            "description": "Number of campaigns to skip for pagination"
+          },
+          "status": {
+            "enum": [
+              "active",
+              "pause",
+              "complete",
+              "cancelled",
+              "retry",
+              "draft",
+              "resend-scheduled"
+            ],
+            "type": "string",
+            "description": "(default: \"active\")"
+          },
+          "emailStatus": {
+            "enum": [
+              "all",
+              "not-started",
+              "paused",
+              "cancelled",
+              "processing",
+              "resumed",
+              "next-drip",
+              "complete",
+              "success",
+              "error",
+              "waiting",
+              "queued",
+              "queueing",
+              "reading",
+              "scheduled"
+            ],
+            "type": "string",
+            "description": "(default: \"complete\")"
+          },
+          "name": {
+            "type": "string",
+            "description": "Filter campaigns by name"
+          },
+          "parentId": {
+            "type": "string",
+            "description": "Filter campaigns by parent folder ID"
+          },
+          "limitedFields": {
+            "type": "boolean",
+            "description": "When true, returns only essential campaign fields like id, templateDataDownloadUrl, updatedAt, type, templateType, templateId, downloadUrl and isPlainText. When false, returns complete campaign data including meta information, bulkRequestStatusInfo, ABTestInfo, resendScheduleInfo and all other camp…"
+          },
+          "archived": {
+            "type": "boolean",
+            "description": "Filter archived campaigns"
+          },
+          "campaignsOnly": {
+            "type": "boolean",
+            "description": "Return only campaigns, excluding folders"
+          },
+          "showStats": {
+            "type": "boolean",
+            "description": "When true, returns campaign statistics including delivered count, opened count, clicked count and revenue if available for the campaign. When false, returns campaign data without statistics."
+          }
+        },
+        "required": [
+          "locationId"
+        ]
+      }
+    },
+    {
+      "name": "emails_fetch_template",
+      "module": "emails",
+      "method": "GET",
+      "path": "/emails/builder",
+      "version": "2021-07-28",
+      "summary": "Fetch email templates",
+      "description": "Fetch email templates by location id [GET /emails/builder] Token: location. Scopes: emails/builder.readonly.",
+      "scopes": [
+        "emails/builder.readonly"
+      ],
+      "access": "location",
+      "operationClass": "read",
+      "deprecated": false,
+      "pathFields": [],
+      "queryFields": [
+        "locationId",
+        "limit",
+        "offset",
+        "search",
+        "sortByDate",
+        "archived",
+        "builderVersion",
+        "name",
+        "parentId",
+        "originId",
+        "templatesOnly"
+      ],
+      "bodyFields": [],
+      "bodyWrapped": false,
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "locationId": {
+            "type": "string"
+          },
+          "limit": {
+            "type": "string",
+            "description": "(default: 10)"
+          },
+          "offset": {
+            "type": "string",
+            "description": "(default: 0)"
+          },
+          "search": {
+            "type": "string",
+            "description": "(default: \"\")"
+          },
+          "sortByDate": {
+            "type": "string",
+            "description": "(default: \"desc\")"
+          },
+          "archived": {
+            "type": "string",
+            "description": "(default: false)"
+          },
+          "builderVersion": {
+            "enum": [
+              "1",
+              "2"
+            ],
+            "type": "string",
+            "description": "(default: \"2\")"
+          },
+          "name": {
+            "type": "string",
+            "description": "(default: \"\")"
+          },
+          "parentId": {
+            "type": "string",
+            "description": "(default: \"\")"
+          },
+          "originId": {
+            "type": "string"
+          },
+          "templatesOnly": {
+            "type": "string",
+            "description": "(default: false)"
+          }
+        },
+        "required": [
+          "locationId"
+        ]
+      }
+    },
+    {
+      "name": "emails_create_template",
+      "module": "emails",
+      "method": "POST",
+      "path": "/emails/builder",
+      "version": "2021-07-28",
+      "summary": "Create a new template",
+      "description": "Create a new template [POST /emails/builder] Token: location. Scopes: emails/builder.write.",
+      "scopes": [
+        "emails/builder.write"
+      ],
+      "access": "location",
+      "operationClass": "write",
+      "deprecated": false,
+      "contentType": "application/json",
+      "pathFields": [],
+      "queryFields": [],
+      "bodyFields": [
+        "locationId",
+        "title",
+        "type",
+        "updatedBy",
+        "builderVersion",
+        "name",
+        "parentId",
+        "templateDataUrl",
+        "importProvider",
+        "importURL",
+        "templateSource",
+        "isPlainText"
+      ],
+      "bodyWrapped": false,
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "locationId": {
+            "type": "string"
+          },
+          "title": {
+            "type": "string"
+          },
+          "type": {
+            "type": "string",
+            "enum": [
+              "html",
+              "folder",
+              "import",
+              "builder",
+              "blank"
+            ]
+          },
+          "updatedBy": {
+            "type": "string"
+          },
+          "builderVersion": {
+            "type": "string",
+            "enum": [
+              "1",
+              "2"
+            ],
+            "description": "(default: \"2\")"
+          },
+          "name": {
+            "type": "string"
+          },
+          "parentId": {
+            "type": "string"
+          },
+          "templateDataUrl": {
+            "type": "string"
+          },
+          "importProvider": {
+            "type": "string",
+            "enum": [
+              "mailchimp",
+              "active_campaign",
+              "kajabi"
+            ]
+          },
+          "importURL": {
+            "type": "string"
+          },
+          "templateSource": {
+            "type": "string"
+          },
+          "isPlainText": {
+            "type": "boolean"
+          }
+        },
+        "required": [
+          "locationId",
+          "type",
+          "importProvider"
+        ]
+      }
+    },
+    {
+      "name": "emails_delete_template",
+      "module": "emails",
+      "method": "DELETE",
+      "path": "/emails/builder/{locationId}/{templateId}",
+      "version": "2021-07-28",
+      "summary": "Delete a template",
+      "description": "Delete a template [DELETE /emails/builder/{locationId}/{templateId}] Token: location.",
+      "scopes": [],
+      "access": "location",
+      "operationClass": "delete",
+      "deprecated": false,
+      "pathFields": [
+        "locationId",
+        "templateId"
+      ],
+      "queryFields": [],
+      "bodyFields": [],
+      "bodyWrapped": false,
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "locationId": {
+            "type": "string"
+          },
+          "templateId": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "locationId",
+          "templateId"
+        ]
+      }
+    },
+    {
+      "name": "emails_update_template",
+      "module": "emails",
+      "method": "POST",
+      "path": "/emails/builder/data",
+      "version": "2021-07-28",
+      "summary": "Update a template",
+      "description": "Update a template [POST /emails/builder/data] Token: location. Scopes: emails/builder.write.",
+      "scopes": [
+        "emails/builder.write"
+      ],
+      "access": "location",
+      "operationClass": "write",
+      "deprecated": false,
+      "contentType": "application/json",
+      "pathFields": [],
+      "queryFields": [],
+      "bodyFields": [
+        "locationId",
+        "templateId",
+        "updatedBy",
+        "dnd",
+        "html",
+        "editorType",
+        "previewText",
+        "isPlainText"
+      ],
+      "bodyWrapped": false,
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "locationId": {
+            "type": "string"
+          },
+          "templateId": {
+            "type": "string"
+          },
+          "updatedBy": {
+            "type": "string"
+          },
+          "dnd": {
+            "type": "object",
+            "properties": {
+              "elements": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              },
+              "attrs": {
+                "type": "object"
+              },
+              "templateSettings": {
+                "type": "object",
+                "properties": {}
+              }
+            },
+            "required": [
+              "elements",
+              "attrs",
+              "templateSettings"
+            ]
+          },
+          "html": {
+            "type": "string"
+          },
+          "editorType": {
+            "type": "string",
+            "enum": [
+              "html",
+              "builder"
+            ]
+          },
+          "previewText": {
+            "type": "string"
+          },
+          "isPlainText": {
+            "type": "boolean"
+          }
+        },
+        "required": [
+          "locationId",
+          "templateId",
+          "updatedBy",
+          "dnd",
+          "html",
+          "editorType"
+        ]
+      }
+    }
+  ]
+}

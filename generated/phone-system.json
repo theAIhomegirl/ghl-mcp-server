@@ -1,0 +1,271 @@
+{
+  "module": "phone-system",
+  "endpoints": [
+    {
+      "name": "phone_system_getnumberpoollist",
+      "module": "phone-system",
+      "method": "GET",
+      "path": "/phone-system/number-pools",
+      "version": "2021-07-28",
+      "summary": "List Number Pools",
+      "description": "List Number Pools Get list of number pools [GET /phone-system/number-pools] Token: location. Scopes: numberpools.read.",
+      "scopes": [
+        "numberpools.read"
+      ],
+      "access": "location",
+      "operationClass": "read",
+      "deprecated": false,
+      "pathFields": [],
+      "queryFields": [
+        "locationId"
+      ],
+      "bodyFields": [],
+      "bodyWrapped": false,
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "locationId": {
+            "type": "string",
+            "description": "Location ID to filter pools"
+          }
+        }
+      }
+    },
+    {
+      "name": "phone_system_available_numbers",
+      "module": "phone-system",
+      "method": "GET",
+      "path": "/phone-system/numbers/location/{locationId}/available",
+      "version": "2021-07-28",
+      "summary": "List available phone numbers",
+      "description": "List available phone numbers Search for available phone numbers to purchase for a specific location. Supports filtering by number pattern, type, and capabilities. [GET /phone-system/numbers/location/{locationId}/available] Token: location. Scopes: phonenumbers.read.",
+      "scopes": [
+        "phonenumbers.read"
+      ],
+      "access": "location",
+      "operationClass": "read",
+      "deprecated": false,
+      "pathFields": [
+        "locationId"
+      ],
+      "queryFields": [
+        "countryCode",
+        "numberTypes",
+        "firstPart",
+        "lastPart",
+        "anywhere",
+        "smsEnabled",
+        "mmsEnabled",
+        "voiceEnabled"
+      ],
+      "bodyFields": [],
+      "bodyWrapped": false,
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "locationId": {
+            "type": "string",
+            "description": "The unique identifier of the location"
+          },
+          "countryCode": {
+            "type": "string",
+            "description": "ISO 3166-1 alpha-2 country code for which to search available numbers"
+          },
+          "numberTypes": {
+            "type": "string",
+            "description": "Comma-separated list of phone number types to search for (e.g. local, tollFree, mobile)"
+          },
+          "firstPart": {
+            "type": "string",
+            "description": "Filter numbers that begin with this digit pattern"
+          },
+          "lastPart": {
+            "type": "string",
+            "description": "Filter numbers that end with this digit pattern"
+          },
+          "anywhere": {
+            "type": "string",
+            "description": "Filter numbers that contain this digit pattern anywhere"
+          },
+          "smsEnabled": {
+            "type": "boolean",
+            "description": "Filter for numbers with SMS capability"
+          },
+          "mmsEnabled": {
+            "type": "boolean",
+            "description": "Filter for numbers with MMS capability"
+          },
+          "voiceEnabled": {
+            "type": "boolean",
+            "description": "Filter for numbers with voice capability"
+          }
+        },
+        "required": [
+          "locationId",
+          "countryCode"
+        ]
+      }
+    },
+    {
+      "name": "phone_system_purchase_phone_number",
+      "module": "phone-system",
+      "method": "POST",
+      "path": "/phone-system/numbers/location/{locationId}/purchase",
+      "version": "2021-07-28",
+      "summary": "Purchase a phone number",
+      "description": "Purchase a phone number for a specific location. [POST /phone-system/numbers/location/{locationId}/purchase] Token: location. Scopes: phonenumbers.write.",
+      "scopes": [
+        "phonenumbers.write"
+      ],
+      "access": "location",
+      "operationClass": "write",
+      "deprecated": false,
+      "contentType": "application/json",
+      "pathFields": [
+        "locationId"
+      ],
+      "queryFields": [],
+      "bodyFields": [
+        "phoneNumber",
+        "countryCode",
+        "numberType",
+        "addressSid",
+        "bundleSid",
+        "locality",
+        "region",
+        "fingerprintId",
+        "skipLocationKYC"
+      ],
+      "bodyWrapped": false,
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "locationId": {
+            "type": "string",
+            "description": "The unique identifier of the location"
+          },
+          "phoneNumber": {
+            "type": "string",
+            "description": "The phone number to purchase"
+          },
+          "countryCode": {
+            "type": "string",
+            "description": "ISO 3166-1 alpha-2 country code of the number"
+          },
+          "numberType": {
+            "type": "string",
+            "description": "Type of phone number",
+            "enum": [
+              "local",
+              "tollFree",
+              "mobile"
+            ]
+          },
+          "addressSid": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "description": "Twilio address SID for compliance"
+          },
+          "bundleSid": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "description": "Twilio bundle SID for regulatory compliance"
+          },
+          "locality": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "description": "Locality where the number is being purchased"
+          },
+          "region": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "description": "Region where the number is being purchased"
+          },
+          "fingerprintId": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "description": "Unique request ID for idempotency (fingerprint of the purchase request)"
+          },
+          "skipLocationKYC": {
+            "type": [
+              "boolean",
+              "null"
+            ],
+            "description": "Skip location-level KYC verification if agency-level compliance has already been verified"
+          }
+        },
+        "required": [
+          "locationId",
+          "phoneNumber"
+        ]
+      }
+    },
+    {
+      "name": "phone_system_active_numbers",
+      "module": "phone-system",
+      "method": "GET",
+      "path": "/phone-system/numbers/location/{locationId}",
+      "version": "2021-07-28",
+      "summary": "List active numbers",
+      "description": "List active numbers Retrieve a paginated list of active phone numbers for a specific location. Supports filtering, pagination, and optional exclusion of number pool assignments. [GET /phone-system/numbers/location/{locationId}] Token: location. Scopes: phonenumbers.read.",
+      "scopes": [
+        "phonenumbers.read"
+      ],
+      "access": "location",
+      "operationClass": "read",
+      "deprecated": false,
+      "pathFields": [
+        "locationId"
+      ],
+      "queryFields": [
+        "pageSize",
+        "page",
+        "searchFilter",
+        "skipNumberPool"
+      ],
+      "bodyFields": [],
+      "bodyWrapped": false,
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "locationId": {
+            "type": "string",
+            "description": "The unique identifier of the location"
+          },
+          "pageSize": {
+            "type": "number",
+            "minimum": 1,
+            "maximum": 1000,
+            "description": "(default: 1000)"
+          },
+          "page": {
+            "type": "number",
+            "minimum": 0,
+            "description": "(default: 0)"
+          },
+          "searchFilter": {
+            "type": "string",
+            "description": "Filter numbers by phone number pattern. Supports partial matching (e.g., \"+91\" to find all Indian numbers)."
+          },
+          "skipNumberPool": {
+            "type": "boolean",
+            "description": "(default: true)"
+          }
+        },
+        "required": [
+          "locationId"
+        ]
+      }
+    }
+  ]
+}

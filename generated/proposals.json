@@ -1,0 +1,354 @@
+{
+  "module": "proposals",
+  "endpoints": [
+    {
+      "name": "proposals_list_documents_contracts",
+      "module": "proposals",
+      "method": "GET",
+      "path": "/proposals/document",
+      "version": "2021-07-28",
+      "summary": "List documents",
+      "description": "List documents for a location [GET /proposals/document] Token: location or agency.",
+      "scopes": [],
+      "access": "both",
+      "operationClass": "read",
+      "deprecated": false,
+      "pathFields": [],
+      "queryFields": [
+        "locationId",
+        "status",
+        "paymentStatus",
+        "limit",
+        "skip",
+        "query",
+        "dateFrom",
+        "dateTo"
+      ],
+      "bodyFields": [],
+      "bodyWrapped": false,
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "locationId": {
+            "type": "string",
+            "description": "Location Id"
+          },
+          "status": {
+            "enum": [
+              "draft",
+              "sent",
+              "viewed",
+              "completed",
+              "accepted"
+            ],
+            "type": "string",
+            "description": "Document status, pass as comma separated values"
+          },
+          "paymentStatus": {
+            "enum": [
+              "waiting_for_payment",
+              "paid",
+              "no_payment"
+            ],
+            "type": "string",
+            "description": "Payment status, pass as comma separated values"
+          },
+          "limit": {
+            "type": "number",
+            "description": "Limit to fetch number of records"
+          },
+          "skip": {
+            "type": "number",
+            "description": "Skip number of records"
+          },
+          "query": {
+            "type": "string",
+            "description": "Search string"
+          },
+          "dateFrom": {
+            "type": "string",
+            "description": "Date start from (ISO 8601), dateFrom & DateTo must be provided together"
+          },
+          "dateTo": {
+            "type": "string",
+            "description": "Date to (ISO 8601), dateFrom & DateTo must be provided together"
+          }
+        },
+        "required": [
+          "locationId"
+        ]
+      }
+    },
+    {
+      "name": "proposals_send_documents_contracts",
+      "module": "proposals",
+      "method": "POST",
+      "path": "/proposals/document/send",
+      "version": "2021-07-28",
+      "summary": "Send document",
+      "description": "Send document to a client [POST /proposals/document/send] Token: location or agency.",
+      "scopes": [],
+      "access": "both",
+      "operationClass": "write",
+      "deprecated": false,
+      "contentType": "application/json",
+      "pathFields": [],
+      "queryFields": [],
+      "bodyFields": [
+        "locationId",
+        "documentId",
+        "documentName",
+        "medium",
+        "ccRecipients",
+        "notificationSettings",
+        "sentBy"
+      ],
+      "bodyWrapped": false,
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "locationId": {
+            "type": "string",
+            "description": "Location Id"
+          },
+          "documentId": {
+            "type": "string",
+            "description": "Document Id"
+          },
+          "documentName": {
+            "type": "string",
+            "description": "Document Name"
+          },
+          "medium": {
+            "type": "string",
+            "enum": [
+              "link",
+              "email"
+            ],
+            "description": "Medium to be used for sending the document"
+          },
+          "ccRecipients": {
+            "description": "CC Recipient",
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "email": {
+                  "type": "string",
+                  "description": "Email"
+                },
+                "id": {
+                  "type": "string",
+                  "description": "Contact ID"
+                },
+                "imageUrl": {
+                  "type": "string",
+                  "description": "Contact Image URL"
+                },
+                "contactName": {
+                  "type": "string",
+                  "description": "Contact Name"
+                },
+                "firstName": {
+                  "type": "string",
+                  "description": "First Name"
+                },
+                "lastName": {
+                  "type": "string",
+                  "description": "Last Name"
+                }
+              },
+              "required": [
+                "email",
+                "id",
+                "imageUrl",
+                "contactName",
+                "firstName",
+                "lastName"
+              ]
+            }
+          },
+          "notificationSettings": {
+            "type": "object",
+            "properties": {
+              "receive": {
+                "type": "object",
+                "properties": {
+                  "templateId": {
+                    "type": "string"
+                  },
+                  "subject": {
+                    "type": "string"
+                  }
+                },
+                "required": [
+                  "templateId",
+                  "subject"
+                ]
+              },
+              "sender": {
+                "type": "object",
+                "properties": {
+                  "fromEmail": {
+                    "type": "string"
+                  },
+                  "fromName": {
+                    "type": "string"
+                  }
+                },
+                "required": [
+                  "fromEmail",
+                  "fromName"
+                ]
+              }
+            },
+            "required": [
+              "receive",
+              "sender"
+            ]
+          },
+          "sentBy": {
+            "type": "string",
+            "description": "Sent ByUser Id"
+          }
+        },
+        "required": [
+          "locationId",
+          "documentId",
+          "sentBy"
+        ]
+      }
+    },
+    {
+      "name": "proposals_list_documents_contracts_templates",
+      "module": "proposals",
+      "method": "GET",
+      "path": "/proposals/templates",
+      "version": "2021-07-28",
+      "summary": "List templates",
+      "description": "List templates List document contract templates for a location [GET /proposals/templates] Token: location or agency.",
+      "scopes": [],
+      "access": "both",
+      "operationClass": "read",
+      "deprecated": false,
+      "pathFields": [],
+      "queryFields": [
+        "locationId",
+        "dateFrom",
+        "dateTo",
+        "type",
+        "name",
+        "isPublicDocument",
+        "userId",
+        "limit",
+        "skip"
+      ],
+      "bodyFields": [],
+      "bodyWrapped": false,
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "locationId": {
+            "type": "string",
+            "description": "Location Id"
+          },
+          "dateFrom": {
+            "type": "string",
+            "description": "Date start from (ISO 8601)"
+          },
+          "dateTo": {
+            "type": "string",
+            "description": "Date to (ISO 8601)"
+          },
+          "type": {
+            "type": "string",
+            "description": "Comma-separated template types. Valid values: proposal, estimate, contentLibrary"
+          },
+          "name": {
+            "type": "string",
+            "description": "Template Name"
+          },
+          "isPublicDocument": {
+            "type": "boolean",
+            "description": "If the docForm is a DocForm"
+          },
+          "userId": {
+            "type": "string",
+            "description": "User Id, required when isPublicDocument is true"
+          },
+          "limit": {
+            "type": "string",
+            "description": "Limit"
+          },
+          "skip": {
+            "type": "string",
+            "description": "Skip"
+          }
+        },
+        "required": [
+          "locationId"
+        ]
+      }
+    },
+    {
+      "name": "proposals_send_documents_contracts_template",
+      "module": "proposals",
+      "method": "POST",
+      "path": "/proposals/templates/send",
+      "version": "2021-07-28",
+      "summary": "Send template",
+      "description": "Send template to a client [POST /proposals/templates/send] Token: location or agency.",
+      "scopes": [],
+      "access": "both",
+      "operationClass": "write",
+      "deprecated": false,
+      "contentType": "application/json",
+      "pathFields": [],
+      "queryFields": [],
+      "bodyFields": [
+        "templateId",
+        "userId",
+        "sendDocument",
+        "locationId",
+        "contactId",
+        "opportunityId"
+      ],
+      "bodyWrapped": false,
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "templateId": {
+            "type": "string",
+            "description": "Template Id"
+          },
+          "userId": {
+            "type": "string",
+            "description": "User Id"
+          },
+          "sendDocument": {
+            "type": "boolean",
+            "description": "Send Document"
+          },
+          "locationId": {
+            "type": "string",
+            "description": "Location Id"
+          },
+          "contactId": {
+            "type": "string",
+            "description": "Contact Id"
+          },
+          "opportunityId": {
+            "type": "string",
+            "description": "Opportunity Id"
+          }
+        },
+        "required": [
+          "templateId",
+          "userId",
+          "locationId",
+          "contactId"
+        ]
+      }
+    }
+  ]
+}

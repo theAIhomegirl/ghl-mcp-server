@@ -1,0 +1,253 @@
+{
+  "module": "affiliate-manager",
+  "endpoints": [
+    {
+      "name": "affiliate_manager_list_affiliates",
+      "module": "affiliate-manager",
+      "method": "GET",
+      "path": "/affiliate-manager/{locationId}/affiliates",
+      "version": "2021-07-28",
+      "summary": "List Affiliates",
+      "description": "List Affiliates Retrieve the list of affiliates for a location. [GET /affiliate-manager/{locationId}/affiliates] Scopes: affiliate-manager.readonly.",
+      "scopes": [
+        "affiliate-manager.readonly"
+      ],
+      "access": "unknown",
+      "operationClass": "read",
+      "deprecated": false,
+      "pathFields": [
+        "locationId"
+      ],
+      "queryFields": [
+        "query",
+        "active",
+        "campaignId",
+        "skip",
+        "limit",
+        "fromDate",
+        "toDate"
+      ],
+      "bodyFields": [],
+      "bodyWrapped": false,
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "locationId": {
+            "type": "string",
+            "description": "Location Id"
+          },
+          "query": {
+            "type": "string"
+          },
+          "active": {
+            "type": "string",
+            "description": "(default: false)"
+          },
+          "campaignId": {
+            "type": "string"
+          },
+          "skip": {
+            "type": "number",
+            "description": "(default: 0)"
+          },
+          "limit": {
+            "type": "number",
+            "description": "(default: 10)"
+          },
+          "fromDate": {
+            "type": "string"
+          },
+          "toDate": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "locationId"
+        ]
+      }
+    },
+    {
+      "name": "affiliate_manager_get_affiliate",
+      "module": "affiliate-manager",
+      "method": "GET",
+      "path": "/affiliate-manager/{locationId}/affiliates/{affiliateId}",
+      "version": "2021-07-28",
+      "summary": "Get Affiliate",
+      "description": "Get Affiliate Retrieve a single affiliate by id for a location. [GET /affiliate-manager/{locationId}/affiliates/{affiliateId}] Scopes: affiliate-manager.readonly.",
+      "scopes": [
+        "affiliate-manager.readonly"
+      ],
+      "access": "unknown",
+      "operationClass": "read",
+      "deprecated": false,
+      "pathFields": [
+        "locationId",
+        "affiliateId"
+      ],
+      "queryFields": [],
+      "bodyFields": [],
+      "bodyWrapped": false,
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "locationId": {
+            "type": "string",
+            "description": "Location Id"
+          },
+          "affiliateId": {
+            "type": "string",
+            "description": "Affiliate Id"
+          }
+        },
+        "required": [
+          "locationId",
+          "affiliateId"
+        ]
+      }
+    },
+    {
+      "name": "affiliate_manager_list_payouts",
+      "module": "affiliate-manager",
+      "method": "GET",
+      "path": "/affiliate-manager/{locationId}/payouts",
+      "version": "2021-07-28",
+      "summary": "List Payouts",
+      "description": "List Payouts Retrieve the list of payouts for a location. [GET /affiliate-manager/{locationId}/payouts] Scopes: affiliate-manager.readonly.",
+      "scopes": [
+        "affiliate-manager.readonly"
+      ],
+      "access": "unknown",
+      "operationClass": "read",
+      "deprecated": false,
+      "pathFields": [
+        "locationId"
+      ],
+      "queryFields": [
+        "status",
+        "query",
+        "affiliateId",
+        "campaignId",
+        "skip",
+        "limit",
+        "start",
+        "end"
+      ],
+      "bodyFields": [],
+      "bodyWrapped": false,
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "locationId": {
+            "type": "string",
+            "description": "Location Id"
+          },
+          "status": {
+            "type": "string",
+            "description": "Payout status"
+          },
+          "query": {
+            "type": "string",
+            "description": "query"
+          },
+          "affiliateId": {
+            "type": "string",
+            "description": "Affiliate Id"
+          },
+          "campaignId": {
+            "type": "string",
+            "description": "Campaign Id"
+          },
+          "skip": {
+            "type": "number",
+            "description": "(default: 0)"
+          },
+          "limit": {
+            "type": "number",
+            "description": "(default: 10)"
+          },
+          "start": {
+            "type": "string"
+          },
+          "end": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "locationId"
+        ]
+      }
+    },
+    {
+      "name": "affiliate_manager_list_commissions",
+      "module": "affiliate-manager",
+      "method": "GET",
+      "path": "/affiliate-manager/{locationId}/commissions",
+      "version": "2021-07-28",
+      "summary": "List Commissions",
+      "description": "List Commissions Retrieve the list of commissions for a location. [GET /affiliate-manager/{locationId}/commissions] Scopes: affiliate-manager.readonly.",
+      "scopes": [
+        "affiliate-manager.readonly"
+      ],
+      "access": "unknown",
+      "operationClass": "read",
+      "deprecated": false,
+      "pathFields": [
+        "locationId"
+      ],
+      "queryFields": [
+        "campaignId",
+        "affiliateId",
+        "status",
+        "query",
+        "skip",
+        "limit",
+        "fromDate",
+        "toDate"
+      ],
+      "bodyFields": [],
+      "bodyWrapped": false,
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "locationId": {
+            "type": "string",
+            "description": "Location Id"
+          },
+          "campaignId": {
+            "type": "string",
+            "description": "Campaign Id"
+          },
+          "affiliateId": {
+            "type": "string",
+            "description": "Affiliate Id"
+          },
+          "status": {
+            "type": "string",
+            "description": "Status"
+          },
+          "query": {
+            "type": "string",
+            "description": "Query"
+          },
+          "skip": {
+            "type": "number",
+            "description": "(default: 0)"
+          },
+          "limit": {
+            "type": "number",
+            "description": "(default: 10)"
+          },
+          "fromDate": {
+            "type": "string"
+          },
+          "toDate": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "locationId"
+        ]
+      }
+    }
+  ]
+}

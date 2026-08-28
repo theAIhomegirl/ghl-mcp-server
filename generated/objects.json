@@ -1,0 +1,477 @@
+{
+  "module": "objects",
+  "endpoints": [
+    {
+      "name": "objects_get_object_schema_by_key",
+      "module": "objects",
+      "method": "GET",
+      "path": "/objects/{key}",
+      "version": "2021-07-28",
+      "summary": "Get Object Schema by key / id",
+      "description": "Get Object Schema by key / id Retrieve Object Schema by key or ID. This will return the schema of the custom object, including all its fields and properties. Supported objects include contact, opportunity, business and custom objects.To understand objects and records, please have a look the documentation here : https://doc.clickup.com/8631005/d/h/87cpx-277156/93bf0c2e23177b0 [GET /objects/{key}] Scopes: objects/schema.readonly.",
+      "scopes": [
+        "objects/schema.readonly"
+      ],
+      "access": "unknown",
+      "operationClass": "read",
+      "deprecated": false,
+      "pathFields": [
+        "key"
+      ],
+      "queryFields": [
+        "locationId",
+        "fetchProperties"
+      ],
+      "bodyFields": [],
+      "bodyWrapped": false,
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "key": {
+            "type": "string",
+            "description": "key of the custom or standard object. For custom objects, the key must include the prefix “custom_objects.”. This key can be found on the Object Details page under Settings in the UI."
+          },
+          "locationId": {
+            "type": "string",
+            "description": "location id of the sub account"
+          },
+          "fetchProperties": {
+            "type": "string",
+            "description": "Fetch Properties , Fetches all the standard / custom fields of the object when set to true"
+          }
+        },
+        "required": [
+          "key",
+          "locationId"
+        ]
+      }
+    },
+    {
+      "name": "objects_update_custom_object",
+      "module": "objects",
+      "method": "PUT",
+      "path": "/objects/{key}",
+      "version": "2021-07-28",
+      "summary": "Update Object Schema By Key / Id",
+      "description": "Update Object Schema By Key / Id Update Custom Object Schema or standard object's like contact, opportunity, business searchable fields. To understand objects and records, please have a look at the documentation here : https://doc.clickup.com/8631005/d/h/87cpx-277156/93bf0c2e23177b0 [PUT /objects/{key}] Scopes: objects/schema.write.",
+      "scopes": [
+        "objects/schema.write"
+      ],
+      "access": "unknown",
+      "operationClass": "write",
+      "deprecated": false,
+      "contentType": "application/json",
+      "pathFields": [
+        "key"
+      ],
+      "queryFields": [],
+      "bodyFields": [
+        "labels",
+        "description",
+        "locationId",
+        "searchableProperties"
+      ],
+      "bodyWrapped": false,
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "key": {
+            "type": "string",
+            "description": "key of the custom or standard object. For custom objects, the key must include the prefix “custom_objects.”. This key can be found on the Object Details page under Settings in the UI."
+          },
+          "labels": {
+            "type": "object",
+            "properties": {
+              "singular": {
+                "type": "string",
+                "description": "Singular name of the custom object"
+              },
+              "plural": {
+                "type": "string",
+                "description": "Plural name of the custom object"
+              }
+            },
+            "description": "This is how your custom object will  be  displayed"
+          },
+          "description": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "description": "Pet Object`s description"
+          },
+          "locationId": {
+            "type": "string",
+            "description": "location id"
+          },
+          "searchableProperties": {
+            "description": "Searchable Fields: Provide the field key of your object that you want to search on, using the format (custom_object.<object_name>.<field_key>).",
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          }
+        },
+        "required": [
+          "key",
+          "locationId",
+          "searchableProperties"
+        ]
+      }
+    },
+    {
+      "name": "objects_get_record_by_id",
+      "module": "objects",
+      "method": "GET",
+      "path": "/objects/{schemaKey}/records/{id}",
+      "version": "2021-07-28",
+      "summary": "Get Record By Id",
+      "description": "Get Record By Id Allows you to get a Standard Object like business and custom object record by Id [GET /objects/{schemaKey}/records/{id}]",
+      "scopes": [],
+      "access": "unknown",
+      "operationClass": "read",
+      "deprecated": false,
+      "pathFields": [
+        "schemaKey",
+        "id"
+      ],
+      "queryFields": [],
+      "bodyFields": [],
+      "bodyWrapped": false,
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "schemaKey": {
+            "type": "string",
+            "description": "The key of the Custom Object / Standard Object Schema. For custom objects, the key must include the “custom_objects.” prefix, while standard objects use their respective object keys. This information is available on the Custom Objects Details page under Settings."
+          },
+          "id": {
+            "type": "string",
+            "description": "id of the record to be updated. Available on the Record details page under the 3 dots or in the url"
+          }
+        },
+        "required": [
+          "schemaKey",
+          "id"
+        ]
+      }
+    },
+    {
+      "name": "objects_update_object_record",
+      "module": "objects",
+      "method": "PUT",
+      "path": "/objects/{schemaKey}/records/{id}",
+      "version": "2021-07-28",
+      "summary": "Update Record",
+      "description": "Update Record Update a Custom Object Record by Id. Supported Objects are business and custom objects. Documentation Link - https://doc.clickup.com/8631005/d/h/87cpx-277156/93bf0c2e23177b0/87cpx-376296 [PUT /objects/{schemaKey}/records/{id}]",
+      "scopes": [],
+      "access": "unknown",
+      "operationClass": "write",
+      "deprecated": false,
+      "contentType": "application/json",
+      "pathFields": [
+        "schemaKey",
+        "id"
+      ],
+      "queryFields": [
+        "locationId"
+      ],
+      "bodyFields": [],
+      "bodyWrapped": true,
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "schemaKey": {
+            "type": "string",
+            "description": "The key of the Custom Object / Standard Object Schema. For custom objects, the key must include the “custom_objects.” prefix, while standard objects use their respective object keys. This information is available on the Custom Objects Details page under Settings."
+          },
+          "id": {
+            "type": "string",
+            "description": "id of the record to be updated. Available on the Record details page under the 3 dots or in the url"
+          },
+          "locationId": {
+            "type": "string"
+          },
+          "body": {
+            "type": "object",
+            "properties": {},
+            "description": "Full request body"
+          }
+        },
+        "required": [
+          "schemaKey",
+          "id",
+          "locationId",
+          "body"
+        ]
+      }
+    },
+    {
+      "name": "objects_delete_object_record",
+      "module": "objects",
+      "method": "DELETE",
+      "path": "/objects/{schemaKey}/records/{id}",
+      "version": "2021-07-28",
+      "summary": "Delete Record",
+      "description": "Delete Record By Id . Supported Objects are business and custom objects. [DELETE /objects/{schemaKey}/records/{id}]",
+      "scopes": [],
+      "access": "unknown",
+      "operationClass": "delete",
+      "deprecated": false,
+      "pathFields": [
+        "schemaKey",
+        "id"
+      ],
+      "queryFields": [],
+      "bodyFields": [],
+      "bodyWrapped": false,
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "schemaKey": {
+            "type": "string",
+            "description": "The key of the Custom Object / Standard Object Schema. For custom objects, the key must include the “custom_objects.” prefix, while standard objects use their respective object keys. This information is available on the Custom Objects Details page under Settings."
+          },
+          "id": {
+            "type": "string",
+            "description": "id of the record to be updated. Available on the Record details page under the 3 dots or in the url"
+          }
+        },
+        "required": [
+          "schemaKey",
+          "id"
+        ]
+      }
+    },
+    {
+      "name": "objects_create_object_record",
+      "module": "objects",
+      "method": "POST",
+      "path": "/objects/{schemaKey}/records",
+      "version": "2021-07-28",
+      "summary": "Create Record",
+      "description": "Create Record Create a Custom Object Record. Supported Objects business and custom objects. Documentation Link - https://doc.clickup.com/8631005/d/h/87cpx-277156/93bf0c2e23177b0/87cpx-376296 [POST /objects/{schemaKey}/records] Scopes: objects/record.write.",
+      "scopes": [
+        "objects/record.write"
+      ],
+      "access": "unknown",
+      "operationClass": "write",
+      "deprecated": false,
+      "contentType": "application/json",
+      "pathFields": [
+        "schemaKey"
+      ],
+      "queryFields": [],
+      "bodyFields": [],
+      "bodyWrapped": true,
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "schemaKey": {
+            "type": "string",
+            "description": "The key of the Custom Object / Standard Object Schema. For custom objects, the key must include the “custom_objects.” prefix, while standard objects use their respective object keys. This information is available on the Custom Objects Details page under Settings."
+          },
+          "body": {
+            "type": "object",
+            "properties": {},
+            "description": "Full request body"
+          }
+        },
+        "required": [
+          "schemaKey",
+          "body"
+        ]
+      }
+    },
+    {
+      "name": "objects_search_object_records",
+      "module": "objects",
+      "method": "POST",
+      "path": "/objects/{schemaKey}/records/search",
+      "version": "2021-07-28",
+      "summary": "Search Object Records",
+      "description": "Search Object Records Supported Objects are custom objects and standard objects like \"business\". Documentation Link - https://doc.clickup.com/8631005/d/h/87cpx-277156/93bf0c2e23177b0/87cpx-379336 [POST /objects/{schemaKey}/records/search] Scopes: objects/record.readonly.",
+      "scopes": [
+        "objects/record.readonly"
+      ],
+      "access": "unknown",
+      "operationClass": "read",
+      "deprecated": false,
+      "contentType": "application/json",
+      "pathFields": [
+        "schemaKey"
+      ],
+      "queryFields": [],
+      "bodyFields": [
+        "locationId",
+        "page",
+        "pageLimit",
+        "query",
+        "searchAfter"
+      ],
+      "bodyWrapped": false,
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "schemaKey": {
+            "type": "string",
+            "description": "custom object key"
+          },
+          "locationId": {
+            "type": "string",
+            "description": "Location Id"
+          },
+          "page": {
+            "type": "number",
+            "description": "Page"
+          },
+          "pageLimit": {
+            "type": "number",
+            "description": "Page Limit"
+          },
+          "query": {
+            "type": "string",
+            "description": "Pass this query parameter to search using your searchable properties. For example, if you have a custom object called “Pets” and have configured “name” as a searchable property, you can pass name:Buddy to search for pets with the name “Buddy.”"
+          },
+          "searchAfter": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          }
+        },
+        "required": [
+          "schemaKey",
+          "locationId",
+          "page",
+          "pageLimit",
+          "query",
+          "searchAfter"
+        ]
+      }
+    },
+    {
+      "name": "objects_get_object_by_location_id",
+      "module": "objects",
+      "method": "GET",
+      "path": "/objects/",
+      "version": "2021-07-28",
+      "summary": "Get all objects for a location",
+      "description": "Get all objects for a location . Supported Objects are contact, opportunity, business and custom objects.To understand objects and records, please have a look at the documentation here : https://doc.clickup.com/8631005/d/h/87cpx-277156/93bf0c2e23177b0 [GET /objects/] Scopes: objects/schema.readonly.",
+      "scopes": [
+        "objects/schema.readonly"
+      ],
+      "access": "unknown",
+      "operationClass": "read",
+      "deprecated": false,
+      "pathFields": [],
+      "queryFields": [
+        "locationId"
+      ],
+      "bodyFields": [],
+      "bodyWrapped": false,
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "locationId": {
+            "type": "string",
+            "description": "location id"
+          }
+        },
+        "required": [
+          "locationId"
+        ]
+      }
+    },
+    {
+      "name": "objects_create_custom_object_schema",
+      "module": "objects",
+      "method": "POST",
+      "path": "/objects/",
+      "version": "2021-07-28",
+      "summary": "Create Custom Object",
+      "description": "Create Custom Object Allows you to create a custom object schema. To understand objects and records, please have a look at the documentation here : https://doc.clickup.com/8631005/d/h/87cpx-277156/93bf0c2e23177b0 [POST /objects/] Token: agency. Scopes: objects/schema.write.",
+      "scopes": [
+        "objects/schema.write"
+      ],
+      "access": "agency",
+      "operationClass": "write",
+      "deprecated": false,
+      "contentType": "application/json",
+      "pathFields": [],
+      "queryFields": [],
+      "bodyFields": [
+        "labels",
+        "key",
+        "description",
+        "locationId",
+        "primaryDisplayPropertyDetails"
+      ],
+      "bodyWrapped": false,
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "labels": {
+            "type": "object",
+            "properties": {
+              "singular": {
+                "type": "string",
+                "description": "Singular name of the custom object"
+              },
+              "plural": {
+                "type": "string",
+                "description": "Plural name of the custom object"
+              }
+            },
+            "required": [
+              "singular",
+              "plural"
+            ],
+            "description": "This is what your custom object will be called. These labels will be used to display your custom object on the UI"
+          },
+          "key": {
+            "type": "string",
+            "description": "key that would be used to refer the Custom Object internally (lowercase + underscore_separated). 'custom_objects.' would be added as prefix by default"
+          },
+          "description": {
+            "type": "string",
+            "description": "Pet Object`s description"
+          },
+          "locationId": {
+            "type": "string",
+            "description": "Location Id"
+          },
+          "primaryDisplayPropertyDetails": {
+            "type": "object",
+            "properties": {
+              "key": {
+                "type": "string",
+                "description": "key that would be used to refer the custom field internally (lowercase + underscore_separated). 'custom_objects.{{objectKey}}' would be added as prefix by default is not passed"
+              },
+              "name": {
+                "type": "string",
+                "description": "Name of the Primary property name which will be displayed on the record page"
+              },
+              "dataType": {
+                "type": "string",
+                "description": "Primary property data Type (it can either be TEXT or NUMERICAL type)"
+              }
+            },
+            "required": [
+              "key",
+              "name",
+              "dataType"
+            ],
+            "description": "Primary property which will be displayed on the record page"
+          }
+        },
+        "required": [
+          "labels",
+          "key",
+          "locationId",
+          "primaryDisplayPropertyDetails"
+        ]
+      }
+    }
+  ]
+}

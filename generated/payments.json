@@ -1,0 +1,1634 @@
+{
+  "module": "payments",
+  "endpoints": [
+    {
+      "name": "payments_list_integration_providers",
+      "module": "payments",
+      "method": "GET",
+      "path": "/payments/integrations/provider/whitelabel",
+      "version": "2021-07-28",
+      "summary": "List White-label Integration Providers",
+      "description": "List White-label Integration Providers The \"List White-label Integration Providers\" API allows to retrieve a paginated list of integration providers. Customize your results by filtering whitelabel integration providers(which are built directly on top of Authorize.net or NMI) based on name or paginate through the list using the provided query parameters. This endpoint provides a straightforward way to explore and retrieve integration p… [GET /payments/integrations/provider/whitelabel] Token: location. Scopes: payments/integration.readonly.",
+      "scopes": [
+        "payments/integration.readonly"
+      ],
+      "access": "location",
+      "operationClass": "read",
+      "deprecated": false,
+      "pathFields": [],
+      "queryFields": [
+        "altId",
+        "altType",
+        "limit",
+        "offset"
+      ],
+      "bodyFields": [],
+      "bodyWrapped": false,
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "altId": {
+            "type": "string",
+            "description": "location Id / company Id based on altType"
+          },
+          "altType": {
+            "enum": [
+              "location"
+            ],
+            "type": "string",
+            "description": "Alt Type"
+          },
+          "limit": {
+            "type": "number",
+            "description": "(default: 0)"
+          },
+          "offset": {
+            "type": "number",
+            "description": "(default: 0)"
+          }
+        },
+        "required": [
+          "altId",
+          "altType"
+        ]
+      }
+    },
+    {
+      "name": "payments_create_integration_provider",
+      "module": "payments",
+      "method": "POST",
+      "path": "/payments/integrations/provider/whitelabel",
+      "version": "2021-07-28",
+      "summary": "Create White-label Integration Provider",
+      "description": "Create White-label Integration Provider The \"Create White-label Integration Provider\" API allows adding a new payment provider integration to the system which is built on top of Authorize.net or NMI. Use this endpoint to create a integration provider with the specified details. Ensure that the required information is provided in the request payload. This endpoint can be only invoked using marketplace-app token [POST /payments/integrations/provider/whitelabel] Token: location. Scopes: payments/integration.write.",
+      "scopes": [
+        "payments/integration.write"
+      ],
+      "access": "location",
+      "operationClass": "write",
+      "deprecated": false,
+      "contentType": "application/json",
+      "pathFields": [],
+      "queryFields": [],
+      "bodyFields": [
+        "altId",
+        "altType",
+        "uniqueName",
+        "title",
+        "provider",
+        "description",
+        "imageUrl"
+      ],
+      "bodyWrapped": false,
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "altId": {
+            "type": "string",
+            "description": "location Id / company Id based on altType"
+          },
+          "altType": {
+            "type": "string",
+            "description": "Alt Type",
+            "enum": [
+              "location"
+            ]
+          },
+          "uniqueName": {
+            "type": "string",
+            "description": "A unique name given to the integration provider, uniqueName must start and end with a character. Only lowercase characters and hyphens (-) are supported"
+          },
+          "title": {
+            "type": "string",
+            "description": "The title or name of the integration provider."
+          },
+          "provider": {
+            "type": "string",
+            "description": "The type of payment provider associated with the integration provider.",
+            "enum": [
+              "authorize-net",
+              "nmi"
+            ]
+          },
+          "description": {
+            "type": "string",
+            "description": "A brief description providing additional information about the integration provider."
+          },
+          "imageUrl": {
+            "type": "string",
+            "description": "The URL to an image representing the integration provider. The imageUrl should start with \"https://\" and ensure that this URL is publicly accessible."
+          }
+        },
+        "required": [
+          "altId",
+          "altType",
+          "uniqueName",
+          "title",
+          "provider",
+          "description",
+          "imageUrl"
+        ]
+      }
+    },
+    {
+      "name": "payments_list_orders",
+      "module": "payments",
+      "method": "GET",
+      "path": "/payments/orders",
+      "version": "2021-07-28",
+      "summary": "List Orders",
+      "description": "List Orders The \"List Orders\" API allows to retrieve a paginated list of orders. Customize your results by filtering orders based on name, alt type, order status, payment mode, date range, type of source, contact, funnel products or paginate through the list using the provided query parameters. This endpoint provides a straightforward way to explore and retrieve order information. [GET /payments/orders] Token: location. Scopes: payments/orders.readonly.",
+      "scopes": [
+        "payments/orders.readonly"
+      ],
+      "access": "location",
+      "operationClass": "read",
+      "deprecated": false,
+      "pathFields": [],
+      "queryFields": [
+        "locationId",
+        "altId",
+        "status",
+        "paymentStatus",
+        "paymentMode",
+        "startAt",
+        "endAt",
+        "search",
+        "contactId",
+        "funnelProductIds",
+        "sourceId",
+        "limit",
+        "offset"
+      ],
+      "bodyFields": [],
+      "bodyWrapped": false,
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "locationId": {
+            "type": "string",
+            "description": "LocationId is the id of the sub-account."
+          },
+          "altId": {
+            "type": "string",
+            "description": "AltId is the unique identifier e.g: location id."
+          },
+          "status": {
+            "type": "string",
+            "description": "Order status."
+          },
+          "paymentStatus": {
+            "enum": [
+              "paid",
+              "unpaid",
+              "refunded",
+              "partially_paid"
+            ],
+            "type": "string",
+            "description": "Payment Status of the Order"
+          },
+          "paymentMode": {
+            "type": "string",
+            "description": "Mode of payment."
+          },
+          "startAt": {
+            "type": "string",
+            "description": "Starting interval of orders."
+          },
+          "endAt": {
+            "type": "string",
+            "description": "Closing interval of orders."
+          },
+          "search": {
+            "type": "string",
+            "description": "The name of the order for searching."
+          },
+          "contactId": {
+            "type": "string",
+            "description": "Contact id for filtering of orders."
+          },
+          "funnelProductIds": {
+            "type": "string",
+            "description": "Funnel product ids separated by comma."
+          },
+          "sourceId": {
+            "type": "string",
+            "description": "Source id"
+          },
+          "limit": {
+            "type": "number",
+            "description": "(default: 10)"
+          },
+          "offset": {
+            "type": "number",
+            "description": "(default: 0)"
+          }
+        },
+        "required": [
+          "altId"
+        ]
+      }
+    },
+    {
+      "name": "payments_get_order_by_id",
+      "module": "payments",
+      "method": "GET",
+      "path": "/payments/orders/{orderId}",
+      "version": "2021-07-28",
+      "summary": "Get Order by ID",
+      "description": "Get Order by ID The \"Get Order by ID\" API allows to retrieve information for a specific order using its unique identifier. Use this endpoint to fetch details for a single order based on the provided order ID. [GET /payments/orders/{orderId}] Token: location. Scopes: payments/orders.readonly.",
+      "scopes": [
+        "payments/orders.readonly"
+      ],
+      "access": "location",
+      "operationClass": "read",
+      "deprecated": false,
+      "pathFields": [
+        "orderId"
+      ],
+      "queryFields": [
+        "locationId",
+        "altId"
+      ],
+      "bodyFields": [],
+      "bodyWrapped": false,
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "orderId": {
+            "type": "string",
+            "description": "ID of the order that needs to be returned"
+          },
+          "locationId": {
+            "type": "string",
+            "description": "LocationId is the id of the sub-account."
+          },
+          "altId": {
+            "type": "string",
+            "description": "AltId is the unique identifier e.g: location id."
+          }
+        },
+        "required": [
+          "orderId",
+          "altId"
+        ]
+      }
+    },
+    {
+      "name": "payments_record_order_payment",
+      "module": "payments",
+      "method": "POST",
+      "path": "/payments/orders/{orderId}/record-payment",
+      "version": "2021-07-28",
+      "summary": "Record Order Payment",
+      "description": "Record Order Payment The \"Record Order Payment\" API allows to record a payment for an order. Use this endpoint to record payment for an order and update the order status to \"Paid\". [POST /payments/orders/{orderId}/record-payment] Token: location. Scopes: payments/orders.collectPayment.",
+      "scopes": [
+        "payments/orders.collectPayment"
+      ],
+      "access": "location",
+      "operationClass": "write",
+      "deprecated": false,
+      "contentType": "application/json",
+      "pathFields": [
+        "orderId"
+      ],
+      "queryFields": [],
+      "bodyFields": [
+        "altId",
+        "altType",
+        "mode",
+        "card",
+        "cheque",
+        "notes",
+        "amount",
+        "meta",
+        "isPartialPayment"
+      ],
+      "bodyWrapped": false,
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "orderId": {
+            "type": "string",
+            "description": "Order ID"
+          },
+          "altId": {
+            "type": "string",
+            "description": "location Id / company Id based on altType"
+          },
+          "altType": {
+            "type": "string",
+            "description": "Alt Type",
+            "enum": [
+              "location"
+            ]
+          },
+          "mode": {
+            "type": "string",
+            "description": "manual payment method",
+            "enum": [
+              "cash",
+              "card",
+              "cheque",
+              "bank_transfer",
+              "other"
+            ]
+          },
+          "card": {
+            "type": "object",
+            "properties": {
+              "type": {
+                "type": "string",
+                "enum": [
+                  "visa",
+                  "mastercard",
+                  "other"
+                ]
+              },
+              "last4": {
+                "type": "string",
+                "description": "Last 4 digit of the card"
+              }
+            },
+            "required": [
+              "type",
+              "last4"
+            ],
+            "description": "Details of Card if used for payment"
+          },
+          "cheque": {
+            "type": "object",
+            "properties": {
+              "number": {
+                "type": "string",
+                "description": "check number"
+              }
+            },
+            "required": [
+              "number"
+            ],
+            "description": "Details of the Cheque if used for payment"
+          },
+          "notes": {
+            "type": "string",
+            "description": "Any note to be recorded with the transaction"
+          },
+          "amount": {
+            "type": "number",
+            "description": "Amount to be paid against the invoice."
+          },
+          "meta": {
+            "type": "object",
+            "description": "Meta data to be recorded with the transaction"
+          },
+          "isPartialPayment": {
+            "type": "boolean",
+            "description": "Indicates if the order is intended to be a partial payment."
+          }
+        },
+        "required": [
+          "orderId",
+          "altId",
+          "altType",
+          "mode"
+        ]
+      }
+    },
+    {
+      "name": "payments_list_order_fulfillment",
+      "module": "payments",
+      "method": "GET",
+      "path": "/payments/orders/{orderId}/fulfillments",
+      "version": "2021-07-28",
+      "summary": "List fulfillment",
+      "description": "List fulfillment List all fulfillment history of an order [GET /payments/orders/{orderId}/fulfillments] Token: location. Scopes: payments/orders.readonly.",
+      "scopes": [
+        "payments/orders.readonly"
+      ],
+      "access": "location",
+      "operationClass": "read",
+      "deprecated": false,
+      "pathFields": [
+        "orderId"
+      ],
+      "queryFields": [
+        "altId",
+        "altType"
+      ],
+      "bodyFields": [],
+      "bodyWrapped": false,
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "altId": {
+            "type": "string",
+            "description": "Location Id or Agency Id"
+          },
+          "altType": {
+            "enum": [
+              "location"
+            ],
+            "type": "string"
+          },
+          "orderId": {
+            "type": "string",
+            "description": "ID of the order that needs to be returned"
+          }
+        },
+        "required": [
+          "altId",
+          "altType",
+          "orderId"
+        ]
+      }
+    },
+    {
+      "name": "payments_create_order_fulfillment",
+      "module": "payments",
+      "method": "POST",
+      "path": "/payments/orders/{orderId}/fulfillments",
+      "version": "2021-07-28",
+      "summary": "Create order fulfillment",
+      "description": "Create order fulfillment The \"Order Fulfillment\" API facilitates the process of fulfilling an order. [POST /payments/orders/{orderId}/fulfillments] Token: location. Scopes: payments/orders.write.",
+      "scopes": [
+        "payments/orders.write"
+      ],
+      "access": "location",
+      "operationClass": "write",
+      "deprecated": false,
+      "contentType": "application/json",
+      "pathFields": [
+        "orderId"
+      ],
+      "queryFields": [],
+      "bodyFields": [
+        "altId",
+        "altType",
+        "trackings",
+        "items",
+        "notifyCustomer"
+      ],
+      "bodyWrapped": false,
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "orderId": {
+            "type": "string",
+            "description": "ID of the order that needs to be returned"
+          },
+          "altId": {
+            "type": "string",
+            "description": "Location Id or Agency Id"
+          },
+          "altType": {
+            "type": "string",
+            "enum": [
+              "location"
+            ]
+          },
+          "trackings": {
+            "description": "Fulfillment tracking information",
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "trackingNumber": {
+                  "type": "string",
+                  "description": "Tracking number provided by the shipping carrier"
+                },
+                "shippingCarrier": {
+                  "type": "string",
+                  "description": "Shipping carrier name"
+                },
+                "trackingUrl": {
+                  "type": "string",
+                  "description": "Tracking URL"
+                }
+              }
+            }
+          },
+          "items": {
+            "description": "Fulfilled items",
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "priceId": {
+                  "type": "string",
+                  "description": "The id of product price"
+                },
+                "qty": {
+                  "type": "number",
+                  "description": "The no of quantity of the item"
+                }
+              },
+              "required": [
+                "priceId",
+                "qty"
+              ]
+            }
+          },
+          "notifyCustomer": {
+            "type": "boolean",
+            "description": "Need to send a notification to customer"
+          }
+        },
+        "required": [
+          "orderId",
+          "altId",
+          "altType",
+          "trackings",
+          "items",
+          "notifyCustomer"
+        ]
+      }
+    },
+    {
+      "name": "payments_list_order_notes",
+      "module": "payments",
+      "method": "GET",
+      "path": "/payments/orders/{orderId}/notes",
+      "version": "2021-07-28",
+      "summary": "List Order Notes",
+      "description": "List Order Notes List all notes of an order [GET /payments/orders/{orderId}/notes] Token: location.",
+      "scopes": [],
+      "access": "location",
+      "operationClass": "read",
+      "deprecated": false,
+      "pathFields": [
+        "orderId"
+      ],
+      "queryFields": [
+        "altId",
+        "altType"
+      ],
+      "bodyFields": [],
+      "bodyWrapped": false,
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "altId": {
+            "type": "string",
+            "description": "Location Id or Agency Id"
+          },
+          "altType": {
+            "enum": [
+              "location"
+            ],
+            "type": "string"
+          },
+          "orderId": {
+            "type": "string",
+            "description": "ID of the order that needs to be returned"
+          }
+        },
+        "required": [
+          "altId",
+          "altType",
+          "orderId"
+        ]
+      }
+    },
+    {
+      "name": "payments_list_transactions",
+      "module": "payments",
+      "method": "GET",
+      "path": "/payments/transactions",
+      "version": "2021-07-28",
+      "summary": "List Transactions",
+      "description": "List Transactions The \"List Transactions\" API allows to retrieve a paginated list of transactions. Customize your results by filtering transactions based on name, alt type, transaction status, payment mode, date range, type of source, contact, subscription id, entity id or paginate through the list using the provided query parameters. This endpoint provides a straightforward way to explore and retrieve transaction… [GET /payments/transactions] Token: location. Scopes: payments/transactions.readonly.",
+      "scopes": [
+        "payments/transactions.readonly"
+      ],
+      "access": "location",
+      "operationClass": "read",
+      "deprecated": false,
+      "pathFields": [],
+      "queryFields": [
+        "locationId",
+        "altId",
+        "altType",
+        "paymentMode",
+        "startAt",
+        "endAt",
+        "entitySourceType",
+        "entitySourceSubType",
+        "search",
+        "subscriptionId",
+        "entityId",
+        "contactId",
+        "limit",
+        "offset"
+      ],
+      "bodyFields": [],
+      "bodyWrapped": false,
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "locationId": {
+            "type": "string",
+            "description": "LocationId is the id of the sub-account."
+          },
+          "altId": {
+            "type": "string",
+            "description": "AltId is the unique identifier e.g: location id."
+          },
+          "altType": {
+            "type": "string",
+            "description": "AltType is the type of identifier."
+          },
+          "paymentMode": {
+            "type": "string",
+            "description": "Mode of payment."
+          },
+          "startAt": {
+            "type": "string",
+            "description": "Starting interval of transactions."
+          },
+          "endAt": {
+            "type": "string",
+            "description": "Closing interval of transactions."
+          },
+          "entitySourceType": {
+            "type": "string",
+            "description": "Source of the transactions."
+          },
+          "entitySourceSubType": {
+            "type": "string",
+            "description": "Source sub-type of the transactions."
+          },
+          "search": {
+            "type": "string",
+            "description": "The name of the transaction for searching."
+          },
+          "subscriptionId": {
+            "type": "string",
+            "description": "Subscription id for filtering of transactions."
+          },
+          "entityId": {
+            "type": "string",
+            "description": "Entity id for filtering of transactions."
+          },
+          "contactId": {
+            "type": "string",
+            "description": "Contact id for filtering of transactions."
+          },
+          "limit": {
+            "type": "number",
+            "description": "(default: 10)"
+          },
+          "offset": {
+            "type": "number",
+            "description": "(default: 0)"
+          }
+        },
+        "required": [
+          "altId",
+          "altType"
+        ]
+      }
+    },
+    {
+      "name": "payments_get_transaction_by_id",
+      "module": "payments",
+      "method": "GET",
+      "path": "/payments/transactions/{transactionId}",
+      "version": "2021-07-28",
+      "summary": "Get Transaction by ID",
+      "description": "Get Transaction by ID The \"Get Transaction by ID\" API allows to retrieve information for a specific transaction using its unique identifier. Use this endpoint to fetch details for a single transaction based on the provided transaction ID. [GET /payments/transactions/{transactionId}] Token: location. Scopes: payments/transactions.readonly.",
+      "scopes": [
+        "payments/transactions.readonly"
+      ],
+      "access": "location",
+      "operationClass": "read",
+      "deprecated": false,
+      "pathFields": [
+        "transactionId"
+      ],
+      "queryFields": [
+        "locationId",
+        "altId",
+        "altType"
+      ],
+      "bodyFields": [],
+      "bodyWrapped": false,
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "transactionId": {
+            "type": "string",
+            "description": "ID of the transaction that needs to be returned"
+          },
+          "locationId": {
+            "type": "string",
+            "description": "LocationId is the id of the sub-account."
+          },
+          "altId": {
+            "type": "string",
+            "description": "AltId is the unique identifier e.g: location id."
+          },
+          "altType": {
+            "type": "string",
+            "description": "AltType is the type of identifier."
+          }
+        },
+        "required": [
+          "transactionId",
+          "altId",
+          "altType"
+        ]
+      }
+    },
+    {
+      "name": "payments_list_subscriptions",
+      "module": "payments",
+      "method": "GET",
+      "path": "/payments/subscriptions",
+      "version": "2021-07-28",
+      "summary": "List Subscriptions",
+      "description": "List Subscriptions The \"List Subscriptions\" API allows to retrieve a paginated list of subscriptions. Customize your results by filtering subscriptions based on name, alt type, subscription status, payment mode, date range, type of source, contact, subscription id, entity id, contact or paginate through the list using the provided query parameters. This endpoint provides a straightforward way to explore and retriev… [GET /payments/subscriptions] Token: location. Scopes: payments/subscriptions.readonly.",
+      "scopes": [
+        "payments/subscriptions.readonly"
+      ],
+      "access": "location",
+      "operationClass": "read",
+      "deprecated": false,
+      "pathFields": [],
+      "queryFields": [
+        "altId",
+        "altType",
+        "entityId",
+        "paymentMode",
+        "startAt",
+        "endAt",
+        "entitySourceType",
+        "search",
+        "contactId",
+        "id",
+        "limit",
+        "offset",
+        "getPaymentsCollectedCount"
+      ],
+      "bodyFields": [],
+      "bodyWrapped": false,
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "altId": {
+            "type": "string",
+            "description": "AltId is the unique identifier e.g: location id."
+          },
+          "altType": {
+            "enum": [
+              "location"
+            ],
+            "type": "string",
+            "description": "AltType is the type of identifier."
+          },
+          "entityId": {
+            "type": "string",
+            "description": "Entity id for filtering of subscriptions."
+          },
+          "paymentMode": {
+            "type": "string",
+            "description": "Mode of payment."
+          },
+          "startAt": {
+            "type": "string",
+            "description": "Starting interval of subscriptions."
+          },
+          "endAt": {
+            "type": "string",
+            "description": "Closing interval of subscriptions."
+          },
+          "entitySourceType": {
+            "type": "string",
+            "description": "Source of the subscriptions."
+          },
+          "search": {
+            "type": "string",
+            "description": "The name of the subscription for searching."
+          },
+          "contactId": {
+            "type": "string",
+            "description": "Contact ID for the subscription"
+          },
+          "id": {
+            "type": "string",
+            "description": "Subscription id for filtering of subscriptions."
+          },
+          "limit": {
+            "type": "number",
+            "description": "(default: 10)"
+          },
+          "offset": {
+            "type": "number",
+            "description": "(default: 0)"
+          },
+          "getPaymentsCollectedCount": {
+            "type": "boolean",
+            "description": "Get the total payments collected for the subscription."
+          }
+        },
+        "required": [
+          "altId",
+          "altType"
+        ]
+      }
+    },
+    {
+      "name": "payments_get_subscription_by_id",
+      "module": "payments",
+      "method": "GET",
+      "path": "/payments/subscriptions/{subscriptionId}",
+      "version": "2021-07-28",
+      "summary": "Get Subscription by ID",
+      "description": "Get Subscription by ID The \"Get Subscription by ID\" API allows to retrieve information for a specific subscription using its unique identifier. Use this endpoint to fetch details for a single subscription based on the provided subscription ID. [GET /payments/subscriptions/{subscriptionId}] Token: location. Scopes: payments/subscriptions.readonly.",
+      "scopes": [
+        "payments/subscriptions.readonly"
+      ],
+      "access": "location",
+      "operationClass": "read",
+      "deprecated": false,
+      "pathFields": [
+        "subscriptionId"
+      ],
+      "queryFields": [
+        "altId",
+        "altType"
+      ],
+      "bodyFields": [],
+      "bodyWrapped": false,
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "subscriptionId": {
+            "type": "string",
+            "description": "ID of the subscription that needs to be returned"
+          },
+          "altId": {
+            "type": "string",
+            "description": "AltId is the unique identifier e.g: location id."
+          },
+          "altType": {
+            "enum": [
+              "location"
+            ],
+            "type": "string",
+            "description": "AltType is the type of identifier."
+          }
+        },
+        "required": [
+          "subscriptionId",
+          "altId",
+          "altType"
+        ]
+      }
+    },
+    {
+      "name": "payments_list_coupons",
+      "module": "payments",
+      "method": "GET",
+      "path": "/payments/coupon/list",
+      "version": "2021-07-28",
+      "summary": "List Coupons",
+      "description": "List Coupons The \"List Coupons\" API allows you to retrieve a list of all coupons available in your location. Use this endpoint to view all promotional offers and special discounts for your customers. [GET /payments/coupon/list] Token: location. Scopes: payments/coupons.readonly.",
+      "scopes": [
+        "payments/coupons.readonly"
+      ],
+      "access": "location",
+      "operationClass": "read",
+      "deprecated": false,
+      "pathFields": [],
+      "queryFields": [
+        "altId",
+        "altType",
+        "limit",
+        "offset",
+        "status",
+        "search"
+      ],
+      "bodyFields": [],
+      "bodyWrapped": false,
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "altId": {
+            "type": "string",
+            "description": "Location Id"
+          },
+          "altType": {
+            "enum": [
+              "location"
+            ],
+            "type": "string",
+            "description": "Alt Type"
+          },
+          "limit": {
+            "type": "number",
+            "description": "(default: 100)"
+          },
+          "offset": {
+            "type": "number",
+            "description": "(default: 0)"
+          },
+          "status": {
+            "enum": [
+              "scheduled",
+              "active",
+              "expired"
+            ],
+            "type": "string",
+            "description": "Filter coupons by status"
+          },
+          "search": {
+            "type": "string",
+            "description": "Search term to filter coupons by name or code"
+          }
+        },
+        "required": [
+          "altId",
+          "altType"
+        ]
+      }
+    },
+    {
+      "name": "payments_get_coupon",
+      "module": "payments",
+      "method": "GET",
+      "path": "/payments/coupon",
+      "version": "2021-07-28",
+      "summary": "Fetch Coupon",
+      "description": "Fetch Coupon The \"Get Coupon Details\" API enables you to retrieve comprehensive information about a specific coupon using either its unique identifier or promotional code. Use this endpoint to view coupon parameters, usage statistics, validity periods, and other promotional details. [GET /payments/coupon] Token: location. Scopes: payments/coupons.readonly.",
+      "scopes": [
+        "payments/coupons.readonly"
+      ],
+      "access": "location",
+      "operationClass": "read",
+      "deprecated": false,
+      "pathFields": [],
+      "queryFields": [
+        "altId",
+        "altType",
+        "id",
+        "code"
+      ],
+      "bodyFields": [],
+      "bodyWrapped": false,
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "altId": {
+            "type": "string",
+            "description": "Location Id"
+          },
+          "altType": {
+            "enum": [
+              "location"
+            ],
+            "type": "string",
+            "description": "Alt Type"
+          },
+          "id": {
+            "type": "string",
+            "description": "Coupon id"
+          },
+          "code": {
+            "type": "string",
+            "description": "Coupon code"
+          }
+        },
+        "required": [
+          "altId",
+          "altType",
+          "id",
+          "code"
+        ]
+      }
+    },
+    {
+      "name": "payments_create_coupon",
+      "module": "payments",
+      "method": "POST",
+      "path": "/payments/coupon",
+      "version": "2021-07-28",
+      "summary": "Create Coupon",
+      "description": "Create Coupon The \"Create Coupon\" API allows you to create a new promotional coupon with customizable parameters such as discount amount, validity period, usage limits, and applicable products. Use this endpoint to set up promotional offers and special discounts for your customers. [POST /payments/coupon] Token: location. Scopes: payments/coupons.write.",
+      "scopes": [
+        "payments/coupons.write"
+      ],
+      "access": "location",
+      "operationClass": "write",
+      "deprecated": false,
+      "contentType": "application/json",
+      "pathFields": [],
+      "queryFields": [],
+      "bodyFields": [
+        "altId",
+        "altType",
+        "name",
+        "code",
+        "discountType",
+        "discountValue",
+        "startDate",
+        "endDate",
+        "usageLimit",
+        "productIds",
+        "applyToFuturePayments",
+        "applyToFuturePaymentsConfig",
+        "limitPerCustomer"
+      ],
+      "bodyWrapped": false,
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "altId": {
+            "type": "string",
+            "description": "Location Id"
+          },
+          "altType": {
+            "type": "string",
+            "description": "Alt Type",
+            "enum": [
+              "location"
+            ]
+          },
+          "name": {
+            "type": "string",
+            "description": "Coupon Name"
+          },
+          "code": {
+            "type": "string",
+            "description": "Coupon Code"
+          },
+          "discountType": {
+            "type": "string",
+            "description": "Discount Type",
+            "enum": [
+              "percentage",
+              "amount"
+            ]
+          },
+          "discountValue": {
+            "type": "number",
+            "description": "Discount Value"
+          },
+          "startDate": {
+            "type": "string",
+            "description": "Start date in YYYY-MM-DDTHH:mm:ssZ format"
+          },
+          "endDate": {
+            "type": "string",
+            "description": "End date in YYYY-MM-DDTHH:mm:ssZ format"
+          },
+          "usageLimit": {
+            "type": "number",
+            "description": "Max number of times coupon can be used"
+          },
+          "productIds": {
+            "description": "Product Ids",
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "applyToFuturePayments": {
+            "type": "boolean",
+            "description": "Is Coupon applicable on upcoming subscription transactions (default: true)"
+          },
+          "applyToFuturePaymentsConfig": {
+            "type": "object",
+            "properties": {
+              "type": {
+                "type": "string",
+                "description": "Type of the config",
+                "enum": [
+                  "forever",
+                  "fixed"
+                ]
+              },
+              "duration": {
+                "type": "number",
+                "description": "Duration the coupon to be applied in a subscription"
+              },
+              "durationType": {
+                "type": "string",
+                "description": "Type of the duration",
+                "enum": [
+                  "months"
+                ]
+              }
+            },
+            "required": [
+              "type",
+              "duration",
+              "durationType"
+            ],
+            "description": "If coupon is applicable on upcoming subscription transactions, how many months should it be applicable for a subscription (default: {\"type\":\"forever\"})"
+          },
+          "limitPerCustomer": {
+            "type": "boolean",
+            "description": "Limits whether a coupon can be redeemed only once per customer. (default: false)"
+          }
+        },
+        "required": [
+          "altId",
+          "altType",
+          "name",
+          "code",
+          "discountType",
+          "discountValue",
+          "startDate"
+        ]
+      }
+    },
+    {
+      "name": "payments_update_coupon",
+      "module": "payments",
+      "method": "PUT",
+      "path": "/payments/coupon",
+      "version": "2021-07-28",
+      "summary": "Update Coupon",
+      "description": "Update Coupon The \"Update Coupon\" API enables you to modify existing coupon details such as discount values, validity periods, usage limits, and other promotional parameters. Use this endpoint to adjust or extend promotional offers for your customers. [PUT /payments/coupon] Token: location. Scopes: payments/coupons.write.",
+      "scopes": [
+        "payments/coupons.write"
+      ],
+      "access": "location",
+      "operationClass": "write",
+      "deprecated": false,
+      "contentType": "application/json",
+      "pathFields": [],
+      "queryFields": [],
+      "bodyFields": [
+        "altId",
+        "altType",
+        "name",
+        "code",
+        "discountType",
+        "discountValue",
+        "startDate",
+        "endDate",
+        "usageLimit",
+        "productIds",
+        "applyToFuturePayments",
+        "applyToFuturePaymentsConfig",
+        "limitPerCustomer",
+        "id"
+      ],
+      "bodyWrapped": false,
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "altId": {
+            "type": "string",
+            "description": "Location Id"
+          },
+          "altType": {
+            "type": "string",
+            "description": "Alt Type",
+            "enum": [
+              "location"
+            ]
+          },
+          "name": {
+            "type": "string",
+            "description": "Coupon Name"
+          },
+          "code": {
+            "type": "string",
+            "description": "Coupon Code"
+          },
+          "discountType": {
+            "type": "string",
+            "description": "Discount Type",
+            "enum": [
+              "percentage",
+              "amount"
+            ]
+          },
+          "discountValue": {
+            "type": "number",
+            "description": "Discount Value"
+          },
+          "startDate": {
+            "type": "string",
+            "description": "Start date in YYYY-MM-DDTHH:mm:ssZ format"
+          },
+          "endDate": {
+            "type": "string",
+            "description": "End date in YYYY-MM-DDTHH:mm:ssZ format"
+          },
+          "usageLimit": {
+            "type": "number",
+            "description": "Max number of times coupon can be used"
+          },
+          "productIds": {
+            "description": "Product Ids",
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "applyToFuturePayments": {
+            "type": "boolean",
+            "description": "Is Coupon applicable on upcoming subscription transactions (default: true)"
+          },
+          "applyToFuturePaymentsConfig": {
+            "type": "object",
+            "properties": {
+              "type": {
+                "type": "string",
+                "description": "Type of the config",
+                "enum": [
+                  "forever",
+                  "fixed"
+                ]
+              },
+              "duration": {
+                "type": "number",
+                "description": "Duration the coupon to be applied in a subscription"
+              },
+              "durationType": {
+                "type": "string",
+                "description": "Type of the duration",
+                "enum": [
+                  "months"
+                ]
+              }
+            },
+            "required": [
+              "type",
+              "duration",
+              "durationType"
+            ],
+            "description": "If coupon is applicable on upcoming subscription transactions, how many months should it be applicable for a subscription (default: {\"type\":\"forever\"})"
+          },
+          "limitPerCustomer": {
+            "type": "boolean",
+            "description": "Limits whether a coupon can be redeemed only once per customer. (default: false)"
+          },
+          "id": {
+            "type": "string",
+            "description": "Coupon Id"
+          }
+        },
+        "required": [
+          "altId",
+          "altType",
+          "name",
+          "code",
+          "discountType",
+          "discountValue",
+          "startDate",
+          "id"
+        ]
+      }
+    },
+    {
+      "name": "payments_delete_coupon",
+      "module": "payments",
+      "method": "DELETE",
+      "path": "/payments/coupon",
+      "version": "2021-07-28",
+      "summary": "Delete Coupon",
+      "description": "Delete Coupon The \"Delete Coupon\" API allows you to permanently remove a coupon from your system using its unique identifier. Use this endpoint to discontinue promotional offers or clean up unused coupons. Note that this action cannot be undone. [DELETE /payments/coupon] Token: location. Scopes: payments/coupons.write.",
+      "scopes": [
+        "payments/coupons.write"
+      ],
+      "access": "location",
+      "operationClass": "delete",
+      "deprecated": false,
+      "contentType": "application/json",
+      "pathFields": [],
+      "queryFields": [],
+      "bodyFields": [
+        "altId",
+        "altType",
+        "id"
+      ],
+      "bodyWrapped": false,
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "altId": {
+            "type": "string",
+            "description": "Location Id"
+          },
+          "altType": {
+            "type": "string",
+            "description": "Alt Type",
+            "enum": [
+              "location"
+            ]
+          },
+          "id": {
+            "type": "string",
+            "description": "Coupon Id"
+          }
+        },
+        "required": [
+          "altId",
+          "altType",
+          "id"
+        ]
+      }
+    },
+    {
+      "name": "payments_create_integration",
+      "module": "payments",
+      "method": "POST",
+      "path": "/payments/custom-provider/provider",
+      "version": "2021-07-28",
+      "summary": "Create new integration",
+      "description": "Create new integration API to create a new association for an app and location [POST /payments/custom-provider/provider] Token: location. Scopes: payments/custom-provider.write.",
+      "scopes": [
+        "payments/custom-provider.write"
+      ],
+      "access": "location",
+      "operationClass": "write",
+      "deprecated": false,
+      "contentType": "application/json",
+      "pathFields": [],
+      "queryFields": [
+        "locationId"
+      ],
+      "bodyFields": [
+        "name",
+        "description",
+        "paymentsUrl",
+        "queryUrl",
+        "imageUrl",
+        "supportsSubscriptionSchedule"
+      ],
+      "bodyWrapped": false,
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "locationId": {
+            "type": "string",
+            "description": "Location id"
+          },
+          "name": {
+            "type": "string",
+            "description": "The name of the custom provider"
+          },
+          "description": {
+            "type": "string",
+            "description": "Description of payment gateway. Shown on the payments integrations page as subtext"
+          },
+          "paymentsUrl": {
+            "type": "string",
+            "description": "This url will be loaded in iFrame to start a payment session."
+          },
+          "queryUrl": {
+            "type": "string",
+            "description": "The url used for querying payments related events. Ex. verify, refund, subscription etc."
+          },
+          "imageUrl": {
+            "type": "string",
+            "description": "Public image url for logo of the payment gateway displayed on the payments integrations page."
+          },
+          "supportsSubscriptionSchedule": {
+            "type": "boolean",
+            "description": "Whether the config supports subscription schedule or not. true represents config supports subscription schedule"
+          }
+        },
+        "required": [
+          "locationId",
+          "name",
+          "description",
+          "paymentsUrl",
+          "queryUrl",
+          "imageUrl",
+          "supportsSubscriptionSchedule"
+        ]
+      }
+    },
+    {
+      "name": "payments_delete_integration",
+      "module": "payments",
+      "method": "DELETE",
+      "path": "/payments/custom-provider/provider",
+      "version": "2021-07-28",
+      "summary": "Deleting an existing integration",
+      "description": "Deleting an existing integration API to delete an association for an app and location [DELETE /payments/custom-provider/provider] Token: location. Scopes: payments/custom-provider.write.",
+      "scopes": [
+        "payments/custom-provider.write"
+      ],
+      "access": "location",
+      "operationClass": "delete",
+      "deprecated": false,
+      "pathFields": [],
+      "queryFields": [
+        "locationId"
+      ],
+      "bodyFields": [],
+      "bodyWrapped": false,
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "locationId": {
+            "type": "string",
+            "description": "Location id"
+          }
+        },
+        "required": [
+          "locationId"
+        ]
+      }
+    },
+    {
+      "name": "payments_fetch_config",
+      "module": "payments",
+      "method": "GET",
+      "path": "/payments/custom-provider/connect",
+      "version": "2021-07-28",
+      "summary": "Fetch given provider config",
+      "description": "Fetch given provider config API for fetching an existing payment config for given location [GET /payments/custom-provider/connect] Token: location. Scopes: payments/custom-provider.readonly.",
+      "scopes": [
+        "payments/custom-provider.readonly"
+      ],
+      "access": "location",
+      "operationClass": "read",
+      "deprecated": false,
+      "pathFields": [],
+      "queryFields": [
+        "locationId"
+      ],
+      "bodyFields": [],
+      "bodyWrapped": false,
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "locationId": {
+            "type": "string",
+            "description": "Location id"
+          }
+        },
+        "required": [
+          "locationId"
+        ]
+      }
+    },
+    {
+      "name": "payments_create_config",
+      "module": "payments",
+      "method": "POST",
+      "path": "/payments/custom-provider/connect",
+      "version": "2021-07-28",
+      "summary": "Create new provider config",
+      "description": "Create new provider config API to create a new payment config for given location [POST /payments/custom-provider/connect] Token: location. Scopes: payments/custom-provider.write.",
+      "scopes": [
+        "payments/custom-provider.write"
+      ],
+      "access": "location",
+      "operationClass": "write",
+      "deprecated": false,
+      "contentType": "application/json",
+      "pathFields": [],
+      "queryFields": [
+        "locationId"
+      ],
+      "bodyFields": [
+        "live",
+        "test"
+      ],
+      "bodyWrapped": false,
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "locationId": {
+            "type": "string",
+            "description": "Location id"
+          },
+          "live": {
+            "type": "object",
+            "properties": {
+              "apiKey": {
+                "type": "string",
+                "description": "Api-key for custom payment provider config"
+              },
+              "publishableKey": {
+                "type": "string",
+                "description": "Publishable-key for custom payment provider config"
+              }
+            },
+            "required": [
+              "apiKey",
+              "publishableKey"
+            ],
+            "description": "Live config containing api-key and publishable key for live payments"
+          },
+          "test": {
+            "type": "object",
+            "properties": {
+              "apiKey": {
+                "type": "string",
+                "description": "Api-key for custom payment provider config"
+              },
+              "publishableKey": {
+                "type": "string",
+                "description": "Publishable-key for custom payment provider config"
+              }
+            },
+            "required": [
+              "apiKey",
+              "publishableKey"
+            ],
+            "description": "Test config containing api-key and publishable-key for test payments"
+          }
+        },
+        "required": [
+          "locationId",
+          "live",
+          "test"
+        ]
+      }
+    },
+    {
+      "name": "payments_disconnect_config",
+      "module": "payments",
+      "method": "POST",
+      "path": "/payments/custom-provider/disconnect",
+      "version": "2021-07-28",
+      "summary": "Disconnect existing provider config",
+      "description": "Disconnect existing provider config API to disconnect an existing payment config for given location [POST /payments/custom-provider/disconnect] Token: location. Scopes: payments/custom-provider.write.",
+      "scopes": [
+        "payments/custom-provider.write"
+      ],
+      "access": "location",
+      "operationClass": "write",
+      "deprecated": false,
+      "contentType": "application/json",
+      "pathFields": [],
+      "queryFields": [
+        "locationId"
+      ],
+      "bodyFields": [
+        "liveMode"
+      ],
+      "bodyWrapped": false,
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "locationId": {
+            "type": "string",
+            "description": "Location id"
+          },
+          "liveMode": {
+            "type": "boolean",
+            "description": "Whether the config is for test mode or live mode. true represents config is for live payments"
+          }
+        },
+        "required": [
+          "locationId",
+          "liveMode"
+        ]
+      }
+    },
+    {
+      "name": "payments_custom_provider_marketplace_app_update_capabilities",
+      "module": "payments",
+      "method": "PUT",
+      "path": "/payments/custom-provider/capabilities",
+      "version": "2021-07-28",
+      "summary": "Custom-provider marketplace app update capabilities",
+      "description": "Custom-provider marketplace app update capabilities Toggle capabilities for the marketplace app tied to the OAuth client [PUT /payments/custom-provider/capabilities] Token: location. Scopes: payments/custom-provider.write.",
+      "scopes": [
+        "payments/custom-provider.write"
+      ],
+      "access": "location",
+      "operationClass": "write",
+      "deprecated": false,
+      "contentType": "application/json",
+      "pathFields": [],
+      "queryFields": [],
+      "bodyFields": [
+        "supportsSubscriptionSchedules",
+        "companyId",
+        "locationId"
+      ],
+      "bodyWrapped": false,
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "supportsSubscriptionSchedules": {
+            "type": "boolean",
+            "description": "Whether the marketplace app supports subscription schedules or not"
+          },
+          "companyId": {
+            "type": "string",
+            "description": "Company id. Mandatory if locationId is not provided"
+          },
+          "locationId": {
+            "type": "string",
+            "description": "Location / Sub-account id. Mandatory if companyId is not provided"
+          }
+        },
+        "required": [
+          "supportsSubscriptionSchedules"
+        ]
+      }
+    }
+  ]
+}

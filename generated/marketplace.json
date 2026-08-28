@@ -1,0 +1,471 @@
+{
+  "module": "marketplace",
+  "endpoints": [
+    {
+      "name": "marketplace_getcharges",
+      "module": "marketplace",
+      "method": "GET",
+      "path": "/marketplace/billing/charges",
+      "version": "2021-07-28",
+      "summary": "Get all wallet charges",
+      "description": "Get all wallet charges [GET /marketplace/billing/charges] Token: location. Scopes: charges.readonly.",
+      "scopes": [
+        "charges.readonly"
+      ],
+      "access": "location",
+      "operationClass": "read",
+      "deprecated": false,
+      "pathFields": [],
+      "queryFields": [
+        "meterId",
+        "eventId",
+        "userId",
+        "startDate",
+        "endDate",
+        "skip",
+        "limit"
+      ],
+      "bodyFields": [],
+      "bodyWrapped": false,
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "meterId": {
+            "type": "string",
+            "description": "Billing Meter ID (you can find this on your app's pricing page on the developer portal)"
+          },
+          "eventId": {
+            "type": "string",
+            "description": "Event ID / Transaction ID"
+          },
+          "userId": {
+            "type": "string",
+            "description": "Filter results by User ID that your server passed via API when the charge was created"
+          },
+          "startDate": {
+            "type": "string",
+            "description": "Filter results AFTER a specific date. Use this in combination with endDate to filter results in a specific time window."
+          },
+          "endDate": {
+            "type": "string",
+            "description": "Filter results BEFORE a specific date. Use this in combination with startDate to filter results in a specific time window."
+          },
+          "skip": {
+            "type": "number",
+            "description": "Number of records to skip"
+          },
+          "limit": {
+            "type": "number",
+            "description": "Maximum number of records to return"
+          }
+        }
+      }
+    },
+    {
+      "name": "marketplace_charge",
+      "module": "marketplace",
+      "method": "POST",
+      "path": "/marketplace/billing/charges",
+      "version": "2021-07-28",
+      "summary": "Create a new wallet charge",
+      "description": "Create a new wallet charge [POST /marketplace/billing/charges] Token: location. Scopes: charges.write.",
+      "scopes": [
+        "charges.write"
+      ],
+      "access": "location",
+      "operationClass": "write",
+      "deprecated": false,
+      "contentType": "application/json",
+      "pathFields": [],
+      "queryFields": [],
+      "bodyFields": [
+        "appId",
+        "meterId",
+        "eventId",
+        "userId",
+        "locationId",
+        "companyId",
+        "description",
+        "price",
+        "units",
+        "eventTime"
+      ],
+      "bodyWrapped": false,
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "appId": {
+            "type": "string",
+            "description": "App ID of the App"
+          },
+          "meterId": {
+            "type": "string",
+            "description": "Billing Meter ID (you can find this on your app's pricing page)"
+          },
+          "eventId": {
+            "type": "string",
+            "description": "Event ID / Transaction ID on your server's side. This will help you maintain the reference of the event/transaction on your end that you charged the customer for."
+          },
+          "userId": {
+            "type": "string",
+            "description": "User ID"
+          },
+          "locationId": {
+            "type": "string",
+            "description": "ID of the Sub-Account to be charged"
+          },
+          "companyId": {
+            "type": "string",
+            "description": "ID of the Agency the Sub-account belongs to"
+          },
+          "description": {
+            "type": "string",
+            "description": "Description of the charge"
+          },
+          "price": {
+            "type": "number",
+            "description": "Price per unit to charge"
+          },
+          "units": {
+            "type": "number",
+            "description": "Number of units to charge"
+          },
+          "eventTime": {
+            "type": "string",
+            "description": "The timestamp when the event/transaction was performed. If blank, the billing timestamp will be set as the event time. ISO8601 Format."
+          }
+        },
+        "required": [
+          "appId",
+          "meterId",
+          "eventId",
+          "locationId",
+          "companyId",
+          "description",
+          "units"
+        ]
+      }
+    },
+    {
+      "name": "marketplace_getspecificcharge",
+      "module": "marketplace",
+      "method": "GET",
+      "path": "/marketplace/billing/charges/{chargeId}",
+      "version": "2021-07-28",
+      "summary": "Get specific wallet charge details",
+      "description": "Get specific wallet charge details [GET /marketplace/billing/charges/{chargeId}] Token: location. Scopes: charges.readonly.",
+      "scopes": [
+        "charges.readonly"
+      ],
+      "access": "location",
+      "operationClass": "read",
+      "deprecated": false,
+      "pathFields": [
+        "chargeId"
+      ],
+      "queryFields": [],
+      "bodyFields": [],
+      "bodyWrapped": false,
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "chargeId": {
+            "type": "string",
+            "description": "ID of the charge to retrieve"
+          }
+        },
+        "required": [
+          "chargeId"
+        ]
+      }
+    },
+    {
+      "name": "marketplace_deletecharge",
+      "module": "marketplace",
+      "method": "DELETE",
+      "path": "/marketplace/billing/charges/{chargeId}",
+      "version": "2021-07-28",
+      "summary": "Delete a wallet charge",
+      "description": "Delete a wallet charge [DELETE /marketplace/billing/charges/{chargeId}] Token: location. Scopes: charges.write.",
+      "scopes": [
+        "charges.write"
+      ],
+      "access": "location",
+      "operationClass": "delete",
+      "deprecated": false,
+      "pathFields": [
+        "chargeId"
+      ],
+      "queryFields": [],
+      "bodyFields": [],
+      "bodyWrapped": false,
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "chargeId": {
+            "type": "string",
+            "description": "ID of the charge to delete"
+          }
+        },
+        "required": [
+          "chargeId"
+        ]
+      }
+    },
+    {
+      "name": "marketplace_hasfunds",
+      "module": "marketplace",
+      "method": "GET",
+      "path": "/marketplace/billing/charges/has-funds",
+      "version": "2021-07-28",
+      "summary": "Check if account has sufficient funds",
+      "description": "Check if account has sufficient funds [GET /marketplace/billing/charges/has-funds] Token: location. Scopes: charges.readonly.",
+      "scopes": [
+        "charges.readonly"
+      ],
+      "access": "location",
+      "operationClass": "read",
+      "deprecated": false,
+      "pathFields": [],
+      "queryFields": [],
+      "bodyFields": [],
+      "bodyWrapped": false,
+      "inputSchema": {
+        "type": "object",
+        "properties": {}
+      }
+    },
+    {
+      "name": "marketplace_get_installer_details",
+      "module": "marketplace",
+      "method": "GET",
+      "path": "/marketplace/app/{appId}/installations",
+      "version": "2021-07-28",
+      "summary": "Get Installer Details",
+      "description": "Get Installer Details Fetches installer details for the authenticated user. This endpoint returns information about the company, location, user, and installation details associated with the current OAuth token. [GET /marketplace/app/{appId}/installations] Token: location or agency. Scopes: marketplace-installer-details.readonly.",
+      "scopes": [
+        "marketplace-installer-details.readonly"
+      ],
+      "access": "both",
+      "operationClass": "read",
+      "deprecated": false,
+      "pathFields": [
+        "appId"
+      ],
+      "queryFields": [],
+      "bodyFields": [],
+      "bodyWrapped": false,
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "appId": {
+            "type": "string",
+            "description": "ID of the app to get installer details"
+          }
+        },
+        "required": [
+          "appId"
+        ]
+      }
+    },
+    {
+      "name": "marketplace_uninstall_application",
+      "module": "marketplace",
+      "method": "DELETE",
+      "path": "/marketplace/app/{appId}/installations",
+      "version": "2021-07-28",
+      "summary": "Uninstall an application",
+      "description": "Uninstall an application Uninstalls an application from your company or a specific location. This will remove the application`s access and stop all its functionalities [DELETE /marketplace/app/{appId}/installations] Token: location or agency. Scopes: oauth.write.",
+      "scopes": [
+        "oauth.write"
+      ],
+      "access": "both",
+      "operationClass": "delete",
+      "deprecated": false,
+      "contentType": "application/json",
+      "pathFields": [
+        "appId"
+      ],
+      "queryFields": [],
+      "bodyFields": [
+        "companyId",
+        "locationId",
+        "reason"
+      ],
+      "bodyWrapped": false,
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "appId": {
+            "type": "string",
+            "description": "The application id which is to be uninstalled."
+          },
+          "companyId": {
+            "type": "string",
+            "description": "The company id from which the application is to be uninstalled. If you pass agency token, then companyId is required. It will uninstall application from agency as well as all sub-accounts."
+          },
+          "locationId": {
+            "type": "string",
+            "description": "The location id from which the application is to be uninstalled. If you pass location token, then locationId is required. It will uninstall application from that location only."
+          },
+          "reason": {
+            "type": "string",
+            "description": "The reason for uninstalling the application. Reason is required if you are uninstalling the application as a developer."
+          }
+        },
+        "required": [
+          "appId"
+        ]
+      }
+    },
+    {
+      "name": "marketplace_get_rebilling_config_for_app",
+      "module": "marketplace",
+      "method": "GET",
+      "path": "/marketplace/app/{appId}/rebilling-config/location/{locationId}",
+      "version": "2021-07-28",
+      "summary": "Get rebilling config for an app subscription and usage plans",
+      "description": "Get rebilling config for an app subscription and usage plans for the authenticated sub-account. This endpoint returns the subscription and usage plans for an app. [GET /marketplace/app/{appId}/rebilling-config/location/{locationId}] Token: location. Scopes: oauth.readonly.",
+      "scopes": [
+        "oauth.readonly"
+      ],
+      "access": "location",
+      "operationClass": "read",
+      "deprecated": false,
+      "pathFields": [
+        "appId",
+        "locationId"
+      ],
+      "queryFields": [],
+      "bodyFields": [],
+      "bodyWrapped": false,
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "appId": {
+            "type": "string",
+            "description": "ID of the app to get rebilling config"
+          },
+          "locationId": {
+            "type": "string",
+            "description": "ID of the Sub-Account location to get rebilling config for"
+          }
+        },
+        "required": [
+          "appId",
+          "locationId"
+        ]
+      }
+    },
+    {
+      "name": "marketplace_migrateconnection",
+      "module": "marketplace",
+      "method": "POST",
+      "path": "/marketplace/external-auth/migration",
+      "version": "2021-07-28",
+      "summary": "Migrate external authentication connection",
+      "description": "Migrate external authentication connection Migrates an external authentication connection credentials (basic or oauth2) for a specific app and location. This endpoint validates the app configuration, stores credentials safely in CRM's native encrypted storage. With this the lifecycle of the token is managed by CRM. [POST /marketplace/external-auth/migration] Token: location. Scopes: marketplace-external-auth-migration.write.",
+      "scopes": [
+        "marketplace-external-auth-migration.write"
+      ],
+      "access": "location",
+      "operationClass": "write",
+      "deprecated": false,
+      "contentType": "application/json",
+      "pathFields": [],
+      "queryFields": [],
+      "bodyFields": [
+        "type",
+        "locationId",
+        "appId",
+        "appVersionId",
+        "accountId",
+        "apiKey",
+        "basicCredentials",
+        "accessToken",
+        "refreshToken",
+        "expiryIn",
+        "expiryAt",
+        "scopes",
+        "displayName",
+        "isDefault"
+      ],
+      "bodyWrapped": false,
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "type": {
+            "type": "string",
+            "enum": [
+              "oauth2",
+              "basic"
+            ],
+            "description": "Type of authentication - basic or oauth2"
+          },
+          "locationId": {
+            "type": "string",
+            "description": "Location ID"
+          },
+          "appId": {
+            "type": "string",
+            "description": "App ID"
+          },
+          "appVersionId": {
+            "type": "string",
+            "description": "App Version ID"
+          },
+          "accountId": {
+            "type": "string",
+            "description": "Connection identifier"
+          },
+          "apiKey": {
+            "type": "string",
+            "description": "API Key (supported when type is basic)"
+          },
+          "basicCredentials": {
+            "type": "object",
+            "description": "Basic auth credentials as key/value pairs (supported when type is basic). Keys are validated against the app version externalAuthConfig.fields."
+          },
+          "accessToken": {
+            "type": "string",
+            "description": "Access token (required when type is oauth2)"
+          },
+          "refreshToken": {
+            "type": "string",
+            "description": "Refresh token (required when type is oauth2)"
+          },
+          "expiryIn": {
+            "type": "number",
+            "description": "Access token expiry time in milliseconds (optional for oauth2)"
+          },
+          "expiryAt": {
+            "type": "number",
+            "description": "Timestamp for access token expiry (optional for oauth2)"
+          },
+          "scopes": {
+            "description": "OAuth2 scopes (optional for oauth2)",
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "displayName": {
+            "type": "string",
+            "description": "Display name for the connection (optional, defaults to accountId)"
+          },
+          "isDefault": {
+            "type": "boolean",
+            "description": "Whether this is the default connection for the location (optional, defaults to false)"
+          }
+        },
+        "required": [
+          "type",
+          "locationId",
+          "appId",
+          "appVersionId",
+          "accountId"
+        ]
+      }
+    }
+  ]
+}

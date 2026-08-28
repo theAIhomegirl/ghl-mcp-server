@@ -1,0 +1,259 @@
+{
+  "module": "businesses",
+  "endpoints": [
+    {
+      "name": "businesses_get_business",
+      "module": "businesses",
+      "method": "GET",
+      "path": "/businesses/{businessId}",
+      "version": "2021-07-28",
+      "summary": "Get Business",
+      "description": "Get Business [GET /businesses/{businessId}] Scopes: businesses.readonly.",
+      "scopes": [
+        "businesses.readonly"
+      ],
+      "access": "unknown",
+      "operationClass": "read",
+      "deprecated": false,
+      "pathFields": [
+        "businessId"
+      ],
+      "queryFields": [],
+      "bodyFields": [],
+      "bodyWrapped": false,
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "businessId": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "businessId"
+        ]
+      }
+    },
+    {
+      "name": "businesses_update_business",
+      "module": "businesses",
+      "method": "PUT",
+      "path": "/businesses/{businessId}",
+      "version": "2021-07-28",
+      "summary": "Update Business",
+      "description": "Update Business [PUT /businesses/{businessId}] Scopes: businesses.write.",
+      "scopes": [
+        "businesses.write"
+      ],
+      "access": "unknown",
+      "operationClass": "write",
+      "deprecated": false,
+      "contentType": "application/json",
+      "pathFields": [
+        "businessId"
+      ],
+      "queryFields": [],
+      "bodyFields": [
+        "name",
+        "phone",
+        "email",
+        "postalCode",
+        "website",
+        "address",
+        "state",
+        "city",
+        "country",
+        "description"
+      ],
+      "bodyWrapped": false,
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "businessId": {
+            "type": "string"
+          },
+          "name": {
+            "type": "string"
+          },
+          "phone": {
+            "type": "string"
+          },
+          "email": {
+            "type": "string"
+          },
+          "postalCode": {
+            "type": "string"
+          },
+          "website": {
+            "type": "string"
+          },
+          "address": {
+            "type": "string"
+          },
+          "state": {
+            "type": "string"
+          },
+          "city": {
+            "type": "string"
+          },
+          "country": {
+            "type": "string"
+          },
+          "description": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "businessId"
+        ]
+      }
+    },
+    {
+      "name": "businesses_delete_business",
+      "module": "businesses",
+      "method": "DELETE",
+      "path": "/businesses/{businessId}",
+      "version": "2021-07-28",
+      "summary": "Delete Business",
+      "description": "Delete Business [DELETE /businesses/{businessId}] Scopes: businesses.write.",
+      "scopes": [
+        "businesses.write"
+      ],
+      "access": "unknown",
+      "operationClass": "delete",
+      "deprecated": false,
+      "pathFields": [
+        "businessId"
+      ],
+      "queryFields": [],
+      "bodyFields": [],
+      "bodyWrapped": false,
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "businessId": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "businessId"
+        ]
+      }
+    },
+    {
+      "name": "businesses_get_businesses_by_location",
+      "module": "businesses",
+      "method": "GET",
+      "path": "/businesses/",
+      "version": "2021-07-28",
+      "summary": "Get Businesses by Location",
+      "description": "Get Businesses by Location [GET /businesses/] Scopes: businesses.readonly.",
+      "scopes": [
+        "businesses.readonly"
+      ],
+      "access": "unknown",
+      "operationClass": "read",
+      "deprecated": false,
+      "pathFields": [],
+      "queryFields": [
+        "locationId",
+        "limit",
+        "skip"
+      ],
+      "bodyFields": [],
+      "bodyWrapped": false,
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "locationId": {
+            "type": "string"
+          },
+          "limit": {
+            "type": "string",
+            "description": "(default: \"100\")"
+          },
+          "skip": {
+            "type": "string",
+            "description": "(default: \"0\")"
+          }
+        },
+        "required": [
+          "locationId"
+        ]
+      }
+    },
+    {
+      "name": "businesses_create_business",
+      "module": "businesses",
+      "method": "POST",
+      "path": "/businesses/",
+      "version": "2021-07-28",
+      "summary": "Create Business",
+      "description": "Create Business [POST /businesses/] Scopes: businesses.write.",
+      "scopes": [
+        "businesses.write"
+      ],
+      "access": "unknown",
+      "operationClass": "write",
+      "deprecated": false,
+      "contentType": "application/json",
+      "pathFields": [],
+      "queryFields": [],
+      "bodyFields": [
+        "name",
+        "locationId",
+        "phone",
+        "email",
+        "website",
+        "address",
+        "city",
+        "postalCode",
+        "state",
+        "country",
+        "description"
+      ],
+      "bodyWrapped": false,
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string"
+          },
+          "locationId": {
+            "type": "string"
+          },
+          "phone": {
+            "type": "string"
+          },
+          "email": {
+            "type": "string"
+          },
+          "website": {
+            "type": "string"
+          },
+          "address": {
+            "type": "string"
+          },
+          "city": {
+            "type": "string"
+          },
+          "postalCode": {
+            "type": "string"
+          },
+          "state": {
+            "type": "string"
+          },
+          "country": {
+            "type": "string"
+          },
+          "description": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "name",
+          "locationId"
+        ]
+      }
+    }
+  ]
+}

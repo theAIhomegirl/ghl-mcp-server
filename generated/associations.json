@@ -1,0 +1,441 @@
+{
+  "module": "associations",
+  "endpoints": [
+    {
+      "name": "associations_create_relation",
+      "module": "associations",
+      "method": "POST",
+      "path": "/associations/relations",
+      "version": "2021-07-28",
+      "summary": "Create Relation for you associated entities.",
+      "description": "Create Relation for you associated entities. Create Relation.Documentation Link - https://doc.clickup.com/8631005/d/h/87cpx-293776/cd0f4122abc04d3 [POST /associations/relations] Scopes: associations/relation.write.",
+      "scopes": [
+        "associations/relation.write"
+      ],
+      "access": "unknown",
+      "operationClass": "write",
+      "deprecated": false,
+      "contentType": "application/json",
+      "pathFields": [],
+      "queryFields": [],
+      "bodyFields": [
+        "locationId",
+        "associationId",
+        "firstRecordId",
+        "secondRecordId"
+      ],
+      "bodyWrapped": false,
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "locationId": {
+            "type": "string",
+            "description": "Your Sub Account's ID"
+          },
+          "associationId": {
+            "type": "string",
+            "description": "Association's Id"
+          },
+          "firstRecordId": {
+            "type": "string",
+            "description": "First Record's Id. For instance, if you have an association between a contact and a custom object, and you specify the contact as the first object while creating the association, then your firstRecordId would be the contactId "
+          },
+          "secondRecordId": {
+            "type": "string",
+            "description": "Second Record's Id.For instance, if you have an association between a contact and a custom object, and you specify the custom object as the second entity while creating the association, then your secondRecordId would be the customObject record Id"
+          }
+        },
+        "required": [
+          "locationId",
+          "associationId",
+          "firstRecordId",
+          "secondRecordId"
+        ]
+      }
+    },
+    {
+      "name": "associations_get_relations_by_record_id",
+      "module": "associations",
+      "method": "GET",
+      "path": "/associations/relations/{recordId}",
+      "version": "2021-07-28",
+      "summary": "Get all relations By record Id",
+      "description": "Get all relations By record Id Get all relations by record Id [GET /associations/relations/{recordId}] Scopes: associations/relation.readonly.",
+      "scopes": [
+        "associations/relation.readonly"
+      ],
+      "access": "unknown",
+      "operationClass": "read",
+      "deprecated": false,
+      "pathFields": [
+        "recordId"
+      ],
+      "queryFields": [
+        "locationId",
+        "skip",
+        "limit",
+        "associationIds"
+      ],
+      "bodyFields": [],
+      "bodyWrapped": false,
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "recordId": {
+            "type": "string"
+          },
+          "locationId": {
+            "type": "string",
+            "description": "Your Sub Account's ID"
+          },
+          "skip": {
+            "type": "number"
+          },
+          "limit": {
+            "type": "number"
+          },
+          "associationIds": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": "Association Ids"
+          }
+        },
+        "required": [
+          "recordId",
+          "locationId",
+          "skip",
+          "limit"
+        ]
+      }
+    },
+    {
+      "name": "associations_delete_relation",
+      "module": "associations",
+      "method": "DELETE",
+      "path": "/associations/relations/{relationId}",
+      "version": "2021-07-28",
+      "summary": "Delete Relation",
+      "description": "Delete Relation [DELETE /associations/relations/{relationId}] Scopes: associations/relation.write.",
+      "scopes": [
+        "associations/relation.write"
+      ],
+      "access": "unknown",
+      "operationClass": "delete",
+      "deprecated": false,
+      "pathFields": [
+        "relationId"
+      ],
+      "queryFields": [
+        "locationId"
+      ],
+      "bodyFields": [],
+      "bodyWrapped": false,
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "relationId": {
+            "type": "string"
+          },
+          "locationId": {
+            "type": "string",
+            "description": "Your Sub Account's ID"
+          }
+        },
+        "required": [
+          "relationId",
+          "locationId"
+        ]
+      }
+    },
+    {
+      "name": "associations_get_association_key_by_key_name",
+      "module": "associations",
+      "method": "GET",
+      "path": "/associations/key/{key_name}",
+      "version": "2021-07-28",
+      "summary": "Get association key by key name",
+      "description": "Get association key by key name Using this api you can get standard / user defined association by key [GET /associations/key/{key_name}] Scopes: associations.readonly.",
+      "scopes": [
+        "associations.readonly"
+      ],
+      "access": "unknown",
+      "operationClass": "read",
+      "deprecated": false,
+      "pathFields": [
+        "key_name"
+      ],
+      "queryFields": [
+        "locationId"
+      ],
+      "bodyFields": [],
+      "bodyWrapped": false,
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "key_name": {
+            "type": "string"
+          },
+          "locationId": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "key_name",
+          "locationId"
+        ]
+      }
+    },
+    {
+      "name": "associations_get_association_by_object_keys",
+      "module": "associations",
+      "method": "GET",
+      "path": "/associations/objectKey/{objectKey}",
+      "version": "2021-07-28",
+      "summary": "Get association by object keys",
+      "description": "Get association by object keys like contacts, custom objects and opportunities. Documentation Link - https://doc.clickup.com/8631005/d/h/87cpx-293776/cd0f4122abc04d3 [GET /associations/objectKey/{objectKey}] Scopes: associations.readonly.",
+      "scopes": [
+        "associations.readonly"
+      ],
+      "access": "unknown",
+      "operationClass": "read",
+      "deprecated": false,
+      "pathFields": [
+        "objectKey"
+      ],
+      "queryFields": [
+        "locationId"
+      ],
+      "bodyFields": [],
+      "bodyWrapped": false,
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "objectKey": {
+            "type": "string"
+          },
+          "locationId": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "objectKey"
+        ]
+      }
+    },
+    {
+      "name": "associations_get_association_by_id",
+      "module": "associations",
+      "method": "GET",
+      "path": "/associations/{associationId}",
+      "version": "2021-07-28",
+      "summary": "Get association by ID",
+      "description": "Get association by ID Using this api you can get SYSTEM_DEFINED / USER_DEFINED association by id [GET /associations/{associationId}] Scopes: associations.readonly.",
+      "scopes": [
+        "associations.readonly"
+      ],
+      "access": "unknown",
+      "operationClass": "read",
+      "deprecated": false,
+      "pathFields": [
+        "associationId"
+      ],
+      "queryFields": [],
+      "bodyFields": [],
+      "bodyWrapped": false,
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "associationId": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "associationId"
+        ]
+      }
+    },
+    {
+      "name": "associations_update_association",
+      "module": "associations",
+      "method": "PUT",
+      "path": "/associations/{associationId}",
+      "version": "2021-07-28",
+      "summary": "Update Association By Id",
+      "description": "Update Association By Id Update Association , Allows you to update labels of an associations. Documentation Link - https://doc.clickup.com/8631005/d/h/87cpx-293776/cd0f4122abc04d3 [PUT /associations/{associationId}] Scopes: associations.write.",
+      "scopes": [
+        "associations.write"
+      ],
+      "access": "unknown",
+      "operationClass": "write",
+      "deprecated": false,
+      "contentType": "application/json",
+      "pathFields": [
+        "associationId"
+      ],
+      "queryFields": [],
+      "bodyFields": [
+        "firstObjectLabel",
+        "secondObjectLabel"
+      ],
+      "bodyWrapped": false,
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "associationId": {
+            "type": "string"
+          },
+          "firstObjectLabel": {
+            "type": "object"
+          },
+          "secondObjectLabel": {
+            "type": "object"
+          }
+        },
+        "required": [
+          "associationId",
+          "firstObjectLabel",
+          "secondObjectLabel"
+        ]
+      }
+    },
+    {
+      "name": "associations_delete_association",
+      "module": "associations",
+      "method": "DELETE",
+      "path": "/associations/{associationId}",
+      "version": "2021-07-28",
+      "summary": "Delete Association",
+      "description": "Delete Association Delete USER_DEFINED Association By Id, deleting an association will also all the relations for that association [DELETE /associations/{associationId}] Scopes: associations.write.",
+      "scopes": [
+        "associations.write"
+      ],
+      "access": "unknown",
+      "operationClass": "delete",
+      "deprecated": false,
+      "pathFields": [
+        "associationId"
+      ],
+      "queryFields": [],
+      "bodyFields": [],
+      "bodyWrapped": false,
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "associationId": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "associationId"
+        ]
+      }
+    },
+    {
+      "name": "associations_find_associations",
+      "module": "associations",
+      "method": "GET",
+      "path": "/associations/",
+      "version": "2021-07-28",
+      "summary": "Get all associations for a sub-account / location",
+      "description": "Get all associations for a sub-account / location Get all Associations [GET /associations/] Scopes: associations.readonly.",
+      "scopes": [
+        "associations.readonly"
+      ],
+      "access": "unknown",
+      "operationClass": "read",
+      "deprecated": false,
+      "pathFields": [],
+      "queryFields": [
+        "locationId",
+        "skip",
+        "limit"
+      ],
+      "bodyFields": [],
+      "bodyWrapped": false,
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "locationId": {
+            "type": "string"
+          },
+          "skip": {
+            "type": "number"
+          },
+          "limit": {
+            "type": "number"
+          }
+        },
+        "required": [
+          "locationId",
+          "skip",
+          "limit"
+        ]
+      }
+    },
+    {
+      "name": "associations_create_association",
+      "module": "associations",
+      "method": "POST",
+      "path": "/associations/",
+      "version": "2021-07-28",
+      "summary": "Create Association",
+      "description": "Create Association Allow you to create contact - contact , contact - custom objects associations, will add more in the future.Documentation Link - https://doc.clickup.com/8631005/d/h/87cpx-293776/cd0f4122abc04d3 [POST /associations/] Scopes: associations.write.",
+      "scopes": [
+        "associations.write"
+      ],
+      "access": "unknown",
+      "operationClass": "write",
+      "deprecated": false,
+      "contentType": "application/json",
+      "pathFields": [],
+      "queryFields": [],
+      "bodyFields": [
+        "locationId",
+        "key",
+        "firstObjectLabel",
+        "firstObjectKey",
+        "secondObjectLabel",
+        "secondObjectKey"
+      ],
+      "bodyWrapped": false,
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "locationId": {
+            "type": "string"
+          },
+          "key": {
+            "type": "string",
+            "description": "Association's Unique key"
+          },
+          "firstObjectLabel": {
+            "type": "object",
+            "description": "First Objects Association Label (custom_objects.children)"
+          },
+          "firstObjectKey": {
+            "type": "object",
+            "description": "First Objects Key"
+          },
+          "secondObjectLabel": {
+            "type": "object",
+            "description": "Second Object Association Label (contact)"
+          },
+          "secondObjectKey": {
+            "type": "object",
+            "description": "Second Objects Key"
+          }
+        },
+        "required": [
+          "locationId",
+          "key",
+          "firstObjectLabel",
+          "firstObjectKey",
+          "secondObjectLabel",
+          "secondObjectKey"
+        ]
+      }
+    }
+  ]
+}

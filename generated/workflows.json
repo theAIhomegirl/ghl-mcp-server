@@ -1,0 +1,37 @@
+{
+  "module": "workflows",
+  "endpoints": [
+    {
+      "name": "workflows_get_workflow",
+      "module": "workflows",
+      "method": "GET",
+      "path": "/workflows/",
+      "version": "2021-07-28",
+      "summary": "Get Workflow",
+      "description": "Get Workflow [GET /workflows/] Scopes: workflows.readonly.",
+      "scopes": [
+        "workflows.readonly"
+      ],
+      "access": "unknown",
+      "operationClass": "read",
+      "deprecated": false,
+      "pathFields": [],
+      "queryFields": [
+        "locationId"
+      ],
+      "bodyFields": [],
+      "bodyWrapped": false,
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "locationId": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "locationId"
+        ]
+      }
+    }
+  ]
+}

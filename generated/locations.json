@@ -1,0 +1,2388 @@
+{
+  "module": "locations",
+  "endpoints": [
+    {
+      "name": "locations_search_locations",
+      "module": "locations",
+      "method": "GET",
+      "path": "/locations/search",
+      "version": "2021-07-28",
+      "summary": "Search",
+      "description": "Search Sub-Account (Formerly Location) [GET /locations/search] Token: location or agency. Scopes: locations.readonly.",
+      "scopes": [
+        "locations.readonly"
+      ],
+      "access": "both",
+      "operationClass": "read",
+      "deprecated": false,
+      "pathFields": [],
+      "queryFields": [
+        "companyId",
+        "skip",
+        "limit",
+        "order",
+        "email"
+      ],
+      "bodyFields": [],
+      "bodyWrapped": false,
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "companyId": {
+            "type": "string",
+            "description": "The company/agency id on which you want to perform the search"
+          },
+          "skip": {
+            "type": "string",
+            "description": "(default: \"0\")"
+          },
+          "limit": {
+            "type": "string",
+            "description": "(default: \"10\")"
+          },
+          "order": {
+            "type": "string",
+            "description": "(default: \"asc\")"
+          },
+          "email": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    {
+      "name": "locations_get_location",
+      "module": "locations",
+      "method": "GET",
+      "path": "/locations/{locationId}",
+      "version": "2021-07-28",
+      "summary": "Get Sub-Account (Formerly Location)",
+      "description": "Get Sub-Account (Formerly Location) Get details of a Sub-Account (Formerly Location) by passing the sub-account id [GET /locations/{locationId}] Token: location or agency. Scopes: locations.readonly.",
+      "scopes": [
+        "locations.readonly"
+      ],
+      "access": "both",
+      "operationClass": "read",
+      "deprecated": false,
+      "pathFields": [
+        "locationId"
+      ],
+      "queryFields": [],
+      "bodyFields": [],
+      "bodyWrapped": false,
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "locationId": {
+            "type": "string",
+            "description": "Location Id"
+          }
+        },
+        "required": [
+          "locationId"
+        ]
+      }
+    },
+    {
+      "name": "locations_put_location",
+      "module": "locations",
+      "method": "PUT",
+      "path": "/locations/{locationId}",
+      "version": "2021-07-28",
+      "summary": "Put Sub-Account (Formerly Location)",
+      "description": "Put Sub-Account (Formerly Location) Update a Sub-Account (Formerly Location) based on the data provided [PUT /locations/{locationId}] Token: agency. Scopes: locations.write.",
+      "scopes": [
+        "locations.write"
+      ],
+      "access": "agency",
+      "operationClass": "write",
+      "deprecated": false,
+      "contentType": "application/json",
+      "pathFields": [
+        "locationId"
+      ],
+      "queryFields": [],
+      "bodyFields": [
+        "name",
+        "phone",
+        "companyId",
+        "address",
+        "city",
+        "state",
+        "country",
+        "postalCode",
+        "website",
+        "timezone",
+        "prospectInfo",
+        "settings",
+        "social",
+        "twilio",
+        "mailgun",
+        "snapshot"
+      ],
+      "bodyWrapped": false,
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "locationId": {
+            "type": "string",
+            "description": "Location Id"
+          },
+          "name": {
+            "type": "string",
+            "description": "The name for the sub-account/location"
+          },
+          "phone": {
+            "type": "string",
+            "description": "The phone number of the business for which sub-account is created"
+          },
+          "companyId": {
+            "type": "string",
+            "description": "Company/Agency Id"
+          },
+          "address": {
+            "type": "string",
+            "description": "The address of the business for which sub-account is created"
+          },
+          "city": {
+            "type": "string",
+            "description": "The city where the business is located for which sub-account is created"
+          },
+          "state": {
+            "type": "string",
+            "description": "The state in which the business operates for which sub-account is created"
+          },
+          "country": {
+            "type": "string",
+            "description": "The country in which the business is present for which sub-account is created",
+            "enum": [
+              "AF",
+              "AX",
+              "AL",
+              "DZ",
+              "AS",
+              "AD",
+              "AO",
+              "AI",
+              "AQ",
+              "AG",
+              "AR",
+              "AM",
+              "AW",
+              "AU",
+              "AT",
+              "AZ",
+              "BS",
+              "BH",
+              "BD",
+              "BB",
+              "BY",
+              "BE",
+              "BZ",
+              "BJ",
+              "BM",
+              "BT",
+              "BO",
+              "BA",
+              "BW",
+              "BV",
+              "BR",
+              "IO",
+              "BN",
+              "BG",
+              "BF",
+              "BI",
+              "KH",
+              "CM",
+              "CA",
+              "CV",
+              "KY",
+              "CF",
+              "TD",
+              "CL",
+              "CN",
+              "CX",
+              "CC",
+              "CO",
+              "KM",
+              "CG",
+              "CD",
+              "CK",
+              "CR",
+              "CI",
+              "HR",
+              "CU",
+              "CY",
+              "CZ",
+              "DK",
+              "DJ",
+              "DM",
+              "DO",
+              "EC",
+              "EG",
+              "SV",
+              "GQ",
+              "ER",
+              "EE",
+              "ET",
+              "FK",
+              "FO",
+              "FJ",
+              "FI",
+              "FR",
+              "GF",
+              "PF",
+              "TF",
+              "GA",
+              "GM",
+              "GE",
+              "DE",
+              "GH",
+              "GI",
+              "GR",
+              "GL",
+              "GD",
+              "GP",
+              "GU",
+              "GT",
+              "GG",
+              "GN",
+              "GW",
+              "GY",
+              "HT",
+              "HM",
+              "VA",
+              "HN",
+              "HK",
+              "HU",
+              "IS",
+              "IN",
+              "ID",
+              "IR",
+              "IQ",
+              "IE",
+              "IM",
+              "IL",
+              "IT",
+              "JM",
+              "JP",
+              "JE",
+              "JO",
+              "KZ",
+              "KE",
+              "KI",
+              "KP",
+              "KR",
+              "XK",
+              "KW",
+              "KG",
+              "LA",
+              "LV",
+              "LB",
+              "LS",
+              "LR",
+              "LY",
+              "LI",
+              "LT",
+              "LU",
+              "MO",
+              "MK",
+              "MG",
+              "MW",
+              "MY",
+              "MV",
+              "ML",
+              "MT",
+              "MH",
+              "MQ",
+              "MR",
+              "MU",
+              "YT",
+              "MX",
+              "FM",
+              "MD",
+              "MC",
+              "MN",
+              "ME",
+              "MS",
+              "MA",
+              "MZ",
+              "MM",
+              "NA",
+              "NR",
+              "NP",
+              "NL",
+              "AN",
+              "NC",
+              "NZ",
+              "NI",
+              "NE",
+              "NG",
+              "NU",
+              "NF",
+              "MP",
+              "NO",
+              "OM",
+              "PK",
+              "PW",
+              "PS",
+              "PA",
+              "PG",
+              "PY",
+              "PE",
+              "PH",
+              "PN",
+              "PL",
+              "PT",
+              "PR",
+              "QA",
+              "RE",
+              "RO",
+              "RU",
+              "RW",
+              "SH",
+              "KN",
+              "LC",
+              "MF",
+              "PM",
+              "VC",
+              "WS",
+              "SM",
+              "ST",
+              "SA",
+              "SN",
+              "RS",
+              "SC",
+              "SL",
+              "SG",
+              "SX",
+              "SK",
+              "SI",
+              "SB",
+              "SO",
+              "ZA",
+              "GS",
+              "ES",
+              "LK",
+              "SD",
+              "SR",
+              "SJ",
+              "SZ",
+              "SE",
+              "CH",
+              "SY",
+              "TW",
+              "TJ",
+              "TZ",
+              "TH",
+              "TL",
+              "TG",
+              "TK",
+              "TO",
+              "TT",
+              "TN",
+              "TR",
+              "TM",
+              "TC",
+              "TV",
+              "UG",
+              "GB",
+              "UA",
+              "AE",
+              "US",
+              "UM",
+              "UY",
+              "UZ",
+              "VU",
+              "VE",
+              "VN",
+              "VG",
+              "VI",
+              "WF",
+              "EH",
+              "YE",
+              "ZM",
+              "ZW"
+            ]
+          },
+          "postalCode": {
+            "type": "string",
+            "description": "The postal code of the business for which sub-account is created"
+          },
+          "website": {
+            "type": "string",
+            "description": "The website of the business for which sub-account is created"
+          },
+          "timezone": {
+            "type": "string",
+            "description": "The timezone of the business for which sub-account is created"
+          },
+          "prospectInfo": {
+            "type": "object",
+            "properties": {
+              "firstName": {
+                "type": "string",
+                "description": "First name of the prospect"
+              },
+              "lastName": {
+                "type": "string",
+                "description": "Last name of the prospect"
+              },
+              "email": {
+                "type": "string",
+                "description": "Email of the prospect"
+              }
+            },
+            "required": [
+              "firstName",
+              "lastName",
+              "email"
+            ]
+          },
+          "settings": {
+            "type": "object",
+            "properties": {
+              "allowDuplicateContact": {
+                "type": "boolean"
+              },
+              "allowDuplicateOpportunity": {
+                "type": "boolean"
+              },
+              "allowFacebookNameMerge": {
+                "type": "boolean"
+              },
+              "disableContactTimezone": {
+                "type": "boolean"
+              }
+            },
+            "description": "The default settings for location"
+          },
+          "social": {
+            "type": "object",
+            "properties": {
+              "facebookUrl": {
+                "type": "string",
+                "description": "Facebook URL"
+              },
+              "googlePlus": {
+                "type": "string",
+                "description": "Googleplus URL"
+              },
+              "linkedIn": {
+                "type": "string",
+                "description": "LinkedIn URL"
+              },
+              "foursquare": {
+                "type": "string",
+                "description": "Foursquare URL"
+              },
+              "twitter": {
+                "type": "string",
+                "description": "Twitter URL"
+              },
+              "yelp": {
+                "type": "string",
+                "description": "Yelp URL"
+              },
+              "instagram": {
+                "type": "string",
+                "description": "Instagram URL"
+              },
+              "youtube": {
+                "type": "string",
+                "description": "Instagram URL"
+              },
+              "pinterest": {
+                "type": "string",
+                "description": "Instagram URL"
+              },
+              "blogRss": {
+                "type": "string",
+                "description": "Instagram URL"
+              },
+              "googlePlacesId": {
+                "type": "string",
+                "description": "Google Business Places ID"
+              }
+            },
+            "description": "The social media links for location"
+          },
+          "twilio": {
+            "type": "object",
+            "properties": {
+              "sid": {
+                "type": "string",
+                "description": "SID provided by Twilio"
+              },
+              "authToken": {
+                "type": "string",
+                "description": "Auth token provided by Twilio"
+              }
+            },
+            "required": [
+              "sid",
+              "authToken"
+            ],
+            "description": "The twilio credentials for location"
+          },
+          "mailgun": {
+            "type": "object",
+            "properties": {
+              "apiKey": {
+                "type": "string",
+                "description": "API key provided by Mailgun"
+              },
+              "domain": {
+                "type": "string",
+                "description": "Domain connected with Mailgun"
+              }
+            },
+            "required": [
+              "apiKey",
+              "domain"
+            ],
+            "description": "The mailgun credentials for location"
+          },
+          "snapshot": {
+            "type": "object",
+            "properties": {
+              "id": {
+                "type": "string",
+                "description": "Snaptshot ID"
+              },
+              "override": {
+                "type": "boolean",
+                "description": "If you want override all conflicted assets then pass true. Default value is false. (default: false)"
+              }
+            },
+            "required": [
+              "id"
+            ],
+            "description": "The snapshot to be updated in the location."
+          }
+        },
+        "required": [
+          "locationId",
+          "companyId"
+        ]
+      }
+    },
+    {
+      "name": "locations_delete_location",
+      "module": "locations",
+      "method": "DELETE",
+      "path": "/locations/{locationId}",
+      "version": "2021-07-28",
+      "summary": "Delete Sub-Account (Formerly Location)",
+      "description": "Delete Sub-Account (Formerly Location) Delete a Sub-Account (Formerly Location) from the Agency [DELETE /locations/{locationId}] Token: agency. Scopes: locations.internal-access-only.",
+      "scopes": [
+        "locations.internal-access-only"
+      ],
+      "access": "agency",
+      "operationClass": "delete",
+      "deprecated": false,
+      "pathFields": [
+        "locationId"
+      ],
+      "queryFields": [
+        "deleteTwilioAccount"
+      ],
+      "bodyFields": [],
+      "bodyWrapped": false,
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "locationId": {
+            "type": "string",
+            "description": "Location Id"
+          },
+          "deleteTwilioAccount": {
+            "type": "boolean",
+            "description": "Boolean value to indicate whether to delete Twilio Account or not"
+          }
+        },
+        "required": [
+          "locationId",
+          "deleteTwilioAccount"
+        ]
+      }
+    },
+    {
+      "name": "locations_get_location_tags",
+      "module": "locations",
+      "method": "GET",
+      "path": "/locations/{locationId}/tags",
+      "version": "2021-07-28",
+      "summary": "Get Tags",
+      "description": "Get Tags Get Sub-Account (Formerly Location) Tags [GET /locations/{locationId}/tags] Scopes: locations/tags.readonly.",
+      "scopes": [
+        "locations/tags.readonly"
+      ],
+      "access": "unknown",
+      "operationClass": "read",
+      "deprecated": false,
+      "pathFields": [
+        "locationId"
+      ],
+      "queryFields": [],
+      "bodyFields": [],
+      "bodyWrapped": false,
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "locationId": {
+            "type": "string",
+            "description": "Location Id"
+          }
+        },
+        "required": [
+          "locationId"
+        ]
+      }
+    },
+    {
+      "name": "locations_create_tag",
+      "module": "locations",
+      "method": "POST",
+      "path": "/locations/{locationId}/tags",
+      "version": "2021-07-28",
+      "summary": "Create Tag",
+      "description": "Create Tag Create tag [POST /locations/{locationId}/tags] Scopes: locations/tags.write.",
+      "scopes": [
+        "locations/tags.write"
+      ],
+      "access": "unknown",
+      "operationClass": "write",
+      "deprecated": false,
+      "contentType": "application/json",
+      "pathFields": [
+        "locationId"
+      ],
+      "queryFields": [],
+      "bodyFields": [
+        "name"
+      ],
+      "bodyWrapped": false,
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "locationId": {
+            "type": "string",
+            "description": "Location Id"
+          },
+          "name": {
+            "type": "string",
+            "description": "Tag name"
+          }
+        },
+        "required": [
+          "locationId",
+          "name"
+        ]
+      }
+    },
+    {
+      "name": "locations_get_tag_by_id",
+      "module": "locations",
+      "method": "GET",
+      "path": "/locations/{locationId}/tags/{tagId}",
+      "version": "2021-07-28",
+      "summary": "Get tag by id",
+      "description": "Get tag by id [GET /locations/{locationId}/tags/{tagId}]",
+      "scopes": [],
+      "access": "unknown",
+      "operationClass": "read",
+      "deprecated": false,
+      "pathFields": [
+        "locationId",
+        "tagId"
+      ],
+      "queryFields": [],
+      "bodyFields": [],
+      "bodyWrapped": false,
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "locationId": {
+            "type": "string",
+            "description": "Location Id"
+          },
+          "tagId": {
+            "type": "string",
+            "description": "Tag Id"
+          }
+        },
+        "required": [
+          "locationId",
+          "tagId"
+        ]
+      }
+    },
+    {
+      "name": "locations_update_tag",
+      "module": "locations",
+      "method": "PUT",
+      "path": "/locations/{locationId}/tags/{tagId}",
+      "version": "2021-07-28",
+      "summary": "Update tag",
+      "description": "Update tag [PUT /locations/{locationId}/tags/{tagId}]",
+      "scopes": [],
+      "access": "unknown",
+      "operationClass": "write",
+      "deprecated": false,
+      "contentType": "application/json",
+      "pathFields": [
+        "locationId",
+        "tagId"
+      ],
+      "queryFields": [],
+      "bodyFields": [
+        "name"
+      ],
+      "bodyWrapped": false,
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "locationId": {
+            "type": "string",
+            "description": "Location Id"
+          },
+          "tagId": {
+            "type": "string",
+            "description": "Tag Id"
+          },
+          "name": {
+            "type": "string",
+            "description": "Tag name"
+          }
+        },
+        "required": [
+          "locationId",
+          "tagId",
+          "name"
+        ]
+      }
+    },
+    {
+      "name": "locations_delete_tag",
+      "module": "locations",
+      "method": "DELETE",
+      "path": "/locations/{locationId}/tags/{tagId}",
+      "version": "2021-07-28",
+      "summary": "Delete tag",
+      "description": "Delete tag [DELETE /locations/{locationId}/tags/{tagId}]",
+      "scopes": [],
+      "access": "unknown",
+      "operationClass": "delete",
+      "deprecated": false,
+      "pathFields": [
+        "locationId",
+        "tagId"
+      ],
+      "queryFields": [],
+      "bodyFields": [],
+      "bodyWrapped": false,
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "locationId": {
+            "type": "string",
+            "description": "Location Id"
+          },
+          "tagId": {
+            "type": "string",
+            "description": "Tag Id"
+          }
+        },
+        "required": [
+          "locationId",
+          "tagId"
+        ]
+      }
+    },
+    {
+      "name": "locations_task_search",
+      "module": "locations",
+      "method": "POST",
+      "path": "/locations/{locationId}/tasks/search",
+      "version": "2021-07-28",
+      "summary": "Task Search Filter",
+      "description": "Task Search Filter Task Search [POST /locations/{locationId}/tasks/search] Scopes: locations/tasks.readonly.",
+      "scopes": [
+        "locations/tasks.readonly"
+      ],
+      "access": "unknown",
+      "operationClass": "write",
+      "deprecated": false,
+      "contentType": "application/json",
+      "pathFields": [
+        "locationId"
+      ],
+      "queryFields": [],
+      "bodyFields": [
+        "contactId",
+        "completed",
+        "assignedTo",
+        "query",
+        "limit",
+        "skip",
+        "businessId"
+      ],
+      "bodyWrapped": false,
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "locationId": {
+            "type": "string",
+            "description": "Location Id"
+          },
+          "contactId": {
+            "description": "Contact Ids",
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "completed": {
+            "type": "boolean",
+            "description": "Task Completed Or Pending"
+          },
+          "assignedTo": {
+            "description": "Assigned User Ids",
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "query": {
+            "type": "string",
+            "description": "Search Value"
+          },
+          "limit": {
+            "type": "number",
+            "description": "Limit To Api (default: 25)"
+          },
+          "skip": {
+            "type": "number",
+            "description": "Number Of Tasks To Skip (default: 0)"
+          },
+          "businessId": {
+            "type": "string",
+            "description": "Bussiness Id"
+          }
+        },
+        "required": [
+          "locationId"
+        ]
+      }
+    },
+    {
+      "name": "locations_get_recurring_task_by_id",
+      "module": "locations",
+      "method": "GET",
+      "path": "/locations/{locationId}/recurring-tasks/{id}",
+      "version": "2021-07-28",
+      "summary": "Get Recurring Task By Id",
+      "description": "Get Recurring Task By Id [GET /locations/{locationId}/recurring-tasks/{id}]",
+      "scopes": [],
+      "access": "unknown",
+      "operationClass": "read",
+      "deprecated": false,
+      "pathFields": [
+        "id",
+        "locationId"
+      ],
+      "queryFields": [],
+      "bodyFields": [],
+      "bodyWrapped": false,
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "Recurring Task Id"
+          },
+          "locationId": {
+            "type": "string",
+            "description": "Location Id"
+          }
+        },
+        "required": [
+          "id",
+          "locationId"
+        ]
+      }
+    },
+    {
+      "name": "locations_update_recurring_task",
+      "module": "locations",
+      "method": "PUT",
+      "path": "/locations/{locationId}/recurring-tasks/{id}",
+      "version": "2021-07-28",
+      "summary": "Update Recurring Task",
+      "description": "Update Recurring Task [PUT /locations/{locationId}/recurring-tasks/{id}]",
+      "scopes": [],
+      "access": "unknown",
+      "operationClass": "write",
+      "deprecated": false,
+      "contentType": "application/json",
+      "pathFields": [
+        "id",
+        "locationId"
+      ],
+      "queryFields": [],
+      "bodyFields": [
+        "title",
+        "description",
+        "contactIds",
+        "owners",
+        "rruleOptions",
+        "ignoreTaskCreation"
+      ],
+      "bodyWrapped": false,
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "Recurring Task Id"
+          },
+          "locationId": {
+            "type": "string",
+            "description": "Location Id"
+          },
+          "title": {
+            "type": "string",
+            "description": "Name of the task"
+          },
+          "description": {
+            "type": "string",
+            "description": "Description of the task"
+          },
+          "contactIds": {
+            "description": "Contact Id",
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "owners": {
+            "description": "Assigned To",
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "rruleOptions": {
+            "type": "object",
+            "properties": {
+              "intervalType": {
+                "type": "string",
+                "enum": [
+                  "yearly",
+                  "monthly",
+                  "weekly",
+                  "daily",
+                  "hourly"
+                ]
+              },
+              "interval": {
+                "type": "number"
+              },
+              "startDate": {
+                "type": "string",
+                "description": "Start Date"
+              },
+              "endDate": {
+                "type": "string",
+                "description": "End Date"
+              },
+              "dayOfMonth": {
+                "type": "number",
+                "description": "1, 2, 3, ..., 27, 31"
+              },
+              "dayOfWeek": {
+                "type": "string",
+                "enum": [
+                  "MO",
+                  "TU",
+                  "WE",
+                  "TH",
+                  "FR",
+                  "SA",
+                  "SU"
+                ]
+              },
+              "monthOfYear": {
+                "type": "number",
+                "description": "1, 2, ....., 11, 12"
+              },
+              "count": {
+                "type": "number",
+                "description": "Max number of task executions"
+              },
+              "createTaskIfOverDue": {
+                "type": "boolean",
+                "description": "Create Task If Over Due"
+              },
+              "dueAfterSeconds": {
+                "type": "number",
+                "description": "Due after seconds"
+              }
+            },
+            "required": [
+              "intervalType",
+              "interval",
+              "startDate",
+              "dueAfterSeconds"
+            ],
+            "description": "Recurring rules"
+          },
+          "ignoreTaskCreation": {
+            "type": "boolean",
+            "description": "Create initial task or not"
+          }
+        },
+        "required": [
+          "id",
+          "locationId"
+        ]
+      }
+    },
+    {
+      "name": "locations_delete_recurring_task",
+      "module": "locations",
+      "method": "DELETE",
+      "path": "/locations/{locationId}/recurring-tasks/{id}",
+      "version": "2021-07-28",
+      "summary": "Delete Recurring Task",
+      "description": "Delete Recurring Task [DELETE /locations/{locationId}/recurring-tasks/{id}]",
+      "scopes": [],
+      "access": "unknown",
+      "operationClass": "delete",
+      "deprecated": false,
+      "pathFields": [
+        "id",
+        "locationId"
+      ],
+      "queryFields": [],
+      "bodyFields": [],
+      "bodyWrapped": false,
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "Recurring Task Id"
+          },
+          "locationId": {
+            "type": "string",
+            "description": "Location Id"
+          }
+        },
+        "required": [
+          "id",
+          "locationId"
+        ]
+      }
+    },
+    {
+      "name": "locations_create_recurring_task",
+      "module": "locations",
+      "method": "POST",
+      "path": "/locations/{locationId}/recurring-tasks",
+      "version": "2021-07-28",
+      "summary": "Create Recurring Task",
+      "description": "Create Recurring Task [POST /locations/{locationId}/recurring-tasks]",
+      "scopes": [],
+      "access": "unknown",
+      "operationClass": "write",
+      "deprecated": false,
+      "contentType": "application/json",
+      "pathFields": [
+        "locationId"
+      ],
+      "queryFields": [],
+      "bodyFields": [
+        "title",
+        "description",
+        "contactIds",
+        "owners",
+        "rruleOptions",
+        "ignoreTaskCreation"
+      ],
+      "bodyWrapped": false,
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "locationId": {
+            "type": "string"
+          },
+          "title": {
+            "type": "string",
+            "description": "Name of the task"
+          },
+          "description": {
+            "type": "string",
+            "description": "Description of the task"
+          },
+          "contactIds": {
+            "description": "Contact Id",
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "owners": {
+            "description": "Assigned To",
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "rruleOptions": {
+            "type": "object",
+            "properties": {
+              "intervalType": {
+                "type": "string",
+                "enum": [
+                  "yearly",
+                  "monthly",
+                  "weekly",
+                  "daily",
+                  "hourly"
+                ]
+              },
+              "interval": {
+                "type": "number"
+              },
+              "startDate": {
+                "type": "string",
+                "description": "Start Date"
+              },
+              "endDate": {
+                "type": "string",
+                "description": "End Date"
+              },
+              "dayOfMonth": {
+                "type": "number",
+                "description": "1, 2, 3, ..., 27, 31"
+              },
+              "dayOfWeek": {
+                "type": "string",
+                "enum": [
+                  "MO",
+                  "TU",
+                  "WE",
+                  "TH",
+                  "FR",
+                  "SA",
+                  "SU"
+                ]
+              },
+              "monthOfYear": {
+                "type": "number",
+                "description": "1, 2, ....., 11, 12"
+              },
+              "count": {
+                "type": "number",
+                "description": "Max number of task executions"
+              },
+              "createTaskIfOverDue": {
+                "type": "boolean",
+                "description": "Create Task If Over Due"
+              },
+              "dueAfterSeconds": {
+                "type": "number",
+                "description": "Due after seconds"
+              }
+            },
+            "required": [
+              "intervalType",
+              "interval",
+              "startDate",
+              "dueAfterSeconds"
+            ],
+            "description": "Recurring rules"
+          },
+          "ignoreTaskCreation": {
+            "type": "boolean",
+            "description": "Create initial task or not"
+          }
+        },
+        "required": [
+          "locationId",
+          "title",
+          "rruleOptions"
+        ]
+      }
+    },
+    {
+      "name": "locations_get_custom_fields",
+      "module": "locations",
+      "method": "GET",
+      "path": "/locations/{locationId}/customFields",
+      "version": "2021-07-28",
+      "summary": "Get Custom Fields",
+      "description": "Get Custom Fields [GET /locations/{locationId}/customFields] Scopes: locations/customFields.readonly.",
+      "scopes": [
+        "locations/customFields.readonly"
+      ],
+      "access": "unknown",
+      "operationClass": "read",
+      "deprecated": false,
+      "pathFields": [
+        "locationId"
+      ],
+      "queryFields": [
+        "model"
+      ],
+      "bodyFields": [],
+      "bodyWrapped": false,
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "locationId": {
+            "type": "string",
+            "description": "Location Id"
+          },
+          "model": {
+            "enum": [
+              "contact",
+              "opportunity",
+              "all"
+            ],
+            "type": "string",
+            "description": "Model of the custom field you want to retrieve"
+          }
+        },
+        "required": [
+          "locationId"
+        ]
+      }
+    },
+    {
+      "name": "locations_create_custom_field",
+      "module": "locations",
+      "method": "POST",
+      "path": "/locations/{locationId}/customFields",
+      "version": "2021-07-28",
+      "summary": "Create Custom Field",
+      "description": "Create Custom Field [POST /locations/{locationId}/customFields] Scopes: locations/customFields.write.",
+      "scopes": [
+        "locations/customFields.write"
+      ],
+      "access": "unknown",
+      "operationClass": "write",
+      "deprecated": false,
+      "contentType": "application/json",
+      "pathFields": [
+        "locationId"
+      ],
+      "queryFields": [],
+      "bodyFields": [
+        "name",
+        "dataType",
+        "placeholder",
+        "acceptedFormat",
+        "isMultipleFile",
+        "maxNumberOfFiles",
+        "textBoxListOptions",
+        "position",
+        "model"
+      ],
+      "bodyWrapped": false,
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "locationId": {
+            "type": "string",
+            "description": "Location Id"
+          },
+          "name": {
+            "type": "string"
+          },
+          "dataType": {
+            "type": "string"
+          },
+          "placeholder": {
+            "type": "string"
+          },
+          "acceptedFormat": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "isMultipleFile": {
+            "type": "boolean"
+          },
+          "maxNumberOfFiles": {
+            "type": "number"
+          },
+          "textBoxListOptions": {
+            "type": "array",
+            "items": {
+              "anyOf": [
+                {
+                  "type": "object",
+                  "properties": {
+                    "label": {
+                      "type": "string"
+                    },
+                    "prefillValue": {
+                      "type": "string"
+                    }
+                  }
+                },
+                {
+                  "type": "object",
+                  "properties": {
+                    "label": {
+                      "type": "string"
+                    },
+                    "prefillValue": {
+                      "type": "string"
+                    }
+                  }
+                }
+              ]
+            }
+          },
+          "position": {
+            "type": "number",
+            "description": "(default: 0)"
+          },
+          "model": {
+            "type": "string",
+            "description": "Model of the custom field you want to create",
+            "enum": [
+              "contact",
+              "opportunity"
+            ]
+          }
+        },
+        "required": [
+          "locationId",
+          "name",
+          "dataType"
+        ]
+      }
+    },
+    {
+      "name": "locations_get_custom_field",
+      "module": "locations",
+      "method": "GET",
+      "path": "/locations/{locationId}/customFields/{id}",
+      "version": "2021-07-28",
+      "summary": "Get Custom Field",
+      "description": "Get Custom Field [GET /locations/{locationId}/customFields/{id}]",
+      "scopes": [],
+      "access": "unknown",
+      "operationClass": "read",
+      "deprecated": false,
+      "pathFields": [
+        "locationId",
+        "id"
+      ],
+      "queryFields": [],
+      "bodyFields": [],
+      "bodyWrapped": false,
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "locationId": {
+            "type": "string",
+            "description": "Location Id"
+          },
+          "id": {
+            "type": "string",
+            "description": "Custom Field Id or Field Key (e.g. \"contact.first_name\" or \"opportunity.pipeline_id\")"
+          }
+        },
+        "required": [
+          "locationId",
+          "id"
+        ]
+      }
+    },
+    {
+      "name": "locations_update_custom_field",
+      "module": "locations",
+      "method": "PUT",
+      "path": "/locations/{locationId}/customFields/{id}",
+      "version": "2021-07-28",
+      "summary": "Update Custom Field",
+      "description": "Update Custom Field [PUT /locations/{locationId}/customFields/{id}]",
+      "scopes": [],
+      "access": "unknown",
+      "operationClass": "write",
+      "deprecated": false,
+      "contentType": "application/json",
+      "pathFields": [
+        "locationId",
+        "id"
+      ],
+      "queryFields": [],
+      "bodyFields": [
+        "name",
+        "placeholder",
+        "acceptedFormat",
+        "isMultipleFile",
+        "maxNumberOfFiles",
+        "textBoxListOptions",
+        "position",
+        "model"
+      ],
+      "bodyWrapped": false,
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "locationId": {
+            "type": "string",
+            "description": "Location Id"
+          },
+          "id": {
+            "type": "string",
+            "description": "Custom Field Id"
+          },
+          "name": {
+            "type": "string"
+          },
+          "placeholder": {
+            "type": "string"
+          },
+          "acceptedFormat": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "isMultipleFile": {
+            "type": "boolean"
+          },
+          "maxNumberOfFiles": {
+            "type": "number"
+          },
+          "textBoxListOptions": {
+            "type": "array",
+            "items": {
+              "anyOf": [
+                {
+                  "type": "object",
+                  "properties": {
+                    "label": {
+                      "type": "string"
+                    },
+                    "prefillValue": {
+                      "type": "string"
+                    }
+                  }
+                },
+                {
+                  "type": "object",
+                  "properties": {
+                    "label": {
+                      "type": "string"
+                    },
+                    "prefillValue": {
+                      "type": "string"
+                    }
+                  }
+                }
+              ]
+            }
+          },
+          "position": {
+            "type": "number",
+            "description": "(default: 0)"
+          },
+          "model": {
+            "type": "string",
+            "description": "Model of the custom field you want to update",
+            "enum": [
+              "contact",
+              "opportunity"
+            ]
+          }
+        },
+        "required": [
+          "locationId",
+          "id",
+          "name"
+        ]
+      }
+    },
+    {
+      "name": "locations_delete_custom_field",
+      "module": "locations",
+      "method": "DELETE",
+      "path": "/locations/{locationId}/customFields/{id}",
+      "version": "2021-07-28",
+      "summary": "Delete Custom Field",
+      "description": "Delete Custom Field [DELETE /locations/{locationId}/customFields/{id}]",
+      "scopes": [],
+      "access": "unknown",
+      "operationClass": "delete",
+      "deprecated": false,
+      "pathFields": [
+        "locationId",
+        "id"
+      ],
+      "queryFields": [],
+      "bodyFields": [],
+      "bodyWrapped": false,
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "locationId": {
+            "type": "string",
+            "description": "Location Id"
+          },
+          "id": {
+            "type": "string",
+            "description": "Custom Field Id"
+          }
+        },
+        "required": [
+          "locationId",
+          "id"
+        ]
+      }
+    },
+    {
+      "name": "locations_upload_file_customfields",
+      "module": "locations",
+      "method": "POST",
+      "path": "/locations/{locationId}/customFields/upload",
+      "version": "2021-07-28",
+      "summary": "Uploads File to customFields",
+      "description": "Uploads File to customFields [POST /locations/{locationId}/customFields/upload] Scopes: locations/customFields.write.",
+      "scopes": [
+        "locations/customFields.write"
+      ],
+      "access": "unknown",
+      "operationClass": "write",
+      "deprecated": false,
+      "contentType": "multipart/form-data",
+      "pathFields": [
+        "locationId"
+      ],
+      "queryFields": [],
+      "bodyFields": [
+        "id",
+        "maxFiles"
+      ],
+      "bodyWrapped": false,
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "locationId": {
+            "type": "string"
+          },
+          "id": {
+            "type": "string",
+            "description": "Id(Contact Id/Opportunity Id/Custom Field Id)"
+          },
+          "maxFiles": {
+            "type": "string",
+            "description": "Max number of files"
+          }
+        },
+        "required": [
+          "locationId"
+        ]
+      }
+    },
+    {
+      "name": "locations_get_custom_values",
+      "module": "locations",
+      "method": "GET",
+      "path": "/locations/{locationId}/customValues",
+      "version": "2021-07-28",
+      "summary": "Get Custom Values",
+      "description": "Get Custom Values [GET /locations/{locationId}/customValues] Scopes: locations/customValues.readonly.",
+      "scopes": [
+        "locations/customValues.readonly"
+      ],
+      "access": "unknown",
+      "operationClass": "read",
+      "deprecated": false,
+      "pathFields": [
+        "locationId"
+      ],
+      "queryFields": [],
+      "bodyFields": [],
+      "bodyWrapped": false,
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "locationId": {
+            "type": "string",
+            "description": "Location Id"
+          }
+        },
+        "required": [
+          "locationId"
+        ]
+      }
+    },
+    {
+      "name": "locations_create_custom_value",
+      "module": "locations",
+      "method": "POST",
+      "path": "/locations/{locationId}/customValues",
+      "version": "2021-07-28",
+      "summary": "Create Custom Value",
+      "description": "Create Custom Value [POST /locations/{locationId}/customValues] Scopes: locations/customValues.write.",
+      "scopes": [
+        "locations/customValues.write"
+      ],
+      "access": "unknown",
+      "operationClass": "write",
+      "deprecated": false,
+      "contentType": "application/json",
+      "pathFields": [
+        "locationId"
+      ],
+      "queryFields": [],
+      "bodyFields": [
+        "name",
+        "value"
+      ],
+      "bodyWrapped": false,
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "locationId": {
+            "type": "string",
+            "description": "Location Id"
+          },
+          "name": {
+            "type": "string"
+          },
+          "value": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "locationId",
+          "name",
+          "value"
+        ]
+      }
+    },
+    {
+      "name": "locations_get_custom_value",
+      "module": "locations",
+      "method": "GET",
+      "path": "/locations/{locationId}/customValues/{id}",
+      "version": "2021-07-28",
+      "summary": "Get Custom Value",
+      "description": "Get Custom Value [GET /locations/{locationId}/customValues/{id}]",
+      "scopes": [],
+      "access": "unknown",
+      "operationClass": "read",
+      "deprecated": false,
+      "pathFields": [
+        "locationId",
+        "id"
+      ],
+      "queryFields": [],
+      "bodyFields": [],
+      "bodyWrapped": false,
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "locationId": {
+            "type": "string",
+            "description": "Location Id"
+          },
+          "id": {
+            "type": "string",
+            "description": "Custom Value Id"
+          }
+        },
+        "required": [
+          "locationId",
+          "id"
+        ]
+      }
+    },
+    {
+      "name": "locations_update_custom_value",
+      "module": "locations",
+      "method": "PUT",
+      "path": "/locations/{locationId}/customValues/{id}",
+      "version": "2021-07-28",
+      "summary": "Update Custom Value",
+      "description": "Update Custom Value [PUT /locations/{locationId}/customValues/{id}]",
+      "scopes": [],
+      "access": "unknown",
+      "operationClass": "write",
+      "deprecated": false,
+      "contentType": "application/json",
+      "pathFields": [
+        "locationId",
+        "id"
+      ],
+      "queryFields": [],
+      "bodyFields": [
+        "name",
+        "value"
+      ],
+      "bodyWrapped": false,
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "locationId": {
+            "type": "string",
+            "description": "Location Id"
+          },
+          "id": {
+            "type": "string",
+            "description": "Custom Value Id"
+          },
+          "name": {
+            "type": "string"
+          },
+          "value": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "locationId",
+          "id",
+          "name",
+          "value"
+        ]
+      }
+    },
+    {
+      "name": "locations_delete_custom_value",
+      "module": "locations",
+      "method": "DELETE",
+      "path": "/locations/{locationId}/customValues/{id}",
+      "version": "2021-07-28",
+      "summary": "Delete Custom Value",
+      "description": "Delete Custom Value [DELETE /locations/{locationId}/customValues/{id}]",
+      "scopes": [],
+      "access": "unknown",
+      "operationClass": "delete",
+      "deprecated": false,
+      "pathFields": [
+        "locationId",
+        "id"
+      ],
+      "queryFields": [],
+      "bodyFields": [],
+      "bodyWrapped": false,
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "locationId": {
+            "type": "string",
+            "description": "Location Id"
+          },
+          "id": {
+            "type": "string",
+            "description": "Custom Value Id"
+          }
+        },
+        "required": [
+          "locationId",
+          "id"
+        ]
+      }
+    },
+    {
+      "name": "locations_get_timezones",
+      "module": "locations",
+      "method": "GET",
+      "path": "/locations/{locationId}/timezones",
+      "version": "2021-07-28",
+      "summary": "Fetch Timezones",
+      "description": "Fetch Timezones Fetch the available timezones [GET /locations/{locationId}/timezones] Token: location. Scopes: locations.readonly.",
+      "scopes": [
+        "locations.readonly"
+      ],
+      "access": "location",
+      "operationClass": "read",
+      "deprecated": false,
+      "pathFields": [],
+      "queryFields": [],
+      "bodyFields": [],
+      "bodyWrapped": false,
+      "inputSchema": {
+        "type": "object",
+        "properties": {}
+      }
+    },
+    {
+      "name": "locations_get_all_or_email_sms_templates",
+      "module": "locations",
+      "method": "GET",
+      "path": "/locations/{locationId}/templates",
+      "version": "2021-07-28",
+      "summary": "GET all or email/sms templates",
+      "description": "GET all or email/sms templates [GET /locations/{locationId}/templates] Scopes: locations/templates.readonly.",
+      "scopes": [
+        "locations/templates.readonly"
+      ],
+      "access": "unknown",
+      "operationClass": "read",
+      "deprecated": false,
+      "pathFields": [
+        "locationId"
+      ],
+      "queryFields": [
+        "deleted",
+        "skip",
+        "limit",
+        "type",
+        "originId"
+      ],
+      "bodyFields": [],
+      "bodyWrapped": false,
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "deleted": {
+            "type": "boolean",
+            "description": "(default: false)"
+          },
+          "skip": {
+            "type": "string",
+            "description": "(default: \"0\")"
+          },
+          "limit": {
+            "type": "string",
+            "description": "(default: \"25\")"
+          },
+          "type": {
+            "enum": [
+              "sms",
+              "email",
+              "whatsapp"
+            ],
+            "type": "string"
+          },
+          "originId": {
+            "type": "string",
+            "description": "Origin Id"
+          },
+          "locationId": {
+            "type": "string",
+            "description": "Location Id"
+          }
+        },
+        "required": [
+          "originId",
+          "locationId"
+        ]
+      }
+    },
+    {
+      "name": "locations_delete_an_email_sms_template",
+      "module": "locations",
+      "method": "DELETE",
+      "path": "/locations/{locationId}/templates/{id}",
+      "version": "2021-07-28",
+      "summary": "DELETE an email/sms template",
+      "description": "DELETE an email/sms template [DELETE /locations/{locationId}/templates/{id}]",
+      "scopes": [],
+      "access": "unknown",
+      "operationClass": "delete",
+      "deprecated": false,
+      "pathFields": [
+        "locationId",
+        "id"
+      ],
+      "queryFields": [],
+      "bodyFields": [],
+      "bodyWrapped": false,
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "locationId": {
+            "type": "string",
+            "description": "Location Id"
+          },
+          "id": {
+            "type": "string",
+            "description": "Template Id"
+          }
+        },
+        "required": [
+          "locationId",
+          "id"
+        ]
+      }
+    },
+    {
+      "name": "locations_create_location",
+      "module": "locations",
+      "method": "POST",
+      "path": "/locations/",
+      "version": "2021-07-28",
+      "summary": "Create Sub-Account (Formerly Location)",
+      "description": "Create Sub-Account (Formerly Location) <div> <p>Create a new Sub-Account (Formerly Location) based on the data provided</p> <div> <span style= \"display: inline-block; width: 25px; height: 25px; background-color: yellow; color: black; font-weight: bold; font-size: 24px; text-align: center; line-height: 22px; border: 2px solid black; border-radius: 10%; margin-right: 10px;\"> ! </span> <span> <strong> This feature is only available on Ag… [POST /locations/] Token: agency. Scopes: locations.write.",
+      "scopes": [
+        "locations.write"
+      ],
+      "access": "agency",
+      "operationClass": "write",
+      "deprecated": false,
+      "contentType": "application/json",
+      "pathFields": [],
+      "queryFields": [],
+      "bodyFields": [
+        "name",
+        "phone",
+        "companyId",
+        "address",
+        "city",
+        "state",
+        "country",
+        "postalCode",
+        "website",
+        "timezone",
+        "prospectInfo",
+        "settings",
+        "social",
+        "twilio",
+        "mailgun",
+        "snapshotId"
+      ],
+      "bodyWrapped": false,
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "description": "The name for the sub-account/location"
+          },
+          "phone": {
+            "type": "string",
+            "description": "The phone number of the business for which sub-account is created with the appropriate country-code"
+          },
+          "companyId": {
+            "type": "string",
+            "description": "Company/Agency Id"
+          },
+          "address": {
+            "type": "string",
+            "description": "The address of the business for which sub-account is created"
+          },
+          "city": {
+            "type": "string",
+            "description": "The city where the business is located for which sub-account is created"
+          },
+          "state": {
+            "type": "string",
+            "description": "The state in which the business operates for which sub-account is created"
+          },
+          "country": {
+            "type": "string",
+            "description": "The 2 letter country-code in which the business is present for which sub-account is created",
+            "enum": [
+              "AF",
+              "AX",
+              "AL",
+              "DZ",
+              "AS",
+              "AD",
+              "AO",
+              "AI",
+              "AQ",
+              "AG",
+              "AR",
+              "AM",
+              "AW",
+              "AU",
+              "AT",
+              "AZ",
+              "BS",
+              "BH",
+              "BD",
+              "BB",
+              "BY",
+              "BE",
+              "BZ",
+              "BJ",
+              "BM",
+              "BT",
+              "BO",
+              "BA",
+              "BW",
+              "BV",
+              "BR",
+              "IO",
+              "BN",
+              "BG",
+              "BF",
+              "BI",
+              "KH",
+              "CM",
+              "CA",
+              "CV",
+              "KY",
+              "CF",
+              "TD",
+              "CL",
+              "CN",
+              "CX",
+              "CC",
+              "CO",
+              "KM",
+              "CG",
+              "CD",
+              "CK",
+              "CR",
+              "CI",
+              "HR",
+              "CU",
+              "CY",
+              "CZ",
+              "DK",
+              "DJ",
+              "DM",
+              "DO",
+              "EC",
+              "EG",
+              "SV",
+              "GQ",
+              "ER",
+              "EE",
+              "ET",
+              "FK",
+              "FO",
+              "FJ",
+              "FI",
+              "FR",
+              "GF",
+              "PF",
+              "TF",
+              "GA",
+              "GM",
+              "GE",
+              "DE",
+              "GH",
+              "GI",
+              "GR",
+              "GL",
+              "GD",
+              "GP",
+              "GU",
+              "GT",
+              "GG",
+              "GN",
+              "GW",
+              "GY",
+              "HT",
+              "HM",
+              "VA",
+              "HN",
+              "HK",
+              "HU",
+              "IS",
+              "IN",
+              "ID",
+              "IR",
+              "IQ",
+              "IE",
+              "IM",
+              "IL",
+              "IT",
+              "JM",
+              "JP",
+              "JE",
+              "JO",
+              "KZ",
+              "KE",
+              "KI",
+              "KP",
+              "KR",
+              "XK",
+              "KW",
+              "KG",
+              "LA",
+              "LV",
+              "LB",
+              "LS",
+              "LR",
+              "LY",
+              "LI",
+              "LT",
+              "LU",
+              "MO",
+              "MK",
+              "MG",
+              "MW",
+              "MY",
+              "MV",
+              "ML",
+              "MT",
+              "MH",
+              "MQ",
+              "MR",
+              "MU",
+              "YT",
+              "MX",
+              "FM",
+              "MD",
+              "MC",
+              "MN",
+              "ME",
+              "MS",
+              "MA",
+              "MZ",
+              "MM",
+              "NA",
+              "NR",
+              "NP",
+              "NL",
+              "AN",
+              "NC",
+              "NZ",
+              "NI",
+              "NE",
+              "NG",
+              "NU",
+              "NF",
+              "MP",
+              "NO",
+              "OM",
+              "PK",
+              "PW",
+              "PS",
+              "PA",
+              "PG",
+              "PY",
+              "PE",
+              "PH",
+              "PN",
+              "PL",
+              "PT",
+              "PR",
+              "QA",
+              "RE",
+              "RO",
+              "RU",
+              "RW",
+              "SH",
+              "KN",
+              "LC",
+              "MF",
+              "PM",
+              "VC",
+              "WS",
+              "SM",
+              "ST",
+              "SA",
+              "SN",
+              "RS",
+              "SC",
+              "SL",
+              "SG",
+              "SX",
+              "SK",
+              "SI",
+              "SB",
+              "SO",
+              "ZA",
+              "GS",
+              "ES",
+              "LK",
+              "SD",
+              "SR",
+              "SJ",
+              "SZ",
+              "SE",
+              "CH",
+              "SY",
+              "TW",
+              "TJ",
+              "TZ",
+              "TH",
+              "TL",
+              "TG",
+              "TK",
+              "TO",
+              "TT",
+              "TN",
+              "TR",
+              "TM",
+              "TC",
+              "TV",
+              "UG",
+              "GB",
+              "UA",
+              "AE",
+              "US",
+              "UM",
+              "UY",
+              "UZ",
+              "VU",
+              "VE",
+              "VN",
+              "VG",
+              "VI",
+              "WF",
+              "EH",
+              "YE",
+              "ZM",
+              "ZW"
+            ]
+          },
+          "postalCode": {
+            "type": "string",
+            "description": "The postal code of the business for which sub-account is created"
+          },
+          "website": {
+            "type": "string",
+            "description": "The website of the business for which sub-account is created"
+          },
+          "timezone": {
+            "type": "string",
+            "description": "The timezone of the business for which sub-account is created"
+          },
+          "prospectInfo": {
+            "type": "object",
+            "properties": {
+              "firstName": {
+                "type": "string",
+                "description": "First name of the prospect"
+              },
+              "lastName": {
+                "type": "string",
+                "description": "Last name of the prospect"
+              },
+              "email": {
+                "type": "string",
+                "description": "Email of the prospect"
+              }
+            },
+            "required": [
+              "firstName",
+              "lastName",
+              "email"
+            ]
+          },
+          "settings": {
+            "type": "object",
+            "properties": {
+              "allowDuplicateContact": {
+                "type": "boolean"
+              },
+              "allowDuplicateOpportunity": {
+                "type": "boolean"
+              },
+              "allowFacebookNameMerge": {
+                "type": "boolean"
+              },
+              "disableContactTimezone": {
+                "type": "boolean"
+              }
+            },
+            "description": "The default settings for location"
+          },
+          "social": {
+            "type": "object",
+            "properties": {
+              "facebookUrl": {
+                "type": "string",
+                "description": "Facebook URL"
+              },
+              "googlePlus": {
+                "type": "string",
+                "description": "Googleplus URL"
+              },
+              "linkedIn": {
+                "type": "string",
+                "description": "LinkedIn URL"
+              },
+              "foursquare": {
+                "type": "string",
+                "description": "Foursquare URL"
+              },
+              "twitter": {
+                "type": "string",
+                "description": "Twitter URL"
+              },
+              "yelp": {
+                "type": "string",
+                "description": "Yelp URL"
+              },
+              "instagram": {
+                "type": "string",
+                "description": "Instagram URL"
+              },
+              "youtube": {
+                "type": "string",
+                "description": "Instagram URL"
+              },
+              "pinterest": {
+                "type": "string",
+                "description": "Instagram URL"
+              },
+              "blogRss": {
+                "type": "string",
+                "description": "Instagram URL"
+              },
+              "googlePlacesId": {
+                "type": "string",
+                "description": "Google Business Places ID"
+              }
+            },
+            "description": "The social media links for location"
+          },
+          "twilio": {
+            "type": "object",
+            "properties": {
+              "sid": {
+                "type": "string",
+                "description": "SID provided by Twilio"
+              },
+              "authToken": {
+                "type": "string",
+                "description": "Auth token provided by Twilio"
+              }
+            },
+            "required": [
+              "sid",
+              "authToken"
+            ],
+            "description": "The twilio credentials for location"
+          },
+          "mailgun": {
+            "type": "object",
+            "properties": {
+              "apiKey": {
+                "type": "string",
+                "description": "API key provided by Mailgun"
+              },
+              "domain": {
+                "type": "string",
+                "description": "Domain connected with Mailgun"
+              }
+            },
+            "required": [
+              "apiKey",
+              "domain"
+            ],
+            "description": "The mailgun credentials for location"
+          },
+          "snapshotId": {
+            "type": "string",
+            "description": "The snapshot ID to be loaded into the location."
+          }
+        },
+        "required": [
+          "name",
+          "companyId"
+        ]
+      }
+    }
+  ]
+}

@@ -1,0 +1,41 @@
+{
+  "module": "campaigns",
+  "endpoints": [
+    {
+      "name": "campaigns_get_campaigns",
+      "module": "campaigns",
+      "method": "GET",
+      "path": "/campaigns/",
+      "version": "2021-07-28",
+      "summary": "Get Campaigns",
+      "description": "Get Campaigns [GET /campaigns/] Scopes: campaigns.readonly.",
+      "scopes": [
+        "campaigns.readonly"
+      ],
+      "access": "unknown",
+      "operationClass": "read",
+      "deprecated": false,
+      "pathFields": [],
+      "queryFields": [
+        "locationId",
+        "status"
+      ],
+      "bodyFields": [],
+      "bodyWrapped": false,
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "locationId": {
+            "type": "string"
+          },
+          "status": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "locationId"
+        ]
+      }
+    }
+  ]
+}

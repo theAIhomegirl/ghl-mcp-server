@@ -1,0 +1,423 @@
+{
+  "module": "medias",
+  "endpoints": [
+    {
+      "name": "medias_fetch_media_content",
+      "module": "medias",
+      "method": "GET",
+      "path": "/medias/files",
+      "version": "2021-07-28",
+      "summary": "Get List of Files/ Folders",
+      "description": "Get List of Files/ Folders Fetches list of files and folders from the media storage [GET /medias/files] Token: location. Scopes: medias.readonly.",
+      "scopes": [
+        "medias.readonly"
+      ],
+      "access": "location",
+      "operationClass": "read",
+      "deprecated": false,
+      "pathFields": [],
+      "queryFields": [
+        "offset",
+        "limit",
+        "sortBy",
+        "sortOrder",
+        "type",
+        "query",
+        "altType",
+        "altId",
+        "parentId",
+        "fetchAll"
+      ],
+      "bodyFields": [],
+      "bodyWrapped": false,
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "offset": {
+            "type": "string",
+            "description": "Number of files to skip in listing"
+          },
+          "limit": {
+            "type": "string",
+            "description": "Number of files to show in the listing"
+          },
+          "sortBy": {
+            "type": "string",
+            "description": "Field to sorting the file listing by"
+          },
+          "sortOrder": {
+            "type": "string",
+            "description": "Direction in which file needs to be sorted"
+          },
+          "type": {
+            "type": "string",
+            "description": "Type"
+          },
+          "query": {
+            "type": "string",
+            "description": "Query text"
+          },
+          "altType": {
+            "type": "string",
+            "enum": [
+              "location"
+            ],
+            "description": "AltType"
+          },
+          "altId": {
+            "type": "string",
+            "description": "location Id"
+          },
+          "parentId": {
+            "type": "string",
+            "description": "parent id or folder id"
+          },
+          "fetchAll": {
+            "type": "string",
+            "description": "Fetch all files or folders"
+          }
+        },
+        "required": [
+          "sortBy",
+          "sortOrder",
+          "type",
+          "altType",
+          "altId"
+        ]
+      }
+    },
+    {
+      "name": "medias_upload_media_content",
+      "module": "medias",
+      "method": "POST",
+      "path": "/medias/upload-file",
+      "version": "2021-07-28",
+      "summary": "Upload File into Media Storage",
+      "description": "Upload File into Media Storage If hosted is set to true then fileUrl is required. Else file is required. If adding a file, maximum allowed is 25 MB [POST /medias/upload-file] Token: location. Scopes: medias.write.",
+      "scopes": [
+        "medias.write"
+      ],
+      "access": "location",
+      "operationClass": "write",
+      "deprecated": false,
+      "contentType": "multipart/form-data",
+      "pathFields": [],
+      "queryFields": [],
+      "bodyFields": [
+        "file",
+        "hosted",
+        "fileUrl",
+        "name",
+        "parentId"
+      ],
+      "bodyWrapped": false,
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "file": {
+            "type": "string",
+            "format": "binary"
+          },
+          "hosted": {
+            "type": "boolean"
+          },
+          "fileUrl": {
+            "type": "string"
+          },
+          "name": {
+            "type": "string"
+          },
+          "parentId": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    {
+      "name": "medias_update_media_object",
+      "module": "medias",
+      "method": "POST",
+      "path": "/medias/{id}",
+      "version": "2021-07-28",
+      "summary": "Update File/ Folder",
+      "description": "Update File/ Folder Updates a single file or folder by ID [POST /medias/{id}] Token: location.",
+      "scopes": [],
+      "access": "location",
+      "operationClass": "write",
+      "deprecated": false,
+      "contentType": "application/json",
+      "pathFields": [
+        "id"
+      ],
+      "queryFields": [],
+      "bodyFields": [
+        "name",
+        "altType",
+        "altId"
+      ],
+      "bodyWrapped": false,
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "Unique identifier of the file or folder to update"
+          },
+          "name": {
+            "type": "string",
+            "description": "New name for the file or folder"
+          },
+          "altType": {
+            "type": "string",
+            "description": "Type of entity that owns the file or folder",
+            "enum": [
+              "location"
+            ]
+          },
+          "altId": {
+            "type": "string",
+            "description": "Location identifier that owns the file or folder"
+          }
+        },
+        "required": [
+          "id",
+          "name",
+          "altType",
+          "altId"
+        ]
+      }
+    },
+    {
+      "name": "medias_delete_media_content",
+      "module": "medias",
+      "method": "DELETE",
+      "path": "/medias/{id}",
+      "version": "2021-07-28",
+      "summary": "Delete File or Folder",
+      "description": "Delete File or Folder Deletes specific file or folder from the media storage [DELETE /medias/{id}] Token: location. Scopes: medias.write.",
+      "scopes": [
+        "medias.write"
+      ],
+      "access": "location",
+      "operationClass": "delete",
+      "deprecated": false,
+      "pathFields": [
+        "id"
+      ],
+      "queryFields": [
+        "altType",
+        "altId"
+      ],
+      "bodyFields": [],
+      "bodyWrapped": false,
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "altType": {
+            "type": "string",
+            "enum": [
+              "location"
+            ],
+            "description": "AltType"
+          },
+          "altId": {
+            "type": "string",
+            "description": "location Id"
+          }
+        },
+        "required": [
+          "id",
+          "altType",
+          "altId"
+        ]
+      }
+    },
+    {
+      "name": "medias_create_media_folder",
+      "module": "medias",
+      "method": "POST",
+      "path": "/medias/folder",
+      "version": "2021-07-28",
+      "summary": "Create Folder",
+      "description": "Create Folder Creates a new folder in the media storage [POST /medias/folder] Token: location.",
+      "scopes": [],
+      "access": "location",
+      "operationClass": "write",
+      "deprecated": false,
+      "contentType": "application/json",
+      "pathFields": [],
+      "queryFields": [],
+      "bodyFields": [
+        "altId",
+        "altType",
+        "name",
+        "parentId"
+      ],
+      "bodyWrapped": false,
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "altId": {
+            "type": "string",
+            "description": "Location Id"
+          },
+          "altType": {
+            "type": "string",
+            "description": "Type of entity (location only)",
+            "enum": [
+              "location"
+            ]
+          },
+          "name": {
+            "type": "string",
+            "description": "Name of the folder to be created"
+          },
+          "parentId": {
+            "type": "string",
+            "description": "ID of the parent folder (optional)"
+          }
+        },
+        "required": [
+          "altId",
+          "altType",
+          "name"
+        ]
+      }
+    },
+    {
+      "name": "medias_bulk_update_media_objects",
+      "module": "medias",
+      "method": "PUT",
+      "path": "/medias/update-files",
+      "version": "2021-07-28",
+      "summary": "Bulk Update Files/ Folders",
+      "description": "Bulk Update Files/ Folders Updates metadata or status of multiple files and folders [PUT /medias/update-files] Token: location.",
+      "scopes": [],
+      "access": "location",
+      "operationClass": "write",
+      "deprecated": false,
+      "contentType": "application/json",
+      "pathFields": [],
+      "queryFields": [],
+      "bodyFields": [
+        "altId",
+        "altType",
+        "filesToBeUpdated"
+      ],
+      "bodyWrapped": false,
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "altId": {
+            "type": "string",
+            "description": "Location identifier"
+          },
+          "altType": {
+            "type": "string",
+            "description": "Type of entity that owns the files",
+            "enum": [
+              "location"
+            ]
+          },
+          "filesToBeUpdated": {
+            "type": "array",
+            "description": "Array of file objects to be updated",
+            "items": {
+              "type": "object",
+              "properties": {
+                "id": {
+                  "type": "string",
+                  "description": "Unique identifier of the file or folder to be updated"
+                },
+                "name": {
+                  "type": "string",
+                  "description": "New name for the file or folder"
+                }
+              },
+              "required": [
+                "id"
+              ]
+            }
+          }
+        },
+        "required": [
+          "altId",
+          "altType",
+          "filesToBeUpdated"
+        ]
+      }
+    },
+    {
+      "name": "medias_bulk_delete_media_objects",
+      "module": "medias",
+      "method": "PUT",
+      "path": "/medias/delete-files",
+      "version": "2021-07-28",
+      "summary": "Bulk Delete / Trash Files or Folders",
+      "description": "Bulk Delete / Trash Files or Folders Soft-deletes or trashes multiple files and folders in a single request [PUT /medias/delete-files] Token: location.",
+      "scopes": [],
+      "access": "location",
+      "operationClass": "write",
+      "deprecated": false,
+      "contentType": "application/json",
+      "pathFields": [],
+      "queryFields": [],
+      "bodyFields": [
+        "filesToBeDeleted",
+        "altType",
+        "altId",
+        "status"
+      ],
+      "bodyWrapped": false,
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "filesToBeDeleted": {
+            "type": "array",
+            "description": "Array of file objects to be deleted or trashed",
+            "items": {
+              "type": "object",
+              "properties": {
+                "_id": {
+                  "type": "string",
+                  "description": "Unique identifier of the file or folder to be deleted"
+                }
+              },
+              "required": [
+                "_id"
+              ]
+            }
+          },
+          "altType": {
+            "type": "string",
+            "description": "Type of entity that owns the files",
+            "enum": [
+              "location"
+            ]
+          },
+          "altId": {
+            "type": "string",
+            "description": "Location identifier"
+          },
+          "status": {
+            "type": "string",
+            "description": "Status to set for the files (deleted or trashed)",
+            "enum": [
+              "deleted",
+              "trashed"
+            ]
+          }
+        },
+        "required": [
+          "filesToBeDeleted",
+          "altType",
+          "altId",
+          "status"
+        ]
+      }
+    }
+  ]
+}

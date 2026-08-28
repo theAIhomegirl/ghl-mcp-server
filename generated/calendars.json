@@ -1,0 +1,3598 @@
+{
+  "module": "calendars",
+  "endpoints": [
+    {
+      "name": "calendars_get_groups",
+      "module": "calendars",
+      "method": "GET",
+      "path": "/calendars/groups",
+      "version": "2021-04-15",
+      "summary": "Get Groups",
+      "description": "Get Groups Get all calendar groups in a location. [GET /calendars/groups] Scopes: calendars/groups.readonly.",
+      "scopes": [
+        "calendars/groups.readonly"
+      ],
+      "access": "unknown",
+      "operationClass": "read",
+      "deprecated": false,
+      "pathFields": [],
+      "queryFields": [
+        "locationId"
+      ],
+      "bodyFields": [],
+      "bodyWrapped": false,
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "locationId": {
+            "type": "string",
+            "description": "Location Id"
+          }
+        },
+        "required": [
+          "locationId"
+        ]
+      }
+    },
+    {
+      "name": "calendars_create_calendar_group",
+      "module": "calendars",
+      "method": "POST",
+      "path": "/calendars/groups",
+      "version": "2021-04-15",
+      "summary": "Create Calendar Group",
+      "description": "Create Calendar Group [POST /calendars/groups] Scopes: calendars/groups.write.",
+      "scopes": [
+        "calendars/groups.write"
+      ],
+      "access": "unknown",
+      "operationClass": "write",
+      "deprecated": false,
+      "contentType": "application/json",
+      "pathFields": [],
+      "queryFields": [],
+      "bodyFields": [
+        "locationId",
+        "name",
+        "description",
+        "slug",
+        "isActive"
+      ],
+      "bodyWrapped": false,
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "locationId": {
+            "type": "string"
+          },
+          "name": {
+            "type": "string"
+          },
+          "description": {
+            "type": "string"
+          },
+          "slug": {
+            "type": "string"
+          },
+          "isActive": {
+            "type": "boolean"
+          }
+        },
+        "required": [
+          "locationId",
+          "name",
+          "description",
+          "slug"
+        ]
+      }
+    },
+    {
+      "name": "calendars_validate_groups_slug",
+      "module": "calendars",
+      "method": "POST",
+      "path": "/calendars/groups/validate-slug",
+      "version": "2021-04-15",
+      "summary": "Validate group slug",
+      "description": "Validate group slug Validate if group slug is available or not. [POST /calendars/groups/validate-slug] Scopes: calendars/groups.write.",
+      "scopes": [
+        "calendars/groups.write"
+      ],
+      "access": "unknown",
+      "operationClass": "read",
+      "deprecated": false,
+      "contentType": "application/json",
+      "pathFields": [],
+      "queryFields": [],
+      "bodyFields": [
+        "locationId",
+        "slug"
+      ],
+      "bodyWrapped": false,
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "locationId": {
+            "type": "string",
+            "description": "Location Id"
+          },
+          "slug": {
+            "type": "string",
+            "description": "Slug"
+          }
+        },
+        "required": [
+          "locationId",
+          "slug"
+        ]
+      }
+    },
+    {
+      "name": "calendars_edit_group",
+      "module": "calendars",
+      "method": "PUT",
+      "path": "/calendars/groups/{groupId}",
+      "version": "2021-04-15",
+      "summary": "Update Group",
+      "description": "Update Group by group ID [PUT /calendars/groups/{groupId}] Scopes: calendars/groups.write.",
+      "scopes": [
+        "calendars/groups.write"
+      ],
+      "access": "unknown",
+      "operationClass": "write",
+      "deprecated": false,
+      "contentType": "application/json",
+      "pathFields": [
+        "groupId"
+      ],
+      "queryFields": [],
+      "bodyFields": [
+        "name",
+        "description",
+        "slug"
+      ],
+      "bodyWrapped": false,
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "groupId": {
+            "type": "string",
+            "description": "Group Id"
+          },
+          "name": {
+            "type": "string"
+          },
+          "description": {
+            "type": "string"
+          },
+          "slug": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "groupId",
+          "name",
+          "description",
+          "slug"
+        ]
+      }
+    },
+    {
+      "name": "calendars_delete_group",
+      "module": "calendars",
+      "method": "DELETE",
+      "path": "/calendars/groups/{groupId}",
+      "version": "2021-04-15",
+      "summary": "Delete Group",
+      "description": "Delete Group [DELETE /calendars/groups/{groupId}] Scopes: calendars/groups.write.",
+      "scopes": [
+        "calendars/groups.write"
+      ],
+      "access": "unknown",
+      "operationClass": "delete",
+      "deprecated": false,
+      "pathFields": [
+        "groupId"
+      ],
+      "queryFields": [],
+      "bodyFields": [],
+      "bodyWrapped": false,
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "groupId": {
+            "type": "string",
+            "description": "Group Id"
+          }
+        },
+        "required": [
+          "groupId"
+        ]
+      }
+    },
+    {
+      "name": "calendars_disable_group",
+      "module": "calendars",
+      "method": "PUT",
+      "path": "/calendars/groups/{groupId}/status",
+      "version": "2021-04-15",
+      "summary": "Disable Group",
+      "description": "Disable Group [PUT /calendars/groups/{groupId}/status] Scopes: calendars/groups.write.",
+      "scopes": [
+        "calendars/groups.write"
+      ],
+      "access": "unknown",
+      "operationClass": "write",
+      "deprecated": false,
+      "contentType": "application/json",
+      "pathFields": [
+        "groupId"
+      ],
+      "queryFields": [],
+      "bodyFields": [
+        "isActive"
+      ],
+      "bodyWrapped": false,
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "groupId": {
+            "type": "string",
+            "description": "Group Id"
+          },
+          "isActive": {
+            "type": "boolean",
+            "description": "Is Active?"
+          }
+        },
+        "required": [
+          "groupId",
+          "isActive"
+        ]
+      }
+    },
+    {
+      "name": "calendars_create_appointment",
+      "module": "calendars",
+      "method": "POST",
+      "path": "/calendars/events/appointments",
+      "version": "2021-04-15",
+      "summary": "Create appointment",
+      "description": "Create appointment [POST /calendars/events/appointments] Scopes: calendars/events.write.",
+      "scopes": [
+        "calendars/events.write"
+      ],
+      "access": "unknown",
+      "operationClass": "write",
+      "deprecated": false,
+      "contentType": "application/json",
+      "pathFields": [],
+      "queryFields": [],
+      "bodyFields": [
+        "title",
+        "meetingLocationType",
+        "meetingLocationId",
+        "overrideLocationConfig",
+        "appointmentStatus",
+        "assignedUserId",
+        "description",
+        "address",
+        "ignoreDateRange",
+        "toNotify",
+        "ignoreFreeSlotValidation",
+        "rrule",
+        "calendarId",
+        "locationId",
+        "contactId",
+        "startTime",
+        "endTime"
+      ],
+      "bodyWrapped": false,
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "title": {
+            "type": "string",
+            "description": "Title"
+          },
+          "meetingLocationType": {
+            "type": "string",
+            "description": "Meeting location type. \n- If `address` is provided in the request body, the `meetingLocationType` defaults to **custom**.",
+            "enum": [
+              "custom",
+              "zoom",
+              "gmeet",
+              "phone",
+              "address",
+              "ms_teams",
+              "google"
+            ]
+          },
+          "meetingLocationId": {
+            "type": "string",
+            "description": "The unique identifier for the meeting location.\n- This value can be found in `calendar.locationConfigurations`or `calendar.teamMembers[].locationConfigurations` (default: \"default\")"
+          },
+          "overrideLocationConfig": {
+            "type": "boolean",
+            "description": "Flag to override location config\n- **false** - If only `meetingLocationId` is provided\n- **true** - If only `meetingLocationType` is provided\n"
+          },
+          "appointmentStatus": {
+            "type": "string",
+            "enum": [
+              "new",
+              "confirmed",
+              "cancelled",
+              "showed",
+              "noshow",
+              "invalid"
+            ]
+          },
+          "assignedUserId": {
+            "type": "string",
+            "description": "Assigned User Id"
+          },
+          "description": {
+            "type": "string",
+            "description": "Appointment Description"
+          },
+          "address": {
+            "type": "string",
+            "description": "Appointment Address"
+          },
+          "ignoreDateRange": {
+            "type": "boolean",
+            "description": "If set to true, the minimum scheduling notice and date range would be ignored"
+          },
+          "toNotify": {
+            "type": "boolean",
+            "description": "If set to false, the automations will not run"
+          },
+          "ignoreFreeSlotValidation": {
+            "type": "boolean",
+            "description": "If true the time slot validation would be avoided for any appointment creation (even the ignoreDateRange)"
+          },
+          "rrule": {
+            "type": "string",
+            "description": "RRULE as per the iCalendar (RFC 5545) specification for recurring events. DTSTART is not required, instance ids are calculated on the basis of startTime of the event. The rrule only be applied if ignoreFreeSlotValidation is true."
+          },
+          "calendarId": {
+            "type": "string",
+            "description": "Calendar Id"
+          },
+          "locationId": {
+            "type": "string",
+            "description": "Location Id"
+          },
+          "contactId": {
+            "type": "string",
+            "description": "Contact Id"
+          },
+          "startTime": {
+            "type": "string",
+            "description": "Start Time"
+          },
+          "endTime": {
+            "type": "string",
+            "description": "End Time"
+          }
+        },
+        "required": [
+          "calendarId",
+          "locationId",
+          "contactId",
+          "startTime"
+        ]
+      }
+    },
+    {
+      "name": "calendars_get_appointment",
+      "module": "calendars",
+      "method": "GET",
+      "path": "/calendars/events/appointments/{eventId}",
+      "version": "2021-04-15",
+      "summary": "Get Appointment",
+      "description": "Get Appointment Get appointment by ID [GET /calendars/events/appointments/{eventId}] Scopes: calendars/events.readonly.",
+      "scopes": [
+        "calendars/events.readonly"
+      ],
+      "access": "unknown",
+      "operationClass": "read",
+      "deprecated": false,
+      "pathFields": [
+        "eventId"
+      ],
+      "queryFields": [],
+      "bodyFields": [],
+      "bodyWrapped": false,
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "eventId": {
+            "type": "string",
+            "description": "Event Id or Instance id. For recurring appointments send masterEventId to modify original series."
+          }
+        },
+        "required": [
+          "eventId"
+        ]
+      }
+    },
+    {
+      "name": "calendars_edit_appointment",
+      "module": "calendars",
+      "method": "PUT",
+      "path": "/calendars/events/appointments/{eventId}",
+      "version": "2021-04-15",
+      "summary": "Update Appointment",
+      "description": "Update Appointment Update appointment [PUT /calendars/events/appointments/{eventId}] Scopes: calendars/events.write.",
+      "scopes": [
+        "calendars/events.write"
+      ],
+      "access": "unknown",
+      "operationClass": "write",
+      "deprecated": false,
+      "contentType": "application/json",
+      "pathFields": [
+        "eventId"
+      ],
+      "queryFields": [],
+      "bodyFields": [
+        "title",
+        "meetingLocationType",
+        "meetingLocationId",
+        "overrideLocationConfig",
+        "appointmentStatus",
+        "assignedUserId",
+        "description",
+        "address",
+        "ignoreDateRange",
+        "toNotify",
+        "ignoreFreeSlotValidation",
+        "rrule",
+        "calendarId",
+        "startTime",
+        "endTime"
+      ],
+      "bodyWrapped": false,
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "eventId": {
+            "type": "string",
+            "description": "Event Id or Instance id. For recurring appointments send masterEventId to modify original series."
+          },
+          "title": {
+            "type": "string",
+            "description": "Title"
+          },
+          "meetingLocationType": {
+            "type": "string",
+            "description": "Meeting location type. \n- If `address` is provided in the request body, the `meetingLocationType` defaults to **custom**.",
+            "enum": [
+              "custom",
+              "zoom",
+              "gmeet",
+              "phone",
+              "address",
+              "ms_teams",
+              "google"
+            ]
+          },
+          "meetingLocationId": {
+            "type": "string",
+            "description": "The unique identifier for the meeting location.\n- This value can be found in `calendar.locationConfigurations`or `calendar.teamMembers[].locationConfigurations` (default: \"default\")"
+          },
+          "overrideLocationConfig": {
+            "type": "boolean",
+            "description": "Flag to override location config\n- **false** - If only `meetingLocationId` is provided\n- **true** - If only `meetingLocationType` is provided\n"
+          },
+          "appointmentStatus": {
+            "type": "string",
+            "enum": [
+              "new",
+              "confirmed",
+              "cancelled",
+              "showed",
+              "noshow",
+              "invalid"
+            ]
+          },
+          "assignedUserId": {
+            "type": "string",
+            "description": "Assigned User Id"
+          },
+          "description": {
+            "type": "string",
+            "description": "Appointment Description"
+          },
+          "address": {
+            "type": "string",
+            "description": "Appointment Address"
+          },
+          "ignoreDateRange": {
+            "type": "boolean",
+            "description": "If set to true, the minimum scheduling notice and date range would be ignored"
+          },
+          "toNotify": {
+            "type": "boolean",
+            "description": "If set to false, the automations will not run"
+          },
+          "ignoreFreeSlotValidation": {
+            "type": "boolean",
+            "description": "If true the time slot validation would be avoided for any appointment creation (even the ignoreDateRange)"
+          },
+          "rrule": {
+            "type": "string",
+            "description": "RRULE as per the iCalendar (RFC 5545) specification for recurring events. DTSTART is not required, instance ids are calculated on the basis of startTime of the event. The rrule only be applied if ignoreFreeSlotValidation is true."
+          },
+          "calendarId": {
+            "type": "string",
+            "description": "Calendar Id"
+          },
+          "startTime": {
+            "type": "string",
+            "description": "Start Time"
+          },
+          "endTime": {
+            "type": "string",
+            "description": "End Time"
+          }
+        },
+        "required": [
+          "eventId"
+        ]
+      }
+    },
+    {
+      "name": "calendars_get_calendar_events",
+      "module": "calendars",
+      "method": "GET",
+      "path": "/calendars/events",
+      "version": "2021-04-15",
+      "summary": "Get Calendar Events",
+      "description": "Get Calendar Events [GET /calendars/events] Scopes: calendars/events.readonly.",
+      "scopes": [
+        "calendars/events.readonly"
+      ],
+      "access": "unknown",
+      "operationClass": "read",
+      "deprecated": false,
+      "pathFields": [],
+      "queryFields": [
+        "locationId",
+        "userId",
+        "calendarId",
+        "groupId",
+        "startTime",
+        "endTime"
+      ],
+      "bodyFields": [],
+      "bodyWrapped": false,
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "locationId": {
+            "type": "string",
+            "description": "Location Id"
+          },
+          "userId": {
+            "type": "string",
+            "description": "User Id - Owner of an appointment. Either of userId, groupId or calendarId is required"
+          },
+          "calendarId": {
+            "type": "string",
+            "description": "Either of calendarId, userId or groupId is required"
+          },
+          "groupId": {
+            "type": "string",
+            "description": "Either of groupId, calendarId or userId is required"
+          },
+          "startTime": {
+            "type": "string",
+            "description": "Start Time (in millis)"
+          },
+          "endTime": {
+            "type": "string",
+            "description": "End Time (in millis)"
+          }
+        },
+        "required": [
+          "locationId",
+          "startTime",
+          "endTime"
+        ]
+      }
+    },
+    {
+      "name": "calendars_get_blocked_slots",
+      "module": "calendars",
+      "method": "GET",
+      "path": "/calendars/blocked-slots",
+      "version": "2021-04-15",
+      "summary": "Get Blocked Slots",
+      "description": "Get Blocked Slots [GET /calendars/blocked-slots] Scopes: calendars/events.readonly.",
+      "scopes": [
+        "calendars/events.readonly"
+      ],
+      "access": "unknown",
+      "operationClass": "read",
+      "deprecated": false,
+      "pathFields": [],
+      "queryFields": [
+        "locationId",
+        "userId",
+        "calendarId",
+        "groupId",
+        "startTime",
+        "endTime"
+      ],
+      "bodyFields": [],
+      "bodyWrapped": false,
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "locationId": {
+            "type": "string",
+            "description": "Location Id"
+          },
+          "userId": {
+            "type": "string",
+            "description": "User Id - Owner of an appointment. Either of userId, groupId or calendarId is required"
+          },
+          "calendarId": {
+            "type": "string",
+            "description": "Either of calendarId, userId or groupId is required"
+          },
+          "groupId": {
+            "type": "string",
+            "description": "Either of groupId, calendarId or userId is required"
+          },
+          "startTime": {
+            "type": "string",
+            "description": "Start Time (in millis)"
+          },
+          "endTime": {
+            "type": "string",
+            "description": "End Time (in millis)"
+          }
+        },
+        "required": [
+          "locationId",
+          "startTime",
+          "endTime"
+        ]
+      }
+    },
+    {
+      "name": "calendars_create_block_slot",
+      "module": "calendars",
+      "method": "POST",
+      "path": "/calendars/events/block-slots",
+      "version": "2021-04-15",
+      "summary": "Create Block Slot",
+      "description": "Create Block Slot Create block slot [POST /calendars/events/block-slots] Scopes: calendars/events.write.",
+      "scopes": [
+        "calendars/events.write"
+      ],
+      "access": "unknown",
+      "operationClass": "write",
+      "deprecated": false,
+      "contentType": "application/json",
+      "pathFields": [],
+      "queryFields": [],
+      "bodyFields": [
+        "title",
+        "calendarId",
+        "assignedUserId",
+        "locationId",
+        "startTime",
+        "endTime"
+      ],
+      "bodyWrapped": false,
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "title": {
+            "type": "string",
+            "description": "Title"
+          },
+          "calendarId": {
+            "type": "string",
+            "description": "Either calendarId or assignedUserId can be set, not both."
+          },
+          "assignedUserId": {
+            "type": "string",
+            "description": "Either calendarId or assignedUserId can be set, not both."
+          },
+          "locationId": {
+            "type": "string",
+            "description": "Location Id"
+          },
+          "startTime": {
+            "type": "string",
+            "description": "Start Time"
+          },
+          "endTime": {
+            "type": "string",
+            "description": "End Time"
+          }
+        },
+        "required": [
+          "calendarId",
+          "locationId"
+        ]
+      }
+    },
+    {
+      "name": "calendars_edit_block_slot",
+      "module": "calendars",
+      "method": "PUT",
+      "path": "/calendars/events/block-slots/{eventId}",
+      "version": "2021-04-15",
+      "summary": "Update Block Slot",
+      "description": "Update Block Slot Update block slot by ID [PUT /calendars/events/block-slots/{eventId}] Scopes: calendars/events.write.",
+      "scopes": [
+        "calendars/events.write"
+      ],
+      "access": "unknown",
+      "operationClass": "write",
+      "deprecated": false,
+      "contentType": "application/json",
+      "pathFields": [
+        "eventId"
+      ],
+      "queryFields": [],
+      "bodyFields": [
+        "title",
+        "calendarId",
+        "assignedUserId",
+        "locationId",
+        "startTime",
+        "endTime"
+      ],
+      "bodyWrapped": false,
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "eventId": {
+            "type": "string",
+            "description": "Event Id or Instance id. For recurring appointments send masterEventId to modify original series."
+          },
+          "title": {
+            "type": "string",
+            "description": "Title"
+          },
+          "calendarId": {
+            "type": "string",
+            "description": "Either calendarId or assignedUserId can be set, not both."
+          },
+          "assignedUserId": {
+            "type": "string",
+            "description": "Either calendarId or assignedUserId can be set, not both."
+          },
+          "locationId": {
+            "type": "string",
+            "description": "Location Id"
+          },
+          "startTime": {
+            "type": "string",
+            "description": "Start Time"
+          },
+          "endTime": {
+            "type": "string",
+            "description": "End Time"
+          }
+        },
+        "required": [
+          "eventId",
+          "calendarId",
+          "locationId"
+        ]
+      }
+    },
+    {
+      "name": "calendars_get_slots",
+      "module": "calendars",
+      "method": "GET",
+      "path": "/calendars/{calendarId}/free-slots",
+      "version": "2021-04-15",
+      "summary": "Get Free Slots",
+      "description": "Get Free Slots Get free slots for a calendar between a date range. Optionally a consumer can also request free slots in a particular timezone and also for a particular user. [GET /calendars/{calendarId}/free-slots] Scopes: calendars.readonly.",
+      "scopes": [
+        "calendars.readonly"
+      ],
+      "access": "unknown",
+      "operationClass": "read",
+      "deprecated": false,
+      "pathFields": [
+        "calendarId"
+      ],
+      "queryFields": [
+        "startDate",
+        "endDate",
+        "timezone",
+        "userId",
+        "userIds"
+      ],
+      "bodyFields": [],
+      "bodyWrapped": false,
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "calendarId": {
+            "type": "string",
+            "description": "Calendar Id"
+          },
+          "startDate": {
+            "type": "number",
+            "description": "Start Date (**⚠️ Important:** Date range cannot be more than 31 days)"
+          },
+          "endDate": {
+            "type": "number",
+            "description": "End Date (**⚠️ Important:** Date range cannot be more than 31 days)"
+          },
+          "timezone": {
+            "type": "string",
+            "description": "The timezone in which the free slots are returned"
+          },
+          "userId": {
+            "type": "string",
+            "description": "The user for whom the free slots are returned"
+          },
+          "userIds": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": "The users for whom the free slots are returned"
+          }
+        },
+        "required": [
+          "calendarId",
+          "startDate",
+          "endDate"
+        ]
+      }
+    },
+    {
+      "name": "calendars_get_calendar",
+      "module": "calendars",
+      "method": "GET",
+      "path": "/calendars/{calendarId}",
+      "version": "2021-04-15",
+      "summary": "Get Calendar",
+      "description": "Get Calendar Get calendar by ID [GET /calendars/{calendarId}] Scopes: calendars.readonly.",
+      "scopes": [
+        "calendars.readonly"
+      ],
+      "access": "unknown",
+      "operationClass": "read",
+      "deprecated": false,
+      "pathFields": [
+        "calendarId"
+      ],
+      "queryFields": [],
+      "bodyFields": [],
+      "bodyWrapped": false,
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "calendarId": {
+            "type": "string",
+            "description": "Calendar Id"
+          }
+        },
+        "required": [
+          "calendarId"
+        ]
+      }
+    },
+    {
+      "name": "calendars_update_calendar",
+      "module": "calendars",
+      "method": "PUT",
+      "path": "/calendars/{calendarId}",
+      "version": "2021-04-15",
+      "summary": "Update Calendar",
+      "description": "Update Calendar Update calendar by ID. [PUT /calendars/{calendarId}] Scopes: calendars.write.",
+      "scopes": [
+        "calendars.write"
+      ],
+      "access": "unknown",
+      "operationClass": "write",
+      "deprecated": false,
+      "contentType": "application/json",
+      "pathFields": [
+        "calendarId"
+      ],
+      "queryFields": [],
+      "bodyFields": [
+        "notifications",
+        "groupId",
+        "teamMembers",
+        "eventType",
+        "name",
+        "description",
+        "slug",
+        "widgetSlug",
+        "widgetType",
+        "eventTitle",
+        "eventColor",
+        "locationConfigurations",
+        "meetingLocation",
+        "slotDuration",
+        "slotDurationUnit",
+        "preBufferUnit",
+        "slotInterval",
+        "slotIntervalUnit",
+        "slotBuffer",
+        "preBuffer",
+        "appoinmentPerSlot",
+        "appoinmentPerDay",
+        "allowBookingAfter",
+        "allowBookingAfterUnit",
+        "allowBookingFor",
+        "allowBookingForUnit",
+        "openHours",
+        "enableRecurring",
+        "recurring",
+        "formId",
+        "stickyContact",
+        "isLivePaymentMode",
+        "autoConfirm",
+        "shouldSendAlertEmailsToAssignedMember",
+        "alertEmail",
+        "googleInvitationEmails",
+        "allowReschedule",
+        "allowCancellation",
+        "shouldAssignContactToTeamMember",
+        "shouldSkipAssigningContactForExisting",
+        "notes",
+        "pixelId",
+        "formSubmitType",
+        "formSubmitRedirectURL",
+        "formSubmitThanksMessage",
+        "availabilityType",
+        "availabilities",
+        "guestType",
+        "consentLabel",
+        "calendarCoverImage",
+        "lookBusyConfig",
+        "isActive"
+      ],
+      "bodyWrapped": false,
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "calendarId": {
+            "type": "string",
+            "description": "Calendar Id"
+          },
+          "notifications": {
+            "description": "🚨 Deprecated! Please use 'Calendar Notifications APIs' instead.",
+            "deprecated": true,
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "type": {
+                  "type": "string",
+                  "description": "Calendar Notification (default: \"email\")",
+                  "enum": [
+                    "email"
+                  ]
+                },
+                "shouldSendToContact": {
+                  "type": "boolean"
+                },
+                "shouldSendToGuest": {
+                  "type": "boolean"
+                },
+                "shouldSendToUser": {
+                  "type": "boolean"
+                },
+                "shouldSendToSelectedUsers": {
+                  "type": "boolean"
+                },
+                "selectedUsers": {
+                  "type": "string",
+                  "description": "Comma separated emails"
+                }
+              },
+              "required": [
+                "shouldSendToContact",
+                "shouldSendToGuest",
+                "shouldSendToUser",
+                "shouldSendToSelectedUsers",
+                "selectedUsers"
+              ]
+            }
+          },
+          "groupId": {
+            "type": "string",
+            "description": "Group Id"
+          },
+          "teamMembers": {
+            "description": "Team members are required for calendars of type: Round Robin, Collective, Class, Service. Personal calendar must have exactly one team member.",
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "userId": {
+                  "type": "string"
+                },
+                "priority": {
+                  "type": "number",
+                  "enum": [
+                    0,
+                    0.5,
+                    1
+                  ],
+                  "description": "(default: 0.5)"
+                },
+                "meetingLocationType": {
+                  "type": "string",
+                  "description": "🚨 Deprecated! Use `locationConfigurations.kind` instead. (default: \"custom\")",
+                  "deprecated": true,
+                  "enum": [
+                    "custom",
+                    "zoom",
+                    "gmeet",
+                    "phone",
+                    "address",
+                    "teams",
+                    "booker"
+                  ]
+                },
+                "meetingLocation": {
+                  "type": "string",
+                  "description": "🚨 Deprecated! Use `locationConfigurations.location` instead.",
+                  "deprecated": true
+                },
+                "isPrimary": {
+                  "type": "boolean",
+                  "description": "Marks a user as primary. This property is required in case of collective booking calendars. Only one user can be primary."
+                },
+                "locationConfigurations": {
+                  "description": "Meeting location configuration for event calendar.\n- *Multiple locations are allowed only when one team member is selected.*\n- *For **Class booking** and **Collective** calendars, only one location configuration is allowed for each team member.*",
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "kind": {
+                        "type": "string",
+                        "description": "Type of meeting location. zoom_conference/google_conference/ms_teams_conference is not supported in event calendar type",
+                        "enum": [
+                          "custom",
+                          "zoom_conference",
+                          "google_conference",
+                          "inbound_call",
+                          "outbound_call",
+                          "physical",
+                          "booker",
+                          "ms_teams_conference"
+                        ]
+                      },
+                      "location": {
+                        "type": "string",
+                        "description": "Address for meeting location. Not applicable on \"zoom_conference\", \"google_conference\" and \"ms_teams_conference\" kind"
+                      }
+                    },
+                    "required": [
+                      "kind"
+                    ]
+                  }
+                }
+              },
+              "required": [
+                "userId"
+              ]
+            }
+          },
+          "eventType": {
+            "type": "string",
+            "enum": [
+              "RoundRobin_OptimizeForAvailability",
+              "RoundRobin_OptimizeForEqualDistribution"
+            ]
+          },
+          "name": {
+            "type": "string"
+          },
+          "description": {
+            "type": "string"
+          },
+          "slug": {
+            "type": "string"
+          },
+          "widgetSlug": {
+            "type": "string"
+          },
+          "widgetType": {
+            "type": "string",
+            "description": "Calendar widget type. Choose \"default\" for \"neo\" and \"classic\" for \"classic\" layout. (default: \"classic\")",
+            "enum": [
+              "default",
+              "classic"
+            ]
+          },
+          "eventTitle": {
+            "type": "string"
+          },
+          "eventColor": {
+            "type": "string",
+            "description": "(default: \"#039be5\")"
+          },
+          "locationConfigurations": {
+            "description": "Meeting location configuration for event calendar",
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "kind": {
+                  "type": "string",
+                  "description": "Type of meeting location. zoom_conference/google_conference/ms_teams_conference is not supported in event calendar type",
+                  "enum": [
+                    "custom",
+                    "zoom_conference",
+                    "google_conference",
+                    "inbound_call",
+                    "outbound_call",
+                    "physical",
+                    "booker",
+                    "ms_teams_conference"
+                  ]
+                },
+                "location": {
+                  "type": "string",
+                  "description": "Address for meeting location. Not applicable on \"zoom_conference\", \"google_conference\" and \"ms_teams_conference\" kind"
+                }
+              },
+              "required": [
+                "kind"
+              ]
+            }
+          },
+          "meetingLocation": {
+            "type": "string",
+            "description": "🚨 Deprecated! Use `locationConfigurations.location` or `teamMembers[].locationConfigurations.location` instead.",
+            "deprecated": true
+          },
+          "slotDuration": {
+            "type": "number",
+            "description": "This controls the duration of the meeting (default: 30)"
+          },
+          "slotDurationUnit": {
+            "type": "string",
+            "description": "Unit for slot duration.",
+            "enum": [
+              "mins",
+              "hours"
+            ]
+          },
+          "preBufferUnit": {
+            "type": "string",
+            "description": "Unit for pre-buffer.",
+            "enum": [
+              "mins",
+              "hours"
+            ]
+          },
+          "slotInterval": {
+            "type": "number",
+            "description": "Slot interval reflects the amount of time the between booking slots that will be shown in the calendar. (default: 30)"
+          },
+          "slotIntervalUnit": {
+            "type": "string",
+            "description": "Unit for slot interval.",
+            "enum": [
+              "mins",
+              "hours"
+            ]
+          },
+          "slotBuffer": {
+            "type": "number",
+            "description": "Slot-Buffer is additional time that can be added after an appointment, allowing for extra time to wrap up"
+          },
+          "preBuffer": {
+            "type": "number",
+            "description": "Pre-Buffer is additional time that can be added before an appointment, allowing for extra time to get ready"
+          },
+          "appoinmentPerSlot": {
+            "type": "number"
+          },
+          "appoinmentPerDay": {
+            "type": "number",
+            "description": "Number of appointments that can be booked for a given day"
+          },
+          "allowBookingAfter": {
+            "type": "number",
+            "description": "Minimum scheduling notice for events"
+          },
+          "allowBookingAfterUnit": {
+            "type": "string",
+            "description": "Unit for minimum scheduling notice",
+            "enum": [
+              "hours",
+              "days",
+              "weeks",
+              "months"
+            ]
+          },
+          "allowBookingFor": {
+            "type": "number",
+            "description": "Minimum number of days/weeks/months for which to allow booking events"
+          },
+          "allowBookingForUnit": {
+            "type": "string",
+            "description": "Unit for controlling the duration for which booking would be allowed for",
+            "enum": [
+              "days",
+              "weeks",
+              "months"
+            ]
+          },
+          "openHours": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "daysOfTheWeek": {
+                  "type": "array",
+                  "items": {
+                    "type": "number",
+                    "maximum": 6,
+                    "minimum": 0
+                  }
+                },
+                "hours": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "openHour": {
+                        "type": "number",
+                        "minimum": 0,
+                        "maximum": 23
+                      },
+                      "openMinute": {
+                        "type": "number",
+                        "minimum": 0,
+                        "maximum": 60
+                      },
+                      "closeHour": {
+                        "type": "number",
+                        "minimum": 0,
+                        "maximum": 23
+                      },
+                      "closeMinute": {
+                        "type": "number",
+                        "minimum": 0,
+                        "maximum": 60
+                      }
+                    },
+                    "required": [
+                      "openHour",
+                      "openMinute",
+                      "closeHour",
+                      "closeMinute"
+                    ]
+                  }
+                }
+              },
+              "required": [
+                "daysOfTheWeek",
+                "hours"
+              ]
+            }
+          },
+          "enableRecurring": {
+            "type": "boolean",
+            "description": "Enable recurring appointments for the calendars. Please note that only one member should be added in the calendar to enable this (default: false)"
+          },
+          "recurring": {
+            "type": "object",
+            "properties": {
+              "freq": {
+                "type": "string",
+                "enum": [
+                  "DAILY",
+                  "WEEKLY",
+                  "MONTHLY"
+                ]
+              },
+              "count": {
+                "type": "number",
+                "description": "Number of recurrences",
+                "maximum": 24
+              },
+              "bookingOption": {
+                "type": "string",
+                "description": "This setting contols what to do incase a recurring slot is unavailable",
+                "enum": [
+                  "skip",
+                  "continue",
+                  "book_next"
+                ]
+              },
+              "bookingOverlapDefaultStatus": {
+                "type": "string",
+                "description": "This setting contols what to do incase a recurring slot is unavailable",
+                "enum": [
+                  "confirmed",
+                  "new"
+                ]
+              }
+            }
+          },
+          "formId": {
+            "type": "string"
+          },
+          "stickyContact": {
+            "type": "boolean"
+          },
+          "isLivePaymentMode": {
+            "type": "boolean"
+          },
+          "autoConfirm": {
+            "type": "boolean"
+          },
+          "shouldSendAlertEmailsToAssignedMember": {
+            "type": "boolean"
+          },
+          "alertEmail": {
+            "type": "string"
+          },
+          "googleInvitationEmails": {
+            "type": "boolean"
+          },
+          "allowReschedule": {
+            "type": "boolean"
+          },
+          "allowCancellation": {
+            "type": "boolean"
+          },
+          "shouldAssignContactToTeamMember": {
+            "type": "boolean"
+          },
+          "shouldSkipAssigningContactForExisting": {
+            "type": "boolean"
+          },
+          "notes": {
+            "type": "string"
+          },
+          "pixelId": {
+            "type": "string"
+          },
+          "formSubmitType": {
+            "type": "string",
+            "enum": [
+              "RedirectURL",
+              "ThankYouMessage"
+            ],
+            "description": "(default: \"ThankYouMessage\")"
+          },
+          "formSubmitRedirectURL": {
+            "type": "string"
+          },
+          "formSubmitThanksMessage": {
+            "type": "string"
+          },
+          "availabilityType": {
+            "type": "number",
+            "description": "Determines which availability type to consider:\n- **1**: Only custom availabilities will be used.\n- **0**: Only open hours will be used.\n- **null**: Both the custom availabilities and open hours will be considered.",
+            "enum": [
+              0,
+              1
+            ]
+          },
+          "availabilities": {
+            "description": "This is only to set the custom availability. For standard availability, use the openHours property",
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "date": {
+                  "type": "string",
+                  "description": "Formulate the date string in the format of `<YYYY-MM-DD in local timezone>T00:00:00.000Z`."
+                },
+                "hours": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "openHour": {
+                        "type": "number",
+                        "minimum": 0,
+                        "maximum": 23
+                      },
+                      "openMinute": {
+                        "type": "number",
+                        "minimum": 0,
+                        "maximum": 60
+                      },
+                      "closeHour": {
+                        "type": "number",
+                        "minimum": 0,
+                        "maximum": 23
+                      },
+                      "closeMinute": {
+                        "type": "number",
+                        "minimum": 0,
+                        "maximum": 60
+                      }
+                    },
+                    "required": [
+                      "openHour",
+                      "openMinute",
+                      "closeHour",
+                      "closeMinute"
+                    ]
+                  }
+                },
+                "deleted": {
+                  "type": "boolean",
+                  "description": "(default: false)"
+                },
+                "id": {
+                  "type": "string",
+                  "description": "The ID of the custom availability object. It is required while updating or deleting the existing custom date availability"
+                }
+              },
+              "required": [
+                "date",
+                "hours"
+              ]
+            }
+          },
+          "guestType": {
+            "type": "string",
+            "enum": [
+              "count_only",
+              "collect_detail"
+            ]
+          },
+          "consentLabel": {
+            "type": "string"
+          },
+          "calendarCoverImage": {
+            "type": "string"
+          },
+          "lookBusyConfig": {
+            "type": "object",
+            "properties": {
+              "enabled": {
+                "type": "boolean",
+                "description": "Apply Look Busy (default: false)"
+              },
+              "LookBusyPercentage": {
+                "type": "number",
+                "description": "Percentage of slots that will be hidden"
+              }
+            },
+            "required": [
+              "enabled",
+              "LookBusyPercentage"
+            ],
+            "description": "Look Busy Configuration"
+          },
+          "isActive": {
+            "type": "boolean"
+          }
+        },
+        "required": [
+          "calendarId"
+        ]
+      }
+    },
+    {
+      "name": "calendars_delete_calendar",
+      "module": "calendars",
+      "method": "DELETE",
+      "path": "/calendars/{calendarId}",
+      "version": "2021-04-15",
+      "summary": "Delete Calendar",
+      "description": "Delete Calendar Delete calendar by ID [DELETE /calendars/{calendarId}] Scopes: calendars.write.",
+      "scopes": [
+        "calendars.write"
+      ],
+      "access": "unknown",
+      "operationClass": "delete",
+      "deprecated": false,
+      "pathFields": [
+        "calendarId"
+      ],
+      "queryFields": [],
+      "bodyFields": [],
+      "bodyWrapped": false,
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "calendarId": {
+            "type": "string",
+            "description": "Calendar Id"
+          }
+        },
+        "required": [
+          "calendarId"
+        ]
+      }
+    },
+    {
+      "name": "calendars_delete_event",
+      "module": "calendars",
+      "method": "DELETE",
+      "path": "/calendars/events/{eventId}",
+      "version": "2021-04-15",
+      "summary": "Delete Event",
+      "description": "Delete Event Delete event by ID [DELETE /calendars/events/{eventId}] Scopes: calendars/events.write.",
+      "scopes": [
+        "calendars/events.write"
+      ],
+      "access": "unknown",
+      "operationClass": "delete",
+      "deprecated": false,
+      "contentType": "application/json",
+      "pathFields": [
+        "eventId"
+      ],
+      "queryFields": [],
+      "bodyFields": [],
+      "bodyWrapped": true,
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "eventId": {
+            "type": "string",
+            "description": "Event Id or Instance id. For recurring appointments send masterEventId to modify original series."
+          },
+          "body": {
+            "type": "object",
+            "properties": {},
+            "description": "Full request body"
+          }
+        },
+        "required": [
+          "eventId",
+          "body"
+        ]
+      }
+    },
+    {
+      "name": "calendars_get_appointment_notes",
+      "module": "calendars",
+      "method": "GET",
+      "path": "/calendars/appointments/{appointmentId}/notes",
+      "version": "2021-04-15",
+      "summary": "Get Notes",
+      "description": "Get Notes Get Appointment Notes [GET /calendars/appointments/{appointmentId}/notes] Scopes: calendars/events.readonly.",
+      "scopes": [
+        "calendars/events.readonly"
+      ],
+      "access": "unknown",
+      "operationClass": "read",
+      "deprecated": false,
+      "pathFields": [
+        "appointmentId"
+      ],
+      "queryFields": [
+        "limit",
+        "offset"
+      ],
+      "bodyFields": [],
+      "bodyWrapped": false,
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "limit": {
+            "maximum": 20,
+            "type": "number",
+            "description": "Limit of notes to fetch"
+          },
+          "offset": {
+            "minimum": 0,
+            "type": "number",
+            "description": "Offset of notes to fetch"
+          },
+          "appointmentId": {
+            "type": "string",
+            "description": "Appointment ID"
+          }
+        },
+        "required": [
+          "limit",
+          "offset",
+          "appointmentId"
+        ]
+      }
+    },
+    {
+      "name": "calendars_create_appointment_note",
+      "module": "calendars",
+      "method": "POST",
+      "path": "/calendars/appointments/{appointmentId}/notes",
+      "version": "2021-04-15",
+      "summary": "Create Note",
+      "description": "Create Note [POST /calendars/appointments/{appointmentId}/notes] Scopes: calendars/events.write.",
+      "scopes": [
+        "calendars/events.write"
+      ],
+      "access": "unknown",
+      "operationClass": "write",
+      "deprecated": false,
+      "contentType": "application/json",
+      "pathFields": [
+        "appointmentId"
+      ],
+      "queryFields": [],
+      "bodyFields": [
+        "userId",
+        "body"
+      ],
+      "bodyWrapped": false,
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "appointmentId": {
+            "type": "string",
+            "description": "Appointment ID"
+          },
+          "userId": {
+            "type": "string"
+          },
+          "body": {
+            "type": "string",
+            "description": "Note body",
+            "maxLength": 5000
+          }
+        },
+        "required": [
+          "appointmentId",
+          "body"
+        ]
+      }
+    },
+    {
+      "name": "calendars_update_appointment_note",
+      "module": "calendars",
+      "method": "PUT",
+      "path": "/calendars/appointments/{appointmentId}/notes/{noteId}",
+      "version": "2021-04-15",
+      "summary": "Update Note",
+      "description": "Update Note [PUT /calendars/appointments/{appointmentId}/notes/{noteId}] Scopes: calendars/events.write.",
+      "scopes": [
+        "calendars/events.write"
+      ],
+      "access": "unknown",
+      "operationClass": "write",
+      "deprecated": false,
+      "contentType": "application/json",
+      "pathFields": [
+        "appointmentId"
+      ],
+      "queryFields": [],
+      "bodyFields": [
+        "userId",
+        "body"
+      ],
+      "bodyWrapped": false,
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "appointmentId": {
+            "type": "string",
+            "description": "Appointment ID"
+          },
+          "userId": {
+            "type": "string"
+          },
+          "body": {
+            "type": "string",
+            "description": "Note body",
+            "maxLength": 5000
+          }
+        },
+        "required": [
+          "appointmentId",
+          "body"
+        ]
+      }
+    },
+    {
+      "name": "calendars_delete_appointment_note",
+      "module": "calendars",
+      "method": "DELETE",
+      "path": "/calendars/appointments/{appointmentId}/notes/{noteId}",
+      "version": "2021-04-15",
+      "summary": "Delete Note",
+      "description": "Delete Note [DELETE /calendars/appointments/{appointmentId}/notes/{noteId}] Scopes: calendars/events.write.",
+      "scopes": [
+        "calendars/events.write"
+      ],
+      "access": "unknown",
+      "operationClass": "delete",
+      "deprecated": false,
+      "pathFields": [
+        "appointmentId"
+      ],
+      "queryFields": [],
+      "bodyFields": [],
+      "bodyWrapped": false,
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "appointmentId": {
+            "type": "string",
+            "description": "Appointment ID"
+          }
+        },
+        "required": [
+          "appointmentId"
+        ]
+      }
+    },
+    {
+      "name": "calendars_get_calendar_resource",
+      "module": "calendars",
+      "method": "GET",
+      "path": "/calendars/resources/{resourceType}/{id}",
+      "version": "2021-04-15",
+      "summary": "Get Calendar Resource",
+      "description": "Get Calendar Resource Get calendar resource by ID [GET /calendars/resources/{resourceType}/{id}] Token: location. Scopes: calendars/resources.readonly.",
+      "scopes": [
+        "calendars/resources.readonly"
+      ],
+      "access": "location",
+      "operationClass": "read",
+      "deprecated": false,
+      "pathFields": [
+        "resourceType",
+        "id"
+      ],
+      "queryFields": [],
+      "bodyFields": [],
+      "bodyWrapped": false,
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "resourceType": {
+            "enum": [
+              "equipments",
+              "rooms"
+            ],
+            "type": "string",
+            "description": "Calendar Resource Type"
+          },
+          "id": {
+            "type": "string",
+            "description": "Calendar Resource ID"
+          }
+        },
+        "required": [
+          "resourceType",
+          "id"
+        ]
+      }
+    },
+    {
+      "name": "calendars_update_calendar_resource",
+      "module": "calendars",
+      "method": "PUT",
+      "path": "/calendars/resources/{resourceType}/{id}",
+      "version": "2021-04-15",
+      "summary": "Update Calendar Resource",
+      "description": "Update Calendar Resource Update calendar resource by ID [PUT /calendars/resources/{resourceType}/{id}] Token: location. Scopes: calendars/resources.write.",
+      "scopes": [
+        "calendars/resources.write"
+      ],
+      "access": "location",
+      "operationClass": "write",
+      "deprecated": false,
+      "contentType": "application/json",
+      "pathFields": [
+        "resourceType",
+        "id"
+      ],
+      "queryFields": [],
+      "bodyFields": [
+        "locationId",
+        "name",
+        "description",
+        "quantity",
+        "outOfService",
+        "capacity",
+        "calendarIds",
+        "isActive"
+      ],
+      "bodyWrapped": false,
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "resourceType": {
+            "enum": [
+              "equipments",
+              "rooms"
+            ],
+            "type": "string",
+            "description": "Calendar Resource Type"
+          },
+          "id": {
+            "type": "string",
+            "description": "Calendar Resource ID"
+          },
+          "locationId": {
+            "type": "string"
+          },
+          "name": {
+            "type": "string"
+          },
+          "description": {
+            "type": "string"
+          },
+          "quantity": {
+            "type": "number",
+            "description": "Quantity of the equipment."
+          },
+          "outOfService": {
+            "type": "number",
+            "description": "Quantity of the out of service equipment."
+          },
+          "capacity": {
+            "type": "number",
+            "description": "Capacity of the room."
+          },
+          "calendarIds": {
+            "description": "Service calendar IDs to be mapped with the resource.\n\n    One equipment can only be mapped with one service calendar.\n    \nOne room can be mapped with multiple service calendars.",
+            "maxItems": 100,
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "isActive": {
+            "type": "boolean"
+          }
+        },
+        "required": [
+          "resourceType",
+          "id"
+        ]
+      }
+    },
+    {
+      "name": "calendars_delete_calendar_resource",
+      "module": "calendars",
+      "method": "DELETE",
+      "path": "/calendars/resources/{resourceType}/{id}",
+      "version": "2021-04-15",
+      "summary": "Delete Calendar Resource",
+      "description": "Delete Calendar Resource Delete calendar resource by ID [DELETE /calendars/resources/{resourceType}/{id}] Token: location. Scopes: calendars/resources.write.",
+      "scopes": [
+        "calendars/resources.write"
+      ],
+      "access": "location",
+      "operationClass": "delete",
+      "deprecated": false,
+      "pathFields": [
+        "resourceType",
+        "id"
+      ],
+      "queryFields": [],
+      "bodyFields": [],
+      "bodyWrapped": false,
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "resourceType": {
+            "enum": [
+              "equipments",
+              "rooms"
+            ],
+            "type": "string",
+            "description": "Calendar Resource Type"
+          },
+          "id": {
+            "type": "string",
+            "description": "Calendar Resource ID"
+          }
+        },
+        "required": [
+          "resourceType",
+          "id"
+        ]
+      }
+    },
+    {
+      "name": "calendars_fetch_calendar_resources",
+      "module": "calendars",
+      "method": "GET",
+      "path": "/calendars/resources/{resourceType}",
+      "version": "2021-04-15",
+      "summary": "List Calendar Resources",
+      "description": "List Calendar Resources List calendar resources by resource type and location ID [GET /calendars/resources/{resourceType}] Token: location. Scopes: calendars/resources.readonly.",
+      "scopes": [
+        "calendars/resources.readonly"
+      ],
+      "access": "location",
+      "operationClass": "read",
+      "deprecated": false,
+      "pathFields": [
+        "resourceType"
+      ],
+      "queryFields": [
+        "locationId",
+        "limit",
+        "skip"
+      ],
+      "bodyFields": [],
+      "bodyWrapped": false,
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "resourceType": {
+            "enum": [
+              "equipments",
+              "rooms"
+            ],
+            "type": "string",
+            "description": "Calendar Resource Type"
+          },
+          "locationId": {
+            "type": "string"
+          },
+          "limit": {
+            "type": "number"
+          },
+          "skip": {
+            "type": "number"
+          }
+        },
+        "required": [
+          "resourceType",
+          "locationId",
+          "limit",
+          "skip"
+        ]
+      }
+    },
+    {
+      "name": "calendars_create_calendar_resource",
+      "module": "calendars",
+      "method": "POST",
+      "path": "/calendars/resources/{resourceType}",
+      "version": "2021-04-15",
+      "summary": "Create Calendar Resource",
+      "description": "Create Calendar Resource Create calendar resource by resource type [POST /calendars/resources/{resourceType}] Token: location. Scopes: calendars/resources.write.",
+      "scopes": [
+        "calendars/resources.write"
+      ],
+      "access": "location",
+      "operationClass": "write",
+      "deprecated": false,
+      "contentType": "application/json",
+      "pathFields": [
+        "resourceType"
+      ],
+      "queryFields": [],
+      "bodyFields": [
+        "locationId",
+        "name",
+        "description",
+        "quantity",
+        "outOfService",
+        "capacity",
+        "calendarIds"
+      ],
+      "bodyWrapped": false,
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "resourceType": {
+            "enum": [
+              "equipments",
+              "rooms"
+            ],
+            "type": "string",
+            "description": "Calendar Resource Type"
+          },
+          "locationId": {
+            "type": "string"
+          },
+          "name": {
+            "type": "string"
+          },
+          "description": {
+            "type": "string"
+          },
+          "quantity": {
+            "type": "number",
+            "description": "Quantity of the equipment."
+          },
+          "outOfService": {
+            "type": "number",
+            "description": "Quantity of the out of service equipment."
+          },
+          "capacity": {
+            "type": "number",
+            "description": "Capacity of the room."
+          },
+          "calendarIds": {
+            "description": "Service calendar IDs to be mapped with the resource.\n\n    One equipment can only be mapped with one service calendar.\n    \nOne room can be mapped with multiple service calendars.",
+            "maxItems": 100,
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          }
+        },
+        "required": [
+          "resourceType",
+          "locationId",
+          "name",
+          "description",
+          "quantity",
+          "outOfService",
+          "capacity",
+          "calendarIds"
+        ]
+      }
+    },
+    {
+      "name": "calendars_get_event_notification",
+      "module": "calendars",
+      "method": "GET",
+      "path": "/calendars/{calendarId}/notifications",
+      "version": "2021-04-15",
+      "summary": "Get notifications",
+      "description": "Get notifications Get calendar notifications based on query [GET /calendars/{calendarId}/notifications] Scopes: calendars/events.readonly.",
+      "scopes": [
+        "calendars/events.readonly"
+      ],
+      "access": "unknown",
+      "operationClass": "read",
+      "deprecated": false,
+      "pathFields": [
+        "calendarId"
+      ],
+      "queryFields": [
+        "isActive",
+        "deleted",
+        "limit",
+        "skip"
+      ],
+      "bodyFields": [],
+      "bodyWrapped": false,
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "calendarId": {
+            "type": "string"
+          },
+          "isActive": {
+            "type": "boolean"
+          },
+          "deleted": {
+            "type": "boolean"
+          },
+          "limit": {
+            "type": "number",
+            "description": "(default: 100)"
+          },
+          "skip": {
+            "type": "number",
+            "description": "(default: 0)"
+          }
+        },
+        "required": [
+          "calendarId"
+        ]
+      }
+    },
+    {
+      "name": "calendars_create_event_notification",
+      "module": "calendars",
+      "method": "POST",
+      "path": "/calendars/{calendarId}/notifications",
+      "version": "2021-04-15",
+      "summary": "Create notification",
+      "description": "Create notification Create Calendar notifications, either one or multiple. All notification settings must be for single calendar only [POST /calendars/{calendarId}/notifications] Scopes: calendars/events.write.",
+      "scopes": [
+        "calendars/events.write"
+      ],
+      "access": "unknown",
+      "operationClass": "write",
+      "deprecated": false,
+      "contentType": "application/json",
+      "pathFields": [
+        "calendarId"
+      ],
+      "queryFields": [],
+      "bodyFields": [],
+      "bodyWrapped": true,
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "calendarId": {
+            "type": "string"
+          },
+          "body": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "receiverType": {
+                  "type": "string",
+                  "description": "notification recipient type",
+                  "enum": [
+                    "contact",
+                    "guest",
+                    "assignedUser",
+                    "emails",
+                    "phoneNumbers",
+                    "business"
+                  ]
+                },
+                "channel": {
+                  "type": "string",
+                  "description": "Notification channel",
+                  "enum": [
+                    "email",
+                    "inApp",
+                    "sms",
+                    "whatsapp"
+                  ]
+                },
+                "notificationType": {
+                  "type": "string",
+                  "description": "Notification type",
+                  "enum": [
+                    "booked",
+                    "confirmation",
+                    "cancellation",
+                    "reminder",
+                    "followup",
+                    "reschedule"
+                  ]
+                },
+                "isActive": {
+                  "type": "boolean",
+                  "description": "Is the notification active (default: true)"
+                },
+                "templateId": {
+                  "type": "string",
+                  "description": "Template ID for email notification. Not necessary for in-App notification"
+                },
+                "body": {
+                  "type": "string",
+                  "description": "Body  for email notification. Not necessary for in-App notification"
+                },
+                "subject": {
+                  "type": "string",
+                  "description": "Subject  for email notification. Not necessary for in-App notification"
+                },
+                "afterTime": {
+                  "description": "Specifies the time after which the follow-up notification should be sent. This is not required for other notification types.",
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "timeOffset": {
+                        "type": "number"
+                      },
+                      "unit": {
+                        "type": "string"
+                      }
+                    }
+                  }
+                },
+                "beforeTime": {
+                  "description": "Specifies the time before which the reminder notification should be sent. This is not required for other notification types.",
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "timeOffset": {
+                        "type": "number"
+                      },
+                      "unit": {
+                        "type": "string"
+                      }
+                    }
+                  }
+                },
+                "additionalEmailIds": {
+                  "description": "Additional email addresses to receive notifications.",
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
+                },
+                "additionalPhoneNumbers": {
+                  "description": "Additional phone numbers to receive notifications.",
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
+                },
+                "selectedUsers": {
+                  "description": "Selected users for in-App and business email notifications. Supports user IDs and special keyword \"sub_account_admin\"",
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
+                },
+                "fromAddress": {
+                  "type": "string",
+                  "description": "from address for email notification"
+                },
+                "fromName": {
+                  "type": "string",
+                  "description": "from name for email/sms notification"
+                },
+                "fromNumber": {
+                  "type": "string",
+                  "description": "from number for sms notification"
+                }
+              },
+              "required": [
+                "receiverType",
+                "channel",
+                "notificationType"
+              ]
+            },
+            "description": "Full request body"
+          }
+        },
+        "required": [
+          "calendarId",
+          "body"
+        ]
+      }
+    },
+    {
+      "name": "calendars_find_event_notification",
+      "module": "calendars",
+      "method": "GET",
+      "path": "/calendars/{calendarId}/notifications/{notificationId}",
+      "version": "2021-04-15",
+      "summary": "Get notification",
+      "description": "Get notification Find Event notification by notificationId [GET /calendars/{calendarId}/notifications/{notificationId}] Scopes: calendars/events.readonly.",
+      "scopes": [
+        "calendars/events.readonly"
+      ],
+      "access": "unknown",
+      "operationClass": "read",
+      "deprecated": false,
+      "pathFields": [
+        "calendarId",
+        "notificationId"
+      ],
+      "queryFields": [],
+      "bodyFields": [],
+      "bodyWrapped": false,
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "calendarId": {
+            "type": "string"
+          },
+          "notificationId": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "calendarId",
+          "notificationId"
+        ]
+      }
+    },
+    {
+      "name": "calendars_update_event_notification",
+      "module": "calendars",
+      "method": "PUT",
+      "path": "/calendars/{calendarId}/notifications/{notificationId}",
+      "version": "2021-04-15",
+      "summary": "Update notification",
+      "description": "Update notification Update Event notification by id [PUT /calendars/{calendarId}/notifications/{notificationId}] Scopes: calendars/events.write.",
+      "scopes": [
+        "calendars/events.write"
+      ],
+      "access": "unknown",
+      "operationClass": "write",
+      "deprecated": false,
+      "contentType": "application/json",
+      "pathFields": [
+        "calendarId",
+        "notificationId"
+      ],
+      "queryFields": [],
+      "bodyFields": [
+        "receiverType",
+        "additionalEmailIds",
+        "additionalPhoneNumbers",
+        "selectedUsers",
+        "channel",
+        "notificationType",
+        "isActive",
+        "deleted",
+        "templateId",
+        "body",
+        "subject",
+        "afterTime",
+        "beforeTime",
+        "fromAddress",
+        "fromNumber",
+        "fromName"
+      ],
+      "bodyWrapped": false,
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "calendarId": {
+            "type": "string"
+          },
+          "notificationId": {
+            "type": "string"
+          },
+          "receiverType": {
+            "type": "string",
+            "description": "Notification recipient type",
+            "enum": [
+              "contact",
+              "guest",
+              "assignedUser",
+              "emails",
+              "phoneNumbers",
+              "business"
+            ]
+          },
+          "additionalEmailIds": {
+            "description": "Additional email addresses to receive notifications.",
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "additionalPhoneNumbers": {
+            "description": "Additional phone numbers to receive notifications.",
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "selectedUsers": {
+            "description": "Selected users for in-App and business email notifications. Supports user IDs and special keyword \"sub_account_admin\"",
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "channel": {
+            "type": "string",
+            "description": "Notification channel",
+            "enum": [
+              "email",
+              "inApp",
+              "sms",
+              "whatsapp"
+            ]
+          },
+          "notificationType": {
+            "type": "string",
+            "description": "Notification type",
+            "enum": [
+              "booked",
+              "confirmation",
+              "cancellation",
+              "reminder",
+              "followup",
+              "reschedule"
+            ]
+          },
+          "isActive": {
+            "type": "boolean",
+            "description": "Is the notification active (default: true)"
+          },
+          "deleted": {
+            "type": "boolean",
+            "description": "Marks the notification as deleted (soft delete) (default: false)"
+          },
+          "templateId": {
+            "type": "string",
+            "description": "Template ID for email notification"
+          },
+          "body": {
+            "type": "string",
+            "description": "Body  for email notification. Not necessary for in-App notification"
+          },
+          "subject": {
+            "type": "string",
+            "description": "Subject  for email notification. Not necessary for in-App notification"
+          },
+          "afterTime": {
+            "description": "Specifies the time after which the follow-up notification should be sent. This is not required for other notification types.",
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "timeOffset": {
+                  "type": "number"
+                },
+                "unit": {
+                  "type": "string"
+                }
+              }
+            }
+          },
+          "beforeTime": {
+            "description": "Specifies the time before which the reminder notification should be sent. This is not required for other notification types.",
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "timeOffset": {
+                  "type": "number"
+                },
+                "unit": {
+                  "type": "string"
+                }
+              }
+            }
+          },
+          "fromAddress": {
+            "type": "string",
+            "description": "From address for email notification"
+          },
+          "fromNumber": {
+            "type": "string",
+            "description": "from number for sms notification"
+          },
+          "fromName": {
+            "type": "string",
+            "description": "From name for email/sms notification"
+          }
+        },
+        "required": [
+          "calendarId",
+          "notificationId"
+        ]
+      }
+    },
+    {
+      "name": "calendars_delete_event_notification",
+      "module": "calendars",
+      "method": "DELETE",
+      "path": "/calendars/{calendarId}/notifications/{notificationId}",
+      "version": "2021-04-15",
+      "summary": "Delete Notification",
+      "description": "Delete Notification Delete notification [DELETE /calendars/{calendarId}/notifications/{notificationId}] Scopes: calendars/events.write.",
+      "scopes": [
+        "calendars/events.write"
+      ],
+      "access": "unknown",
+      "operationClass": "delete",
+      "deprecated": false,
+      "pathFields": [
+        "calendarId",
+        "notificationId"
+      ],
+      "queryFields": [],
+      "bodyFields": [],
+      "bodyWrapped": false,
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "calendarId": {
+            "type": "string"
+          },
+          "notificationId": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "calendarId",
+          "notificationId"
+        ]
+      }
+    },
+    {
+      "name": "calendars_getallschedules",
+      "module": "calendars",
+      "method": "GET",
+      "path": "/calendars/schedules/search",
+      "version": "2021-04-15",
+      "summary": "List user availability schedule",
+      "description": "List user availability schedule Retrieve user availability schedules based on various filters including location, calendar, and user. Supports pagination. [GET /calendars/schedules/search] Scopes: calendars.readonly.",
+      "scopes": [
+        "calendars.readonly"
+      ],
+      "access": "unknown",
+      "operationClass": "read",
+      "deprecated": false,
+      "pathFields": [],
+      "queryFields": [
+        "locationId",
+        "userId",
+        "calendarId",
+        "skip",
+        "limit"
+      ],
+      "bodyFields": [],
+      "bodyWrapped": false,
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "locationId": {
+            "type": "string",
+            "description": "Location ID to filter schedules by"
+          },
+          "userId": {
+            "type": "string",
+            "description": "User ID to filter schedules by specific user"
+          },
+          "calendarId": {
+            "type": "string",
+            "description": "Calendar ID for filtering schedules by specific calendar"
+          },
+          "skip": {
+            "minimum": 0,
+            "type": "number",
+            "description": "(default: 0)"
+          },
+          "limit": {
+            "minimum": 1,
+            "maximum": 500,
+            "type": "number",
+            "description": "(default: 50)"
+          }
+        },
+        "required": [
+          "locationId",
+          "userId"
+        ]
+      }
+    },
+    {
+      "name": "calendars_getschedulebyid",
+      "module": "calendars",
+      "method": "GET",
+      "path": "/calendars/schedules/{id}",
+      "version": "2021-04-15",
+      "summary": "Get user availability schedule",
+      "description": "Get user availability schedule Retrieve a specific schedule by its unique identifier. Returns detailed information including rules, timezone, and associated calendars/users. [GET /calendars/schedules/{id}] Scopes: calendars.readonly.",
+      "scopes": [
+        "calendars.readonly"
+      ],
+      "access": "unknown",
+      "operationClass": "read",
+      "deprecated": false,
+      "pathFields": [
+        "id"
+      ],
+      "queryFields": [],
+      "bodyFields": [],
+      "bodyWrapped": false,
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "Unique identifier of the schedule"
+          }
+        },
+        "required": [
+          "id"
+        ]
+      }
+    },
+    {
+      "name": "calendars_updateschedule",
+      "module": "calendars",
+      "method": "PUT",
+      "path": "/calendars/schedules/{id}",
+      "version": "2021-04-15",
+      "summary": "Update user availability schedule",
+      "description": "Update user availability schedule Modify an existing schedule by updating its rules, timezone, and name All fields are optional - only provided fields will be updated. [PUT /calendars/schedules/{id}] Scopes: calendars.write.",
+      "scopes": [
+        "calendars.write"
+      ],
+      "access": "unknown",
+      "operationClass": "write",
+      "deprecated": false,
+      "contentType": "application/json",
+      "pathFields": [
+        "id"
+      ],
+      "queryFields": [],
+      "bodyFields": [
+        "name",
+        "rules",
+        "timezone"
+      ],
+      "bodyWrapped": false,
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "Unique identifier of the schedule to update"
+          },
+          "name": {
+            "type": "string",
+            "description": "Human-readable name for the schedule"
+          },
+          "rules": {
+            "description": "Updated schedule rules defining when the schedule is active",
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "type": {
+                  "type": "string",
+                  "enum": [
+                    "wday",
+                    "date"
+                  ],
+                  "description": "Type of schedule rule - weekday (recurring) or date (specific date)"
+                },
+                "intervals": {
+                  "description": "Time intervals for the rule (e.g., 9 AM to 5 PM)",
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "from": {
+                        "type": "string",
+                        "description": "Start time in HH:MM format (24-hour format)",
+                        "pattern": "^([01]?[0-9]|2[0-3]):[0-5][0-9]$"
+                      },
+                      "to": {
+                        "type": "string",
+                        "description": "End time in HH:MM format (24-hour format)",
+                        "pattern": "^([01]?[0-9]|2[0-3]):[0-5][0-9]$"
+                      }
+                    },
+                    "required": [
+                      "from",
+                      "to"
+                    ]
+                  }
+                },
+                "date": {
+                  "type": "string",
+                  "description": "Specific date in YYYY-MM-DD format (only for date-type rules)",
+                  "pattern": "^\\d{4}-\\d{2}-\\d{2}$"
+                },
+                "day": {
+                  "type": "string",
+                  "enum": [
+                    "sunday",
+                    "monday",
+                    "tuesday",
+                    "wednesday",
+                    "thursday",
+                    "friday",
+                    "saturday"
+                  ],
+                  "description": "Day of week (only for weekday-type rules)"
+                }
+              },
+              "required": [
+                "type",
+                "intervals"
+              ]
+            }
+          },
+          "timezone": {
+            "type": "string",
+            "description": "Updated timezone for the schedule (IANA timezone identifier)",
+            "pattern": "^[A-Za-z_]+/[A-Za-z_]+$"
+          }
+        },
+        "required": [
+          "id"
+        ]
+      }
+    },
+    {
+      "name": "calendars_deleteschedule",
+      "module": "calendars",
+      "method": "DELETE",
+      "path": "/calendars/schedules/{id}",
+      "version": "2021-04-15",
+      "summary": "Delete user availability schedule",
+      "description": "Delete user availability schedule Permanently remove a schedule and all its associated rules. This action cannot be undone. [DELETE /calendars/schedules/{id}] Scopes: calendars.write.",
+      "scopes": [
+        "calendars.write"
+      ],
+      "access": "unknown",
+      "operationClass": "delete",
+      "deprecated": false,
+      "pathFields": [
+        "id"
+      ],
+      "queryFields": [],
+      "bodyFields": [],
+      "bodyWrapped": false,
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "Unique identifier of the schedule to delete"
+          }
+        },
+        "required": [
+          "id"
+        ]
+      }
+    },
+    {
+      "name": "calendars_createschedule",
+      "module": "calendars",
+      "method": "POST",
+      "path": "/calendars/schedules",
+      "version": "2021-04-15",
+      "summary": "Create user availability schedule",
+      "description": "Create user availability schedule Create new schedule with specified rules, timezone, location, user and calendar associations. [POST /calendars/schedules] Scopes: calendars.write.",
+      "scopes": [
+        "calendars.write"
+      ],
+      "access": "unknown",
+      "operationClass": "write",
+      "deprecated": false,
+      "contentType": "application/json",
+      "pathFields": [],
+      "queryFields": [],
+      "bodyFields": [
+        "rules",
+        "timezone",
+        "locationId",
+        "name",
+        "userId",
+        "calendarIds"
+      ],
+      "bodyWrapped": false,
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "rules": {
+            "description": "Schedule rules defining when the schedule is active",
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "type": {
+                  "type": "string",
+                  "enum": [
+                    "wday",
+                    "date"
+                  ],
+                  "description": "Type of schedule rule - weekday (recurring) or date (specific date)"
+                },
+                "intervals": {
+                  "description": "Time intervals for the rule (e.g., 9 AM to 5 PM)",
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "from": {
+                        "type": "string",
+                        "description": "Start time in HH:MM format (24-hour format)",
+                        "pattern": "^([01]?[0-9]|2[0-3]):[0-5][0-9]$"
+                      },
+                      "to": {
+                        "type": "string",
+                        "description": "End time in HH:MM format (24-hour format)",
+                        "pattern": "^([01]?[0-9]|2[0-3]):[0-5][0-9]$"
+                      }
+                    },
+                    "required": [
+                      "from",
+                      "to"
+                    ]
+                  }
+                },
+                "date": {
+                  "type": "string",
+                  "description": "Specific date in YYYY-MM-DD format (only for date-type rules)",
+                  "pattern": "^\\d{4}-\\d{2}-\\d{2}$"
+                },
+                "day": {
+                  "type": "string",
+                  "enum": [
+                    "sunday",
+                    "monday",
+                    "tuesday",
+                    "wednesday",
+                    "thursday",
+                    "friday",
+                    "saturday"
+                  ],
+                  "description": "Day of week (only for weekday-type rules)"
+                }
+              },
+              "required": [
+                "type",
+                "intervals"
+              ]
+            }
+          },
+          "timezone": {
+            "type": "string",
+            "description": "Timezone for the schedule (IANA timezone identifier)",
+            "pattern": "^[A-Za-z_]+/[A-Za-z_]+$"
+          },
+          "locationId": {
+            "type": "string",
+            "description": "Location ID where this schedule applies"
+          },
+          "name": {
+            "type": "string",
+            "description": "Human-readable name for the schedule"
+          },
+          "userId": {
+            "type": "string",
+            "description": "User ID associated with the schedule"
+          },
+          "calendarIds": {
+            "description": "Calendar IDs associated with the schedule",
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          }
+        },
+        "required": [
+          "timezone",
+          "locationId",
+          "name",
+          "userId"
+        ]
+      }
+    },
+    {
+      "name": "calendars_add_calendar_to_schedule",
+      "module": "calendars",
+      "method": "PUT",
+      "path": "/calendars/schedules/{id}/associations/{calendarId}",
+      "version": "2021-04-15",
+      "summary": "Apply user availability schedule to a calendar",
+      "description": "Apply user availability schedule to a calendar Associates a calendar with the given schedule by adding the calendarId to a schedule [PUT /calendars/schedules/{id}/associations/{calendarId}] Scopes: calendars.write.",
+      "scopes": [
+        "calendars.write"
+      ],
+      "access": "unknown",
+      "operationClass": "write",
+      "deprecated": false,
+      "pathFields": [
+        "id",
+        "calendarId"
+      ],
+      "queryFields": [],
+      "bodyFields": [],
+      "bodyWrapped": false,
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "Unique identifier of the schedule"
+          },
+          "calendarId": {
+            "type": "string",
+            "description": "Unique identifier of the team calendar to add to the schedule"
+          }
+        },
+        "required": [
+          "id",
+          "calendarId"
+        ]
+      }
+    },
+    {
+      "name": "calendars_remove_calendar_from_schedule",
+      "module": "calendars",
+      "method": "DELETE",
+      "path": "/calendars/schedules/{id}/associations/{calendarId}",
+      "version": "2021-04-15",
+      "summary": "Remove user availability schedule from a calendar",
+      "description": "Remove user availability schedule from a calendar Removes the association between a team calendar and the given schedule by removing the calendarId from the schedule [DELETE /calendars/schedules/{id}/associations/{calendarId}] Scopes: calendars.write.",
+      "scopes": [
+        "calendars.write"
+      ],
+      "access": "unknown",
+      "operationClass": "delete",
+      "deprecated": false,
+      "pathFields": [
+        "id",
+        "calendarId"
+      ],
+      "queryFields": [],
+      "bodyFields": [],
+      "bodyWrapped": false,
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "Unique identifier of the schedule"
+          },
+          "calendarId": {
+            "type": "string",
+            "description": "Unique identifier of the calendar to remove from the schedule"
+          }
+        },
+        "required": [
+          "id",
+          "calendarId"
+        ]
+      }
+    },
+    {
+      "name": "calendars_get_calendars",
+      "module": "calendars",
+      "method": "GET",
+      "path": "/calendars/",
+      "version": "2021-04-15",
+      "summary": "Get Calendars",
+      "description": "Get Calendars Get all calendars in a location. [GET /calendars/] Scopes: calendars.readonly.",
+      "scopes": [
+        "calendars.readonly"
+      ],
+      "access": "unknown",
+      "operationClass": "read",
+      "deprecated": false,
+      "pathFields": [],
+      "queryFields": [
+        "locationId",
+        "groupId",
+        "showDrafted"
+      ],
+      "bodyFields": [],
+      "bodyWrapped": false,
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "locationId": {
+            "type": "string",
+            "description": "Location Id"
+          },
+          "groupId": {
+            "type": "string",
+            "description": "Group Id"
+          },
+          "showDrafted": {
+            "type": "boolean",
+            "description": "(default: true)"
+          }
+        },
+        "required": [
+          "locationId"
+        ]
+      }
+    },
+    {
+      "name": "calendars_create_calendar",
+      "module": "calendars",
+      "method": "POST",
+      "path": "/calendars/",
+      "version": "2021-04-15",
+      "summary": "Create Calendar",
+      "description": "Create Calendar Create calendar in a location. [POST /calendars/] Scopes: calendars.write.",
+      "scopes": [
+        "calendars.write"
+      ],
+      "access": "unknown",
+      "operationClass": "write",
+      "deprecated": false,
+      "contentType": "application/json",
+      "pathFields": [],
+      "queryFields": [],
+      "bodyFields": [
+        "isActive",
+        "notifications",
+        "locationId",
+        "groupId",
+        "teamMembers",
+        "eventType",
+        "name",
+        "description",
+        "slug",
+        "widgetSlug",
+        "calendarType",
+        "widgetType",
+        "eventTitle",
+        "eventColor",
+        "meetingLocation",
+        "locationConfigurations",
+        "slotDuration",
+        "slotDurationUnit",
+        "slotInterval",
+        "slotIntervalUnit",
+        "slotBuffer",
+        "slotBufferUnit",
+        "preBuffer",
+        "preBufferUnit",
+        "appoinmentPerSlot",
+        "appoinmentPerDay",
+        "allowBookingAfter",
+        "allowBookingAfterUnit",
+        "allowBookingFor",
+        "allowBookingForUnit",
+        "openHours",
+        "enableRecurring",
+        "recurring",
+        "formId",
+        "stickyContact",
+        "isLivePaymentMode",
+        "autoConfirm",
+        "shouldSendAlertEmailsToAssignedMember",
+        "alertEmail",
+        "googleInvitationEmails",
+        "allowReschedule",
+        "allowCancellation",
+        "shouldAssignContactToTeamMember",
+        "shouldSkipAssigningContactForExisting",
+        "notes",
+        "pixelId",
+        "formSubmitType",
+        "formSubmitRedirectURL",
+        "formSubmitThanksMessage",
+        "availabilityType",
+        "availabilities",
+        "guestType",
+        "consentLabel",
+        "calendarCoverImage",
+        "lookBusyConfig"
+      ],
+      "bodyWrapped": false,
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "isActive": {
+            "type": "boolean",
+            "description": "Should the created calendar be active or draft (default: true)"
+          },
+          "notifications": {
+            "description": "🚨 Deprecated! Please use 'Calendar Notifications APIs' instead.",
+            "deprecated": true,
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "type": {
+                  "type": "string",
+                  "description": "Calendar Notification (default: \"email\")",
+                  "enum": [
+                    "email"
+                  ]
+                },
+                "shouldSendToContact": {
+                  "type": "boolean"
+                },
+                "shouldSendToGuest": {
+                  "type": "boolean"
+                },
+                "shouldSendToUser": {
+                  "type": "boolean"
+                },
+                "shouldSendToSelectedUsers": {
+                  "type": "boolean"
+                },
+                "selectedUsers": {
+                  "type": "string",
+                  "description": "Comma separated emails"
+                }
+              },
+              "required": [
+                "shouldSendToContact",
+                "shouldSendToGuest",
+                "shouldSendToUser",
+                "shouldSendToSelectedUsers",
+                "selectedUsers"
+              ]
+            }
+          },
+          "locationId": {
+            "type": "string"
+          },
+          "groupId": {
+            "type": "string",
+            "description": "Group Id"
+          },
+          "teamMembers": {
+            "description": "Team members are required for calendars of type: Round Robin, Collective, Class, Service. Personal calendar must have exactly one team member.",
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "userId": {
+                  "type": "string"
+                },
+                "priority": {
+                  "type": "number",
+                  "enum": [
+                    0,
+                    0.5,
+                    1
+                  ],
+                  "description": "(default: 0.5)"
+                },
+                "meetingLocationType": {
+                  "type": "string",
+                  "description": "🚨 Deprecated! Use `locationConfigurations.kind` instead. (default: \"custom\")",
+                  "deprecated": true,
+                  "enum": [
+                    "custom",
+                    "zoom",
+                    "gmeet",
+                    "phone",
+                    "address",
+                    "teams",
+                    "booker"
+                  ]
+                },
+                "meetingLocation": {
+                  "type": "string",
+                  "description": "🚨 Deprecated! Use `locationConfigurations.location` instead.",
+                  "deprecated": true
+                },
+                "isPrimary": {
+                  "type": "boolean",
+                  "description": "Marks a user as primary. This property is required in case of collective booking calendars. Only one user can be primary."
+                },
+                "locationConfigurations": {
+                  "description": "Meeting location configuration for event calendar.\n- *Multiple locations are allowed only when one team member is selected.*\n- *For **Class booking** and **Collective** calendars, only one location configuration is allowed for each team member.*",
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "kind": {
+                        "type": "string",
+                        "description": "Type of meeting location. zoom_conference/google_conference/ms_teams_conference is not supported in event calendar type",
+                        "enum": [
+                          "custom",
+                          "zoom_conference",
+                          "google_conference",
+                          "inbound_call",
+                          "outbound_call",
+                          "physical",
+                          "booker",
+                          "ms_teams_conference"
+                        ]
+                      },
+                      "location": {
+                        "type": "string",
+                        "description": "Address for meeting location. Not applicable on \"zoom_conference\", \"google_conference\" and \"ms_teams_conference\" kind"
+                      }
+                    },
+                    "required": [
+                      "kind"
+                    ]
+                  }
+                }
+              },
+              "required": [
+                "userId"
+              ]
+            }
+          },
+          "eventType": {
+            "type": "string",
+            "enum": [
+              "RoundRobin_OptimizeForAvailability",
+              "RoundRobin_OptimizeForEqualDistribution"
+            ],
+            "description": "(default: \"RoundRobin_OptimizeForAvailability\")"
+          },
+          "name": {
+            "type": "string"
+          },
+          "description": {
+            "type": "string"
+          },
+          "slug": {
+            "type": "string"
+          },
+          "widgetSlug": {
+            "type": "string"
+          },
+          "calendarType": {
+            "type": "string",
+            "enum": [
+              "round_robin",
+              "event",
+              "class_booking",
+              "collective",
+              "service_booking",
+              "personal"
+            ]
+          },
+          "widgetType": {
+            "type": "string",
+            "description": "Calendar widget type. Choose \"default\" for \"neo\" and \"classic\" for \"classic\" layout. (default: \"classic\")",
+            "enum": [
+              "default",
+              "classic"
+            ]
+          },
+          "eventTitle": {
+            "type": "string",
+            "description": "(default: \"{{contact.name}}\")"
+          },
+          "eventColor": {
+            "type": "string",
+            "description": "(default: \"#039be5\")"
+          },
+          "meetingLocation": {
+            "type": "string",
+            "description": "🚨 Deprecated! Use `locationConfigurations.location` or `teamMembers[].locationConfigurations.location` instead.",
+            "deprecated": true
+          },
+          "locationConfigurations": {
+            "description": "Meeting location configuration for event calendar",
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "kind": {
+                  "type": "string",
+                  "description": "Type of meeting location. zoom_conference/google_conference/ms_teams_conference is not supported in event calendar type",
+                  "enum": [
+                    "custom",
+                    "zoom_conference",
+                    "google_conference",
+                    "inbound_call",
+                    "outbound_call",
+                    "physical",
+                    "booker",
+                    "ms_teams_conference"
+                  ]
+                },
+                "location": {
+                  "type": "string",
+                  "description": "Address for meeting location. Not applicable on \"zoom_conference\", \"google_conference\" and \"ms_teams_conference\" kind"
+                }
+              },
+              "required": [
+                "kind"
+              ]
+            }
+          },
+          "slotDuration": {
+            "type": "number",
+            "description": "This controls the duration of the meeting (default: 30)"
+          },
+          "slotDurationUnit": {
+            "type": "string",
+            "description": "Unit for slot duration.",
+            "enum": [
+              "mins",
+              "hours"
+            ]
+          },
+          "slotInterval": {
+            "type": "number",
+            "description": "Slot interval reflects the amount of time the between booking slots that will be shown in the calendar. (default: 30)"
+          },
+          "slotIntervalUnit": {
+            "type": "string",
+            "description": "Unit for slot interval.",
+            "enum": [
+              "mins",
+              "hours"
+            ]
+          },
+          "slotBuffer": {
+            "type": "number",
+            "description": "Slot-Buffer is additional time that can be added after an appointment, allowing for extra time to wrap up"
+          },
+          "slotBufferUnit": {
+            "type": "string",
+            "description": "Unit for slot buffer.",
+            "enum": [
+              "mins",
+              "hours"
+            ]
+          },
+          "preBuffer": {
+            "type": "number",
+            "description": "Pre-Buffer is additional time that can be added before an appointment, allowing for extra time to get ready"
+          },
+          "preBufferUnit": {
+            "type": "string",
+            "description": "Unit for pre-buffer.",
+            "enum": [
+              "mins",
+              "hours"
+            ]
+          },
+          "appoinmentPerSlot": {
+            "type": "number",
+            "description": "Maximum bookings per slot (per user). Maximum seats per slot in case of Class Booking Calendar. (default: 1)"
+          },
+          "appoinmentPerDay": {
+            "type": "number",
+            "description": "Number of appointments that can be booked for a given day"
+          },
+          "allowBookingAfter": {
+            "type": "number",
+            "description": "Minimum scheduling notice for events"
+          },
+          "allowBookingAfterUnit": {
+            "type": "string",
+            "description": "Unit for minimum scheduling notice",
+            "enum": [
+              "hours",
+              "days",
+              "weeks",
+              "months"
+            ]
+          },
+          "allowBookingFor": {
+            "type": "number",
+            "description": "Minimum number of days/weeks/months for which to allow booking events"
+          },
+          "allowBookingForUnit": {
+            "type": "string",
+            "description": "Unit for controlling the duration for which booking would be allowed for",
+            "enum": [
+              "days",
+              "weeks",
+              "months"
+            ]
+          },
+          "openHours": {
+            "description": "This is only to set the standard availability. For custom availability, use the availabilities property",
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "daysOfTheWeek": {
+                  "type": "array",
+                  "items": {
+                    "type": "number",
+                    "maximum": 6,
+                    "minimum": 0
+                  }
+                },
+                "hours": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "openHour": {
+                        "type": "number",
+                        "minimum": 0,
+                        "maximum": 23
+                      },
+                      "openMinute": {
+                        "type": "number",
+                        "minimum": 0,
+                        "maximum": 60
+                      },
+                      "closeHour": {
+                        "type": "number",
+                        "minimum": 0,
+                        "maximum": 23
+                      },
+                      "closeMinute": {
+                        "type": "number",
+                        "minimum": 0,
+                        "maximum": 60
+                      }
+                    },
+                    "required": [
+                      "openHour",
+                      "openMinute",
+                      "closeHour",
+                      "closeMinute"
+                    ]
+                  }
+                }
+              },
+              "required": [
+                "daysOfTheWeek",
+                "hours"
+              ]
+            }
+          },
+          "enableRecurring": {
+            "type": "boolean",
+            "description": "Enable recurring appointments for the calendars. Please note that only one member should be added in the calendar to enable this (default: false)"
+          },
+          "recurring": {
+            "type": "object",
+            "properties": {
+              "freq": {
+                "type": "string",
+                "enum": [
+                  "DAILY",
+                  "WEEKLY",
+                  "MONTHLY"
+                ]
+              },
+              "count": {
+                "type": "number",
+                "description": "Number of recurrences",
+                "maximum": 24
+              },
+              "bookingOption": {
+                "type": "string",
+                "description": "This setting contols what to do incase a recurring slot is unavailable",
+                "enum": [
+                  "skip",
+                  "continue",
+                  "book_next"
+                ]
+              },
+              "bookingOverlapDefaultStatus": {
+                "type": "string",
+                "description": "This setting contols what to do incase a recurring slot is unavailable",
+                "enum": [
+                  "confirmed",
+                  "new"
+                ]
+              }
+            }
+          },
+          "formId": {
+            "type": "string"
+          },
+          "stickyContact": {
+            "type": "boolean"
+          },
+          "isLivePaymentMode": {
+            "type": "boolean"
+          },
+          "autoConfirm": {
+            "type": "boolean",
+            "description": "(default: true)"
+          },
+          "shouldSendAlertEmailsToAssignedMember": {
+            "type": "boolean"
+          },
+          "alertEmail": {
+            "type": "string"
+          },
+          "googleInvitationEmails": {
+            "type": "boolean",
+            "description": "(default: false)"
+          },
+          "allowReschedule": {
+            "type": "boolean",
+            "description": "(default: true)"
+          },
+          "allowCancellation": {
+            "type": "boolean",
+            "description": "(default: true)"
+          },
+          "shouldAssignContactToTeamMember": {
+            "type": "boolean"
+          },
+          "shouldSkipAssigningContactForExisting": {
+            "type": "boolean"
+          },
+          "notes": {
+            "type": "string"
+          },
+          "pixelId": {
+            "type": "string"
+          },
+          "formSubmitType": {
+            "type": "string",
+            "enum": [
+              "RedirectURL",
+              "ThankYouMessage"
+            ],
+            "description": "(default: \"ThankYouMessage\")"
+          },
+          "formSubmitRedirectURL": {
+            "type": "string"
+          },
+          "formSubmitThanksMessage": {
+            "type": "string"
+          },
+          "availabilityType": {
+            "type": "number",
+            "description": "Determines which availability type to consider:\n- **1**: Only custom availabilities will be used.\n- **0**: Only open hours will be used.\n- **null**: Both custom availabilities and open hours will be considered.",
+            "enum": [
+              0,
+              1
+            ]
+          },
+          "availabilities": {
+            "description": "This is only to set the custom availability. For standard availability, use the openHours property",
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "date": {
+                  "type": "string",
+                  "description": "Formulate the date string in the format of `<YYYY-MM-DD in local timezone>T00:00:00.000Z`."
+                },
+                "hours": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "openHour": {
+                        "type": "number",
+                        "minimum": 0,
+                        "maximum": 23
+                      },
+                      "openMinute": {
+                        "type": "number",
+                        "minimum": 0,
+                        "maximum": 60
+                      },
+                      "closeHour": {
+                        "type": "number",
+                        "minimum": 0,
+                        "maximum": 23
+                      },
+                      "closeMinute": {
+                        "type": "number",
+                        "minimum": 0,
+                        "maximum": 60
+                      }
+                    },
+                    "required": [
+                      "openHour",
+                      "openMinute",
+                      "closeHour",
+                      "closeMinute"
+                    ]
+                  }
+                },
+                "deleted": {
+                  "type": "boolean",
+                  "description": "(default: false)"
+                }
+              },
+              "required": [
+                "date",
+                "hours"
+              ]
+            }
+          },
+          "guestType": {
+            "type": "string",
+            "enum": [
+              "count_only",
+              "collect_detail"
+            ]
+          },
+          "consentLabel": {
+            "type": "string"
+          },
+          "calendarCoverImage": {
+            "type": "string"
+          },
+          "lookBusyConfig": {
+            "type": "object",
+            "properties": {
+              "enabled": {
+                "type": "boolean",
+                "description": "Apply Look Busy (default: false)"
+              },
+              "LookBusyPercentage": {
+                "type": "number",
+                "description": "Percentage of slots that will be hidden"
+              }
+            },
+            "required": [
+              "enabled",
+              "LookBusyPercentage"
+            ],
+            "description": "Look Busy Configuration"
+          }
+        },
+        "required": [
+          "locationId",
+          "name"
+        ]
+      }
+    }
+  ]
+}

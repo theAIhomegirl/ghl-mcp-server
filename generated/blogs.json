@@ -1,0 +1,468 @@
+{
+  "module": "blogs",
+  "endpoints": [
+    {
+      "name": "blogs_check_url_slug_exists",
+      "module": "blogs",
+      "method": "GET",
+      "path": "/blogs/posts/url-slug-exists",
+      "version": "2021-07-28",
+      "summary": "Check url slug",
+      "description": "Check url slug The \"Check url slug\" API allows check the blog slug validation which is needed before publishing any blog post. Please use blogs/check-slug.readonly. you can find the POST ID from the post edit url. [GET /blogs/posts/url-slug-exists] Token: location. Scopes: blogs/check-slug.readonly.",
+      "scopes": [
+        "blogs/check-slug.readonly"
+      ],
+      "access": "location",
+      "operationClass": "read",
+      "deprecated": false,
+      "pathFields": [],
+      "queryFields": [
+        "urlSlug",
+        "locationId",
+        "postId"
+      ],
+      "bodyFields": [],
+      "bodyWrapped": false,
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "urlSlug": {
+            "type": "string"
+          },
+          "locationId": {
+            "type": "string"
+          },
+          "postId": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "urlSlug",
+          "locationId"
+        ]
+      }
+    },
+    {
+      "name": "blogs_update_blog_post",
+      "module": "blogs",
+      "method": "PUT",
+      "path": "/blogs/posts/{postId}",
+      "version": "2021-07-28",
+      "summary": "Update Blog Post",
+      "description": "Update Blog Post The \"Update Blog Post\" API allows you update blog post for any given blog site. Please use blogs/post-update.write [PUT /blogs/posts/{postId}] Token: location. Scopes: blogs/post-update.write.",
+      "scopes": [
+        "blogs/post-update.write"
+      ],
+      "access": "location",
+      "operationClass": "write",
+      "deprecated": false,
+      "contentType": "application/json",
+      "pathFields": [],
+      "queryFields": [],
+      "bodyFields": [
+        "title",
+        "locationId",
+        "blogId",
+        "imageUrl",
+        "description",
+        "rawHTML",
+        "status",
+        "imageAltText",
+        "categories",
+        "tags",
+        "author",
+        "urlSlug",
+        "canonicalLink",
+        "publishedAt"
+      ],
+      "bodyWrapped": false,
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "title": {
+            "type": "string"
+          },
+          "locationId": {
+            "type": "string"
+          },
+          "blogId": {
+            "type": "string",
+            "description": "You can find the blog id from blog site dashboard link"
+          },
+          "imageUrl": {
+            "type": "string"
+          },
+          "description": {
+            "type": "string"
+          },
+          "rawHTML": {
+            "type": "string"
+          },
+          "status": {
+            "type": "string",
+            "enum": [
+              "DRAFT",
+              "PUBLISHED",
+              "SCHEDULED",
+              "ARCHIVED"
+            ]
+          },
+          "imageAltText": {
+            "type": "string"
+          },
+          "categories": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": "This needs to be array of category ids, which you can get from the category get api call."
+          },
+          "tags": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "author": {
+            "type": "string",
+            "description": "This needs to be author id, which you can get from the author get api call."
+          },
+          "urlSlug": {
+            "type": "string"
+          },
+          "canonicalLink": {
+            "type": "string"
+          },
+          "publishedAt": {
+            "type": "string",
+            "description": "Provide ISO timestamp"
+          }
+        },
+        "required": [
+          "title",
+          "locationId",
+          "blogId",
+          "imageUrl",
+          "description",
+          "rawHTML",
+          "status",
+          "imageAltText",
+          "categories",
+          "author",
+          "urlSlug",
+          "publishedAt"
+        ]
+      }
+    },
+    {
+      "name": "blogs_create_blog_post",
+      "module": "blogs",
+      "method": "POST",
+      "path": "/blogs/posts",
+      "version": "2021-07-28",
+      "summary": "Create Blog Post",
+      "description": "Create Blog Post The \"Create Blog Post\" API allows you create blog post for any given blog site. Please use blogs/post.write [POST /blogs/posts] Token: location. Scopes: blogs/post.write.",
+      "scopes": [
+        "blogs/post.write"
+      ],
+      "access": "location",
+      "operationClass": "write",
+      "deprecated": false,
+      "contentType": "application/json",
+      "pathFields": [],
+      "queryFields": [],
+      "bodyFields": [
+        "title",
+        "locationId",
+        "blogId",
+        "imageUrl",
+        "description",
+        "rawHTML",
+        "status",
+        "imageAltText",
+        "categories",
+        "tags",
+        "author",
+        "urlSlug",
+        "canonicalLink",
+        "publishedAt"
+      ],
+      "bodyWrapped": false,
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "title": {
+            "type": "string"
+          },
+          "locationId": {
+            "type": "string"
+          },
+          "blogId": {
+            "type": "string",
+            "description": "You can find the blog id from blog site dashboard link"
+          },
+          "imageUrl": {
+            "type": "string"
+          },
+          "description": {
+            "type": "string"
+          },
+          "rawHTML": {
+            "type": "string"
+          },
+          "status": {
+            "type": "string",
+            "enum": [
+              "DRAFT",
+              "PUBLISHED",
+              "SCHEDULED",
+              "ARCHIVED"
+            ]
+          },
+          "imageAltText": {
+            "type": "string"
+          },
+          "categories": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": "This needs to be array of category ids, which you can get from the category get api call."
+          },
+          "tags": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "author": {
+            "type": "string",
+            "description": "This needs to be author id, which you can get from the author get api call."
+          },
+          "urlSlug": {
+            "type": "string"
+          },
+          "canonicalLink": {
+            "type": "string"
+          },
+          "publishedAt": {
+            "type": "string",
+            "description": "Provide ISO timestamp"
+          }
+        },
+        "required": [
+          "title",
+          "locationId",
+          "blogId",
+          "imageUrl",
+          "description",
+          "rawHTML",
+          "status",
+          "imageAltText",
+          "categories",
+          "author",
+          "urlSlug",
+          "publishedAt"
+        ]
+      }
+    },
+    {
+      "name": "blogs_get_all_blog_authors_by_location",
+      "module": "blogs",
+      "method": "GET",
+      "path": "/blogs/authors",
+      "version": "2021-07-28",
+      "summary": "Get all authors",
+      "description": "Get all authors The \"Get all authors\" Api return the blog authors for a given location ID. Please use \"blogs/author.readonly\" [GET /blogs/authors] Token: location. Scopes: blogs/author.readonly.",
+      "scopes": [
+        "blogs/author.readonly"
+      ],
+      "access": "location",
+      "operationClass": "read",
+      "deprecated": false,
+      "pathFields": [],
+      "queryFields": [
+        "locationId",
+        "limit",
+        "offset"
+      ],
+      "bodyFields": [],
+      "bodyWrapped": false,
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "locationId": {
+            "type": "string",
+            "description": "Location Id"
+          },
+          "limit": {
+            "type": "number",
+            "description": "Number of authors to show in the listing"
+          },
+          "offset": {
+            "type": "number",
+            "description": "Number of authors to skip in listing"
+          }
+        },
+        "required": [
+          "locationId",
+          "limit",
+          "offset"
+        ]
+      }
+    },
+    {
+      "name": "blogs_get_all_categories_by_location",
+      "module": "blogs",
+      "method": "GET",
+      "path": "/blogs/categories",
+      "version": "2021-07-28",
+      "summary": "Get all categories",
+      "description": "Get all categories The \"Get all categories\" Api return the blog categoies for a given location ID. Please use \"blogs/category.readonly\" [GET /blogs/categories] Token: location. Scopes: blogs/category.readonly.",
+      "scopes": [
+        "blogs/category.readonly"
+      ],
+      "access": "location",
+      "operationClass": "read",
+      "deprecated": false,
+      "pathFields": [],
+      "queryFields": [
+        "locationId",
+        "limit",
+        "offset"
+      ],
+      "bodyFields": [],
+      "bodyWrapped": false,
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "locationId": {
+            "type": "string"
+          },
+          "limit": {
+            "type": "number",
+            "description": "Number of categories to show in the listing"
+          },
+          "offset": {
+            "type": "number",
+            "description": "Number of categories to skip in listing"
+          }
+        },
+        "required": [
+          "locationId",
+          "limit",
+          "offset"
+        ]
+      }
+    },
+    {
+      "name": "blogs_get_blog_post",
+      "module": "blogs",
+      "method": "GET",
+      "path": "/blogs/posts/all",
+      "version": "2021-07-28",
+      "summary": "Get Blog posts by Blog ID",
+      "description": "Get Blog posts by Blog ID The \"Get Blog posts by Blog ID\" API allows you get blog posts for any given blog site using blog ID.Please use blogs/posts.readonly [GET /blogs/posts/all] Token: location. Scopes: blogs/posts.readonly.",
+      "scopes": [
+        "blogs/posts.readonly"
+      ],
+      "access": "location",
+      "operationClass": "read",
+      "deprecated": false,
+      "pathFields": [],
+      "queryFields": [
+        "locationId",
+        "blogId",
+        "limit",
+        "offset",
+        "searchTerm",
+        "status"
+      ],
+      "bodyFields": [],
+      "bodyWrapped": false,
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "locationId": {
+            "type": "string"
+          },
+          "blogId": {
+            "type": "string"
+          },
+          "limit": {
+            "type": "number"
+          },
+          "offset": {
+            "type": "number"
+          },
+          "searchTerm": {
+            "type": "string",
+            "description": "search for any post by name"
+          },
+          "status": {
+            "enum": [
+              "PUBLISHED",
+              "SCHEDULED",
+              "ARCHIVED",
+              "DRAFT"
+            ],
+            "type": "string"
+          }
+        },
+        "required": [
+          "locationId",
+          "blogId",
+          "limit",
+          "offset"
+        ]
+      }
+    },
+    {
+      "name": "blogs_get_blogs",
+      "module": "blogs",
+      "method": "GET",
+      "path": "/blogs/site/all",
+      "version": "2021-07-28",
+      "summary": "Get Blogs by Location ID",
+      "description": "Get Blogs by Location ID The \"Get Blogs by Location ID\" API allows you get blogs using Location ID.Please use blogs/list.readonly [GET /blogs/site/all] Token: location. Scopes: blogs/list.readonly.",
+      "scopes": [
+        "blogs/list.readonly"
+      ],
+      "access": "location",
+      "operationClass": "read",
+      "deprecated": false,
+      "pathFields": [],
+      "queryFields": [
+        "locationId",
+        "skip",
+        "limit",
+        "searchTerm"
+      ],
+      "bodyFields": [],
+      "bodyWrapped": false,
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "locationId": {
+            "type": "string"
+          },
+          "skip": {
+            "type": "number"
+          },
+          "limit": {
+            "type": "number"
+          },
+          "searchTerm": {
+            "type": "string",
+            "description": "search for any post by name"
+          }
+        },
+        "required": [
+          "locationId",
+          "skip",
+          "limit"
+        ]
+      }
+    }
+  ]
+}

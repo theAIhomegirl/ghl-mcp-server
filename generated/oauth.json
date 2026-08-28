@@ -1,0 +1,193 @@
+{
+  "module": "oauth",
+  "endpoints": [
+    {
+      "name": "oauth_get_access_token",
+      "module": "oauth",
+      "method": "POST",
+      "path": "/oauth/token",
+      "version": "2021-07-28",
+      "summary": "Get Access Token",
+      "description": "Get Access Token Use Access Tokens to access GoHighLevel resources on behalf of an authenticated location/company. [POST /oauth/token]",
+      "scopes": [],
+      "access": "unknown",
+      "operationClass": "write",
+      "deprecated": false,
+      "contentType": "application/x-www-form-urlencoded",
+      "pathFields": [],
+      "queryFields": [],
+      "bodyFields": [
+        "client_id",
+        "client_secret",
+        "grant_type",
+        "code",
+        "refresh_token",
+        "user_type",
+        "redirect_uri"
+      ],
+      "bodyWrapped": false,
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "client_id": {
+            "type": "string",
+            "description": "The ID provided by GHL for your integration"
+          },
+          "client_secret": {
+            "type": "string"
+          },
+          "grant_type": {
+            "type": "string",
+            "enum": [
+              "authorization_code",
+              "refresh_token",
+              "client_credentials"
+            ]
+          },
+          "code": {
+            "type": "string"
+          },
+          "refresh_token": {
+            "type": "string"
+          },
+          "user_type": {
+            "type": "string",
+            "description": "The type of token to be requested",
+            "enum": [
+              "Company",
+              "Location"
+            ]
+          },
+          "redirect_uri": {
+            "type": "string",
+            "description": "The redirect URI for your application"
+          }
+        },
+        "required": [
+          "client_id",
+          "client_secret",
+          "grant_type"
+        ]
+      }
+    },
+    {
+      "name": "oauth_get_location_access_token",
+      "module": "oauth",
+      "method": "POST",
+      "path": "/oauth/locationToken",
+      "version": "2021-07-28",
+      "summary": "Get Location Access Token from Agency Token",
+      "description": "Get Location Access Token from Agency Token This API allows you to generate locationAccessToken from AgencyAccessToken [POST /oauth/locationToken] Token: agency. Scopes: oauth.write.",
+      "scopes": [
+        "oauth.write"
+      ],
+      "access": "agency",
+      "operationClass": "write",
+      "deprecated": false,
+      "contentType": "application/x-www-form-urlencoded",
+      "pathFields": [],
+      "queryFields": [],
+      "bodyFields": [
+        "companyId",
+        "locationId"
+      ],
+      "bodyWrapped": false,
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "companyId": {
+            "type": "string",
+            "description": "Company Id of location you want to request token for"
+          },
+          "locationId": {
+            "type": "string",
+            "description": "The location ID for which you want to obtain accessToken"
+          }
+        },
+        "required": [
+          "companyId",
+          "locationId"
+        ]
+      }
+    },
+    {
+      "name": "oauth_get_installed_location",
+      "module": "oauth",
+      "method": "GET",
+      "path": "/oauth/installedLocations",
+      "version": "2021-07-28",
+      "summary": "Get Location where app is installed",
+      "description": "Get Location where app is installed This API allows you fetch location where app is installed upon [GET /oauth/installedLocations] Token: agency. Scopes: oauth.readonly.",
+      "scopes": [
+        "oauth.readonly"
+      ],
+      "access": "agency",
+      "operationClass": "read",
+      "deprecated": false,
+      "pathFields": [],
+      "queryFields": [
+        "skip",
+        "limit",
+        "query",
+        "isInstalled",
+        "companyId",
+        "appId",
+        "versionId",
+        "onTrial",
+        "planId",
+        "locationId"
+      ],
+      "bodyFields": [],
+      "bodyWrapped": false,
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "skip": {
+            "type": "string",
+            "description": "(default: \"0\")"
+          },
+          "limit": {
+            "type": "string",
+            "description": "(default: \"20\")"
+          },
+          "query": {
+            "type": "string",
+            "description": "Parameter to search for the installed location by name"
+          },
+          "isInstalled": {
+            "type": "boolean",
+            "description": "Filters out location which are installed for specified app under the specified company"
+          },
+          "companyId": {
+            "type": "string",
+            "description": "Parameter to search by the companyId"
+          },
+          "appId": {
+            "type": "string",
+            "description": "Parameter to search by the appId"
+          },
+          "versionId": {
+            "type": "string",
+            "description": "VersionId of the app"
+          },
+          "onTrial": {
+            "type": "boolean",
+            "description": "Filters out locations which are installed for specified app in trial mode"
+          },
+          "planId": {
+            "type": "string",
+            "description": "Filters out location which are installed for specified app under the specified planId"
+          },
+          "locationId": {
+            "type": "string",
+            "description": "locationId"
+          }
+        },
+        "required": [
+          "companyId",
+          "appId"
+        ]
+      }
+    }
+  ]
+}

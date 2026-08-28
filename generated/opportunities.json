@@ -1,0 +1,887 @@
+{
+  "module": "opportunities",
+  "endpoints": [
+    {
+      "name": "opportunities_get_lost_reason",
+      "module": "opportunities",
+      "method": "GET",
+      "path": "/opportunities/lost-reason",
+      "version": "2021-07-28",
+      "summary": "Get lost reason",
+      "description": "Get lost reason [GET /opportunities/lost-reason] Scopes: opportunities.readonly.",
+      "scopes": [
+        "opportunities.readonly"
+      ],
+      "access": "unknown",
+      "operationClass": "read",
+      "deprecated": false,
+      "pathFields": [],
+      "queryFields": [
+        "locationId",
+        "name",
+        "deleted",
+        "query",
+        "skip",
+        "limit",
+        "getCount"
+      ],
+      "bodyFields": [],
+      "bodyWrapped": false,
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "locationId": {
+            "type": "string"
+          },
+          "name": {
+            "type": "string",
+            "description": "lost reason name"
+          },
+          "deleted": {
+            "type": "boolean",
+            "description": "(default: false)"
+          },
+          "query": {
+            "type": "string",
+            "description": "search query"
+          },
+          "skip": {
+            "type": "number",
+            "description": "(default: 0)"
+          },
+          "limit": {
+            "type": "number",
+            "description": "(default: 100)"
+          },
+          "getCount": {
+            "type": "boolean",
+            "description": "get count"
+          }
+        },
+        "required": [
+          "locationId"
+        ]
+      }
+    },
+    {
+      "name": "opportunities_search_opportunity",
+      "module": "opportunities",
+      "method": "GET",
+      "path": "/opportunities/search",
+      "version": "2021-07-28",
+      "summary": "Search Opportunity",
+      "description": "Search Opportunity [GET /opportunities/search] Scopes: opportunities.readonly.",
+      "scopes": [
+        "opportunities.readonly"
+      ],
+      "access": "unknown",
+      "operationClass": "read",
+      "deprecated": false,
+      "pathFields": [],
+      "queryFields": [
+        "q",
+        "location_id",
+        "pipeline_id",
+        "pipeline_stage_id",
+        "contact_id",
+        "status",
+        "assigned_to",
+        "campaignId",
+        "id",
+        "order",
+        "endDate",
+        "startAfter",
+        "startAfterId",
+        "date",
+        "country",
+        "page",
+        "limit",
+        "getTasks",
+        "getNotes",
+        "getCalendarEvents"
+      ],
+      "bodyFields": [],
+      "bodyWrapped": false,
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "q": {
+            "type": "string"
+          },
+          "location_id": {
+            "type": "string",
+            "description": "Location Id"
+          },
+          "pipeline_id": {
+            "type": "string",
+            "description": "Pipeline Id"
+          },
+          "pipeline_stage_id": {
+            "type": "string",
+            "description": "stage Id"
+          },
+          "contact_id": {
+            "type": "string",
+            "description": "Contact Id"
+          },
+          "status": {
+            "enum": [
+              "open",
+              "won",
+              "lost",
+              "abandoned",
+              "all"
+            ],
+            "type": "string"
+          },
+          "assigned_to": {
+            "type": "string"
+          },
+          "campaignId": {
+            "type": "string",
+            "description": "Campaign Id"
+          },
+          "id": {
+            "type": "string",
+            "description": "Opportunity Id"
+          },
+          "order": {
+            "type": "string"
+          },
+          "endDate": {
+            "type": "string",
+            "description": "End date"
+          },
+          "startAfter": {
+            "type": "string",
+            "description": "Start After"
+          },
+          "startAfterId": {
+            "type": "string",
+            "description": "Start After Id"
+          },
+          "date": {
+            "type": "string",
+            "description": "Start date"
+          },
+          "country": {
+            "type": "string"
+          },
+          "page": {
+            "type": "number",
+            "description": "(default: 1)"
+          },
+          "limit": {
+            "type": "number",
+            "description": "(default: 20)"
+          },
+          "getTasks": {
+            "type": "boolean",
+            "description": "get Tasks in contact"
+          },
+          "getNotes": {
+            "type": "boolean",
+            "description": "get Notes in contact"
+          },
+          "getCalendarEvents": {
+            "type": "boolean",
+            "description": "get Calender event in contact"
+          }
+        },
+        "required": [
+          "location_id"
+        ]
+      }
+    },
+    {
+      "name": "opportunities_search_opportunities_advanced",
+      "module": "opportunities",
+      "method": "POST",
+      "path": "/opportunities/search",
+      "version": "2021-07-28",
+      "summary": "Search Opportunities",
+      "description": "Search Opportunities based on combinations of advanced filters. Documentation Link - https://doc.clickup.com/8631005/d/h/87cpx-424216/7bf11bc9b94f80f [POST /opportunities/search] Scopes: opportunities.readonly.",
+      "scopes": [
+        "opportunities.readonly"
+      ],
+      "access": "unknown",
+      "operationClass": "read",
+      "deprecated": false,
+      "contentType": "application/json",
+      "pathFields": [],
+      "queryFields": [],
+      "bodyFields": [
+        "locationId",
+        "query",
+        "limit",
+        "page",
+        "searchAfter",
+        "additionalDetails"
+      ],
+      "bodyWrapped": false,
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "locationId": {
+            "type": "string",
+            "description": "Location Id"
+          },
+          "query": {
+            "type": "string"
+          },
+          "limit": {
+            "type": "number"
+          },
+          "page": {
+            "type": "number"
+          },
+          "searchAfter": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "additionalDetails": {
+            "type": "object",
+            "properties": {
+              "notes": {
+                "type": "boolean"
+              },
+              "tasks": {
+                "type": "boolean"
+              },
+              "calendarEvents": {
+                "type": "boolean"
+              },
+              "unReadConversations": {
+                "type": "boolean"
+              }
+            },
+            "required": [
+              "notes",
+              "tasks",
+              "calendarEvents",
+              "unReadConversations"
+            ]
+          }
+        },
+        "required": [
+          "locationId",
+          "query",
+          "limit",
+          "page",
+          "searchAfter",
+          "additionalDetails"
+        ]
+      }
+    },
+    {
+      "name": "opportunities_get_pipelines",
+      "module": "opportunities",
+      "method": "GET",
+      "path": "/opportunities/pipelines",
+      "version": "2021-07-28",
+      "summary": "Get Pipelines",
+      "description": "Get Pipelines [GET /opportunities/pipelines] Scopes: opportunities.readonly.",
+      "scopes": [
+        "opportunities.readonly"
+      ],
+      "access": "unknown",
+      "operationClass": "read",
+      "deprecated": false,
+      "pathFields": [],
+      "queryFields": [
+        "locationId"
+      ],
+      "bodyFields": [],
+      "bodyWrapped": false,
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "locationId": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "locationId"
+        ]
+      }
+    },
+    {
+      "name": "opportunities_get_opportunity",
+      "module": "opportunities",
+      "method": "GET",
+      "path": "/opportunities/{id}",
+      "version": "2021-07-28",
+      "summary": "Get Opportunity",
+      "description": "Get Opportunity [GET /opportunities/{id}] Scopes: opportunities.readonly.",
+      "scopes": [
+        "opportunities.readonly"
+      ],
+      "access": "unknown",
+      "operationClass": "read",
+      "deprecated": false,
+      "pathFields": [
+        "id"
+      ],
+      "queryFields": [],
+      "bodyFields": [],
+      "bodyWrapped": false,
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "Opportunity Id"
+          }
+        },
+        "required": [
+          "id"
+        ]
+      }
+    },
+    {
+      "name": "opportunities_update_opportunity",
+      "module": "opportunities",
+      "method": "PUT",
+      "path": "/opportunities/{id}",
+      "version": "2021-07-28",
+      "summary": "Update Opportunity",
+      "description": "Update Opportunity [PUT /opportunities/{id}] Scopes: opportunities.write.",
+      "scopes": [
+        "opportunities.write"
+      ],
+      "access": "unknown",
+      "operationClass": "write",
+      "deprecated": false,
+      "contentType": "application/json",
+      "pathFields": [
+        "id"
+      ],
+      "queryFields": [],
+      "bodyFields": [
+        "pipelineId",
+        "name",
+        "pipelineStageId",
+        "status",
+        "monetaryValue",
+        "assignedTo",
+        "customFields"
+      ],
+      "bodyWrapped": false,
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "Opportunity Id"
+          },
+          "pipelineId": {
+            "type": "string",
+            "description": "pipeline Id"
+          },
+          "name": {
+            "type": "string"
+          },
+          "pipelineStageId": {
+            "type": "string"
+          },
+          "status": {
+            "type": "string",
+            "enum": [
+              "open",
+              "won",
+              "lost",
+              "abandoned",
+              "all"
+            ]
+          },
+          "monetaryValue": {
+            "type": "number"
+          },
+          "assignedTo": {
+            "type": "string"
+          },
+          "customFields": {
+            "type": "array",
+            "description": "Update custom fields to opportunities.",
+            "items": {
+              "anyOf": [
+                {
+                  "type": "object",
+                  "properties": {
+                    "id": {
+                      "type": "string",
+                      "description": "Pass either `id` or `key` of custom field"
+                    },
+                    "key": {
+                      "type": "string",
+                      "description": "Pass either `id` or `key` of custom field"
+                    },
+                    "field_value": {
+                      "type": "string"
+                    }
+                  }
+                },
+                {
+                  "type": "object",
+                  "properties": {
+                    "id": {
+                      "type": "string"
+                    },
+                    "key": {
+                      "type": "string"
+                    },
+                    "field_value": {
+                      "type": "array",
+                      "items": {
+                        "type": "string"
+                      }
+                    }
+                  },
+                  "required": [
+                    "id"
+                  ]
+                },
+                {
+                  "type": "object",
+                  "properties": {
+                    "id": {
+                      "type": "string"
+                    },
+                    "key": {
+                      "type": "string"
+                    },
+                    "field_value": {
+                      "type": "object"
+                    }
+                  },
+                  "required": [
+                    "id"
+                  ]
+                }
+              ]
+            }
+          }
+        },
+        "required": [
+          "id"
+        ]
+      }
+    },
+    {
+      "name": "opportunities_delete_opportunity",
+      "module": "opportunities",
+      "method": "DELETE",
+      "path": "/opportunities/{id}",
+      "version": "2021-07-28",
+      "summary": "Delete Opportunity",
+      "description": "Delete Opportunity [DELETE /opportunities/{id}] Scopes: opportunities.write.",
+      "scopes": [
+        "opportunities.write"
+      ],
+      "access": "unknown",
+      "operationClass": "delete",
+      "deprecated": false,
+      "pathFields": [
+        "id"
+      ],
+      "queryFields": [],
+      "bodyFields": [],
+      "bodyWrapped": false,
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "Opportunity Id"
+          }
+        },
+        "required": [
+          "id"
+        ]
+      }
+    },
+    {
+      "name": "opportunities_update_opportunity_status",
+      "module": "opportunities",
+      "method": "PUT",
+      "path": "/opportunities/{id}/status",
+      "version": "2021-07-28",
+      "summary": "Update Opportunity Status",
+      "description": "Update Opportunity Status [PUT /opportunities/{id}/status] Scopes: opportunities.write.",
+      "scopes": [
+        "opportunities.write"
+      ],
+      "access": "unknown",
+      "operationClass": "write",
+      "deprecated": false,
+      "contentType": "application/json",
+      "pathFields": [
+        "id"
+      ],
+      "queryFields": [],
+      "bodyFields": [
+        "status",
+        "lostReasonId"
+      ],
+      "bodyWrapped": false,
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "Opportunity Id"
+          },
+          "status": {
+            "type": "string",
+            "enum": [
+              "open",
+              "won",
+              "lost",
+              "abandoned",
+              "all"
+            ]
+          },
+          "lostReasonId": {
+            "type": "string",
+            "description": "lost reason Id"
+          }
+        },
+        "required": [
+          "id",
+          "status"
+        ]
+      }
+    },
+    {
+      "name": "opportunities_upsert_opportunity",
+      "module": "opportunities",
+      "method": "POST",
+      "path": "/opportunities/upsert",
+      "version": "2021-07-28",
+      "summary": "Upsert Opportunity",
+      "description": "Upsert Opportunity [POST /opportunities/upsert] Scopes: opportunities.write.",
+      "scopes": [
+        "opportunities.write"
+      ],
+      "access": "unknown",
+      "operationClass": "write",
+      "deprecated": false,
+      "contentType": "application/json",
+      "pathFields": [],
+      "queryFields": [],
+      "bodyFields": [
+        "id",
+        "pipelineId",
+        "locationId",
+        "followers",
+        "isRemoveAllFollowers",
+        "followersActionType",
+        "name",
+        "status",
+        "pipelineStageId",
+        "monetaryValue",
+        "assignedTo",
+        "lostReasonId"
+      ],
+      "bodyWrapped": false,
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "opportunityId"
+          },
+          "pipelineId": {
+            "type": "string",
+            "description": "pipeline Id"
+          },
+          "locationId": {
+            "type": "string",
+            "description": "locationId"
+          },
+          "followers": {
+            "description": "contactId",
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "isRemoveAllFollowers": {
+            "type": "boolean",
+            "description": "isRemoveAllFollowers"
+          },
+          "followersActionType": {
+            "type": "string",
+            "description": "followers action type",
+            "enum": [
+              "add",
+              "remove"
+            ]
+          },
+          "name": {
+            "type": "string",
+            "description": "name"
+          },
+          "status": {
+            "type": "string",
+            "enum": [
+              "open",
+              "won",
+              "lost",
+              "abandoned",
+              "all"
+            ]
+          },
+          "pipelineStageId": {
+            "type": "string"
+          },
+          "monetaryValue": {
+            "type": "object"
+          },
+          "assignedTo": {
+            "type": "string"
+          },
+          "lostReasonId": {
+            "type": "string",
+            "description": "lost reason Id"
+          }
+        },
+        "required": [
+          "pipelineId",
+          "locationId",
+          "followers",
+          "isRemoveAllFollowers",
+          "followersActionType"
+        ]
+      }
+    },
+    {
+      "name": "opportunities_add_followers_opportunity",
+      "module": "opportunities",
+      "method": "POST",
+      "path": "/opportunities/{id}/followers",
+      "version": "2021-07-28",
+      "summary": "Add Followers",
+      "description": "Add Followers [POST /opportunities/{id}/followers] Scopes: opportunities.write.",
+      "scopes": [
+        "opportunities.write"
+      ],
+      "access": "unknown",
+      "operationClass": "write",
+      "deprecated": false,
+      "contentType": "application/json",
+      "pathFields": [
+        "id"
+      ],
+      "queryFields": [],
+      "bodyFields": [
+        "followers"
+      ],
+      "bodyWrapped": false,
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "Opportunity Id"
+          },
+          "followers": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          }
+        },
+        "required": [
+          "id",
+          "followers"
+        ]
+      }
+    },
+    {
+      "name": "opportunities_remove_followers_opportunity",
+      "module": "opportunities",
+      "method": "DELETE",
+      "path": "/opportunities/{id}/followers",
+      "version": "2021-07-28",
+      "summary": "Remove Followers",
+      "description": "Remove Followers Allows removal of one or all followers from an opportunity. [DELETE /opportunities/{id}/followers] Scopes: opportunities.write.",
+      "scopes": [
+        "opportunities.write"
+      ],
+      "access": "unknown",
+      "operationClass": "delete",
+      "deprecated": false,
+      "contentType": "application/json",
+      "pathFields": [
+        "id"
+      ],
+      "queryFields": [
+        "isRemoveAllFollowers"
+      ],
+      "bodyFields": [
+        "followers"
+      ],
+      "bodyWrapped": false,
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "Opportunity Id"
+          },
+          "isRemoveAllFollowers": {
+            "type": "boolean"
+          },
+          "followers": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          }
+        },
+        "required": [
+          "id",
+          "followers"
+        ]
+      }
+    },
+    {
+      "name": "opportunities_create_opportunity",
+      "module": "opportunities",
+      "method": "POST",
+      "path": "/opportunities/",
+      "version": "2021-07-28",
+      "summary": "Create Opportunity",
+      "description": "Create Opportunity [POST /opportunities/] Scopes: opportunities.write.",
+      "scopes": [
+        "opportunities.write"
+      ],
+      "access": "unknown",
+      "operationClass": "write",
+      "deprecated": false,
+      "contentType": "application/json",
+      "pathFields": [],
+      "queryFields": [],
+      "bodyFields": [
+        "pipelineId",
+        "locationId",
+        "name",
+        "pipelineStageId",
+        "status",
+        "contactId",
+        "monetaryValue",
+        "assignedTo",
+        "customFields"
+      ],
+      "bodyWrapped": false,
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "pipelineId": {
+            "type": "string",
+            "description": "pipeline Id"
+          },
+          "locationId": {
+            "type": "string"
+          },
+          "name": {
+            "type": "string"
+          },
+          "pipelineStageId": {
+            "type": "string"
+          },
+          "status": {
+            "type": "string",
+            "enum": [
+              "open",
+              "won",
+              "lost",
+              "abandoned",
+              "all"
+            ]
+          },
+          "contactId": {
+            "type": "string"
+          },
+          "monetaryValue": {
+            "type": "number"
+          },
+          "assignedTo": {
+            "type": "string"
+          },
+          "customFields": {
+            "type": "array",
+            "description": "Add custom fields to opportunities.",
+            "items": {
+              "anyOf": [
+                {
+                  "type": "object",
+                  "properties": {
+                    "id": {
+                      "type": "string",
+                      "description": "Pass either `id` or `key` of custom field"
+                    },
+                    "key": {
+                      "type": "string",
+                      "description": "Pass either `id` or `key` of custom field"
+                    },
+                    "field_value": {
+                      "type": "string"
+                    }
+                  }
+                },
+                {
+                  "type": "object",
+                  "properties": {
+                    "id": {
+                      "type": "string"
+                    },
+                    "key": {
+                      "type": "string"
+                    },
+                    "field_value": {
+                      "type": "array",
+                      "items": {
+                        "type": "string"
+                      }
+                    }
+                  },
+                  "required": [
+                    "id"
+                  ]
+                },
+                {
+                  "type": "object",
+                  "properties": {
+                    "id": {
+                      "type": "string"
+                    },
+                    "key": {
+                      "type": "string"
+                    },
+                    "field_value": {
+                      "type": "object"
+                    }
+                  },
+                  "required": [
+                    "id"
+                  ]
+                }
+              ]
+            }
+          }
+        },
+        "required": [
+          "pipelineId",
+          "locationId",
+          "name",
+          "status",
+          "contactId"
+        ]
+      }
+    }
+  ]
+}

@@ -1,0 +1,37 @@
+{
+  "module": "companies",
+  "endpoints": [
+    {
+      "name": "companies_get_company",
+      "module": "companies",
+      "method": "GET",
+      "path": "/companies/{companyId}",
+      "version": "2021-07-28",
+      "summary": "Get Company",
+      "description": "Get Company Get Comapny [GET /companies/{companyId}] Token: agency. Scopes: companies.readonly.",
+      "scopes": [
+        "companies.readonly"
+      ],
+      "access": "agency",
+      "operationClass": "read",
+      "deprecated": false,
+      "pathFields": [
+        "companyId"
+      ],
+      "queryFields": [],
+      "bodyFields": [],
+      "bodyWrapped": false,
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "companyId": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "companyId"
+        ]
+      }
+    }
+  ]
+}

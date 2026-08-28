@@ -1,0 +1,345 @@
+{
+  "module": "funnels",
+  "endpoints": [
+    {
+      "name": "funnels_create_redirect",
+      "module": "funnels",
+      "method": "POST",
+      "path": "/funnels/lookup/redirect",
+      "version": "2021-07-28",
+      "summary": "Create Redirect",
+      "description": "Create Redirect The \"Create Redirect\" API Allows adding a new url redirect to the system. Use this endpoint to create a url redirect with the specified details. Ensure that the required information is provided in the request payload. [POST /funnels/lookup/redirect] Token: location. Scopes: funnels/redirect.write.",
+      "scopes": [
+        "funnels/redirect.write"
+      ],
+      "access": "location",
+      "operationClass": "write",
+      "deprecated": false,
+      "contentType": "application/json",
+      "pathFields": [],
+      "queryFields": [],
+      "bodyFields": [
+        "locationId",
+        "domain",
+        "path",
+        "target",
+        "action"
+      ],
+      "bodyWrapped": false,
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "locationId": {
+            "type": "string"
+          },
+          "domain": {
+            "type": "string"
+          },
+          "path": {
+            "type": "string"
+          },
+          "target": {
+            "type": "string"
+          },
+          "action": {
+            "type": "string",
+            "enum": [
+              "funnel",
+              "website",
+              "url",
+              "all"
+            ]
+          }
+        },
+        "required": [
+          "locationId",
+          "domain",
+          "path",
+          "target",
+          "action"
+        ]
+      }
+    },
+    {
+      "name": "funnels_update_redirect_by_id",
+      "module": "funnels",
+      "method": "PATCH",
+      "path": "/funnels/lookup/redirect/{id}",
+      "version": "2021-07-28",
+      "summary": "Update Redirect By Id",
+      "description": "Update Redirect By Id The \"Update Redirect By Id\" API Allows updating an existing URL redirect in the system. Use this endpoint to modify a URL redirect with the specified ID using details provided in the request payload. [PATCH /funnels/lookup/redirect/{id}] Token: location. Scopes: funnels/redirect.write.",
+      "scopes": [
+        "funnels/redirect.write"
+      ],
+      "access": "location",
+      "operationClass": "write",
+      "deprecated": false,
+      "contentType": "application/json",
+      "pathFields": [
+        "id"
+      ],
+      "queryFields": [],
+      "bodyFields": [
+        "target",
+        "action",
+        "locationId"
+      ],
+      "bodyWrapped": false,
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "target": {
+            "type": "string"
+          },
+          "action": {
+            "type": "string",
+            "enum": [
+              "funnel",
+              "website",
+              "url",
+              "all"
+            ]
+          },
+          "locationId": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "id",
+          "target",
+          "action",
+          "locationId"
+        ]
+      }
+    },
+    {
+      "name": "funnels_delete_redirect_by_id",
+      "module": "funnels",
+      "method": "DELETE",
+      "path": "/funnels/lookup/redirect/{id}",
+      "version": "2021-07-28",
+      "summary": "Delete Redirect By Id",
+      "description": "Delete Redirect By Id The \"Delete Redirect By Id\" API Allows deletion of a URL redirect from the system using its unique identifier. Use this endpoint to delete a URL redirect with the specified ID using details provided in the request payload. [DELETE /funnels/lookup/redirect/{id}] Token: location. Scopes: funnels/redirect.write.",
+      "scopes": [
+        "funnels/redirect.write"
+      ],
+      "access": "location",
+      "operationClass": "delete",
+      "deprecated": false,
+      "pathFields": [
+        "id"
+      ],
+      "queryFields": [
+        "locationId"
+      ],
+      "bodyFields": [],
+      "bodyWrapped": false,
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "locationId": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "id",
+          "locationId"
+        ]
+      }
+    },
+    {
+      "name": "funnels_fetch_redirects_list",
+      "module": "funnels",
+      "method": "GET",
+      "path": "/funnels/lookup/redirect/list",
+      "version": "2021-07-28",
+      "summary": "Fetch List of Redirects",
+      "description": "Fetch List of Redirects Retrieves a list of all URL redirects based on the given query parameters. [GET /funnels/lookup/redirect/list] Token: location. Scopes: funnels/redirect.readonly.",
+      "scopes": [
+        "funnels/redirect.readonly"
+      ],
+      "access": "location",
+      "operationClass": "read",
+      "deprecated": false,
+      "pathFields": [],
+      "queryFields": [
+        "locationId",
+        "limit",
+        "offset",
+        "search"
+      ],
+      "bodyFields": [],
+      "bodyWrapped": false,
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "locationId": {
+            "type": "string"
+          },
+          "limit": {
+            "type": "number"
+          },
+          "offset": {
+            "type": "number"
+          },
+          "search": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "locationId",
+          "limit",
+          "offset"
+        ]
+      }
+    },
+    {
+      "name": "funnels_getfunnels",
+      "module": "funnels",
+      "method": "GET",
+      "path": "/funnels/funnel/list",
+      "version": "2021-07-28",
+      "summary": "Fetch List of Funnels",
+      "description": "Fetch List of Funnels Retrieves a list of all funnels based on the given query parameters. [GET /funnels/funnel/list] Token: location.",
+      "scopes": [],
+      "access": "location",
+      "operationClass": "read",
+      "deprecated": false,
+      "pathFields": [],
+      "queryFields": [
+        "locationId",
+        "type",
+        "category",
+        "offset",
+        "limit",
+        "parentId",
+        "name"
+      ],
+      "bodyFields": [],
+      "bodyWrapped": false,
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "locationId": {
+            "type": "string"
+          },
+          "type": {
+            "type": "string"
+          },
+          "category": {
+            "type": "string"
+          },
+          "offset": {
+            "type": "string"
+          },
+          "limit": {
+            "type": "string"
+          },
+          "parentId": {
+            "type": "string"
+          },
+          "name": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "locationId"
+        ]
+      }
+    },
+    {
+      "name": "funnels_getpagesbyfunnelid",
+      "module": "funnels",
+      "method": "GET",
+      "path": "/funnels/page",
+      "version": "2021-07-28",
+      "summary": "Fetch list of funnel pages",
+      "description": "Fetch list of funnel pages Retrieves a list of all funnel pages based on the given query parameters. [GET /funnels/page] Token: location.",
+      "scopes": [],
+      "access": "location",
+      "operationClass": "read",
+      "deprecated": false,
+      "pathFields": [],
+      "queryFields": [
+        "locationId",
+        "funnelId",
+        "name",
+        "limit",
+        "offset"
+      ],
+      "bodyFields": [],
+      "bodyWrapped": false,
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "locationId": {
+            "type": "string"
+          },
+          "funnelId": {
+            "type": "string"
+          },
+          "name": {
+            "type": "string"
+          },
+          "limit": {
+            "type": "number"
+          },
+          "offset": {
+            "type": "number"
+          }
+        },
+        "required": [
+          "locationId",
+          "funnelId",
+          "limit",
+          "offset"
+        ]
+      }
+    },
+    {
+      "name": "funnels_getpagescountbyfunnelid",
+      "module": "funnels",
+      "method": "GET",
+      "path": "/funnels/page/count",
+      "version": "2021-07-28",
+      "summary": "Fetch count of funnel pages",
+      "description": "Fetch count of funnel pages Retrieves count of all funnel pages based on the given query parameters. [GET /funnels/page/count] Token: location.",
+      "scopes": [],
+      "access": "location",
+      "operationClass": "read",
+      "deprecated": false,
+      "pathFields": [],
+      "queryFields": [
+        "locationId",
+        "funnelId",
+        "name"
+      ],
+      "bodyFields": [],
+      "bodyWrapped": false,
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "locationId": {
+            "type": "string"
+          },
+          "funnelId": {
+            "type": "string"
+          },
+          "name": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "locationId",
+          "funnelId"
+        ]
+      }
+    }
+  ]
+}

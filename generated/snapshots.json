@@ -1,0 +1,194 @@
+{
+  "module": "snapshots",
+  "endpoints": [
+    {
+      "name": "snapshots_get_custom_snapshots",
+      "module": "snapshots",
+      "method": "GET",
+      "path": "/snapshots/",
+      "version": "2021-07-28",
+      "summary": "Get Snapshots",
+      "description": "Get Snapshots Get a list of all own and imported Snapshots [GET /snapshots/] Token: agency.",
+      "scopes": [],
+      "access": "agency",
+      "operationClass": "read",
+      "deprecated": false,
+      "pathFields": [],
+      "queryFields": [
+        "companyId"
+      ],
+      "bodyFields": [],
+      "bodyWrapped": false,
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "companyId": {
+            "type": "string",
+            "description": "Company Id"
+          }
+        },
+        "required": [
+          "companyId"
+        ]
+      }
+    },
+    {
+      "name": "snapshots_create_snapshot_share_link",
+      "module": "snapshots",
+      "method": "POST",
+      "path": "/snapshots/share/link",
+      "version": "2021-07-28",
+      "summary": "Create Snapshot Share Link",
+      "description": "Create Snapshot Share Link Create a share link for snapshot [POST /snapshots/share/link] Token: agency.",
+      "scopes": [],
+      "access": "agency",
+      "operationClass": "write",
+      "deprecated": false,
+      "contentType": "application/json",
+      "pathFields": [],
+      "queryFields": [
+        "companyId"
+      ],
+      "bodyFields": [
+        "snapshot_id",
+        "share_type",
+        "relationship_number",
+        "share_location_id"
+      ],
+      "bodyWrapped": false,
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "companyId": {
+            "type": "string"
+          },
+          "snapshot_id": {
+            "type": "string",
+            "description": "id for snapshot to be shared"
+          },
+          "share_type": {
+            "type": "string",
+            "description": "Type of share link to generate",
+            "enum": [
+              "link",
+              "permanent_link",
+              "agency_link",
+              "location_link"
+            ]
+          },
+          "relationship_number": {
+            "type": "string",
+            "description": "Comma separated Relationship number of Agencies to create agency restricted share link"
+          },
+          "share_location_id": {
+            "type": "string",
+            "description": "Comma separated Sub-Account ids to create sub-account restricted share link"
+          }
+        },
+        "required": [
+          "companyId",
+          "snapshot_id",
+          "share_type"
+        ]
+      }
+    },
+    {
+      "name": "snapshots_get_snapshot_push",
+      "module": "snapshots",
+      "method": "GET",
+      "path": "/snapshots/snapshot-status/{snapshotId}",
+      "version": "2021-07-28",
+      "summary": "Get Snapshot Push between Dates",
+      "description": "Get Snapshot Push between Dates Get list of sub-accounts snapshot pushed in time period [GET /snapshots/snapshot-status/{snapshotId}] Token: agency.",
+      "scopes": [],
+      "access": "agency",
+      "operationClass": "read",
+      "deprecated": false,
+      "pathFields": [
+        "snapshotId"
+      ],
+      "queryFields": [
+        "companyId",
+        "from",
+        "to",
+        "lastDoc",
+        "limit"
+      ],
+      "bodyFields": [],
+      "bodyWrapped": false,
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "snapshotId": {
+            "type": "string"
+          },
+          "companyId": {
+            "type": "string"
+          },
+          "from": {
+            "type": "string"
+          },
+          "to": {
+            "type": "string"
+          },
+          "lastDoc": {
+            "type": "string",
+            "description": "Id for last document till what you want to skip"
+          },
+          "limit": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "snapshotId",
+          "companyId",
+          "from",
+          "to",
+          "lastDoc",
+          "limit"
+        ]
+      }
+    },
+    {
+      "name": "snapshots_get_latest_snapshot_push",
+      "module": "snapshots",
+      "method": "GET",
+      "path": "/snapshots/snapshot-status/{snapshotId}/location/{locationId}",
+      "version": "2021-07-28",
+      "summary": "Get Last Snapshot Push",
+      "description": "Get Last Snapshot Push Get Latest Snapshot Push Status for a location id [GET /snapshots/snapshot-status/{snapshotId}/location/{locationId}] Token: agency.",
+      "scopes": [],
+      "access": "agency",
+      "operationClass": "read",
+      "deprecated": false,
+      "pathFields": [
+        "snapshotId",
+        "locationId"
+      ],
+      "queryFields": [
+        "companyId"
+      ],
+      "bodyFields": [],
+      "bodyWrapped": false,
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "companyId": {
+            "type": "string"
+          },
+          "snapshotId": {
+            "type": "string"
+          },
+          "locationId": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "companyId",
+          "snapshotId",
+          "locationId"
+        ]
+      }
+    }
+  ]
+}

@@ -1,0 +1,112 @@
+{
+  "module": "surveys",
+  "endpoints": [
+    {
+      "name": "surveys_get_surveys_submissions",
+      "module": "surveys",
+      "method": "GET",
+      "path": "/surveys/submissions",
+      "version": "2021-07-28",
+      "summary": "Get Surveys Submissions",
+      "description": "Get Surveys Submissions [GET /surveys/submissions] Scopes: surveys.readonly.",
+      "scopes": [
+        "surveys.readonly"
+      ],
+      "access": "unknown",
+      "operationClass": "read",
+      "deprecated": false,
+      "pathFields": [],
+      "queryFields": [
+        "locationId",
+        "page",
+        "limit",
+        "surveyId",
+        "q",
+        "startAt",
+        "endAt"
+      ],
+      "bodyFields": [],
+      "bodyWrapped": false,
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "locationId": {
+            "type": "string"
+          },
+          "page": {
+            "type": "number",
+            "description": "(default: 1)"
+          },
+          "limit": {
+            "type": "number",
+            "description": "(default: 20)"
+          },
+          "surveyId": {
+            "type": "string",
+            "description": "Filter submission by survey id"
+          },
+          "q": {
+            "type": "string",
+            "description": "Filter by contactId, name, email or phone no."
+          },
+          "startAt": {
+            "type": "string",
+            "description": "Get submission by starting of this date. By default it will be same date of last month(YYYY-MM-DD)."
+          },
+          "endAt": {
+            "type": "string",
+            "description": "Get submission by ending of this date. By default it will be current date(YYYY-MM-DD)."
+          }
+        },
+        "required": [
+          "locationId"
+        ]
+      }
+    },
+    {
+      "name": "surveys_get_surveys",
+      "module": "surveys",
+      "method": "GET",
+      "path": "/surveys/",
+      "version": "2021-07-28",
+      "summary": "Get Surveys",
+      "description": "Get Surveys [GET /surveys/] Scopes: surveys.readonly.",
+      "scopes": [
+        "surveys.readonly"
+      ],
+      "access": "unknown",
+      "operationClass": "read",
+      "deprecated": false,
+      "pathFields": [],
+      "queryFields": [
+        "locationId",
+        "skip",
+        "limit",
+        "type"
+      ],
+      "bodyFields": [],
+      "bodyWrapped": false,
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "locationId": {
+            "type": "string"
+          },
+          "skip": {
+            "type": "number"
+          },
+          "limit": {
+            "type": "number",
+            "description": "(default: 10)"
+          },
+          "type": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "locationId"
+        ]
+      }
+    }
+  ]
+}

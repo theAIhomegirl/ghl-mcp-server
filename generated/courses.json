@@ -1,0 +1,365 @@
+{
+  "module": "courses",
+  "endpoints": [
+    {
+      "name": "courses_import_courses",
+      "module": "courses",
+      "method": "POST",
+      "path": "/courses/courses-exporter/public/import",
+      "version": "2021-07-28",
+      "summary": "Import Courses",
+      "description": "Import Courses through public channels [POST /courses/courses-exporter/public/import]",
+      "scopes": [],
+      "access": "unknown",
+      "operationClass": "write",
+      "deprecated": false,
+      "contentType": "application/json",
+      "pathFields": [],
+      "queryFields": [],
+      "bodyFields": [
+        "locationId",
+        "userId",
+        "products"
+      ],
+      "bodyWrapped": false,
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "locationId": {
+            "type": "string"
+          },
+          "userId": {
+            "type": "string"
+          },
+          "products": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "title": {
+                  "type": "string"
+                },
+                "description": {
+                  "type": "string"
+                },
+                "imageUrl": {
+                  "type": "string"
+                },
+                "categories": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "title": {
+                        "type": "string"
+                      },
+                      "visibility": {
+                        "type": "string",
+                        "enum": [
+                          "published",
+                          "draft"
+                        ]
+                      },
+                      "thumbnailUrl": {
+                        "type": "string"
+                      },
+                      "posts": {
+                        "type": "array",
+                        "items": {
+                          "type": "object",
+                          "properties": {
+                            "title": {
+                              "type": "string"
+                            },
+                            "visibility": {
+                              "type": "string",
+                              "enum": [
+                                "published",
+                                "draft"
+                              ]
+                            },
+                            "thumbnailUrl": {
+                              "type": "string"
+                            },
+                            "contentType": {
+                              "type": "string",
+                              "enum": [
+                                "video",
+                                "assignment",
+                                "quiz"
+                              ]
+                            },
+                            "description": {
+                              "type": "string"
+                            },
+                            "bucketVideoUrl": {
+                              "type": "string"
+                            },
+                            "postMaterials": {
+                              "type": "array",
+                              "items": {
+                                "type": "object",
+                                "properties": {
+                                  "title": {
+                                    "type": "string"
+                                  },
+                                  "type": {
+                                    "type": "string",
+                                    "enum": [
+                                      "pdf",
+                                      "image",
+                                      "docx",
+                                      "pptx",
+                                      "xlsx",
+                                      "html",
+                                      "dotx",
+                                      "epub",
+                                      "webp",
+                                      "gdoc",
+                                      "mp3",
+                                      "doc",
+                                      "txt",
+                                      "zip",
+                                      "ppt",
+                                      "key",
+                                      "htm",
+                                      "xls",
+                                      "odp",
+                                      "odt",
+                                      "rtf",
+                                      "m4a",
+                                      "ods",
+                                      "mp4",
+                                      "ai",
+                                      "avi",
+                                      "mov",
+                                      "wmv",
+                                      "mkv",
+                                      "wav",
+                                      "flac",
+                                      "ogg",
+                                      "png",
+                                      "jpeg",
+                                      "jpg",
+                                      "gif",
+                                      "bmp",
+                                      "tiff",
+                                      "svg",
+                                      "odg",
+                                      "sxw",
+                                      "sxc",
+                                      "sxi",
+                                      "rar",
+                                      "7z",
+                                      "json",
+                                      "xml",
+                                      "csv",
+                                      "md",
+                                      "obj",
+                                      "stl",
+                                      "woff",
+                                      "ttf"
+                                    ]
+                                  },
+                                  "url": {
+                                    "type": "string"
+                                  }
+                                },
+                                "required": [
+                                  "title",
+                                  "type",
+                                  "url"
+                                ]
+                              }
+                            }
+                          },
+                          "required": [
+                            "title",
+                            "visibility",
+                            "contentType",
+                            "description"
+                          ]
+                        }
+                      },
+                      "subCategories": {
+                        "type": "array",
+                        "items": {
+                          "type": "object",
+                          "properties": {
+                            "title": {
+                              "type": "string"
+                            },
+                            "visibility": {
+                              "type": "string",
+                              "enum": [
+                                "published",
+                                "draft"
+                              ]
+                            },
+                            "thumbnailUrl": {
+                              "type": "string"
+                            },
+                            "posts": {
+                              "type": "array",
+                              "items": {
+                                "type": "object",
+                                "properties": {
+                                  "title": {
+                                    "type": "string"
+                                  },
+                                  "visibility": {
+                                    "type": "string",
+                                    "enum": [
+                                      "published",
+                                      "draft"
+                                    ]
+                                  },
+                                  "thumbnailUrl": {
+                                    "type": "string"
+                                  },
+                                  "contentType": {
+                                    "type": "string",
+                                    "enum": [
+                                      "video",
+                                      "assignment",
+                                      "quiz"
+                                    ]
+                                  },
+                                  "description": {
+                                    "type": "string"
+                                  },
+                                  "bucketVideoUrl": {
+                                    "type": "string"
+                                  },
+                                  "postMaterials": {
+                                    "type": "array",
+                                    "items": {
+                                      "type": "object",
+                                      "properties": {
+                                        "title": {
+                                          "type": "string"
+                                        },
+                                        "type": {
+                                          "type": "string",
+                                          "enum": [
+                                            "pdf",
+                                            "image",
+                                            "docx",
+                                            "pptx",
+                                            "xlsx",
+                                            "html",
+                                            "dotx",
+                                            "epub",
+                                            "webp",
+                                            "gdoc",
+                                            "mp3",
+                                            "doc",
+                                            "txt",
+                                            "zip",
+                                            "ppt",
+                                            "key",
+                                            "htm",
+                                            "xls",
+                                            "odp",
+                                            "odt",
+                                            "rtf",
+                                            "m4a",
+                                            "ods",
+                                            "mp4",
+                                            "ai",
+                                            "avi",
+                                            "mov",
+                                            "wmv",
+                                            "mkv",
+                                            "wav",
+                                            "flac",
+                                            "ogg",
+                                            "png",
+                                            "jpeg",
+                                            "jpg",
+                                            "gif",
+                                            "bmp",
+                                            "tiff",
+                                            "svg",
+                                            "odg",
+                                            "sxw",
+                                            "sxc",
+                                            "sxi",
+                                            "rar",
+                                            "7z",
+                                            "json",
+                                            "xml",
+                                            "csv",
+                                            "md",
+                                            "obj",
+                                            "stl",
+                                            "woff",
+                                            "ttf"
+                                          ]
+                                        },
+                                        "url": {
+                                          "type": "string"
+                                        }
+                                      },
+                                      "required": [
+                                        "title",
+                                        "type",
+                                        "url"
+                                      ]
+                                    }
+                                  }
+                                },
+                                "required": [
+                                  "title",
+                                  "visibility",
+                                  "contentType",
+                                  "description"
+                                ]
+                              }
+                            }
+                          },
+                          "required": [
+                            "title",
+                            "visibility"
+                          ]
+                        }
+                      }
+                    },
+                    "required": [
+                      "title",
+                      "visibility"
+                    ]
+                  }
+                },
+                "instructorDetails": {
+                  "type": "object",
+                  "properties": {
+                    "name": {
+                      "type": "string"
+                    },
+                    "description": {
+                      "type": "string"
+                    }
+                  },
+                  "required": [
+                    "name",
+                    "description"
+                  ]
+                }
+              },
+              "required": [
+                "title",
+                "description",
+                "categories"
+              ]
+            }
+          }
+        },
+        "required": [
+          "locationId",
+          "products"
+        ]
+      }
+    }
+  ]
+}

@@ -1,0 +1,352 @@
+{
+  "modules": [
+    {
+      "module": "ad-manager",
+      "count": 94,
+      "byClass": {
+        "read": 47,
+        "write": 35,
+        "delete": 12
+      }
+    },
+    {
+      "module": "affiliate-manager",
+      "count": 4,
+      "byClass": {
+        "read": 4
+      }
+    },
+    {
+      "module": "agent-studio",
+      "count": 11,
+      "byClass": {
+        "read": 4,
+        "write": 6,
+        "delete": 1
+      }
+    },
+    {
+      "module": "associations",
+      "count": 10,
+      "byClass": {
+        "write": 3,
+        "read": 5,
+        "delete": 2
+      }
+    },
+    {
+      "module": "blogs",
+      "count": 7,
+      "byClass": {
+        "read": 5,
+        "write": 2
+      }
+    },
+    {
+      "module": "brand-boards",
+      "count": 5,
+      "byClass": {
+        "read": 2,
+        "write": 2,
+        "delete": 1
+      }
+    },
+    {
+      "module": "businesses",
+      "count": 5,
+      "byClass": {
+        "read": 2,
+        "write": 2,
+        "delete": 1
+      }
+    },
+    {
+      "module": "calendars",
+      "count": 41,
+      "byClass": {
+        "read": 15,
+        "write": 18,
+        "delete": 8
+      }
+    },
+    {
+      "module": "campaigns",
+      "count": 1,
+      "byClass": {
+        "read": 1
+      }
+    },
+    {
+      "module": "companies",
+      "count": 1,
+      "byClass": {
+        "read": 1
+      }
+    },
+    {
+      "module": "contacts",
+      "count": 32,
+      "byClass": {
+        "read": 10,
+        "write": 14,
+        "delete": 8
+      }
+    },
+    {
+      "module": "conversation-ai",
+      "count": 12,
+      "byClass": {
+        "write": 5,
+        "read": 5,
+        "delete": 2
+      }
+    },
+    {
+      "module": "conversations",
+      "count": 29,
+      "byClass": {
+        "read": 11,
+        "write": 15,
+        "delete": 3
+      }
+    },
+    {
+      "module": "courses",
+      "count": 1,
+      "byClass": {
+        "write": 1
+      }
+    },
+    {
+      "module": "custom-fields",
+      "count": 8,
+      "byClass": {
+        "read": 2,
+        "write": 4,
+        "delete": 2
+      }
+    },
+    {
+      "module": "custom-menus",
+      "count": 5,
+      "byClass": {
+        "read": 2,
+        "write": 2,
+        "delete": 1
+      }
+    },
+    {
+      "module": "email-isv",
+      "count": 1,
+      "byClass": {
+        "write": 1
+      }
+    },
+    {
+      "module": "emails",
+      "count": 5,
+      "byClass": {
+        "read": 2,
+        "write": 2,
+        "delete": 1
+      }
+    },
+    {
+      "module": "forms",
+      "count": 3,
+      "byClass": {
+        "read": 2,
+        "write": 1
+      }
+    },
+    {
+      "module": "funnels",
+      "count": 7,
+      "byClass": {
+        "write": 2,
+        "delete": 1,
+        "read": 4
+      }
+    },
+    {
+      "module": "invoices",
+      "count": 42,
+      "byClass": {
+        "read": 12,
+        "write": 25,
+        "delete": 5
+      }
+    },
+    {
+      "module": "knowledge-base",
+      "count": 14,
+      "byClass": {
+        "read": 5,
+        "write": 6,
+        "delete": 3
+      }
+    },
+    {
+      "module": "links",
+      "count": 6,
+      "byClass": {
+        "read": 3,
+        "write": 2,
+        "delete": 1
+      }
+    },
+    {
+      "module": "locations",
+      "count": 29,
+      "byClass": {
+        "read": 11,
+        "write": 12,
+        "delete": 6
+      }
+    },
+    {
+      "module": "marketplace",
+      "count": 9,
+      "byClass": {
+        "read": 5,
+        "write": 2,
+        "delete": 2
+      }
+    },
+    {
+      "module": "medias",
+      "count": 7,
+      "byClass": {
+        "read": 1,
+        "write": 5,
+        "delete": 1
+      }
+    },
+    {
+      "module": "oauth",
+      "count": 3,
+      "byClass": {
+        "write": 2,
+        "read": 1
+      }
+    },
+    {
+      "module": "objects",
+      "count": 9,
+      "byClass": {
+        "read": 4,
+        "write": 4,
+        "delete": 1
+      }
+    },
+    {
+      "module": "opportunities",
+      "count": 12,
+      "byClass": {
+        "read": 5,
+        "write": 5,
+        "delete": 2
+      }
+    },
+    {
+      "module": "payments",
+      "count": 23,
+      "byClass": {
+        "read": 12,
+        "write": 9,
+        "delete": 2
+      }
+    },
+    {
+      "module": "phone-system",
+      "count": 4,
+      "byClass": {
+        "read": 3,
+        "write": 1
+      }
+    },
+    {
+      "module": "products",
+      "count": 27,
+      "byClass": {
+        "write": 13,
+        "read": 10,
+        "delete": 4
+      }
+    },
+    {
+      "module": "proposals",
+      "count": 4,
+      "byClass": {
+        "read": 2,
+        "write": 2
+      }
+    },
+    {
+      "module": "saas-api",
+      "count": 22,
+      "byClass": {
+        "read": 10,
+        "write": 12
+      }
+    },
+    {
+      "module": "snapshots",
+      "count": 4,
+      "byClass": {
+        "read": 3,
+        "write": 1
+      }
+    },
+    {
+      "module": "social-media-posting",
+      "count": 40,
+      "byClass": {
+        "read": 24,
+        "write": 12,
+        "delete": 4
+      }
+    },
+    {
+      "module": "store",
+      "count": 18,
+      "byClass": {
+        "read": 8,
+        "write": 7,
+        "delete": 3
+      }
+    },
+    {
+      "module": "surveys",
+      "count": 2,
+      "byClass": {
+        "read": 2
+      }
+    },
+    {
+      "module": "users",
+      "count": 7,
+      "byClass": {
+        "read": 3,
+        "write": 3,
+        "delete": 1
+      }
+    },
+    {
+      "module": "voice-ai",
+      "count": 11,
+      "byClass": {
+        "read": 5,
+        "write": 4,
+        "delete": 2
+      }
+    },
+    {
+      "module": "workflows",
+      "count": 1,
+      "byClass": {
+        "read": 1
+      }
+    }
+  ]
+}

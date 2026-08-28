@@ -1,0 +1,1140 @@
+{
+  "module": "saas-api",
+  "endpoints": [
+    {
+      "name": "saas_api_locations_deprecated",
+      "module": "saas-api",
+      "method": "GET",
+      "path": "/saas-api/public-api/locations",
+      "version": "2021-04-15",
+      "summary": "Get locations by stripeId with companyId",
+      "description": "Get locations by stripeId with companyId Get locations by stripeCustomerId or stripeSubscriptionId with companyId [GET /saas-api/public-api/locations] Token: agency. DEPRECATED.",
+      "scopes": [],
+      "access": "agency",
+      "operationClass": "read",
+      "deprecated": true,
+      "pathFields": [],
+      "queryFields": [
+        "customerId",
+        "subscriptionId",
+        "companyId"
+      ],
+      "bodyFields": [],
+      "bodyWrapped": false,
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "customerId": {
+            "type": "string",
+            "description": "Stripe customer ID to find locations for"
+          },
+          "subscriptionId": {
+            "type": "string",
+            "description": "Stripe subscription ID to find locations for"
+          },
+          "companyId": {
+            "type": "string",
+            "description": "Company ID to filter locations"
+          }
+        },
+        "required": [
+          "companyId"
+        ]
+      }
+    },
+    {
+      "name": "saas_api_update_saas_subscription_deprecated",
+      "module": "saas-api",
+      "method": "PUT",
+      "path": "/saas-api/public-api/update-saas-subscription/{locationId}",
+      "version": "2021-04-15",
+      "summary": "Update SaaS subscription",
+      "description": "Update SaaS subscription for given locationId and customerId [PUT /saas-api/public-api/update-saas-subscription/{locationId}] Token: agency. DEPRECATED.",
+      "scopes": [],
+      "access": "agency",
+      "operationClass": "write",
+      "deprecated": true,
+      "contentType": "application/json",
+      "pathFields": [
+        "locationId"
+      ],
+      "queryFields": [],
+      "bodyFields": [
+        "subscriptionId",
+        "customerId",
+        "companyId"
+      ],
+      "bodyWrapped": false,
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "locationId": {
+            "type": "string",
+            "description": "Location ID to update subscription for"
+          },
+          "subscriptionId": {
+            "type": "string",
+            "description": "Subscription ID"
+          },
+          "customerId": {
+            "type": "string",
+            "description": "Customer ID"
+          },
+          "companyId": {
+            "type": "string",
+            "description": "Company ID"
+          }
+        },
+        "required": [
+          "locationId",
+          "subscriptionId",
+          "customerId",
+          "companyId"
+        ]
+      }
+    },
+    {
+      "name": "saas_api_bulk_disable_saas_deprecated",
+      "module": "saas-api",
+      "method": "POST",
+      "path": "/saas-api/public-api/bulk-disable-saas/{companyId}",
+      "version": "2021-04-15",
+      "summary": "Disable SaaS for locations",
+      "description": "Disable SaaS for locations for given locationIds [POST /saas-api/public-api/bulk-disable-saas/{companyId}] Token: agency. DEPRECATED.",
+      "scopes": [],
+      "access": "agency",
+      "operationClass": "write",
+      "deprecated": true,
+      "contentType": "application/json",
+      "pathFields": [
+        "companyId"
+      ],
+      "queryFields": [],
+      "bodyFields": [
+        "locationIds"
+      ],
+      "bodyWrapped": false,
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "companyId": {
+            "type": "string",
+            "description": "Company ID to disable SaaS for"
+          },
+          "locationIds": {
+            "description": "Location IDs",
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          }
+        },
+        "required": [
+          "companyId",
+          "locationIds"
+        ]
+      }
+    },
+    {
+      "name": "saas_api_enable_saas_location_deprecated",
+      "module": "saas-api",
+      "method": "POST",
+      "path": "/saas-api/public-api/enable-saas/{locationId}",
+      "version": "2021-04-15",
+      "summary": "Enable SaaS for Sub-Account (Formerly Location)",
+      "description": "Enable SaaS for Sub-Account (Formerly Location) <div> <p>Enable SaaS for Sub-Account (Formerly Location) based on the data provided</p> <div> <span style= \"display: inline-block; width: 25px; height: 25px; background-color: yellow; color: black; font-weight: bold; font-size: 24px; text-align: center; line-height: 22px; border: 2px solid black; border-radius: 10%; margin-right: 10px;\"> ! </span> <span> <strong> This feature is only available on… [POST /saas-api/public-api/enable-saas/{locationId}] Token: agency. DEPRECATED.",
+      "scopes": [],
+      "access": "agency",
+      "operationClass": "write",
+      "deprecated": true,
+      "contentType": "application/json",
+      "pathFields": [
+        "locationId"
+      ],
+      "queryFields": [],
+      "bodyFields": [
+        "stripeAccountId",
+        "name",
+        "email",
+        "stripeCustomerId",
+        "companyId",
+        "isSaaSV2",
+        "contactId",
+        "providerLocationId",
+        "description",
+        "saasPlanId",
+        "priceId"
+      ],
+      "bodyWrapped": false,
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "locationId": {
+            "type": "string",
+            "description": "Location ID to enable SaaS for"
+          },
+          "stripeAccountId": {
+            "type": "string",
+            "description": "Stripe account id(Required only for SaaS V1)"
+          },
+          "name": {
+            "type": "string",
+            "description": "Name of the stripe customer(Required only for SaaS V1)"
+          },
+          "email": {
+            "type": "string",
+            "description": "Email of the stripe customer(Required only for SaaS V1)"
+          },
+          "stripeCustomerId": {
+            "type": "string",
+            "description": "Stripe customer id if exists(Required only for SaaS V1)"
+          },
+          "companyId": {
+            "type": "string"
+          },
+          "isSaaSV2": {
+            "type": "boolean",
+            "description": "Denotes if it is a saas v2 or v1 sub-account"
+          },
+          "contactId": {
+            "type": "string",
+            "description": "Agency subaccount used for payment provider integration(Required Only for SaaS V2)"
+          },
+          "providerLocationId": {
+            "type": "string",
+            "description": "Agency Subaccount ID"
+          },
+          "description": {
+            "type": "string",
+            "description": "Description"
+          },
+          "saasPlanId": {
+            "type": "string",
+            "description": "Required only while pre-configuring saas subscription"
+          },
+          "priceId": {
+            "type": "string",
+            "description": "Required only while pre-configuring saas subscription"
+          }
+        },
+        "required": [
+          "locationId",
+          "companyId",
+          "isSaaSV2"
+        ]
+      }
+    },
+    {
+      "name": "saas_api_pause_location_deprecated",
+      "module": "saas-api",
+      "method": "POST",
+      "path": "/saas-api/public-api/pause/{locationId}",
+      "version": "2021-04-15",
+      "summary": "Pause location",
+      "description": "Pause location Pause Sub account for given locationId [POST /saas-api/public-api/pause/{locationId}] Token: agency. DEPRECATED.",
+      "scopes": [],
+      "access": "agency",
+      "operationClass": "write",
+      "deprecated": true,
+      "contentType": "application/json",
+      "pathFields": [
+        "locationId"
+      ],
+      "queryFields": [],
+      "bodyFields": [
+        "paused",
+        "companyId"
+      ],
+      "bodyWrapped": false,
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "locationId": {
+            "type": "string",
+            "description": "Location ID to pause/unpause"
+          },
+          "paused": {
+            "type": "boolean",
+            "description": "Paused"
+          },
+          "companyId": {
+            "type": "string",
+            "description": "Company ID"
+          }
+        },
+        "required": [
+          "locationId",
+          "paused",
+          "companyId"
+        ]
+      }
+    },
+    {
+      "name": "saas_api_update_rebilling_deprecated",
+      "module": "saas-api",
+      "method": "POST",
+      "path": "/saas-api/public-api/update-rebilling/{companyId}",
+      "version": "2021-04-15",
+      "summary": "Update Rebilling",
+      "description": "Update Rebilling Bulk update rebilling for given locationIds [POST /saas-api/public-api/update-rebilling/{companyId}] Token: agency. DEPRECATED.",
+      "scopes": [],
+      "access": "agency",
+      "operationClass": "write",
+      "deprecated": true,
+      "contentType": "application/json",
+      "pathFields": [
+        "companyId"
+      ],
+      "queryFields": [],
+      "bodyFields": [
+        "product",
+        "locationIds",
+        "config"
+      ],
+      "bodyWrapped": false,
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "companyId": {
+            "type": "string",
+            "description": "Company ID to update rebilling for"
+          },
+          "product": {
+            "type": "string",
+            "description": "The product to update rebilling for",
+            "enum": [
+              "contentAI",
+              "workflow_premium_actions",
+              "workflow_ai",
+              "conversationAI",
+              "EmailNotification",
+              "whatsApp",
+              "reviewsAI",
+              "VERIFIED_CALLER_ID",
+              "WALLET_SALES_TAX",
+              "NOTIFICATION_SMS",
+              "EmailSmtp",
+              "EmailVerification",
+              "autoCompleteAddress",
+              "funnelAI",
+              "domainPurchase",
+              "Phone",
+              "Email"
+            ]
+          },
+          "locationIds": {
+            "description": "Array of location IDs to update rebilling for",
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "config": {
+            "type": "object",
+            "description": "Configuration for rebilling settings",
+            "properties": {
+              "optIn": {
+                "type": "boolean",
+                "description": "Enable the product for the locations"
+              },
+              "enabled": {
+                "type": "boolean",
+                "description": "Enable the rebilling for the locations"
+              },
+              "markup": {
+                "type": "number",
+                "description": "Additional value to be added in terms of percentage. For example, if the product price is $100 and the markup is 5, the amount charged to will be $105."
+              }
+            }
+          }
+        },
+        "required": [
+          "companyId",
+          "product",
+          "locationIds",
+          "config"
+        ]
+      }
+    },
+    {
+      "name": "saas_api_get_agency_plans_deprecated",
+      "module": "saas-api",
+      "method": "GET",
+      "path": "/saas-api/public-api/agency-plans/{companyId}",
+      "version": "2021-04-15",
+      "summary": "Get Agency Plans",
+      "description": "Get Agency Plans Fetch all agency subscription plans for a given company ID [GET /saas-api/public-api/agency-plans/{companyId}] Token: agency. DEPRECATED.",
+      "scopes": [],
+      "access": "agency",
+      "operationClass": "read",
+      "deprecated": true,
+      "pathFields": [
+        "companyId"
+      ],
+      "queryFields": [],
+      "bodyFields": [],
+      "bodyWrapped": false,
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "companyId": {
+            "type": "string",
+            "description": "Company ID to get agency plans for"
+          }
+        },
+        "required": [
+          "companyId"
+        ]
+      }
+    },
+    {
+      "name": "saas_api_get_location_subscription_deprecated",
+      "module": "saas-api",
+      "method": "GET",
+      "path": "/saas-api/public-api/get-saas-subscription/{locationId}",
+      "version": "2021-04-15",
+      "summary": "Get Location Subscription Details",
+      "description": "Get Location Subscription Details Fetch subscription details for a specific location from location metadata [GET /saas-api/public-api/get-saas-subscription/{locationId}] Token: agency. DEPRECATED.",
+      "scopes": [],
+      "access": "agency",
+      "operationClass": "read",
+      "deprecated": true,
+      "pathFields": [
+        "locationId"
+      ],
+      "queryFields": [
+        "companyId"
+      ],
+      "bodyFields": [],
+      "bodyWrapped": false,
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "locationId": {
+            "type": "string",
+            "description": "Location ID to get subscription details for"
+          },
+          "companyId": {
+            "type": "string",
+            "description": "Company ID to filter subscription details"
+          }
+        },
+        "required": [
+          "locationId",
+          "companyId"
+        ]
+      }
+    },
+    {
+      "name": "saas_api_bulk_enable_saas_deprecated",
+      "module": "saas-api",
+      "method": "POST",
+      "path": "/saas-api/public-api/bulk-enable-saas/{companyId}",
+      "version": "2021-04-15",
+      "summary": "Bulk Enable SaaS",
+      "description": "Bulk Enable SaaS Enable SaaS mode for multiple locations with support for both SaaS v1 and v2 [POST /saas-api/public-api/bulk-enable-saas/{companyId}] Token: agency. DEPRECATED.",
+      "scopes": [],
+      "access": "agency",
+      "operationClass": "write",
+      "deprecated": true,
+      "contentType": "application/json",
+      "pathFields": [
+        "companyId"
+      ],
+      "queryFields": [],
+      "bodyFields": [
+        "locationIds",
+        "isSaaSV2",
+        "actionPayload"
+      ],
+      "bodyWrapped": false,
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "companyId": {
+            "type": "string",
+            "description": "Company ID to enable SaaS for"
+          },
+          "locationIds": {
+            "description": "Array of location IDs to enable SaaS for",
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "isSaaSV2": {
+            "type": "boolean",
+            "description": "Indicates if the SaaS is V2"
+          },
+          "actionPayload": {
+            "type": "object",
+            "properties": {
+              "priceId": {
+                "type": "string",
+                "description": "Price ID for the SaaS plan"
+              },
+              "stripeAccountId": {
+                "type": "string",
+                "description": "Stripe account ID"
+              },
+              "saasPlanId": {
+                "type": "string",
+                "description": "SaaS plan ID"
+              },
+              "providerLocationId": {
+                "type": "string",
+                "description": "Provider location ID"
+              }
+            },
+            "required": [
+              "saasPlanId"
+            ],
+            "description": "Action payload for the bulk enable SaaS operation"
+          }
+        },
+        "required": [
+          "companyId",
+          "locationIds",
+          "isSaaSV2",
+          "actionPayload"
+        ]
+      }
+    },
+    {
+      "name": "saas_api_get_saas_locations_deprecated",
+      "module": "saas-api",
+      "method": "GET",
+      "path": "/saas-api/public-api/saas-locations/{companyId}",
+      "version": "2021-04-15",
+      "summary": "Get SaaS Locations",
+      "description": "Get SaaS Locations Fetch all SaaS-activated locations for a company with pagination [GET /saas-api/public-api/saas-locations/{companyId}] Token: agency. DEPRECATED.",
+      "scopes": [],
+      "access": "agency",
+      "operationClass": "read",
+      "deprecated": true,
+      "pathFields": [
+        "companyId"
+      ],
+      "queryFields": [
+        "page"
+      ],
+      "bodyFields": [],
+      "bodyWrapped": false,
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "companyId": {
+            "type": "string",
+            "description": "Company ID to get SaaS locations for"
+          },
+          "page": {
+            "type": "number",
+            "description": "Page number for pagination"
+          }
+        },
+        "required": [
+          "companyId"
+        ]
+      }
+    },
+    {
+      "name": "saas_api_get_saas_plan_deprecated",
+      "module": "saas-api",
+      "method": "GET",
+      "path": "/saas-api/public-api/saas-plan/{planId}",
+      "version": "2021-04-15",
+      "summary": "Get SaaS Plan",
+      "description": "Get SaaS Plan Fetch a specific SaaS plan by plan ID [GET /saas-api/public-api/saas-plan/{planId}] Token: agency. DEPRECATED.",
+      "scopes": [],
+      "access": "agency",
+      "operationClass": "read",
+      "deprecated": true,
+      "pathFields": [
+        "planId"
+      ],
+      "queryFields": [
+        "companyId"
+      ],
+      "bodyFields": [],
+      "bodyWrapped": false,
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "planId": {
+            "type": "string",
+            "description": "Plan ID to get SaaS plan details for"
+          },
+          "companyId": {
+            "type": "string",
+            "description": "Company ID to filter SaaS plan"
+          }
+        },
+        "required": [
+          "planId",
+          "companyId"
+        ]
+      }
+    },
+    {
+      "name": "saas_api_locations",
+      "module": "saas-api",
+      "method": "GET",
+      "path": "/saas/locations",
+      "version": "2021-04-15",
+      "summary": "Get locations by stripeId with companyId",
+      "description": "Get locations by stripeId with companyId Get locations by stripeCustomerId or stripeSubscriptionId with companyId [GET /saas/locations] Token: agency.",
+      "scopes": [],
+      "access": "agency",
+      "operationClass": "read",
+      "deprecated": false,
+      "pathFields": [],
+      "queryFields": [
+        "customerId",
+        "subscriptionId",
+        "companyId"
+      ],
+      "bodyFields": [],
+      "bodyWrapped": false,
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "customerId": {
+            "type": "string"
+          },
+          "subscriptionId": {
+            "type": "string"
+          },
+          "companyId": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "customerId",
+          "subscriptionId",
+          "companyId"
+        ]
+      }
+    },
+    {
+      "name": "saas_api_generate_payment_link",
+      "module": "saas-api",
+      "method": "PUT",
+      "path": "/saas/update-saas-subscription/{locationId}",
+      "version": "2021-04-15",
+      "summary": "Update SaaS subscription",
+      "description": "Update SaaS subscription for given locationId and customerId [PUT /saas/update-saas-subscription/{locationId}] Token: agency.",
+      "scopes": [],
+      "access": "agency",
+      "operationClass": "write",
+      "deprecated": false,
+      "contentType": "application/json",
+      "pathFields": [
+        "locationId"
+      ],
+      "queryFields": [],
+      "bodyFields": [
+        "subscriptionId",
+        "customerId",
+        "companyId"
+      ],
+      "bodyWrapped": false,
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "locationId": {
+            "type": "string"
+          },
+          "subscriptionId": {
+            "type": "string",
+            "description": "Subscription ID"
+          },
+          "customerId": {
+            "type": "string",
+            "description": "Customer ID"
+          },
+          "companyId": {
+            "type": "string",
+            "description": "Company ID"
+          }
+        },
+        "required": [
+          "locationId",
+          "subscriptionId",
+          "customerId",
+          "companyId"
+        ]
+      }
+    },
+    {
+      "name": "saas_api_bulk_disable_saas",
+      "module": "saas-api",
+      "method": "POST",
+      "path": "/saas/bulk-disable-saas/{companyId}",
+      "version": "2021-04-15",
+      "summary": "Disable SaaS for locations",
+      "description": "Disable SaaS for locations for given locationIds [POST /saas/bulk-disable-saas/{companyId}] Token: agency.",
+      "scopes": [],
+      "access": "agency",
+      "operationClass": "write",
+      "deprecated": false,
+      "contentType": "application/json",
+      "pathFields": [
+        "companyId"
+      ],
+      "queryFields": [],
+      "bodyFields": [
+        "locationIds"
+      ],
+      "bodyWrapped": false,
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "companyId": {
+            "type": "string"
+          },
+          "locationIds": {
+            "description": "Location IDs",
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          }
+        },
+        "required": [
+          "companyId",
+          "locationIds"
+        ]
+      }
+    },
+    {
+      "name": "saas_api_enable_saas_location",
+      "module": "saas-api",
+      "method": "POST",
+      "path": "/saas/enable-saas/{locationId}",
+      "version": "2021-04-15",
+      "summary": "Enable SaaS for Sub-Account (Formerly Location)",
+      "description": "Enable SaaS for Sub-Account (Formerly Location) <div> <p>Enable SaaS for Sub-Account (Formerly Location) based on the data provided</p> <div> <span style= \"display: inline-block; width: 25px; height: 25px; background-color: yellow; color: black; font-weight: bold; font-size: 24px; text-align: center; line-height: 22px; border: 2px solid black; border-radius: 10%; margin-right: 10px;\"> ! </span> <span> <strong> This feature is only available on… [POST /saas/enable-saas/{locationId}] Token: agency.",
+      "scopes": [],
+      "access": "agency",
+      "operationClass": "write",
+      "deprecated": false,
+      "contentType": "application/json",
+      "pathFields": [
+        "locationId"
+      ],
+      "queryFields": [],
+      "bodyFields": [
+        "stripeAccountId",
+        "name",
+        "email",
+        "stripeCustomerId",
+        "companyId",
+        "isSaaSV2",
+        "contactId",
+        "providerLocationId",
+        "description",
+        "saasPlanId",
+        "priceId"
+      ],
+      "bodyWrapped": false,
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "locationId": {
+            "type": "string"
+          },
+          "stripeAccountId": {
+            "type": "string",
+            "description": "Stripe account id(Required only for SaaS V1)"
+          },
+          "name": {
+            "type": "string",
+            "description": "Name of the stripe customer(Required only for SaaS V1)"
+          },
+          "email": {
+            "type": "string",
+            "description": "Email of the stripe customer(Required only for SaaS V1)"
+          },
+          "stripeCustomerId": {
+            "type": "string",
+            "description": "Stripe customer id if exists(Required only for SaaS V1)"
+          },
+          "companyId": {
+            "type": "string"
+          },
+          "isSaaSV2": {
+            "type": "boolean",
+            "description": "Denotes if it is a saas v2 or v1 sub-account"
+          },
+          "contactId": {
+            "type": "string",
+            "description": "Agency subaccount used for payment provider integration(Required Only for SaaS V2)"
+          },
+          "providerLocationId": {
+            "type": "string",
+            "description": "Agency Subaccount ID"
+          },
+          "description": {
+            "type": "string",
+            "description": "Description"
+          },
+          "saasPlanId": {
+            "type": "string",
+            "description": "Required only while pre-configuring saas subscription"
+          },
+          "priceId": {
+            "type": "string",
+            "description": "Required only while pre-configuring saas subscription"
+          }
+        },
+        "required": [
+          "locationId",
+          "companyId",
+          "isSaaSV2"
+        ]
+      }
+    },
+    {
+      "name": "saas_api_pause_location",
+      "module": "saas-api",
+      "method": "POST",
+      "path": "/saas/pause/{locationId}",
+      "version": "2021-04-15",
+      "summary": "Pause location",
+      "description": "Pause location Pause Sub account for given locationId [POST /saas/pause/{locationId}] Token: agency.",
+      "scopes": [],
+      "access": "agency",
+      "operationClass": "write",
+      "deprecated": false,
+      "contentType": "application/json",
+      "pathFields": [
+        "locationId"
+      ],
+      "queryFields": [],
+      "bodyFields": [
+        "paused",
+        "companyId"
+      ],
+      "bodyWrapped": false,
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "locationId": {
+            "type": "string"
+          },
+          "paused": {
+            "type": "boolean",
+            "description": "Paused"
+          },
+          "companyId": {
+            "type": "string",
+            "description": "Company ID"
+          }
+        },
+        "required": [
+          "locationId",
+          "paused",
+          "companyId"
+        ]
+      }
+    },
+    {
+      "name": "saas_api_update_rebilling",
+      "module": "saas-api",
+      "method": "POST",
+      "path": "/saas/update-rebilling/{companyId}",
+      "version": "2021-04-15",
+      "summary": "Update Rebilling",
+      "description": "Update Rebilling Bulk update rebilling for given locationIds [POST /saas/update-rebilling/{companyId}] Token: agency.",
+      "scopes": [],
+      "access": "agency",
+      "operationClass": "write",
+      "deprecated": false,
+      "contentType": "application/json",
+      "pathFields": [
+        "companyId"
+      ],
+      "queryFields": [],
+      "bodyFields": [
+        "product",
+        "locationIds",
+        "config"
+      ],
+      "bodyWrapped": false,
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "companyId": {
+            "type": "string"
+          },
+          "product": {
+            "type": "string",
+            "description": "The product to update rebilling for",
+            "enum": [
+              "contentAI",
+              "workflow_premium_actions",
+              "workflow_ai",
+              "conversationAI",
+              "EmailNotification",
+              "whatsApp",
+              "reviewsAI",
+              "VERIFIED_CALLER_ID",
+              "WALLET_SALES_TAX",
+              "NOTIFICATION_SMS",
+              "EmailSmtp",
+              "EmailVerification",
+              "autoCompleteAddress",
+              "funnelAI",
+              "domainPurchase",
+              "Phone",
+              "Email"
+            ]
+          },
+          "locationIds": {
+            "description": "Array of location IDs to update rebilling for",
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "config": {
+            "type": "object",
+            "description": "Configuration for rebilling settings",
+            "properties": {
+              "optIn": {
+                "type": "boolean",
+                "description": "Enable the product for the locations"
+              },
+              "enabled": {
+                "type": "boolean",
+                "description": "Enable the rebilling for the locations"
+              },
+              "markup": {
+                "type": "number",
+                "description": "Additional value to be added in terms of percentage. For example, if the product price is $100 and the markup is 5, the amount charged to will be $105."
+              }
+            }
+          }
+        },
+        "required": [
+          "companyId",
+          "product",
+          "locationIds",
+          "config"
+        ]
+      }
+    },
+    {
+      "name": "saas_api_get_agency_plans",
+      "module": "saas-api",
+      "method": "GET",
+      "path": "/saas/agency-plans/{companyId}",
+      "version": "2021-04-15",
+      "summary": "Get Agency Plans",
+      "description": "Get Agency Plans Fetch all agency subscription plans for a given company ID [GET /saas/agency-plans/{companyId}] Token: agency.",
+      "scopes": [],
+      "access": "agency",
+      "operationClass": "read",
+      "deprecated": false,
+      "pathFields": [
+        "companyId"
+      ],
+      "queryFields": [],
+      "bodyFields": [],
+      "bodyWrapped": false,
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "companyId": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "companyId"
+        ]
+      }
+    },
+    {
+      "name": "saas_api_get_location_subscription",
+      "module": "saas-api",
+      "method": "GET",
+      "path": "/saas/get-saas-subscription/{locationId}",
+      "version": "2021-04-15",
+      "summary": "Get Location Subscription Details",
+      "description": "Get Location Subscription Details Fetch subscription details for a specific location from location metadata [GET /saas/get-saas-subscription/{locationId}] Token: agency.",
+      "scopes": [],
+      "access": "agency",
+      "operationClass": "read",
+      "deprecated": false,
+      "pathFields": [
+        "locationId"
+      ],
+      "queryFields": [
+        "companyId"
+      ],
+      "bodyFields": [],
+      "bodyWrapped": false,
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "locationId": {
+            "type": "string"
+          },
+          "companyId": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "locationId",
+          "companyId"
+        ]
+      }
+    },
+    {
+      "name": "saas_api_bulk_enable_saas",
+      "module": "saas-api",
+      "method": "POST",
+      "path": "/saas/bulk-enable-saas/{companyId}",
+      "version": "2021-04-15",
+      "summary": "Bulk Enable SaaS",
+      "description": "Bulk Enable SaaS Enable SaaS mode for multiple locations with support for both SaaS v1 and v2 [POST /saas/bulk-enable-saas/{companyId}] Token: agency.",
+      "scopes": [],
+      "access": "agency",
+      "operationClass": "write",
+      "deprecated": false,
+      "contentType": "application/json",
+      "pathFields": [
+        "companyId"
+      ],
+      "queryFields": [],
+      "bodyFields": [
+        "locationIds",
+        "isSaaSV2",
+        "actionPayload"
+      ],
+      "bodyWrapped": false,
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "companyId": {
+            "type": "string"
+          },
+          "locationIds": {
+            "description": "Array of location IDs to enable SaaS for",
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "isSaaSV2": {
+            "type": "boolean",
+            "description": "Indicates if the SaaS is V2"
+          },
+          "actionPayload": {
+            "type": "object",
+            "properties": {
+              "priceId": {
+                "type": "string",
+                "description": "Price ID for the SaaS plan"
+              },
+              "stripeAccountId": {
+                "type": "string",
+                "description": "Stripe account ID"
+              },
+              "saasPlanId": {
+                "type": "string",
+                "description": "SaaS plan ID"
+              },
+              "providerLocationId": {
+                "type": "string",
+                "description": "Provider location ID"
+              }
+            },
+            "required": [
+              "saasPlanId"
+            ],
+            "description": "Action payload for the bulk enable SaaS operation"
+          }
+        },
+        "required": [
+          "companyId",
+          "locationIds",
+          "isSaaSV2",
+          "actionPayload"
+        ]
+      }
+    },
+    {
+      "name": "saas_api_get_saas_locations",
+      "module": "saas-api",
+      "method": "GET",
+      "path": "/saas/saas-locations/{companyId}",
+      "version": "2021-04-15",
+      "summary": "Get SaaS Locations",
+      "description": "Get SaaS Locations Fetch all SaaS-activated locations for a company with pagination [GET /saas/saas-locations/{companyId}] Token: agency.",
+      "scopes": [],
+      "access": "agency",
+      "operationClass": "read",
+      "deprecated": false,
+      "pathFields": [
+        "companyId"
+      ],
+      "queryFields": [
+        "page"
+      ],
+      "bodyFields": [],
+      "bodyWrapped": false,
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "companyId": {
+            "type": "string"
+          },
+          "page": {
+            "type": "number"
+          }
+        },
+        "required": [
+          "companyId",
+          "page"
+        ]
+      }
+    },
+    {
+      "name": "saas_api_get_saas_plan",
+      "module": "saas-api",
+      "method": "GET",
+      "path": "/saas/saas-plan/{planId}",
+      "version": "2021-04-15",
+      "summary": "Get SaaS Plan",
+      "description": "Get SaaS Plan Fetch a specific SaaS plan by plan ID [GET /saas/saas-plan/{planId}] Token: agency.",
+      "scopes": [],
+      "access": "agency",
+      "operationClass": "read",
+      "deprecated": false,
+      "pathFields": [
+        "planId"
+      ],
+      "queryFields": [
+        "companyId"
+      ],
+      "bodyFields": [],
+      "bodyWrapped": false,
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "planId": {
+            "type": "string"
+          },
+          "companyId": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "planId",
+          "companyId"
+        ]
+      }
+    }
+  ]
+}

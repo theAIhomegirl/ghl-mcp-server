@@ -1,0 +1,497 @@
+{
+  "module": "custom-fields",
+  "endpoints": [
+    {
+      "name": "custom_fields_get_custom_field_by_id",
+      "module": "custom-fields",
+      "method": "GET",
+      "path": "/custom-fields/{id}",
+      "version": "2021-07-28",
+      "summary": "Get Custom Field / Folder By Id",
+      "description": "Get Custom Field / Folder By Id <div> <p> Get Custom Field / Folder By Id.</p> <div> <span style= \"display: inline-block; width: 25px; height: 25px; background-color: yellow; color: black; font-weight: bold; font-size: 24px; text-align: center; line-height: 22px; border: 2px solid black; border-radius: 10%; margin-right: 10px;\"> ! </span> <span> <strong> Only supports Custom Objects and Company (Business) today. Will be extende… [GET /custom-fields/{id}] Scopes: locations/customFields.readonly.",
+      "scopes": [
+        "locations/customFields.readonly"
+      ],
+      "access": "unknown",
+      "operationClass": "read",
+      "deprecated": false,
+      "pathFields": [
+        "id"
+      ],
+      "queryFields": [],
+      "bodyFields": [],
+      "bodyWrapped": false,
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "id"
+        ]
+      }
+    },
+    {
+      "name": "custom_fields_update_custom_field",
+      "module": "custom-fields",
+      "method": "PUT",
+      "path": "/custom-fields/{id}",
+      "version": "2021-07-28",
+      "summary": "Update Custom Field By Id",
+      "description": "Update Custom Field By Id <div> <p> Update Custom Field By Id </p> <div> <span style= \"display: inline-block; width: 25px; height: 25px; background-color: yellow; color: black; font-weight: bold; font-size: 24px; text-align: center; line-height: 22px; border: 2px solid black; border-radius: 10%; margin-right: 10px;\"> ! </span> <span> <strong> Only supports Custom Objects and Company (Business) today. Will be extended to o… [PUT /custom-fields/{id}] Scopes: locations/customFields.write.",
+      "scopes": [
+        "locations/customFields.write"
+      ],
+      "access": "unknown",
+      "operationClass": "write",
+      "deprecated": false,
+      "contentType": "application/json",
+      "pathFields": [
+        "id"
+      ],
+      "queryFields": [],
+      "bodyFields": [
+        "locationId",
+        "name",
+        "description",
+        "placeholder",
+        "showInForms",
+        "options",
+        "acceptedFormats",
+        "maxFileLimit"
+      ],
+      "bodyWrapped": false,
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "locationId": {
+            "type": "string",
+            "description": "Location Id"
+          },
+          "name": {
+            "type": "string",
+            "description": "Field name"
+          },
+          "description": {
+            "type": "string",
+            "description": "Description of the field"
+          },
+          "placeholder": {
+            "type": "string",
+            "description": "Placeholder text for the field"
+          },
+          "showInForms": {
+            "type": "boolean",
+            "description": "Whether the field should be shown in forms"
+          },
+          "options": {
+            "description": "Options for the field. Important: Providing options will completely replace the existing options array. You must include all existing options alongside any new options you wish to add. Removal of options is not supported through this update. Applicable only for SINGLE_OPTIONS, MULTIPLE_OPTIONS, RADIO, CHECKBOX, TEXTBOX_LIST types.",
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "key": {
+                  "type": "string",
+                  "description": "Key of the option (Included in Create and Response, excluded in Update)"
+                },
+                "label": {
+                  "type": "string",
+                  "description": "Value of the option"
+                },
+                "url": {
+                  "type": "string",
+                  "description": "URL associated with the option (Optional, valid only for RADIO type)"
+                }
+              },
+              "required": [
+                "key",
+                "label"
+              ]
+            }
+          },
+          "acceptedFormats": {
+            "type": "string",
+            "enum": [
+              ".pdf",
+              ".docx",
+              ".doc",
+              ".jpg",
+              ".jpeg",
+              ".png",
+              ".gif",
+              ".csv",
+              ".xlsx",
+              ".xls",
+              "all"
+            ],
+            "description": "Allowed file formats for uploads. Options include: .pdf, .docx, .doc, .jpg, .jpeg, .png, .gif, .csv, .xlsx, .xls, all"
+          },
+          "maxFileLimit": {
+            "type": "number",
+            "description": "Maximum file limit for uploads. Applicable only for fields with a data type of FILE_UPLOAD."
+          }
+        },
+        "required": [
+          "id",
+          "locationId",
+          "showInForms"
+        ]
+      }
+    },
+    {
+      "name": "custom_fields_delete_custom_field",
+      "module": "custom-fields",
+      "method": "DELETE",
+      "path": "/custom-fields/{id}",
+      "version": "2021-07-28",
+      "summary": "Delete Custom Field By Id",
+      "description": "Delete Custom Field By Id <div> <p> Delete Custom Field By Id </p> <div> <span style= \"display: inline-block; width: 25px; height: 25px; background-color: yellow; color: black; font-weight: bold; font-size: 24px; text-align: center; line-height: 22px; border: 2px solid black; border-radius: 10%; margin-right: 10px;\"> ! </span> <span> <strong> Only supports Custom Objects and Company (Business) today. Will be extended to o… [DELETE /custom-fields/{id}] Scopes: locations/customFields.write.",
+      "scopes": [
+        "locations/customFields.write"
+      ],
+      "access": "unknown",
+      "operationClass": "delete",
+      "deprecated": false,
+      "pathFields": [
+        "id"
+      ],
+      "queryFields": [],
+      "bodyFields": [],
+      "bodyWrapped": false,
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "id"
+        ]
+      }
+    },
+    {
+      "name": "custom_fields_get_custom_fields_by_object_key",
+      "module": "custom-fields",
+      "method": "GET",
+      "path": "/custom-fields/object-key/{objectKey}",
+      "version": "2021-07-28",
+      "summary": "Get Custom Fields By Object Key",
+      "description": "Get Custom Fields By Object Key <div> <p> Get Custom Fields By Object Key</p> <div> <span style= \"display: inline-block; width: 25px; height: 25px; background-color: yellow; color: black; font-weight: bold; font-size: 24px; text-align: center; line-height: 22px; border: 2px solid black; border-radius: 10%; margin-right: 10px;\"> ! </span> <span> <strong> Only supports Custom Objects and Company (Business) today. Will be extended… [GET /custom-fields/object-key/{objectKey}] Scopes: locations/customFields.readonly.",
+      "scopes": [
+        "locations/customFields.readonly"
+      ],
+      "access": "unknown",
+      "operationClass": "read",
+      "deprecated": false,
+      "pathFields": [
+        "objectKey"
+      ],
+      "queryFields": [
+        "locationId"
+      ],
+      "bodyFields": [],
+      "bodyWrapped": false,
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "objectKey": {
+            "type": "string",
+            "description": "key of the Object. Must include \"custom_objects.\" prefix for custom objects. Available on the Custom Objects details Page under settings"
+          },
+          "locationId": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "objectKey",
+          "locationId"
+        ]
+      }
+    },
+    {
+      "name": "custom_fields_create_custom_field_folder",
+      "module": "custom-fields",
+      "method": "POST",
+      "path": "/custom-fields/folder",
+      "version": "2021-07-28",
+      "summary": "Create Custom Field Folder",
+      "description": "Create Custom Field Folder <div> <p> Create Custom Field Folder </p> <div> <span style= \"display: inline-block; width: 25px; height: 25px; background-color: yellow; color: black; font-weight: bold; font-size: 24px; text-align: center; line-height: 22px; border: 2px solid black; border-radius: 10%; margin-right: 10px;\"> ! </span> <span> <strong> Only supports Custom Objects and Company (Business) today. Will be extended to … [POST /custom-fields/folder] Scopes: locations/customFields.write.",
+      "scopes": [
+        "locations/customFields.write"
+      ],
+      "access": "unknown",
+      "operationClass": "write",
+      "deprecated": false,
+      "contentType": "application/json",
+      "pathFields": [],
+      "queryFields": [],
+      "bodyFields": [
+        "objectKey",
+        "name",
+        "locationId"
+      ],
+      "bodyWrapped": false,
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "objectKey": {
+            "type": "string",
+            "description": "The key for your custom object. This key uniquely identifies the custom object. Example: \"custom_object.pet\" for a custom object related to pets."
+          },
+          "name": {
+            "type": "string",
+            "description": "Field name"
+          },
+          "locationId": {
+            "type": "string",
+            "description": "Location Id"
+          }
+        },
+        "required": [
+          "objectKey",
+          "name",
+          "locationId"
+        ]
+      }
+    },
+    {
+      "name": "custom_fields_update_custom_field_folder",
+      "module": "custom-fields",
+      "method": "PUT",
+      "path": "/custom-fields/folder/{id}",
+      "version": "2021-07-28",
+      "summary": "Update Custom Field Folder Name",
+      "description": "Update Custom Field Folder Name <div> <p> Create Custom Field Folder </p> <div> <span style= \"display: inline-block; width: 25px; height: 25px; background-color: yellow; color: black; font-weight: bold; font-size: 24px; text-align: center; line-height: 22px; border: 2px solid black; border-radius: 10%; margin-right: 10px;\"> ! </span> <span> <strong> Only supports Custom Objects and Company (Business) today. Will be extended to … [PUT /custom-fields/folder/{id}] Scopes: locations/customFields.write.",
+      "scopes": [
+        "locations/customFields.write"
+      ],
+      "access": "unknown",
+      "operationClass": "write",
+      "deprecated": false,
+      "contentType": "application/json",
+      "pathFields": [
+        "id"
+      ],
+      "queryFields": [],
+      "bodyFields": [
+        "name",
+        "locationId"
+      ],
+      "bodyWrapped": false,
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "name": {
+            "type": "string",
+            "description": "Field name"
+          },
+          "locationId": {
+            "type": "string",
+            "description": "Location Id"
+          }
+        },
+        "required": [
+          "id",
+          "name",
+          "locationId"
+        ]
+      }
+    },
+    {
+      "name": "custom_fields_delete_custom_field_folder",
+      "module": "custom-fields",
+      "method": "DELETE",
+      "path": "/custom-fields/folder/{id}",
+      "version": "2021-07-28",
+      "summary": "Delete Custom Field Folder",
+      "description": "Delete Custom Field Folder <div> <p> Create Custom Field Folder </p> <div> <span style= \"display: inline-block; width: 25px; height: 25px; background-color: yellow; color: black; font-weight: bold; font-size: 24px; text-align: center; line-height: 22px; border: 2px solid black; border-radius: 10%; margin-right: 10px;\"> ! </span> <span> <strong> Only supports Custom Objects and Company (Business) today. Will be extended to … [DELETE /custom-fields/folder/{id}] Scopes: locations/customFields.write.",
+      "scopes": [
+        "locations/customFields.write"
+      ],
+      "access": "unknown",
+      "operationClass": "delete",
+      "deprecated": false,
+      "pathFields": [
+        "id"
+      ],
+      "queryFields": [
+        "locationId"
+      ],
+      "bodyFields": [],
+      "bodyWrapped": false,
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "locationId": {
+            "type": "string",
+            "description": "Location Id"
+          }
+        },
+        "required": [
+          "id",
+          "locationId"
+        ]
+      }
+    },
+    {
+      "name": "custom_fields_create_custom_field",
+      "module": "custom-fields",
+      "method": "POST",
+      "path": "/custom-fields/",
+      "version": "2021-07-28",
+      "summary": "Create Custom Field",
+      "description": "Create Custom Field <div> <p> Create Custom Field </p> <div> <span style= \"display: inline-block; width: 25px; height: 25px; background-color: yellow; color: black; font-weight: bold; font-size: 24px; text-align: center; line-height: 22px; border: 2px solid black; border-radius: 10%; margin-right: 10px;\"> ! </span> <span> <strong> Only supports Custom Objects and Company (Business) today. Will be extended to other S… [POST /custom-fields/] Scopes: locations/customFields.write.",
+      "scopes": [
+        "locations/customFields.write"
+      ],
+      "access": "unknown",
+      "operationClass": "write",
+      "deprecated": false,
+      "contentType": "application/json",
+      "pathFields": [],
+      "queryFields": [],
+      "bodyFields": [
+        "locationId",
+        "name",
+        "description",
+        "placeholder",
+        "showInForms",
+        "options",
+        "acceptedFormats",
+        "dataType",
+        "fieldKey",
+        "objectKey",
+        "maxFileLimit",
+        "allowCustomOption",
+        "parentId"
+      ],
+      "bodyWrapped": false,
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "locationId": {
+            "type": "string",
+            "description": "Location Id"
+          },
+          "name": {
+            "type": "string",
+            "description": "Field name"
+          },
+          "description": {
+            "type": "string",
+            "description": "Description of the field"
+          },
+          "placeholder": {
+            "type": "string",
+            "description": "Placeholder text for the field"
+          },
+          "showInForms": {
+            "type": "boolean",
+            "description": "Whether the field should be shown in forms"
+          },
+          "options": {
+            "description": "Options for the field (Optional, valid only for SINGLE_OPTIONS, MULTIPLE_OPTIONS, RADIO, CHECKBOX, TEXTBOX_LIST type)",
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "key": {
+                  "type": "string",
+                  "description": "Key of the option (Included in Create and Response, excluded in Update)"
+                },
+                "label": {
+                  "type": "string",
+                  "description": "Value of the option"
+                },
+                "url": {
+                  "type": "string",
+                  "description": "URL associated with the option (Optional, valid only for RADIO type)"
+                }
+              },
+              "required": [
+                "key",
+                "label"
+              ]
+            }
+          },
+          "acceptedFormats": {
+            "type": "string",
+            "enum": [
+              ".pdf",
+              ".docx",
+              ".doc",
+              ".jpg",
+              ".jpeg",
+              ".png",
+              ".gif",
+              ".csv",
+              ".xlsx",
+              ".xls",
+              "all"
+            ],
+            "description": "Allowed file formats for uploads. Options include: .pdf, .docx, .doc, .jpg, .jpeg, .png, .gif, .csv, .xlsx, .xls, all"
+          },
+          "dataType": {
+            "type": "string",
+            "enum": [
+              "TEXT",
+              "LARGE_TEXT",
+              "NUMERICAL",
+              "PHONE",
+              "MONETORY",
+              "CHECKBOX",
+              "SINGLE_OPTIONS",
+              "MULTIPLE_OPTIONS",
+              "DATE",
+              "TEXTBOX_LIST",
+              "FILE_UPLOAD",
+              "RADIO",
+              "EMAIL"
+            ],
+            "description": "Type of field that you are trying to create"
+          },
+          "fieldKey": {
+            "type": "string",
+            "description": "Field key. For Custom Object it's formatted as \"custom_object.{objectKey}.{fieldKey}\". \"custom_object\" is a fixed prefix, \"{objectKey}\" is your custom object's identifier, and \"{fieldKey}\" is the unique field name within that object. Example: \"custom_object.pet.name\" for a \"name\" field in a \"pet\" custom object."
+          },
+          "objectKey": {
+            "type": "string",
+            "description": "The key for your custom object. This key uniquely identifies the custom object. Example: \"custom_object.pet\" for a custom object related to pets."
+          },
+          "maxFileLimit": {
+            "type": "number",
+            "description": "Maximum file limit for uploads. Applicable only for fields with a data type of FILE_UPLOAD."
+          },
+          "allowCustomOption": {
+            "type": "boolean",
+            "description": "Determines if users can add a custom option value different from the predefined options in records for RADIO type fields. A custom value added in one record does not automatically become an option and will not appear as an option for other records."
+          },
+          "parentId": {
+            "type": "string",
+            "description": "ID of the parent folder"
+          }
+        },
+        "required": [
+          "locationId",
+          "showInForms",
+          "dataType",
+          "fieldKey",
+          "objectKey",
+          "parentId"
+        ]
+      }
+    }
+  ]
+}

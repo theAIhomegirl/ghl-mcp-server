@@ -1,0 +1,1554 @@
+{
+  "module": "users",
+  "endpoints": [
+    {
+      "name": "users_search_users",
+      "module": "users",
+      "method": "GET",
+      "path": "/users/search",
+      "version": "2021-07-28",
+      "summary": "Search Users",
+      "description": "Search Users [GET /users/search] Token: location or agency. Scopes: users.readonly.",
+      "scopes": [
+        "users.readonly"
+      ],
+      "access": "both",
+      "operationClass": "read",
+      "deprecated": false,
+      "pathFields": [],
+      "queryFields": [
+        "companyId",
+        "query",
+        "skip",
+        "limit",
+        "locationId",
+        "type",
+        "role",
+        "ids",
+        "sort",
+        "sortDirection",
+        "enabled2waySync"
+      ],
+      "bodyFields": [],
+      "bodyWrapped": false,
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "companyId": {
+            "type": "string",
+            "description": "Company ID in which the search needs to be performed"
+          },
+          "query": {
+            "type": "string",
+            "description": "The search term for the user is matched based on the user full name, email or phone"
+          },
+          "skip": {
+            "type": "string",
+            "description": "(default: \"0\")"
+          },
+          "limit": {
+            "type": "string",
+            "description": "(default: \"25\")"
+          },
+          "locationId": {
+            "type": "string",
+            "description": "Location ID in which the search needs to be performed"
+          },
+          "type": {
+            "type": "string",
+            "description": "Type of the users to be filtered in the search"
+          },
+          "role": {
+            "type": "string",
+            "description": "Role of the users to be filtered in the search"
+          },
+          "ids": {
+            "type": "string",
+            "description": "List of User IDs to be filtered in the search"
+          },
+          "sort": {
+            "type": "string",
+            "description": "The field on which sort is applied in which the results need to be sorted. Default is based on the first and last name"
+          },
+          "sortDirection": {
+            "type": "string",
+            "description": "The direction in which the results need to be sorted"
+          },
+          "enabled2waySync": {
+            "type": "boolean"
+          }
+        },
+        "required": [
+          "companyId"
+        ]
+      }
+    },
+    {
+      "name": "users_filter_users_by_email",
+      "module": "users",
+      "method": "POST",
+      "path": "/users/search/filter-by-email",
+      "version": "2021-07-28",
+      "summary": "Filter Users by Email",
+      "description": "Filter Users by Email Filter users by company ID, deleted status, and email array [POST /users/search/filter-by-email] Token: agency. Scopes: users.readonly.",
+      "scopes": [
+        "users.readonly"
+      ],
+      "access": "agency",
+      "operationClass": "write",
+      "deprecated": false,
+      "contentType": "application/json",
+      "pathFields": [],
+      "queryFields": [],
+      "bodyFields": [
+        "companyId",
+        "emails",
+        "deleted",
+        "skip",
+        "limit",
+        "projection"
+      ],
+      "bodyWrapped": false,
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "companyId": {
+            "type": "string",
+            "description": "Company ID to filter users"
+          },
+          "emails": {
+            "type": "string",
+            "description": "Comma-separated list of email addresses to filter users"
+          },
+          "deleted": {
+            "type": "boolean",
+            "description": "Filter deleted users (default: false)"
+          },
+          "skip": {
+            "type": "string",
+            "description": "No of results to be skipped before returning the result (default: \"0\")"
+          },
+          "limit": {
+            "type": "string",
+            "description": "No of results to be limited before returning the result (default: \"25\")"
+          },
+          "projection": {
+            "type": "string",
+            "description": "Projection fields to return. Use \"all\" for all fields, or specify comma-separated field names. Default returns only id and email"
+          }
+        },
+        "required": [
+          "companyId",
+          "emails"
+        ]
+      }
+    },
+    {
+      "name": "users_get_user",
+      "module": "users",
+      "method": "GET",
+      "path": "/users/{userId}",
+      "version": "2021-07-28",
+      "summary": "Get User",
+      "description": "Get User [GET /users/{userId}] Token: location or agency. Scopes: users.readonly.",
+      "scopes": [
+        "users.readonly"
+      ],
+      "access": "both",
+      "operationClass": "read",
+      "deprecated": false,
+      "pathFields": [
+        "userId"
+      ],
+      "queryFields": [],
+      "bodyFields": [],
+      "bodyWrapped": false,
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "userId": {
+            "type": "string",
+            "description": "User Id"
+          }
+        },
+        "required": [
+          "userId"
+        ]
+      }
+    },
+    {
+      "name": "users_update_user",
+      "module": "users",
+      "method": "PUT",
+      "path": "/users/{userId}",
+      "version": "2021-07-28",
+      "summary": "Update User",
+      "description": "Update User [PUT /users/{userId}] Token: location or agency. Scopes: users.write.",
+      "scopes": [
+        "users.write"
+      ],
+      "access": "both",
+      "operationClass": "write",
+      "deprecated": false,
+      "contentType": "application/json",
+      "pathFields": [],
+      "queryFields": [],
+      "bodyFields": [
+        "firstName",
+        "lastName",
+        "email",
+        "password",
+        "phone",
+        "type",
+        "role",
+        "companyId",
+        "locationIds",
+        "permissions",
+        "scopes",
+        "scopesAssignedToOnly",
+        "profilePhoto",
+        "twilioPhone",
+        "platformLanguage"
+      ],
+      "bodyWrapped": false,
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "firstName": {
+            "type": "string"
+          },
+          "lastName": {
+            "type": "string"
+          },
+          "email": {
+            "type": "string",
+            "deprecated": true,
+            "description": "Email update is no longer supported due to security reasons."
+          },
+          "password": {
+            "type": "string"
+          },
+          "phone": {
+            "type": "string"
+          },
+          "type": {
+            "type": "string"
+          },
+          "role": {
+            "type": "string"
+          },
+          "companyId": {
+            "type": "string",
+            "description": "Company/Agency Id. Required for Agency Level access"
+          },
+          "locationIds": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "permissions": {
+            "type": "object",
+            "properties": {
+              "campaignsEnabled": {
+                "type": "boolean",
+                "description": "(default: true)"
+              },
+              "campaignsReadOnly": {
+                "type": "boolean",
+                "description": "(default: false)"
+              },
+              "contactsEnabled": {
+                "type": "boolean",
+                "description": "(default: true)"
+              },
+              "workflowsEnabled": {
+                "type": "boolean",
+                "description": "(default: true)"
+              },
+              "workflowsReadOnly": {
+                "type": "boolean",
+                "description": "(default: false)"
+              },
+              "triggersEnabled": {
+                "type": "boolean",
+                "description": "(default: true)"
+              },
+              "funnelsEnabled": {
+                "type": "boolean",
+                "description": "(default: true)"
+              },
+              "websitesEnabled": {
+                "type": "boolean",
+                "description": "(default: false)"
+              },
+              "opportunitiesEnabled": {
+                "type": "boolean",
+                "description": "(default: true)"
+              },
+              "dashboardStatsEnabled": {
+                "type": "boolean",
+                "description": "(default: true)"
+              },
+              "bulkRequestsEnabled": {
+                "type": "boolean",
+                "description": "(default: true)"
+              },
+              "appointmentsEnabled": {
+                "type": "boolean",
+                "description": "(default: true)"
+              },
+              "reviewsEnabled": {
+                "type": "boolean",
+                "description": "(default: true)"
+              },
+              "onlineListingsEnabled": {
+                "type": "boolean",
+                "description": "(default: true)"
+              },
+              "phoneCallEnabled": {
+                "type": "boolean",
+                "description": "(default: true)"
+              },
+              "conversationsEnabled": {
+                "type": "boolean",
+                "description": "(default: true)"
+              },
+              "assignedDataOnly": {
+                "type": "boolean",
+                "description": "(default: false)"
+              },
+              "adwordsReportingEnabled": {
+                "type": "boolean",
+                "description": "(default: false)"
+              },
+              "membershipEnabled": {
+                "type": "boolean",
+                "description": "(default: false)"
+              },
+              "facebookAdsReportingEnabled": {
+                "type": "boolean",
+                "description": "(default: false)"
+              },
+              "attributionsReportingEnabled": {
+                "type": "boolean",
+                "description": "(default: false)"
+              },
+              "settingsEnabled": {
+                "type": "boolean",
+                "description": "(default: true)"
+              },
+              "tagsEnabled": {
+                "type": "boolean",
+                "description": "(default: true)"
+              },
+              "leadValueEnabled": {
+                "type": "boolean",
+                "description": "(default: true)"
+              },
+              "marketingEnabled": {
+                "type": "boolean",
+                "description": "(default: true)"
+              },
+              "agentReportingEnabled": {
+                "type": "boolean",
+                "description": "(default: true)"
+              },
+              "botService": {
+                "type": "boolean",
+                "description": "(default: false)"
+              },
+              "socialPlanner": {
+                "type": "boolean",
+                "description": "(default: true)"
+              },
+              "bloggingEnabled": {
+                "type": "boolean",
+                "description": "(default: true)"
+              },
+              "invoiceEnabled": {
+                "type": "boolean",
+                "description": "(default: true)"
+              },
+              "affiliateManagerEnabled": {
+                "type": "boolean",
+                "description": "(default: true)"
+              },
+              "contentAiEnabled": {
+                "type": "boolean",
+                "description": "(default: true)"
+              },
+              "refundsEnabled": {
+                "type": "boolean",
+                "description": "(default: true)"
+              },
+              "recordPaymentEnabled": {
+                "type": "boolean",
+                "description": "(default: true)"
+              },
+              "cancelSubscriptionEnabled": {
+                "type": "boolean",
+                "description": "(default: true)"
+              },
+              "paymentsEnabled": {
+                "type": "boolean",
+                "description": "(default: true)"
+              },
+              "communitiesEnabled": {
+                "type": "boolean",
+                "description": "(default: true)"
+              },
+              "exportPaymentsEnabled": {
+                "type": "boolean",
+                "description": "(default: true)"
+              }
+            }
+          },
+          "scopes": {
+            "type": "array",
+            "description": "Scopes allowed for users. Only scopes that have been passed will be enabled. If passed empty all the scopes will be get disabled",
+            "items": {
+              "type": "string",
+              "enum": [
+                "campaigns.readonly",
+                "campaigns.write",
+                "calendars.readonly",
+                "calendars/events.write",
+                "calendars/groups.write",
+                "calendars.write",
+                "contacts.write",
+                "contacts/bulkActions.write",
+                "workflows.readonly",
+                "workflows.write",
+                "triggers.write",
+                "funnels.write",
+                "forms.write",
+                "surveys.write",
+                "quizzes.write",
+                "websites.write",
+                "medias.write",
+                "medias.readonly",
+                "opportunities.write",
+                "opportunities/leadValue.readonly",
+                "opportunities/bulkActions.write",
+                "reporting/phone.readonly",
+                "reporting/adwords.readonly",
+                "reporting/facebookAds.readonly",
+                "reporting/attributions.readonly",
+                "prospecting/auditReport.write",
+                "reporting/reports.readonly",
+                "reporting/agent.readonly",
+                "reporting/reports.write",
+                "reporting/stats.export",
+                "payments.write",
+                "payments/records.write",
+                "payments/orders.readonly",
+                "payments/orders.export",
+                "payments/orders.import",
+                "payments/orders.collectPayment",
+                "payments/subscriptions.readonly",
+                "payments/subscriptions.write",
+                "payments/subscriptions.update",
+                "payments/subscriptions.export",
+                "payments/subscriptions.pauseResumeCancel",
+                "payments/subscriptions.sharePaymentMethod",
+                "payments/transactions.readonly",
+                "payments/transactions.export",
+                "payments/transactions.import",
+                "payments/transactions.refund",
+                "payments/transactions.viewReceipts",
+                "payments/taxesSettings.readonly",
+                "payments/settings.readonly",
+                "payments/taxesSettings.updateInclusiveExclusive",
+                "payments/taxesSettings.manageRates",
+                "payments/taxesSettings.configureAutomatic",
+                "products.readonly",
+                "products.write",
+                "products.delete",
+                "products.duplicate",
+                "products.bulkActions",
+                "payments/settings.write",
+                "payments/settings.configureReceipt",
+                "payments/settings.configureSubscription",
+                "invoices.write",
+                "invoices.readonly",
+                "invoices/schedule.readonly",
+                "invoices/schedule.write",
+                "invoices/template.readonly",
+                "invoices/template.write",
+                "reputation/review.write",
+                "reputation/listing.write",
+                "reputation/reviewsAIAgents.write",
+                "reputation/gbp.write",
+                "conversations.write",
+                "conversations.readonly",
+                "conversations/message.readonly",
+                "conversations/message.write",
+                "contentAI.write",
+                "dashboard/stats.readonly",
+                "locations/tags.write",
+                "locations/tags.readonly",
+                "marketing.write",
+                "eliza.write",
+                "settings.write",
+                "socialplanner/post.write",
+                "socialplanner/account.readonly",
+                "socialplanner/account.write",
+                "socialplanner/category.readonly",
+                "socialplanner/category.write",
+                "socialplanner/csv.readonly",
+                "socialplanner/csv.write",
+                "socialplanner/group.write",
+                "socialplanner/hashtag.readonly",
+                "socialplanner/hashtag.write",
+                "socialplanner/oauth.readonly",
+                "socialplanner/oauth.write",
+                "socialplanner/post.readonly",
+                "socialplanner/recurring.readonly",
+                "socialplanner/recurring.write",
+                "socialplanner/review.readonly",
+                "socialplanner/review.write",
+                "socialplanner/rss.readonly",
+                "socialplanner/rss.write",
+                "socialplanner/search.readonly",
+                "socialplanner/setting.readonly",
+                "socialplanner/setting.write",
+                "socialplanner/stat.readonly",
+                "socialplanner/tag.readonly",
+                "socialplanner/tag.write",
+                "socialplanner/filters.readonly",
+                "socialplanner/medias.readonly",
+                "socialplanner/medias.write",
+                "socialplanner/watermarks.readonly",
+                "socialplanner/watermarks.write",
+                "socialplanner/metatag.readonly",
+                "socialplanner/facebook.readonly",
+                "socialplanner/linkedin.readonly",
+                "socialplanner/twitter.readonly",
+                "socialplanner/notification.readonly",
+                "socialplanner/notification.write",
+                "socialplanner/snapshot.readonly",
+                "socialplanner/snapshot.write",
+                "marketing/affiliate.write",
+                "blogs.write",
+                "membership.write",
+                "communities.write",
+                "gokollab.write",
+                "certificates.write",
+                "certificates.readonly",
+                "adPublishing.write",
+                "adPublishing.readonly",
+                "prospecting.write",
+                "prospecting.readonly",
+                "prospecting/reports.readonly",
+                "private-integration-location.readonly",
+                "private-integration-location.write",
+                "private-integration-company.readonly",
+                "private-integration-company.write",
+                "native-integrations.readonly",
+                "native-integrations.write",
+                "wordpress.write",
+                "wordpress.read",
+                "custom-menu-link.write",
+                "qrcodes.write",
+                "users/team-management.write",
+                "users/team-management.readonly",
+                "loginas.write",
+                "users-sso-login-management.write",
+                "users-sso-login-management.readonly",
+                "sso-config.write",
+                "snapshots/api.readonly",
+                "snapshots/api.create",
+                "snapshots/api.edit",
+                "snapshots/api.push",
+                "snapshots/api.refresh",
+                "snapshots/api.share",
+                "snapshots/api.delete",
+                "internaltools.location-transfer.write",
+                "internaltools.location-transfer.readonly",
+                "affiliateportal.write",
+                "affiliateportal.readonly",
+                "companies.write",
+                "internaltools.billing.write",
+                "internaltools.billing.readonly",
+                "internaltools.billing-common.readonly",
+                "internaltools.billing-common.write",
+                "voice-ai-agents.write",
+                "voice-ai-agents.readonly",
+                "voice-ai-common.readonly",
+                "voice-ai-common.write",
+                "voice-ai-agent-goals.readonly",
+                "voice-ai-agent-goals.write",
+                "voice-ai-dashboard.readonly",
+                "agency/launchpad.write",
+                "agency/launchpad.readonly",
+                "launchpad/location.write",
+                "launchpad/location.readonly",
+                "text-ai-agents.write",
+                "text-ai-agent-goals.readonly",
+                "text-ai-agent-goals.write",
+                "text-ai-agent-training.write",
+                "text-ai-agents-dashboard.readonly",
+                "locations.create",
+                "locations.delete",
+                "locations.export.list",
+                "locations.features-limits.manage",
+                "locations.pause-resume",
+                "locations.agency-subaccounts.manage",
+                "locations.billing.manage",
+                "locations.details.manage",
+                "audit-logs.readonly",
+                "audit-logs.export"
+              ]
+            }
+          },
+          "scopesAssignedToOnly": {
+            "type": "array",
+            "description": "Assigned Scopes allowed for users. Only scopes that have been passed will be enabled. If passed empty all the assigned scopes will be get disabled",
+            "items": {
+              "type": "string",
+              "enum": [
+                "campaigns.readonly",
+                "campaigns.write",
+                "calendars.readonly",
+                "calendars/events.write",
+                "calendars/groups.write",
+                "calendars.write",
+                "contacts.write",
+                "contacts/bulkActions.write",
+                "workflows.readonly",
+                "workflows.write",
+                "triggers.write",
+                "funnels.write",
+                "forms.write",
+                "surveys.write",
+                "quizzes.write",
+                "websites.write",
+                "medias.write",
+                "medias.readonly",
+                "opportunities.write",
+                "opportunities/leadValue.readonly",
+                "opportunities/bulkActions.write",
+                "reporting/phone.readonly",
+                "reporting/adwords.readonly",
+                "reporting/facebookAds.readonly",
+                "reporting/attributions.readonly",
+                "prospecting/auditReport.write",
+                "reporting/reports.readonly",
+                "reporting/agent.readonly",
+                "reporting/reports.write",
+                "reporting/stats.export",
+                "payments.write",
+                "payments/records.write",
+                "payments/orders.readonly",
+                "payments/orders.export",
+                "payments/orders.import",
+                "payments/orders.collectPayment",
+                "payments/subscriptions.readonly",
+                "payments/subscriptions.write",
+                "payments/subscriptions.update",
+                "payments/subscriptions.export",
+                "payments/subscriptions.pauseResumeCancel",
+                "payments/subscriptions.sharePaymentMethod",
+                "payments/transactions.readonly",
+                "payments/transactions.export",
+                "payments/transactions.import",
+                "payments/transactions.refund",
+                "payments/transactions.viewReceipts",
+                "payments/taxesSettings.readonly",
+                "payments/settings.readonly",
+                "payments/taxesSettings.updateInclusiveExclusive",
+                "payments/taxesSettings.manageRates",
+                "payments/taxesSettings.configureAutomatic",
+                "products.readonly",
+                "products.write",
+                "products.delete",
+                "products.duplicate",
+                "products.bulkActions",
+                "payments/settings.write",
+                "payments/settings.configureReceipt",
+                "payments/settings.configureSubscription",
+                "invoices.write",
+                "invoices.readonly",
+                "invoices/schedule.readonly",
+                "invoices/schedule.write",
+                "invoices/template.readonly",
+                "invoices/template.write",
+                "reputation/review.write",
+                "reputation/listing.write",
+                "reputation/reviewsAIAgents.write",
+                "reputation/gbp.write",
+                "conversations.write",
+                "conversations.readonly",
+                "conversations/message.readonly",
+                "conversations/message.write",
+                "contentAI.write",
+                "dashboard/stats.readonly",
+                "locations/tags.write",
+                "locations/tags.readonly",
+                "marketing.write",
+                "eliza.write",
+                "settings.write",
+                "socialplanner/post.write",
+                "socialplanner/account.readonly",
+                "socialplanner/account.write",
+                "socialplanner/category.readonly",
+                "socialplanner/category.write",
+                "socialplanner/csv.readonly",
+                "socialplanner/csv.write",
+                "socialplanner/group.write",
+                "socialplanner/hashtag.readonly",
+                "socialplanner/hashtag.write",
+                "socialplanner/oauth.readonly",
+                "socialplanner/oauth.write",
+                "socialplanner/post.readonly",
+                "socialplanner/recurring.readonly",
+                "socialplanner/recurring.write",
+                "socialplanner/review.readonly",
+                "socialplanner/review.write",
+                "socialplanner/rss.readonly",
+                "socialplanner/rss.write",
+                "socialplanner/search.readonly",
+                "socialplanner/setting.readonly",
+                "socialplanner/setting.write",
+                "socialplanner/stat.readonly",
+                "socialplanner/tag.readonly",
+                "socialplanner/tag.write",
+                "socialplanner/filters.readonly",
+                "socialplanner/medias.readonly",
+                "socialplanner/medias.write",
+                "socialplanner/watermarks.readonly",
+                "socialplanner/watermarks.write",
+                "socialplanner/metatag.readonly",
+                "socialplanner/facebook.readonly",
+                "socialplanner/linkedin.readonly",
+                "socialplanner/twitter.readonly",
+                "socialplanner/notification.readonly",
+                "socialplanner/notification.write",
+                "socialplanner/snapshot.readonly",
+                "socialplanner/snapshot.write",
+                "marketing/affiliate.write",
+                "blogs.write",
+                "membership.write",
+                "communities.write",
+                "gokollab.write",
+                "certificates.write",
+                "certificates.readonly",
+                "adPublishing.write",
+                "adPublishing.readonly",
+                "prospecting.write",
+                "prospecting.readonly",
+                "prospecting/reports.readonly",
+                "private-integration-location.readonly",
+                "private-integration-location.write",
+                "private-integration-company.readonly",
+                "private-integration-company.write",
+                "native-integrations.readonly",
+                "native-integrations.write",
+                "wordpress.write",
+                "wordpress.read",
+                "custom-menu-link.write",
+                "qrcodes.write",
+                "users/team-management.write",
+                "users/team-management.readonly",
+                "loginas.write",
+                "users-sso-login-management.write",
+                "users-sso-login-management.readonly",
+                "sso-config.write",
+                "snapshots/api.readonly",
+                "snapshots/api.create",
+                "snapshots/api.edit",
+                "snapshots/api.push",
+                "snapshots/api.refresh",
+                "snapshots/api.share",
+                "snapshots/api.delete",
+                "internaltools.location-transfer.write",
+                "internaltools.location-transfer.readonly",
+                "affiliateportal.write",
+                "affiliateportal.readonly",
+                "companies.write",
+                "internaltools.billing.write",
+                "internaltools.billing.readonly",
+                "internaltools.billing-common.readonly",
+                "internaltools.billing-common.write",
+                "voice-ai-agents.write",
+                "voice-ai-agents.readonly",
+                "voice-ai-common.readonly",
+                "voice-ai-common.write",
+                "voice-ai-agent-goals.readonly",
+                "voice-ai-agent-goals.write",
+                "voice-ai-dashboard.readonly",
+                "agency/launchpad.write",
+                "agency/launchpad.readonly",
+                "launchpad/location.write",
+                "launchpad/location.readonly",
+                "text-ai-agents.write",
+                "text-ai-agent-goals.readonly",
+                "text-ai-agent-goals.write",
+                "text-ai-agent-training.write",
+                "text-ai-agents-dashboard.readonly",
+                "locations.create",
+                "locations.delete",
+                "locations.export.list",
+                "locations.features-limits.manage",
+                "locations.pause-resume",
+                "locations.agency-subaccounts.manage",
+                "locations.billing.manage",
+                "locations.details.manage",
+                "audit-logs.readonly",
+                "audit-logs.export"
+              ]
+            }
+          },
+          "profilePhoto": {
+            "type": "string"
+          },
+          "twilioPhone": {
+            "type": "object",
+            "additionalProperties": {
+              "type": "string"
+            },
+            "description": "Per-location inbound Twilio number in E.164 format, keyed by location id (Call and Voicemail Inbound Number for direct Twilio, not LC Phone). Replacement semantics: if you send twilioPhone in the request body, the stored map is replaced entirely with this object (not merged). Any location id omitted from the object is removed from the saved map. Omit the twilioPhone property entirely to leave existing numbers unchanged. Send an empty object {} to clear all per-location numbers. To clear a single location only, set that location id to an empty string \"\"."
+          },
+          "platformLanguage": {
+            "type": "string",
+            "description": "Platform language preference for the user",
+            "enum": [
+              "en_US",
+              "es",
+              "fr_CA",
+              "fr_FR",
+              "nl",
+              "de",
+              "pt_PT",
+              "pt_BR",
+              "it",
+              "sv",
+              "da",
+              "fi",
+              "no"
+            ]
+          }
+        }
+      }
+    },
+    {
+      "name": "users_delete_user",
+      "module": "users",
+      "method": "DELETE",
+      "path": "/users/{userId}",
+      "version": "2021-07-28",
+      "summary": "Delete User",
+      "description": "Delete User [DELETE /users/{userId}] Token: location or agency. Scopes: users.write.",
+      "scopes": [
+        "users.write"
+      ],
+      "access": "both",
+      "operationClass": "delete",
+      "deprecated": false,
+      "pathFields": [],
+      "queryFields": [],
+      "bodyFields": [],
+      "bodyWrapped": false,
+      "inputSchema": {
+        "type": "object",
+        "properties": {}
+      }
+    },
+    {
+      "name": "users_get_user_by_location",
+      "module": "users",
+      "method": "GET",
+      "path": "/users/",
+      "version": "2021-07-28",
+      "summary": "Get User by Location",
+      "description": "Get User by Location Deprecated. Use `GET /users/search` instead. Pass `locationId` as a query parameter to filter results by location, along with the required `companyId` and other search filters as needed. [GET /users/] Token: location. Scopes: users.readonly. DEPRECATED.",
+      "scopes": [
+        "users.readonly"
+      ],
+      "access": "location",
+      "operationClass": "read",
+      "deprecated": true,
+      "pathFields": [],
+      "queryFields": [
+        "locationId"
+      ],
+      "bodyFields": [],
+      "bodyWrapped": false,
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "locationId": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "locationId"
+        ]
+      }
+    },
+    {
+      "name": "users_create_user",
+      "module": "users",
+      "method": "POST",
+      "path": "/users/",
+      "version": "2021-07-28",
+      "summary": "Create User",
+      "description": "Create User [POST /users/] Token: location or agency. Scopes: users.write.",
+      "scopes": [
+        "users.write"
+      ],
+      "access": "both",
+      "operationClass": "write",
+      "deprecated": false,
+      "contentType": "application/json",
+      "pathFields": [],
+      "queryFields": [],
+      "bodyFields": [
+        "companyId",
+        "firstName",
+        "lastName",
+        "email",
+        "password",
+        "phone",
+        "type",
+        "role",
+        "locationIds",
+        "permissions",
+        "scopes",
+        "scopesAssignedToOnly",
+        "profilePhoto",
+        "twilioPhone",
+        "platformLanguage"
+      ],
+      "bodyWrapped": false,
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "companyId": {
+            "type": "string"
+          },
+          "firstName": {
+            "type": "string"
+          },
+          "lastName": {
+            "type": "string"
+          },
+          "email": {
+            "type": "string"
+          },
+          "password": {
+            "type": "string"
+          },
+          "phone": {
+            "type": "string"
+          },
+          "type": {
+            "type": "string"
+          },
+          "role": {
+            "type": "string"
+          },
+          "locationIds": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "permissions": {
+            "type": "object",
+            "properties": {
+              "campaignsEnabled": {
+                "type": "boolean",
+                "description": "(default: true)"
+              },
+              "campaignsReadOnly": {
+                "type": "boolean",
+                "description": "(default: false)"
+              },
+              "contactsEnabled": {
+                "type": "boolean",
+                "description": "(default: true)"
+              },
+              "workflowsEnabled": {
+                "type": "boolean",
+                "description": "(default: true)"
+              },
+              "workflowsReadOnly": {
+                "type": "boolean",
+                "description": "(default: false)"
+              },
+              "triggersEnabled": {
+                "type": "boolean",
+                "description": "(default: true)"
+              },
+              "funnelsEnabled": {
+                "type": "boolean",
+                "description": "(default: true)"
+              },
+              "websitesEnabled": {
+                "type": "boolean",
+                "description": "(default: false)"
+              },
+              "opportunitiesEnabled": {
+                "type": "boolean",
+                "description": "(default: true)"
+              },
+              "dashboardStatsEnabled": {
+                "type": "boolean",
+                "description": "(default: true)"
+              },
+              "bulkRequestsEnabled": {
+                "type": "boolean",
+                "description": "(default: true)"
+              },
+              "appointmentsEnabled": {
+                "type": "boolean",
+                "description": "(default: true)"
+              },
+              "reviewsEnabled": {
+                "type": "boolean",
+                "description": "(default: true)"
+              },
+              "onlineListingsEnabled": {
+                "type": "boolean",
+                "description": "(default: true)"
+              },
+              "phoneCallEnabled": {
+                "type": "boolean",
+                "description": "(default: true)"
+              },
+              "conversationsEnabled": {
+                "type": "boolean",
+                "description": "(default: true)"
+              },
+              "assignedDataOnly": {
+                "type": "boolean",
+                "description": "(default: false)"
+              },
+              "adwordsReportingEnabled": {
+                "type": "boolean",
+                "description": "(default: false)"
+              },
+              "membershipEnabled": {
+                "type": "boolean",
+                "description": "(default: false)"
+              },
+              "facebookAdsReportingEnabled": {
+                "type": "boolean",
+                "description": "(default: false)"
+              },
+              "attributionsReportingEnabled": {
+                "type": "boolean",
+                "description": "(default: false)"
+              },
+              "settingsEnabled": {
+                "type": "boolean",
+                "description": "(default: true)"
+              },
+              "tagsEnabled": {
+                "type": "boolean",
+                "description": "(default: true)"
+              },
+              "leadValueEnabled": {
+                "type": "boolean",
+                "description": "(default: true)"
+              },
+              "marketingEnabled": {
+                "type": "boolean",
+                "description": "(default: true)"
+              },
+              "agentReportingEnabled": {
+                "type": "boolean",
+                "description": "(default: true)"
+              },
+              "botService": {
+                "type": "boolean",
+                "description": "(default: false)"
+              },
+              "socialPlanner": {
+                "type": "boolean",
+                "description": "(default: true)"
+              },
+              "bloggingEnabled": {
+                "type": "boolean",
+                "description": "(default: true)"
+              },
+              "invoiceEnabled": {
+                "type": "boolean",
+                "description": "(default: true)"
+              },
+              "affiliateManagerEnabled": {
+                "type": "boolean",
+                "description": "(default: true)"
+              },
+              "contentAiEnabled": {
+                "type": "boolean",
+                "description": "(default: true)"
+              },
+              "refundsEnabled": {
+                "type": "boolean",
+                "description": "(default: true)"
+              },
+              "recordPaymentEnabled": {
+                "type": "boolean",
+                "description": "(default: true)"
+              },
+              "cancelSubscriptionEnabled": {
+                "type": "boolean",
+                "description": "(default: true)"
+              },
+              "paymentsEnabled": {
+                "type": "boolean",
+                "description": "(default: true)"
+              },
+              "communitiesEnabled": {
+                "type": "boolean",
+                "description": "(default: true)"
+              },
+              "exportPaymentsEnabled": {
+                "type": "boolean",
+                "description": "(default: true)"
+              }
+            }
+          },
+          "scopes": {
+            "type": "array",
+            "description": "Scopes allowed for users. Only scopes that have been passed will be enabled. Note:- If passed empty all the scopes will be get disabled",
+            "items": {
+              "type": "string",
+              "enum": [
+                "campaigns.readonly",
+                "campaigns.write",
+                "calendars.readonly",
+                "calendars/events.write",
+                "calendars/groups.write",
+                "calendars.write",
+                "contacts.write",
+                "contacts/bulkActions.write",
+                "workflows.readonly",
+                "workflows.write",
+                "triggers.write",
+                "funnels.write",
+                "forms.write",
+                "surveys.write",
+                "quizzes.write",
+                "websites.write",
+                "medias.write",
+                "medias.readonly",
+                "opportunities.write",
+                "opportunities/leadValue.readonly",
+                "opportunities/bulkActions.write",
+                "reporting/phone.readonly",
+                "reporting/adwords.readonly",
+                "reporting/facebookAds.readonly",
+                "reporting/attributions.readonly",
+                "prospecting/auditReport.write",
+                "reporting/reports.readonly",
+                "reporting/agent.readonly",
+                "reporting/reports.write",
+                "reporting/stats.export",
+                "payments.write",
+                "payments/records.write",
+                "payments/orders.readonly",
+                "payments/orders.export",
+                "payments/orders.import",
+                "payments/orders.collectPayment",
+                "payments/subscriptions.readonly",
+                "payments/subscriptions.write",
+                "payments/subscriptions.update",
+                "payments/subscriptions.export",
+                "payments/subscriptions.pauseResumeCancel",
+                "payments/subscriptions.sharePaymentMethod",
+                "payments/transactions.readonly",
+                "payments/transactions.export",
+                "payments/transactions.import",
+                "payments/transactions.refund",
+                "payments/transactions.viewReceipts",
+                "payments/taxesSettings.readonly",
+                "payments/settings.readonly",
+                "payments/taxesSettings.updateInclusiveExclusive",
+                "payments/taxesSettings.manageRates",
+                "payments/taxesSettings.configureAutomatic",
+                "products.readonly",
+                "products.write",
+                "products.delete",
+                "products.duplicate",
+                "products.bulkActions",
+                "payments/settings.write",
+                "payments/settings.configureReceipt",
+                "payments/settings.configureSubscription",
+                "invoices.write",
+                "invoices.readonly",
+                "invoices/schedule.readonly",
+                "invoices/schedule.write",
+                "invoices/template.readonly",
+                "invoices/template.write",
+                "reputation/review.write",
+                "reputation/listing.write",
+                "reputation/reviewsAIAgents.write",
+                "reputation/gbp.write",
+                "conversations.write",
+                "conversations.readonly",
+                "conversations/message.readonly",
+                "conversations/message.write",
+                "contentAI.write",
+                "dashboard/stats.readonly",
+                "locations/tags.write",
+                "locations/tags.readonly",
+                "marketing.write",
+                "eliza.write",
+                "settings.write",
+                "socialplanner/post.write",
+                "socialplanner/account.readonly",
+                "socialplanner/account.write",
+                "socialplanner/category.readonly",
+                "socialplanner/category.write",
+                "socialplanner/csv.readonly",
+                "socialplanner/csv.write",
+                "socialplanner/group.write",
+                "socialplanner/hashtag.readonly",
+                "socialplanner/hashtag.write",
+                "socialplanner/oauth.readonly",
+                "socialplanner/oauth.write",
+                "socialplanner/post.readonly",
+                "socialplanner/recurring.readonly",
+                "socialplanner/recurring.write",
+                "socialplanner/review.readonly",
+                "socialplanner/review.write",
+                "socialplanner/rss.readonly",
+                "socialplanner/rss.write",
+                "socialplanner/search.readonly",
+                "socialplanner/setting.readonly",
+                "socialplanner/setting.write",
+                "socialplanner/stat.readonly",
+                "socialplanner/tag.readonly",
+                "socialplanner/tag.write",
+                "socialplanner/filters.readonly",
+                "socialplanner/medias.readonly",
+                "socialplanner/medias.write",
+                "socialplanner/watermarks.readonly",
+                "socialplanner/watermarks.write",
+                "socialplanner/metatag.readonly",
+                "socialplanner/facebook.readonly",
+                "socialplanner/linkedin.readonly",
+                "socialplanner/twitter.readonly",
+                "socialplanner/notification.readonly",
+                "socialplanner/notification.write",
+                "socialplanner/snapshot.readonly",
+                "socialplanner/snapshot.write",
+                "marketing/affiliate.write",
+                "blogs.write",
+                "membership.write",
+                "communities.write",
+                "gokollab.write",
+                "certificates.write",
+                "certificates.readonly",
+                "adPublishing.write",
+                "adPublishing.readonly",
+                "prospecting.write",
+                "prospecting.readonly",
+                "prospecting/reports.readonly",
+                "private-integration-location.readonly",
+                "private-integration-location.write",
+                "private-integration-company.readonly",
+                "private-integration-company.write",
+                "native-integrations.readonly",
+                "native-integrations.write",
+                "wordpress.write",
+                "wordpress.read",
+                "custom-menu-link.write",
+                "qrcodes.write",
+                "users/team-management.write",
+                "users/team-management.readonly",
+                "loginas.write",
+                "users-sso-login-management.write",
+                "users-sso-login-management.readonly",
+                "sso-config.write",
+                "snapshots/api.readonly",
+                "snapshots/api.create",
+                "snapshots/api.edit",
+                "snapshots/api.push",
+                "snapshots/api.refresh",
+                "snapshots/api.share",
+                "snapshots/api.delete",
+                "internaltools.location-transfer.write",
+                "internaltools.location-transfer.readonly",
+                "affiliateportal.write",
+                "affiliateportal.readonly",
+                "companies.write",
+                "internaltools.billing.write",
+                "internaltools.billing.readonly",
+                "internaltools.billing-common.readonly",
+                "internaltools.billing-common.write",
+                "voice-ai-agents.write",
+                "voice-ai-agents.readonly",
+                "voice-ai-common.readonly",
+                "voice-ai-common.write",
+                "voice-ai-agent-goals.readonly",
+                "voice-ai-agent-goals.write",
+                "voice-ai-dashboard.readonly",
+                "agency/launchpad.write",
+                "agency/launchpad.readonly",
+                "launchpad/location.write",
+                "launchpad/location.readonly",
+                "text-ai-agents.write",
+                "text-ai-agent-goals.readonly",
+                "text-ai-agent-goals.write",
+                "text-ai-agent-training.write",
+                "text-ai-agents-dashboard.readonly",
+                "locations.create",
+                "locations.delete",
+                "locations.export.list",
+                "locations.features-limits.manage",
+                "locations.pause-resume",
+                "locations.agency-subaccounts.manage",
+                "locations.billing.manage",
+                "locations.details.manage",
+                "audit-logs.readonly",
+                "audit-logs.export"
+              ]
+            }
+          },
+          "scopesAssignedToOnly": {
+            "type": "array",
+            "description": "Assigned Scopes allowed for users. Only scopes that have been passed will be enabled. If passed empty all the assigned scopes will be get disabled",
+            "items": {
+              "type": "string",
+              "enum": [
+                "campaigns.readonly",
+                "campaigns.write",
+                "calendars.readonly",
+                "calendars/events.write",
+                "calendars/groups.write",
+                "calendars.write",
+                "contacts.write",
+                "contacts/bulkActions.write",
+                "workflows.readonly",
+                "workflows.write",
+                "triggers.write",
+                "funnels.write",
+                "forms.write",
+                "surveys.write",
+                "quizzes.write",
+                "websites.write",
+                "medias.write",
+                "medias.readonly",
+                "opportunities.write",
+                "opportunities/leadValue.readonly",
+                "opportunities/bulkActions.write",
+                "reporting/phone.readonly",
+                "reporting/adwords.readonly",
+                "reporting/facebookAds.readonly",
+                "reporting/attributions.readonly",
+                "prospecting/auditReport.write",
+                "reporting/reports.readonly",
+                "reporting/agent.readonly",
+                "reporting/reports.write",
+                "reporting/stats.export",
+                "payments.write",
+                "payments/records.write",
+                "payments/orders.readonly",
+                "payments/orders.export",
+                "payments/orders.import",
+                "payments/orders.collectPayment",
+                "payments/subscriptions.readonly",
+                "payments/subscriptions.write",
+                "payments/subscriptions.update",
+                "payments/subscriptions.export",
+                "payments/subscriptions.pauseResumeCancel",
+                "payments/subscriptions.sharePaymentMethod",
+                "payments/transactions.readonly",
+                "payments/transactions.export",
+                "payments/transactions.import",
+                "payments/transactions.refund",
+                "payments/transactions.viewReceipts",
+                "payments/taxesSettings.readonly",
+                "payments/settings.readonly",
+                "payments/taxesSettings.updateInclusiveExclusive",
+                "payments/taxesSettings.manageRates",
+                "payments/taxesSettings.configureAutomatic",
+                "products.readonly",
+                "products.write",
+                "products.delete",
+                "products.duplicate",
+                "products.bulkActions",
+                "payments/settings.write",
+                "payments/settings.configureReceipt",
+                "payments/settings.configureSubscription",
+                "invoices.write",
+                "invoices.readonly",
+                "invoices/schedule.readonly",
+                "invoices/schedule.write",
+                "invoices/template.readonly",
+                "invoices/template.write",
+                "reputation/review.write",
+                "reputation/listing.write",
+                "reputation/reviewsAIAgents.write",
+                "reputation/gbp.write",
+                "conversations.write",
+                "conversations.readonly",
+                "conversations/message.readonly",
+                "conversations/message.write",
+                "contentAI.write",
+                "dashboard/stats.readonly",
+                "locations/tags.write",
+                "locations/tags.readonly",
+                "marketing.write",
+                "eliza.write",
+                "settings.write",
+                "socialplanner/post.write",
+                "socialplanner/account.readonly",
+                "socialplanner/account.write",
+                "socialplanner/category.readonly",
+                "socialplanner/category.write",
+                "socialplanner/csv.readonly",
+                "socialplanner/csv.write",
+                "socialplanner/group.write",
+                "socialplanner/hashtag.readonly",
+                "socialplanner/hashtag.write",
+                "socialplanner/oauth.readonly",
+                "socialplanner/oauth.write",
+                "socialplanner/post.readonly",
+                "socialplanner/recurring.readonly",
+                "socialplanner/recurring.write",
+                "socialplanner/review.readonly",
+                "socialplanner/review.write",
+                "socialplanner/rss.readonly",
+                "socialplanner/rss.write",
+                "socialplanner/search.readonly",
+                "socialplanner/setting.readonly",
+                "socialplanner/setting.write",
+                "socialplanner/stat.readonly",
+                "socialplanner/tag.readonly",
+                "socialplanner/tag.write",
+                "socialplanner/filters.readonly",
+                "socialplanner/medias.readonly",
+                "socialplanner/medias.write",
+                "socialplanner/watermarks.readonly",
+                "socialplanner/watermarks.write",
+                "socialplanner/metatag.readonly",
+                "socialplanner/facebook.readonly",
+                "socialplanner/linkedin.readonly",
+                "socialplanner/twitter.readonly",
+                "socialplanner/notification.readonly",
+                "socialplanner/notification.write",
+                "socialplanner/snapshot.readonly",
+                "socialplanner/snapshot.write",
+                "marketing/affiliate.write",
+                "blogs.write",
+                "membership.write",
+                "communities.write",
+                "gokollab.write",
+                "certificates.write",
+                "certificates.readonly",
+                "adPublishing.write",
+                "adPublishing.readonly",
+                "prospecting.write",
+                "prospecting.readonly",
+                "prospecting/reports.readonly",
+                "private-integration-location.readonly",
+                "private-integration-location.write",
+                "private-integration-company.readonly",
+                "private-integration-company.write",
+                "native-integrations.readonly",
+                "native-integrations.write",
+                "wordpress.write",
+                "wordpress.read",
+                "custom-menu-link.write",
+                "qrcodes.write",
+                "users/team-management.write",
+                "users/team-management.readonly",
+                "loginas.write",
+                "users-sso-login-management.write",
+                "users-sso-login-management.readonly",
+                "sso-config.write",
+                "snapshots/api.readonly",
+                "snapshots/api.create",
+                "snapshots/api.edit",
+                "snapshots/api.push",
+                "snapshots/api.refresh",
+                "snapshots/api.share",
+                "snapshots/api.delete",
+                "internaltools.location-transfer.write",
+                "internaltools.location-transfer.readonly",
+                "affiliateportal.write",
+                "affiliateportal.readonly",
+                "companies.write",
+                "internaltools.billing.write",
+                "internaltools.billing.readonly",
+                "internaltools.billing-common.readonly",
+                "internaltools.billing-common.write",
+                "voice-ai-agents.write",
+                "voice-ai-agents.readonly",
+                "voice-ai-common.readonly",
+                "voice-ai-common.write",
+                "voice-ai-agent-goals.readonly",
+                "voice-ai-agent-goals.write",
+                "voice-ai-dashboard.readonly",
+                "agency/launchpad.write",
+                "agency/launchpad.readonly",
+                "launchpad/location.write",
+                "launchpad/location.readonly",
+                "text-ai-agents.write",
+                "text-ai-agent-goals.readonly",
+                "text-ai-agent-goals.write",
+                "text-ai-agent-training.write",
+                "text-ai-agents-dashboard.readonly",
+                "locations.create",
+                "locations.delete",
+                "locations.export.list",
+                "locations.features-limits.manage",
+                "locations.pause-resume",
+                "locations.agency-subaccounts.manage",
+                "locations.billing.manage",
+                "locations.details.manage",
+                "audit-logs.readonly",
+                "audit-logs.export"
+              ]
+            }
+          },
+          "profilePhoto": {
+            "type": "string"
+          },
+          "twilioPhone": {
+            "type": "object",
+            "additionalProperties": {
+              "type": "string"
+            },
+            "description": "Per-location inbound Twilio number in E.164 format, keyed by location id (Call and Voicemail Inbound Number for direct Twilio, not LC Phone). Replacement semantics: if you send twilioPhone in the request body, the stored map is replaced entirely with this object (not merged). Any location id omitted from the object is removed from the saved map. Omit the twilioPhone property entirely to leave existing numbers unchanged. Send an empty object {} to clear all per-location numbers. To clear a single location only, set that location id to an empty string \"\"."
+          },
+          "platformLanguage": {
+            "type": "string",
+            "description": "Platform language preference for the user",
+            "enum": [
+              "en_US",
+              "es",
+              "fr_CA",
+              "fr_FR",
+              "nl",
+              "de",
+              "pt_PT",
+              "pt_BR",
+              "it",
+              "sv",
+              "da",
+              "fi",
+              "no"
+            ]
+          }
+        },
+        "required": [
+          "companyId",
+          "firstName",
+          "lastName",
+          "email",
+          "password",
+          "type",
+          "role",
+          "locationIds"
+        ]
+      }
+    }
+  ]
+}

@@ -1,0 +1,151 @@
+{
+  "module": "forms",
+  "endpoints": [
+    {
+      "name": "forms_get_forms_submissions",
+      "module": "forms",
+      "method": "GET",
+      "path": "/forms/submissions",
+      "version": "2021-07-28",
+      "summary": "Get Forms Submissions",
+      "description": "Get Forms Submissions [GET /forms/submissions] Scopes: forms.readonly.",
+      "scopes": [
+        "forms.readonly"
+      ],
+      "access": "unknown",
+      "operationClass": "read",
+      "deprecated": false,
+      "pathFields": [],
+      "queryFields": [
+        "locationId",
+        "page",
+        "limit",
+        "formId",
+        "q",
+        "startAt",
+        "endAt"
+      ],
+      "bodyFields": [],
+      "bodyWrapped": false,
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "locationId": {
+            "type": "string"
+          },
+          "page": {
+            "type": "number",
+            "description": "(default: 1)"
+          },
+          "limit": {
+            "type": "number",
+            "description": "(default: 20)"
+          },
+          "formId": {
+            "type": "string",
+            "description": "Filter submission by form id"
+          },
+          "q": {
+            "type": "string",
+            "description": "Filter by contactId, name, email or phone no."
+          },
+          "startAt": {
+            "type": "string",
+            "description": "Get submission by starting of this date. By default it will be same date of last month(YYYY-MM-DD)."
+          },
+          "endAt": {
+            "type": "string",
+            "description": "Get submission by ending of this date. By default it will be current date(YYYY-MM-DD)."
+          }
+        },
+        "required": [
+          "locationId"
+        ]
+      }
+    },
+    {
+      "name": "forms_upload_to_custom_fields",
+      "module": "forms",
+      "method": "POST",
+      "path": "/forms/upload-custom-files",
+      "version": "2021-07-28",
+      "summary": "Upload files to custom fields",
+      "description": "Upload files to custom fields Post the necessary fields for the API to upload files. The files need to be a buffer with the key \"< custom_field_id >_< file_id >\". <br /> Here custom field id is the ID of your custom field and file id is a randomly generated id (or uuid) <br /> There is support for multiple file uploads as well. Have multiple fields in the format mentioned.<br />File size is limited to 50 MB.<br /><br /> The a… [POST /forms/upload-custom-files] Token: location. Scopes: forms.write.",
+      "scopes": [
+        "forms.write"
+      ],
+      "access": "location",
+      "operationClass": "write",
+      "deprecated": false,
+      "pathFields": [],
+      "queryFields": [
+        "contactId",
+        "locationId"
+      ],
+      "bodyFields": [],
+      "bodyWrapped": false,
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "contactId": {
+            "type": "string",
+            "description": "Contact ID to upload the file to."
+          },
+          "locationId": {
+            "type": "string",
+            "description": "Location ID of the contact."
+          }
+        },
+        "required": [
+          "contactId",
+          "locationId"
+        ]
+      }
+    },
+    {
+      "name": "forms_get_forms",
+      "module": "forms",
+      "method": "GET",
+      "path": "/forms/",
+      "version": "2021-07-28",
+      "summary": "Get Forms",
+      "description": "Get Forms [GET /forms/] Scopes: forms.readonly.",
+      "scopes": [
+        "forms.readonly"
+      ],
+      "access": "unknown",
+      "operationClass": "read",
+      "deprecated": false,
+      "pathFields": [],
+      "queryFields": [
+        "locationId",
+        "skip",
+        "limit",
+        "type"
+      ],
+      "bodyFields": [],
+      "bodyWrapped": false,
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "locationId": {
+            "type": "string"
+          },
+          "skip": {
+            "type": "number"
+          },
+          "limit": {
+            "type": "number",
+            "description": "(default: 10)"
+          },
+          "type": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "locationId"
+        ]
+      }
+    }
+  ]
+}

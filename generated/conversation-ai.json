@@ -1,0 +1,1702 @@
+{
+  "module": "conversation-ai",
+  "endpoints": [
+    {
+      "name": "conversation_ai_create_action",
+      "module": "conversation-ai",
+      "method": "POST",
+      "path": "/conversation-ai/agents/{agentId}/actions",
+      "version": "2021-04-15",
+      "summary": "Attach Action to Agent",
+      "description": "Attach Action to Agent Creates and attach a new action for an AI agent. Actions define specific tasks or behaviors that the agent can perform, such as booking appointments, sending follow-ups, or collecting information. [POST /conversation-ai/agents/{agentId}/actions] Scopes: conversation-ai.write.",
+      "scopes": [
+        "conversation-ai.write"
+      ],
+      "access": "unknown",
+      "operationClass": "write",
+      "deprecated": false,
+      "contentType": "application/json",
+      "pathFields": [
+        "agentId"
+      ],
+      "queryFields": [],
+      "bodyFields": [
+        "type",
+        "name",
+        "details"
+      ],
+      "bodyWrapped": false,
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "agentId": {
+            "type": "string"
+          },
+          "type": {
+            "type": "string",
+            "enum": [
+              "triggerWorkflow",
+              "updateContactField",
+              "appointmentBooking",
+              "stopBot",
+              "humanHandOver",
+              "advancedFollowup",
+              "transferBot"
+            ]
+          },
+          "name": {
+            "type": "string"
+          },
+          "details": {
+            "description": "Action-specific details. The structure depends on the action type. For TRIGGER_WORKFLOW use triggerWorkflowDto, for UPDATE_CONTACT_FIELD use updateContactFieldDto, for APPOINTMENT_BOOKING use appointmentBookingDto, for STOP_BOT use stopBotDto, for HUMAN_HAND_OVER use humanHandOverDto, for ADVANCED_FOLLOWUP use advancedFollowupDto, and for TRANSFER_BOT use transferBotDto.",
+            "oneOf": [
+              {
+                "type": "object",
+                "properties": {
+                  "workflowIds": {
+                    "description": "Array of workflow IDs to trigger",
+                    "type": "array",
+                    "items": {
+                      "type": "string"
+                    }
+                  },
+                  "triggerCondition": {
+                    "type": "string",
+                    "description": "Condition that triggers the workflow"
+                  },
+                  "triggerMessage": {
+                    "type": "string",
+                    "description": "Optional message to send when triggering the workflow"
+                  }
+                },
+                "required": [
+                  "workflowIds",
+                  "triggerCondition"
+                ]
+              },
+              {
+                "type": "object",
+                "properties": {
+                  "contactFieldId": {
+                    "type": "string",
+                    "description": "ID of the contact field in Contacts Table"
+                  },
+                  "description": {
+                    "type": "string",
+                    "description": "Description of the contact field in Contacts Table"
+                  },
+                  "contactUpdateExamples": {
+                    "description": "Contact update examples in Contacts Table. Not required when using standard fields, Monetory or Date Custom fields. (default: [])",
+                    "type": "array",
+                    "items": {
+                      "type": "string"
+                    }
+                  }
+                },
+                "required": [
+                  "contactFieldId",
+                  "description"
+                ]
+              },
+              {
+                "type": "object",
+                "properties": {
+                  "actionId": {
+                    "type": "string",
+                    "description": "Optional action ID reference"
+                  },
+                  "calendarId": {
+                    "type": "string",
+                    "description": "Calendar ID for appointment booking"
+                  },
+                  "onlySendLink": {
+                    "type": "boolean",
+                    "description": "If true, only sends the appointment link without booking"
+                  },
+                  "triggerWorkflow": {
+                    "type": "boolean",
+                    "description": "Whether to trigger a workflow after booking (cannot be true when onlySendLink is true)"
+                  },
+                  "workflowIds": {
+                    "description": "Workflow IDs to trigger after booking (required when triggerWorkflow is true)",
+                    "type": "array",
+                    "items": {
+                      "type": "string"
+                    }
+                  },
+                  "sleepAfterBooking": {
+                    "type": "boolean",
+                    "description": "Whether to put the agent to sleep after booking (cannot be true when onlySendLink is true)"
+                  },
+                  "sleepTimeUnit": {
+                    "type": "string",
+                    "enum": [
+                      "days",
+                      "hours",
+                      "minutes"
+                    ],
+                    "description": "Unit for sleep time (required when sleepAfterBooking is true)"
+                  },
+                  "sleepTime": {
+                    "type": "number",
+                    "description": "Sleep duration (required when sleepAfterBooking is true)"
+                  },
+                  "transferBot": {
+                    "type": "boolean",
+                    "description": "Whether to transfer to another agent after booking (cannot be true when onlySendLink is true)"
+                  },
+                  "transferAgent": {
+                    "type": "string",
+                    "description": "Agent ID to transfer to (required when transferBot is true)"
+                  },
+                  "rescheduleEnabled": {
+                    "type": "boolean",
+                    "description": "Whether to allow appointment rescheduling (cannot be true when onlySendLink is true) (default: false)"
+                  },
+                  "cancelEnabled": {
+                    "type": "boolean",
+                    "description": "Whether to allow appointment cancellation (cannot be true when onlySendLink is true) (default: false)"
+                  }
+                },
+                "required": [
+                  "calendarId",
+                  "onlySendLink",
+                  "triggerWorkflow",
+                  "sleepAfterBooking",
+                  "transferBot",
+                  "rescheduleEnabled",
+                  "cancelEnabled"
+                ]
+              },
+              {
+                "type": "object",
+                "properties": {
+                  "stopBotDetectionType": {
+                    "type": "string",
+                    "enum": [
+                      "Goodbye",
+                      "Custom"
+                    ],
+                    "description": "Type of stop bot detection - Goodbye or Custom"
+                  },
+                  "stopBotTriggerCondition": {
+                    "type": "string",
+                    "description": "Condition that triggers stopping the bot"
+                  },
+                  "reactivateEnabled": {
+                    "type": "boolean",
+                    "description": "Whether the bot can be reactivated after being stopped"
+                  },
+                  "sleepTimeUnit": {
+                    "type": "string",
+                    "enum": [
+                      "days",
+                      "hours",
+                      "minutes"
+                    ],
+                    "description": "Time unit for reactivation delay (required when reactivateEnabled is true)"
+                  },
+                  "sleepTime": {
+                    "type": "number",
+                    "description": "Time duration before reactivation (required when reactivateEnabled is true)"
+                  },
+                  "enabled": {
+                    "type": "boolean",
+                    "description": "Whether this action is enabled for the agent"
+                  },
+                  "stopBotExamples": {
+                    "description": "Example phrases that trigger stop bot action (minimum 2 required)",
+                    "type": "array",
+                    "items": {
+                      "type": "string"
+                    }
+                  },
+                  "finalMessage": {
+                    "type": "string",
+                    "description": "Final message sent when stopping the bot"
+                  },
+                  "tags": {
+                    "description": "Tags to apply when stopping the bot",
+                    "type": "array",
+                    "items": {
+                      "type": "string"
+                    }
+                  }
+                },
+                "required": [
+                  "stopBotDetectionType",
+                  "stopBotTriggerCondition",
+                  "reactivateEnabled",
+                  "enabled",
+                  "stopBotExamples",
+                  "finalMessage"
+                ]
+              },
+              {
+                "type": "object",
+                "properties": {
+                  "enabled": {
+                    "type": "boolean",
+                    "description": "Whether human handover action is enabled"
+                  },
+                  "triggerCondition": {
+                    "type": "string",
+                    "description": "Condition that triggers human handover"
+                  },
+                  "examples": {
+                    "description": "Example phrases that trigger human handover (required when handoverType is custom or contactRequest)",
+                    "type": "array",
+                    "items": {
+                      "type": "string"
+                    }
+                  },
+                  "assignToUserId": {
+                    "type": "string",
+                    "description": "ID of the user to assign the conversation to"
+                  },
+                  "skipAssignToUser": {
+                    "type": "boolean",
+                    "description": "Whether to skip assigning to a specific user"
+                  },
+                  "createTask": {
+                    "type": "boolean",
+                    "description": "Whether to create a task when handing over"
+                  },
+                  "reactivateEnabled": {
+                    "type": "boolean",
+                    "description": "Whether the agent can be reactivated after handover"
+                  },
+                  "sleepTimeUnit": {
+                    "type": "string",
+                    "enum": [
+                      "days",
+                      "hours",
+                      "minutes"
+                    ],
+                    "description": "Time unit for reactivation delay (required when reactivateEnabled is true)"
+                  },
+                  "sleepTime": {
+                    "type": "number",
+                    "description": "Time duration before reactivation (required when reactivateEnabled is true)"
+                  },
+                  "finalMessage": {
+                    "type": "string",
+                    "description": "Final message sent when handing over to human"
+                  },
+                  "tags": {
+                    "description": "Tags to apply during handover",
+                    "type": "array",
+                    "items": {
+                      "type": "string"
+                    }
+                  },
+                  "handoverType": {
+                    "type": "string",
+                    "enum": [
+                      "contactRequest",
+                      "lackOfInformation",
+                      "failedToResolveIssue",
+                      "custom"
+                    ],
+                    "description": "Type of human handover detection"
+                  }
+                },
+                "required": [
+                  "enabled",
+                  "triggerCondition",
+                  "reactivateEnabled",
+                  "finalMessage",
+                  "handoverType"
+                ]
+              },
+              {
+                "type": "object",
+                "properties": {
+                  "enabled": {
+                    "type": "boolean",
+                    "description": "Whether advanced followup is enabled"
+                  },
+                  "scenarioId": {
+                    "type": "string",
+                    "enum": [
+                      "contactStoppedReplying",
+                      "contactIsBusy",
+                      "contactRequested"
+                    ],
+                    "description": "ID of the followup scenario"
+                  },
+                  "followupSequence": {
+                    "description": "Sequence of followup actions to perform",
+                    "type": "array",
+                    "items": {
+                      "type": "object",
+                      "properties": {
+                        "id": {
+                          "type": "number",
+                          "description": "Unique identifier for this followup step"
+                        },
+                        "followupTimeUnit": {
+                          "type": "string",
+                          "enum": [
+                            "days",
+                            "hours",
+                            "minutes"
+                          ],
+                          "description": "Time unit for followup delay"
+                        },
+                        "followupTime": {
+                          "type": "number",
+                          "description": "Time duration before followup (max: 60 minutes, 24 hours, or 180 days depending on unit)"
+                        },
+                        "aiEnabledMessage": {
+                          "type": "boolean",
+                          "description": "Whether to use AI to generate the followup message (default: true)"
+                        },
+                        "triggerWorkflow": {
+                          "type": "boolean",
+                          "description": "Whether to trigger a workflow during this followup (default: false)"
+                        },
+                        "customMessage": {
+                          "type": "string",
+                          "description": "Custom message to send (when aiEnabledMessage is false)"
+                        },
+                        "workflowId": {
+                          "type": "string",
+                          "description": "Workflow ID to trigger (when triggerWorkflow is true)"
+                        },
+                        "contactRequested": {
+                          "type": "boolean",
+                          "description": "Whether contact was requested in this followup"
+                        }
+                      },
+                      "required": [
+                        "id",
+                        "followupTimeUnit",
+                        "followupTime"
+                      ]
+                    }
+                  },
+                  "followupSettings": {
+                    "type": "object",
+                    "properties": {
+                      "dynamicChannelSwitching": {
+                        "type": "boolean",
+                        "description": "Whether to dynamically switch channels for followups (default: true)"
+                      },
+                      "followUpHours": {
+                        "type": "boolean",
+                        "description": "Whether to respect working hours for followups"
+                      },
+                      "workingHours": {
+                        "description": "Working hours configuration for followups",
+                        "type": "array",
+                        "items": {
+                          "type": "object",
+                          "properties": {
+                            "dayOfTheWeek": {
+                              "type": "number",
+                              "description": "Day of the week (0=Sunday, 1=Monday, etc.)"
+                            },
+                            "intervals": {
+                              "description": "Time intervals for this day",
+                              "type": "array",
+                              "items": {
+                                "type": "object",
+                                "properties": {
+                                  "startHour": {
+                                    "type": "number",
+                                    "description": "Start hour (24-hour format)"
+                                  },
+                                  "startMinute": {
+                                    "type": "number",
+                                    "description": "Start minute"
+                                  },
+                                  "endHour": {
+                                    "type": "number",
+                                    "description": "End hour (24-hour format)"
+                                  },
+                                  "endMinute": {
+                                    "type": "number",
+                                    "description": "End minute"
+                                  }
+                                },
+                                "required": [
+                                  "startHour",
+                                  "startMinute",
+                                  "endHour",
+                                  "endMinute"
+                                ]
+                              }
+                            }
+                          },
+                          "required": [
+                            "dayOfTheWeek"
+                          ]
+                        }
+                      },
+                      "timezoneToUse": {
+                        "type": "string",
+                        "enum": [
+                          "contact",
+                          "business"
+                        ],
+                        "description": "Timezone to use for followups, contact or location"
+                      }
+                    },
+                    "required": [
+                      "dynamicChannelSwitching"
+                    ],
+                    "description": "Additional settings for followup behavior"
+                  }
+                },
+                "required": [
+                  "enabled",
+                  "scenarioId",
+                  "followupSequence"
+                ]
+              },
+              {
+                "type": "object",
+                "properties": {
+                  "transferBotType": {
+                    "type": "string",
+                    "enum": [
+                      "Default",
+                      "Custom"
+                    ],
+                    "description": "Type of transfer - Default or Custom"
+                  },
+                  "transferToBot": {
+                    "type": "string",
+                    "description": "ID of the bot/agent to transfer to"
+                  },
+                  "enabled": {
+                    "type": "boolean",
+                    "description": "Whether this transfer action is enabled"
+                  },
+                  "transferBotTriggerCondition": {
+                    "type": "string",
+                    "description": "Condition that triggers the transfer (required for Custom type)"
+                  },
+                  "transferBotExamples": {
+                    "description": "Example phrases that trigger transfer (required for Custom type, minimum 2)",
+                    "type": "array",
+                    "items": {
+                      "type": "string"
+                    }
+                  }
+                },
+                "required": [
+                  "transferBotType",
+                  "transferToBot",
+                  "enabled"
+                ]
+              }
+            ]
+          }
+        },
+        "required": [
+          "agentId",
+          "type",
+          "name",
+          "details"
+        ]
+      }
+    },
+    {
+      "name": "conversation_ai_list_actions",
+      "module": "conversation-ai",
+      "method": "GET",
+      "path": "/conversation-ai/agents/{agentId}/actions/list",
+      "version": "2021-04-15",
+      "summary": "List Actions for an Agent",
+      "description": "List Actions for an Agent List for actions for an agent [GET /conversation-ai/agents/{agentId}/actions/list] Scopes: conversation-ai.readonly.",
+      "scopes": [
+        "conversation-ai.readonly"
+      ],
+      "access": "unknown",
+      "operationClass": "read",
+      "deprecated": false,
+      "pathFields": [
+        "agentId"
+      ],
+      "queryFields": [],
+      "bodyFields": [],
+      "bodyWrapped": false,
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "agentId": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "agentId"
+        ]
+      }
+    },
+    {
+      "name": "conversation_ai_get_action_by_id",
+      "module": "conversation-ai",
+      "method": "GET",
+      "path": "/conversation-ai/agents/{agentId}/actions/{actionId}",
+      "version": "2021-04-15",
+      "summary": "Get Action by ID",
+      "description": "Get Action by ID Retrieves detailed information about a specific action using its unique identifier. Returns the action configuration, associated agents, and performance metrics. [GET /conversation-ai/agents/{agentId}/actions/{actionId}] Scopes: conversation-ai.readonly.",
+      "scopes": [
+        "conversation-ai.readonly"
+      ],
+      "access": "unknown",
+      "operationClass": "read",
+      "deprecated": false,
+      "pathFields": [
+        "actionId",
+        "agentId"
+      ],
+      "queryFields": [],
+      "bodyFields": [],
+      "bodyWrapped": false,
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "actionId": {
+            "type": "string",
+            "description": "The unique identifier of the action ID Attached to the agent"
+          },
+          "agentId": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "actionId",
+          "agentId"
+        ]
+      }
+    },
+    {
+      "name": "conversation_ai_update_action",
+      "module": "conversation-ai",
+      "method": "PUT",
+      "path": "/conversation-ai/agents/{agentId}/actions/{actionId}",
+      "version": "2021-04-15",
+      "summary": "Update Action",
+      "description": "Update Action Updates an existing action's configuration. This includes modifying the action name, description, trigger conditions, and behavior settings. [PUT /conversation-ai/agents/{agentId}/actions/{actionId}] Scopes: conversation-ai.write.",
+      "scopes": [
+        "conversation-ai.write"
+      ],
+      "access": "unknown",
+      "operationClass": "write",
+      "deprecated": false,
+      "contentType": "application/json",
+      "pathFields": [
+        "actionId",
+        "agentId"
+      ],
+      "queryFields": [],
+      "bodyFields": [
+        "type",
+        "name",
+        "details"
+      ],
+      "bodyWrapped": false,
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "actionId": {
+            "type": "string",
+            "description": "The unique identifier of the action ID Attached to the agent"
+          },
+          "agentId": {
+            "type": "string"
+          },
+          "type": {
+            "type": "string",
+            "enum": [
+              "triggerWorkflow",
+              "updateContactField",
+              "appointmentBooking",
+              "stopBot",
+              "humanHandOver",
+              "advancedFollowup",
+              "transferBot"
+            ]
+          },
+          "name": {
+            "type": "string"
+          },
+          "details": {
+            "description": "Action-specific details. The structure depends on the action type. For TRIGGER_WORKFLOW use triggerWorkflowDto, for UPDATE_CONTACT_FIELD use updateContactFieldDto, for APPOINTMENT_BOOKING use appointmentBookingDto, for STOP_BOT use stopBotDto, for HUMAN_HAND_OVER use humanHandOverDto, for ADVANCED_FOLLOWUP use advancedFollowupDto, and for TRANSFER_BOT use transferBotDto.",
+            "oneOf": [
+              {
+                "type": "object",
+                "properties": {
+                  "workflowIds": {
+                    "description": "Array of workflow IDs to trigger",
+                    "type": "array",
+                    "items": {
+                      "type": "string"
+                    }
+                  },
+                  "triggerCondition": {
+                    "type": "string",
+                    "description": "Condition that triggers the workflow"
+                  },
+                  "triggerMessage": {
+                    "type": "string",
+                    "description": "Optional message to send when triggering the workflow"
+                  }
+                },
+                "required": [
+                  "workflowIds",
+                  "triggerCondition"
+                ]
+              },
+              {
+                "type": "object",
+                "properties": {
+                  "contactFieldId": {
+                    "type": "string",
+                    "description": "ID of the contact field in Contacts Table"
+                  },
+                  "description": {
+                    "type": "string",
+                    "description": "Description of the contact field in Contacts Table"
+                  },
+                  "contactUpdateExamples": {
+                    "description": "Contact update examples in Contacts Table. Not required when using standard fields, Monetory or Date Custom fields. (default: [])",
+                    "type": "array",
+                    "items": {
+                      "type": "string"
+                    }
+                  }
+                },
+                "required": [
+                  "contactFieldId",
+                  "description"
+                ]
+              },
+              {
+                "type": "object",
+                "properties": {
+                  "actionId": {
+                    "type": "string",
+                    "description": "Optional action ID reference"
+                  },
+                  "calendarId": {
+                    "type": "string",
+                    "description": "Calendar ID for appointment booking"
+                  },
+                  "onlySendLink": {
+                    "type": "boolean",
+                    "description": "If true, only sends the appointment link without booking"
+                  },
+                  "triggerWorkflow": {
+                    "type": "boolean",
+                    "description": "Whether to trigger a workflow after booking (cannot be true when onlySendLink is true)"
+                  },
+                  "workflowIds": {
+                    "description": "Workflow IDs to trigger after booking (required when triggerWorkflow is true)",
+                    "type": "array",
+                    "items": {
+                      "type": "string"
+                    }
+                  },
+                  "sleepAfterBooking": {
+                    "type": "boolean",
+                    "description": "Whether to put the agent to sleep after booking (cannot be true when onlySendLink is true)"
+                  },
+                  "sleepTimeUnit": {
+                    "type": "string",
+                    "enum": [
+                      "days",
+                      "hours",
+                      "minutes"
+                    ],
+                    "description": "Unit for sleep time (required when sleepAfterBooking is true)"
+                  },
+                  "sleepTime": {
+                    "type": "number",
+                    "description": "Sleep duration (required when sleepAfterBooking is true)"
+                  },
+                  "transferBot": {
+                    "type": "boolean",
+                    "description": "Whether to transfer to another agent after booking (cannot be true when onlySendLink is true)"
+                  },
+                  "transferAgent": {
+                    "type": "string",
+                    "description": "Agent ID to transfer to (required when transferBot is true)"
+                  },
+                  "rescheduleEnabled": {
+                    "type": "boolean",
+                    "description": "Whether to allow appointment rescheduling (cannot be true when onlySendLink is true) (default: false)"
+                  },
+                  "cancelEnabled": {
+                    "type": "boolean",
+                    "description": "Whether to allow appointment cancellation (cannot be true when onlySendLink is true) (default: false)"
+                  }
+                },
+                "required": [
+                  "calendarId",
+                  "onlySendLink",
+                  "triggerWorkflow",
+                  "sleepAfterBooking",
+                  "transferBot",
+                  "rescheduleEnabled",
+                  "cancelEnabled"
+                ]
+              },
+              {
+                "type": "object",
+                "properties": {
+                  "stopBotDetectionType": {
+                    "type": "string",
+                    "enum": [
+                      "Goodbye",
+                      "Custom"
+                    ],
+                    "description": "Type of stop bot detection - Goodbye or Custom"
+                  },
+                  "stopBotTriggerCondition": {
+                    "type": "string",
+                    "description": "Condition that triggers stopping the bot"
+                  },
+                  "reactivateEnabled": {
+                    "type": "boolean",
+                    "description": "Whether the bot can be reactivated after being stopped"
+                  },
+                  "sleepTimeUnit": {
+                    "type": "string",
+                    "enum": [
+                      "days",
+                      "hours",
+                      "minutes"
+                    ],
+                    "description": "Time unit for reactivation delay (required when reactivateEnabled is true)"
+                  },
+                  "sleepTime": {
+                    "type": "number",
+                    "description": "Time duration before reactivation (required when reactivateEnabled is true)"
+                  },
+                  "enabled": {
+                    "type": "boolean",
+                    "description": "Whether this action is enabled for the agent"
+                  },
+                  "stopBotExamples": {
+                    "description": "Example phrases that trigger stop bot action (minimum 2 required)",
+                    "type": "array",
+                    "items": {
+                      "type": "string"
+                    }
+                  },
+                  "finalMessage": {
+                    "type": "string",
+                    "description": "Final message sent when stopping the bot"
+                  },
+                  "tags": {
+                    "description": "Tags to apply when stopping the bot",
+                    "type": "array",
+                    "items": {
+                      "type": "string"
+                    }
+                  }
+                },
+                "required": [
+                  "stopBotDetectionType",
+                  "stopBotTriggerCondition",
+                  "reactivateEnabled",
+                  "enabled",
+                  "stopBotExamples",
+                  "finalMessage"
+                ]
+              },
+              {
+                "type": "object",
+                "properties": {
+                  "enabled": {
+                    "type": "boolean",
+                    "description": "Whether human handover action is enabled"
+                  },
+                  "triggerCondition": {
+                    "type": "string",
+                    "description": "Condition that triggers human handover"
+                  },
+                  "examples": {
+                    "description": "Example phrases that trigger human handover (required when handoverType is custom or contactRequest)",
+                    "type": "array",
+                    "items": {
+                      "type": "string"
+                    }
+                  },
+                  "assignToUserId": {
+                    "type": "string",
+                    "description": "ID of the user to assign the conversation to"
+                  },
+                  "skipAssignToUser": {
+                    "type": "boolean",
+                    "description": "Whether to skip assigning to a specific user"
+                  },
+                  "createTask": {
+                    "type": "boolean",
+                    "description": "Whether to create a task when handing over"
+                  },
+                  "reactivateEnabled": {
+                    "type": "boolean",
+                    "description": "Whether the agent can be reactivated after handover"
+                  },
+                  "sleepTimeUnit": {
+                    "type": "string",
+                    "enum": [
+                      "days",
+                      "hours",
+                      "minutes"
+                    ],
+                    "description": "Time unit for reactivation delay (required when reactivateEnabled is true)"
+                  },
+                  "sleepTime": {
+                    "type": "number",
+                    "description": "Time duration before reactivation (required when reactivateEnabled is true)"
+                  },
+                  "finalMessage": {
+                    "type": "string",
+                    "description": "Final message sent when handing over to human"
+                  },
+                  "tags": {
+                    "description": "Tags to apply during handover",
+                    "type": "array",
+                    "items": {
+                      "type": "string"
+                    }
+                  },
+                  "handoverType": {
+                    "type": "string",
+                    "enum": [
+                      "contactRequest",
+                      "lackOfInformation",
+                      "failedToResolveIssue",
+                      "custom"
+                    ],
+                    "description": "Type of human handover detection"
+                  }
+                },
+                "required": [
+                  "enabled",
+                  "triggerCondition",
+                  "reactivateEnabled",
+                  "finalMessage",
+                  "handoverType"
+                ]
+              },
+              {
+                "type": "object",
+                "properties": {
+                  "enabled": {
+                    "type": "boolean",
+                    "description": "Whether advanced followup is enabled"
+                  },
+                  "scenarioId": {
+                    "type": "string",
+                    "enum": [
+                      "contactStoppedReplying",
+                      "contactIsBusy",
+                      "contactRequested"
+                    ],
+                    "description": "ID of the followup scenario"
+                  },
+                  "followupSequence": {
+                    "description": "Sequence of followup actions to perform",
+                    "type": "array",
+                    "items": {
+                      "type": "object",
+                      "properties": {
+                        "id": {
+                          "type": "number",
+                          "description": "Unique identifier for this followup step"
+                        },
+                        "followupTimeUnit": {
+                          "type": "string",
+                          "enum": [
+                            "days",
+                            "hours",
+                            "minutes"
+                          ],
+                          "description": "Time unit for followup delay"
+                        },
+                        "followupTime": {
+                          "type": "number",
+                          "description": "Time duration before followup (max: 60 minutes, 24 hours, or 180 days depending on unit)"
+                        },
+                        "aiEnabledMessage": {
+                          "type": "boolean",
+                          "description": "Whether to use AI to generate the followup message (default: true)"
+                        },
+                        "triggerWorkflow": {
+                          "type": "boolean",
+                          "description": "Whether to trigger a workflow during this followup (default: false)"
+                        },
+                        "customMessage": {
+                          "type": "string",
+                          "description": "Custom message to send (when aiEnabledMessage is false)"
+                        },
+                        "workflowId": {
+                          "type": "string",
+                          "description": "Workflow ID to trigger (when triggerWorkflow is true)"
+                        },
+                        "contactRequested": {
+                          "type": "boolean",
+                          "description": "Whether contact was requested in this followup"
+                        }
+                      },
+                      "required": [
+                        "id",
+                        "followupTimeUnit",
+                        "followupTime"
+                      ]
+                    }
+                  },
+                  "followupSettings": {
+                    "type": "object",
+                    "properties": {
+                      "dynamicChannelSwitching": {
+                        "type": "boolean",
+                        "description": "Whether to dynamically switch channels for followups (default: true)"
+                      },
+                      "followUpHours": {
+                        "type": "boolean",
+                        "description": "Whether to respect working hours for followups"
+                      },
+                      "workingHours": {
+                        "description": "Working hours configuration for followups",
+                        "type": "array",
+                        "items": {
+                          "type": "object",
+                          "properties": {
+                            "dayOfTheWeek": {
+                              "type": "number",
+                              "description": "Day of the week (0=Sunday, 1=Monday, etc.)"
+                            },
+                            "intervals": {
+                              "description": "Time intervals for this day",
+                              "type": "array",
+                              "items": {
+                                "type": "object",
+                                "properties": {
+                                  "startHour": {
+                                    "type": "number",
+                                    "description": "Start hour (24-hour format)"
+                                  },
+                                  "startMinute": {
+                                    "type": "number",
+                                    "description": "Start minute"
+                                  },
+                                  "endHour": {
+                                    "type": "number",
+                                    "description": "End hour (24-hour format)"
+                                  },
+                                  "endMinute": {
+                                    "type": "number",
+                                    "description": "End minute"
+                                  }
+                                },
+                                "required": [
+                                  "startHour",
+                                  "startMinute",
+                                  "endHour",
+                                  "endMinute"
+                                ]
+                              }
+                            }
+                          },
+                          "required": [
+                            "dayOfTheWeek"
+                          ]
+                        }
+                      },
+                      "timezoneToUse": {
+                        "type": "string",
+                        "enum": [
+                          "contact",
+                          "business"
+                        ],
+                        "description": "Timezone to use for followups, contact or location"
+                      }
+                    },
+                    "required": [
+                      "dynamicChannelSwitching"
+                    ],
+                    "description": "Additional settings for followup behavior"
+                  }
+                },
+                "required": [
+                  "enabled",
+                  "scenarioId",
+                  "followupSequence"
+                ]
+              },
+              {
+                "type": "object",
+                "properties": {
+                  "transferBotType": {
+                    "type": "string",
+                    "enum": [
+                      "Default",
+                      "Custom"
+                    ],
+                    "description": "Type of transfer - Default or Custom"
+                  },
+                  "transferToBot": {
+                    "type": "string",
+                    "description": "ID of the bot/agent to transfer to"
+                  },
+                  "enabled": {
+                    "type": "boolean",
+                    "description": "Whether this transfer action is enabled"
+                  },
+                  "transferBotTriggerCondition": {
+                    "type": "string",
+                    "description": "Condition that triggers the transfer (required for Custom type)"
+                  },
+                  "transferBotExamples": {
+                    "description": "Example phrases that trigger transfer (required for Custom type, minimum 2)",
+                    "type": "array",
+                    "items": {
+                      "type": "string"
+                    }
+                  }
+                },
+                "required": [
+                  "transferBotType",
+                  "transferToBot",
+                  "enabled"
+                ]
+              }
+            ]
+          }
+        },
+        "required": [
+          "actionId",
+          "agentId",
+          "type",
+          "name",
+          "details"
+        ]
+      }
+    },
+    {
+      "name": "conversation_ai_delete_action",
+      "module": "conversation-ai",
+      "method": "DELETE",
+      "path": "/conversation-ai/agents/{agentId}/actions/{actionId}",
+      "version": "2021-04-15",
+      "summary": "Remove Action from Agent",
+      "description": "Remove Action from Agent Permanently deletes an action. This will remove the action from all associated agents and cannot be undone. [DELETE /conversation-ai/agents/{agentId}/actions/{actionId}] Scopes: conversation-ai.write.",
+      "scopes": [
+        "conversation-ai.write"
+      ],
+      "access": "unknown",
+      "operationClass": "delete",
+      "deprecated": false,
+      "pathFields": [
+        "actionId",
+        "agentId"
+      ],
+      "queryFields": [],
+      "bodyFields": [],
+      "bodyWrapped": false,
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "actionId": {
+            "type": "string",
+            "description": "The unique identifier of the action ID Attached to the agent"
+          },
+          "agentId": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "actionId",
+          "agentId"
+        ]
+      }
+    },
+    {
+      "name": "conversation_ai_update_followup_settings",
+      "module": "conversation-ai",
+      "method": "PATCH",
+      "path": "/conversation-ai/agents/{agentId}/followup-settings",
+      "version": "2021-04-15",
+      "summary": "Update Followup Settings",
+      "description": "Update Followup Settings Update the followup settings for an action [PATCH /conversation-ai/agents/{agentId}/followup-settings] Scopes: conversation-ai.write.",
+      "scopes": [
+        "conversation-ai.write"
+      ],
+      "access": "unknown",
+      "operationClass": "write",
+      "deprecated": false,
+      "contentType": "application/json",
+      "pathFields": [
+        "agentId"
+      ],
+      "queryFields": [],
+      "bodyFields": [
+        "actionIds",
+        "followupSettings"
+      ],
+      "bodyWrapped": false,
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "agentId": {
+            "type": "string"
+          },
+          "actionIds": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "followupSettings": {
+            "type": "object",
+            "properties": {
+              "dynamicChannelSwitching": {
+                "type": "boolean",
+                "description": "Whether to dynamically switch channels for followups (default: true)"
+              },
+              "followUpHours": {
+                "type": "boolean",
+                "description": "Whether to respect working hours for followups"
+              },
+              "workingHours": {
+                "description": "Working hours configuration for followups",
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "dayOfTheWeek": {
+                      "type": "number",
+                      "description": "Day of the week (0=Sunday, 1=Monday, etc.)"
+                    },
+                    "intervals": {
+                      "description": "Time intervals for this day",
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "startHour": {
+                            "type": "number",
+                            "description": "Start hour (24-hour format)"
+                          },
+                          "startMinute": {
+                            "type": "number",
+                            "description": "Start minute"
+                          },
+                          "endHour": {
+                            "type": "number",
+                            "description": "End hour (24-hour format)"
+                          },
+                          "endMinute": {
+                            "type": "number",
+                            "description": "End minute"
+                          }
+                        },
+                        "required": [
+                          "startHour",
+                          "startMinute",
+                          "endHour",
+                          "endMinute"
+                        ]
+                      }
+                    }
+                  },
+                  "required": [
+                    "dayOfTheWeek"
+                  ]
+                }
+              },
+              "timezoneToUse": {
+                "type": "string",
+                "enum": [
+                  "contact",
+                  "business"
+                ],
+                "description": "Timezone to use for followups, contact or location"
+              }
+            },
+            "required": [
+              "dynamicChannelSwitching"
+            ]
+          }
+        },
+        "required": [
+          "agentId",
+          "actionIds",
+          "followupSettings"
+        ]
+      }
+    },
+    {
+      "name": "conversation_ai_create_agent",
+      "module": "conversation-ai",
+      "method": "POST",
+      "path": "/conversation-ai/agents",
+      "version": "2021-04-15",
+      "summary": "Create an Agent",
+      "description": "Create an Agent Creates a new AI agent for the location. The agent will be created with the specified configuration including name, role, actions, and behavior settings. [POST /conversation-ai/agents] Scopes: conversation-ai.write.",
+      "scopes": [
+        "conversation-ai.write"
+      ],
+      "access": "unknown",
+      "operationClass": "write",
+      "deprecated": false,
+      "contentType": "application/json",
+      "pathFields": [],
+      "queryFields": [],
+      "bodyFields": [
+        "name",
+        "businessName",
+        "mode",
+        "channels",
+        "isPrimary",
+        "waitTime",
+        "waitTimeUnit",
+        "sleepEnabled",
+        "sleepTime",
+        "sleepTimeUnit",
+        "personality",
+        "goal",
+        "instructions",
+        "autoPilotMaxMessages",
+        "knowledgeBaseIds",
+        "respondToImages",
+        "respondToAudio",
+        "sleepOnManualMessage",
+        "sleepOnWorkflowMessage"
+      ],
+      "bodyWrapped": false,
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "description": "Name of the agent."
+          },
+          "businessName": {
+            "type": "string",
+            "description": "Name of the business the agent represents."
+          },
+          "mode": {
+            "type": "string",
+            "enum": [
+              "off",
+              "suggestive",
+              "auto-pilot"
+            ],
+            "description": "Mode of operation - OFF, SUGGESTIVE, or AUTO_PILOT (default: \"off\")"
+          },
+          "channels": {
+            "type": "array",
+            "description": "Communication channels the agent can operate on",
+            "items": {
+              "type": "string",
+              "enum": [
+                "IG",
+                "FB",
+                "SMS",
+                "WebChat",
+                "WhatsApp",
+                "Live_Chat"
+              ]
+            }
+          },
+          "isPrimary": {
+            "type": "boolean",
+            "description": "Indicates if this agent is a primary agent. (default: false)"
+          },
+          "waitTime": {
+            "type": "number",
+            "description": "Wait time before agent responds (max 5 for minutes, 300 for seconds) (default: 2)"
+          },
+          "waitTimeUnit": {
+            "type": "string",
+            "enum": [
+              "minutes",
+              "seconds"
+            ],
+            "description": "Unit for wait time - SECONDS or MINUTES (default: \"seconds\")"
+          },
+          "sleepEnabled": {
+            "type": "boolean",
+            "description": "Indicates if sleep functionality is enabled. (default: false)",
+            "deprecated": true
+          },
+          "sleepTime": {
+            "type": "number",
+            "description": "Duration of sleep period (required if sleepEnabled is true). Set to null for indefinite sleep. (max 2880 for minutes, 172800 for seconds, 48 for hours)"
+          },
+          "sleepTimeUnit": {
+            "type": "string",
+            "enum": [
+              "hours",
+              "minutes",
+              "seconds"
+            ],
+            "description": "Unit of sleep time - HOURS, MINUTES, or SECONDS (required if sleepEnabled is true). Set to null for indefinite sleep."
+          },
+          "personality": {
+            "type": "string",
+            "description": "Personality traits of the agent."
+          },
+          "goal": {
+            "type": "string",
+            "description": "The goal of the agent."
+          },
+          "instructions": {
+            "type": "string",
+            "description": "Instructions for the agent."
+          },
+          "autoPilotMaxMessages": {
+            "type": "number",
+            "description": "Maximum number of messages in auto-pilot mode before requiring human intervention. (max: 100, min: 1) (default: 75)"
+          },
+          "knowledgeBaseIds": {
+            "description": "Array of knowledge base IDs associated with this agent.",
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "respondToImages": {
+            "type": "boolean",
+            "description": "Allow agent to respond to images (default: false)"
+          },
+          "respondToAudio": {
+            "type": "boolean",
+            "description": "Allow agent to respond to audio (default: false)"
+          },
+          "sleepOnManualMessage": {
+            "type": "boolean",
+            "description": "Enable sleep when a manual outbound message is sent."
+          },
+          "sleepOnWorkflowMessage": {
+            "type": "boolean",
+            "description": "Enable sleep when a workflow outbound message is sent."
+          }
+        },
+        "required": [
+          "name",
+          "personality",
+          "goal",
+          "instructions"
+        ]
+      }
+    },
+    {
+      "name": "conversation_ai_search_agent",
+      "module": "conversation-ai",
+      "method": "GET",
+      "path": "/conversation-ai/agents/search",
+      "version": "2021-04-15",
+      "summary": "Search Agents",
+      "description": "Search Agents Searches for AI agents based on various criteria including name, status, and configuration. Supports advanced filtering and full-text search capabilities. [GET /conversation-ai/agents/search] Scopes: conversation-ai.readonly.",
+      "scopes": [
+        "conversation-ai.readonly"
+      ],
+      "access": "unknown",
+      "operationClass": "read",
+      "deprecated": false,
+      "pathFields": [],
+      "queryFields": [
+        "startAfter",
+        "limit",
+        "query"
+      ],
+      "bodyFields": [],
+      "bodyWrapped": false,
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "startAfter": {
+            "type": "string",
+            "description": "Start after is the agent id to start after, Serving as skip, send empty when first page"
+          },
+          "limit": {
+            "type": "number",
+            "description": "Records per page"
+          },
+          "query": {
+            "type": "string",
+            "description": "query to search on agent name, must be provided in lowercase"
+          }
+        }
+      }
+    },
+    {
+      "name": "conversation_ai_get_agent",
+      "module": "conversation-ai",
+      "method": "GET",
+      "path": "/conversation-ai/agents/{agentId}",
+      "version": "2021-04-15",
+      "summary": "Get Agent",
+      "description": "Get Agent Retrieves a specific AI agent by its ID. Returns the complete agent configuration including name, status, actions, and settings. [GET /conversation-ai/agents/{agentId}] Scopes: conversation-ai.readonly.",
+      "scopes": [
+        "conversation-ai.readonly"
+      ],
+      "access": "unknown",
+      "operationClass": "read",
+      "deprecated": false,
+      "pathFields": [
+        "agentId"
+      ],
+      "queryFields": [],
+      "bodyFields": [],
+      "bodyWrapped": false,
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "agentId": {
+            "type": "string",
+            "description": "Conversations AI agent id"
+          }
+        },
+        "required": [
+          "agentId"
+        ]
+      }
+    },
+    {
+      "name": "conversation_ai_update_agent",
+      "module": "conversation-ai",
+      "method": "PUT",
+      "path": "/conversation-ai/agents/{agentId}",
+      "version": "2021-04-15",
+      "summary": "Update Agent",
+      "description": "Update Agent Updates an existing AI agent's configuration. All fields in the agent configuration can be updated including name, status, actions, and behavior settings. [PUT /conversation-ai/agents/{agentId}] Scopes: conversation-ai.write.",
+      "scopes": [
+        "conversation-ai.write"
+      ],
+      "access": "unknown",
+      "operationClass": "write",
+      "deprecated": false,
+      "contentType": "application/json",
+      "pathFields": [
+        "agentId"
+      ],
+      "queryFields": [],
+      "bodyFields": [
+        "name",
+        "businessName",
+        "mode",
+        "channels",
+        "isPrimary",
+        "waitTime",
+        "waitTimeUnit",
+        "sleepEnabled",
+        "sleepTime",
+        "sleepTimeUnit",
+        "personality",
+        "goal",
+        "instructions",
+        "autoPilotMaxMessages",
+        "knowledgeBaseIds",
+        "respondToImages",
+        "respondToAudio",
+        "sleepOnManualMessage",
+        "sleepOnWorkflowMessage"
+      ],
+      "bodyWrapped": false,
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "agentId": {
+            "type": "string",
+            "description": "Conversations AI agent id"
+          },
+          "name": {
+            "type": "string",
+            "description": "Name of the agent."
+          },
+          "businessName": {
+            "type": "string",
+            "description": "Name of the business the agent represents."
+          },
+          "mode": {
+            "type": "string",
+            "enum": [
+              "off",
+              "suggestive",
+              "auto-pilot"
+            ],
+            "description": "Mode of operation for the agent, required if primary is enabled."
+          },
+          "channels": {
+            "type": "array",
+            "description": "Channels the agent can use.",
+            "items": {
+              "type": "string",
+              "enum": [
+                "IG",
+                "FB",
+                "SMS",
+                "WebChat",
+                "WhatsApp",
+                "Live_Chat"
+              ]
+            }
+          },
+          "isPrimary": {
+            "type": "boolean",
+            "description": "Indicates if this agent is a primary agent."
+          },
+          "waitTime": {
+            "type": "number",
+            "description": "Wait time before agent responds (max 5 for minutes, 300 for seconds)."
+          },
+          "waitTimeUnit": {
+            "type": "string",
+            "enum": [
+              "minutes",
+              "seconds"
+            ],
+            "description": "Unit for wait time - SECONDS or MINUTES"
+          },
+          "sleepEnabled": {
+            "type": "boolean",
+            "description": "Indicates if sleep functionality is enabled.",
+            "deprecated": true
+          },
+          "sleepTime": {
+            "type": "number",
+            "description": "Duration of sleep period (required if sleepEnabled is true). Set to null for indefinite sleep. (max 2880 for minutes, 172800 for seconds, 48 for hours)"
+          },
+          "sleepTimeUnit": {
+            "type": "string",
+            "enum": [
+              "hours",
+              "minutes",
+              "seconds"
+            ],
+            "description": "Unit of sleep time - HOURS, MINUTES, or SECONDS (required if sleepEnabled is true). Set to null for indefinite sleep."
+          },
+          "personality": {
+            "type": "string",
+            "description": "Personality traits of the agent."
+          },
+          "goal": {
+            "type": "string",
+            "description": "The goal of the agent."
+          },
+          "instructions": {
+            "type": "string",
+            "description": "Instructions for the agent."
+          },
+          "autoPilotMaxMessages": {
+            "type": "number",
+            "description": "Maximum number of messages in auto-pilot mode before requiring human intervention. (max: 100, min: 1) (default: 75)"
+          },
+          "knowledgeBaseIds": {
+            "description": "Array of knowledge base IDs associated with this agent.",
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "respondToImages": {
+            "type": "boolean",
+            "description": "Allow agent to respond to images (default: false)"
+          },
+          "respondToAudio": {
+            "type": "boolean",
+            "description": "Allow agent to respond to audio (default: false)"
+          },
+          "sleepOnManualMessage": {
+            "type": "boolean",
+            "description": "Enable sleep when a manual outbound message is sent."
+          },
+          "sleepOnWorkflowMessage": {
+            "type": "boolean",
+            "description": "Enable sleep when a workflow outbound message is sent."
+          }
+        },
+        "required": [
+          "agentId",
+          "autoPilotMaxMessages"
+        ]
+      }
+    },
+    {
+      "name": "conversation_ai_delete_agent",
+      "module": "conversation-ai",
+      "method": "DELETE",
+      "path": "/conversation-ai/agents/{agentId}",
+      "version": "2021-04-15",
+      "summary": "Delete Agent",
+      "description": "Delete Agent Deletes an AI agent permanently. This action cannot be undone. All associated configurations and conversation history will be removed. [DELETE /conversation-ai/agents/{agentId}] Scopes: conversation-ai.write.",
+      "scopes": [
+        "conversation-ai.write"
+      ],
+      "access": "unknown",
+      "operationClass": "delete",
+      "deprecated": false,
+      "pathFields": [
+        "agentId"
+      ],
+      "queryFields": [],
+      "bodyFields": [],
+      "bodyWrapped": false,
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "agentId": {
+            "type": "string",
+            "description": "Conversations AI agent id"
+          }
+        },
+        "required": [
+          "agentId"
+        ]
+      }
+    },
+    {
+      "name": "conversation_ai_get_generation_details",
+      "module": "conversation-ai",
+      "method": "GET",
+      "path": "/conversation-ai/generations",
+      "version": "2021-04-15",
+      "summary": "Get the generation details",
+      "description": "Get the generation details Retrieves detailed information about AI responses including the System Prompt, Conversation history, Knowledge base, website, FAQ chunks, and Rich Text chunks. [GET /conversation-ai/generations] Scopes: conversation-ai.readonly.",
+      "scopes": [
+        "conversation-ai.readonly"
+      ],
+      "access": "unknown",
+      "operationClass": "read",
+      "deprecated": false,
+      "pathFields": [],
+      "queryFields": [
+        "messageId",
+        "source"
+      ],
+      "bodyFields": [],
+      "bodyWrapped": false,
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "messageId": {
+            "type": "string",
+            "description": "Message Id"
+          },
+          "source": {
+            "enum": [
+              "conversation",
+              "workflow"
+            ],
+            "type": "string"
+          }
+        },
+        "required": [
+          "messageId",
+          "source"
+        ]
+      }
+    }
+  ]
+}

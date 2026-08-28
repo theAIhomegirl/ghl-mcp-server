@@ -1,0 +1,469 @@
+{
+  "module": "brand-boards",
+  "endpoints": [
+    {
+      "name": "brand_boards_getbrandboardsbylocation",
+      "module": "brand-boards",
+      "method": "GET",
+      "path": "/brand-boards/{locationId}",
+      "version": "2021-07-28",
+      "summary": "Get Brand Boards",
+      "description": "Get Brand Boards Retrieves all Brand Boards for a specific location [GET /brand-boards/{locationId}] Token: location. Scopes: brand-boards/design-kit.readonly.",
+      "scopes": [
+        "brand-boards/design-kit.readonly"
+      ],
+      "access": "location",
+      "operationClass": "read",
+      "deprecated": false,
+      "pathFields": [
+        "locationId"
+      ],
+      "queryFields": [
+        "limit",
+        "offset",
+        "search",
+        "deleted"
+      ],
+      "bodyFields": [],
+      "bodyWrapped": false,
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "locationId": {
+            "type": "string"
+          },
+          "limit": {
+            "type": "number",
+            "description": "(default: 10)"
+          },
+          "offset": {
+            "type": "number",
+            "description": "(default: 0)"
+          },
+          "search": {
+            "type": "string",
+            "description": "(default: \"\")"
+          },
+          "deleted": {
+            "type": "boolean",
+            "description": "(default: false)"
+          }
+        },
+        "required": [
+          "locationId"
+        ]
+      }
+    },
+    {
+      "name": "brand_boards_getbrandboardbyid",
+      "module": "brand-boards",
+      "method": "GET",
+      "path": "/brand-boards/{locationId}/{id}",
+      "version": "2021-07-28",
+      "summary": "Get Brand Board",
+      "description": "Get Brand Board Retrieves a specific Brand Board by its ID [GET /brand-boards/{locationId}/{id}] Token: location. Scopes: brand-boards/design-kit.readonly.",
+      "scopes": [
+        "brand-boards/design-kit.readonly"
+      ],
+      "access": "location",
+      "operationClass": "read",
+      "deprecated": false,
+      "pathFields": [
+        "locationId",
+        "id"
+      ],
+      "queryFields": [],
+      "bodyFields": [],
+      "bodyWrapped": false,
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "locationId": {
+            "type": "string",
+            "description": "Location ID where the brand board exists"
+          },
+          "id": {
+            "type": "string",
+            "description": "Brand board ID to update, retrieve, or delete"
+          }
+        },
+        "required": [
+          "locationId",
+          "id"
+        ]
+      }
+    },
+    {
+      "name": "brand_boards_updatebrandboard",
+      "module": "brand-boards",
+      "method": "PATCH",
+      "path": "/brand-boards/{locationId}/{id}",
+      "version": "2021-07-28",
+      "summary": "Update a Brand Board",
+      "description": "Update a Brand Board Updates an existing Brand Board [PATCH /brand-boards/{locationId}/{id}] Token: location. Scopes: brand-boards/design-kit.write.",
+      "scopes": [
+        "brand-boards/design-kit.write"
+      ],
+      "access": "location",
+      "operationClass": "write",
+      "deprecated": false,
+      "contentType": "application/json",
+      "pathFields": [
+        "locationId",
+        "id"
+      ],
+      "queryFields": [],
+      "bodyFields": [
+        "name",
+        "logos",
+        "colors",
+        "fonts",
+        "default",
+        "parentId"
+      ],
+      "bodyWrapped": false,
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "locationId": {
+            "type": "string",
+            "description": "Location ID where the brand board exists"
+          },
+          "id": {
+            "type": "string",
+            "description": "Brand board ID to update, retrieve, or delete"
+          },
+          "name": {
+            "type": "string",
+            "description": "Name of the brand board"
+          },
+          "logos": {
+            "description": "Array of logos for the brand board",
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "id": {
+                  "type": "string",
+                  "description": "Unique identifier for the logo"
+                },
+                "url": {
+                  "type": "string",
+                  "description": "Public URL of the logo image. Used for uploading to the brand board folder in media library"
+                },
+                "label": {
+                  "type": "string",
+                  "description": "Display label for the logo (e.g., Primary, Secondary)"
+                },
+                "path": {
+                  "type": "string",
+                  "description": "Storage path of the logo in the media library"
+                }
+              },
+              "required": [
+                "id",
+                "url",
+                "label",
+                "path"
+              ]
+            }
+          },
+          "colors": {
+            "description": "Array of colors for the brand board",
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "id": {
+                  "type": "string",
+                  "description": "Unique identifier for the color"
+                },
+                "hexa": {
+                  "type": "string",
+                  "description": "Color in HEXA format (with alpha)"
+                },
+                "rgba": {
+                  "type": "string",
+                  "description": "Color in RGBA format"
+                },
+                "hex": {
+                  "type": "string",
+                  "description": "Color in HEX format"
+                },
+                "rgb": {
+                  "type": "string",
+                  "description": "Color in RGB format"
+                },
+                "label": {
+                  "type": "string",
+                  "description": "Display label for the color"
+                }
+              },
+              "required": [
+                "id",
+                "hexa",
+                "rgba",
+                "hex",
+                "rgb",
+                "label"
+              ]
+            }
+          },
+          "fonts": {
+            "description": "Array of fonts for the brand board",
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "id": {
+                  "type": "string",
+                  "description": "Unique identifier for the font"
+                },
+                "font": {
+                  "type": "string",
+                  "description": "Font family name"
+                },
+                "fallback": {
+                  "type": "string",
+                  "description": "Fallback font family"
+                },
+                "label": {
+                  "type": "string",
+                  "description": "Display label for the font"
+                }
+              },
+              "required": [
+                "id",
+                "font",
+                "fallback",
+                "label"
+              ]
+            }
+          },
+          "default": {
+            "type": "boolean",
+            "description": "Set as the default brand board for this location"
+          },
+          "parentId": {
+            "type": "string",
+            "description": "Parent folder ID in media library (reserved for future use)"
+          }
+        },
+        "required": [
+          "locationId",
+          "id"
+        ]
+      }
+    },
+    {
+      "name": "brand_boards_deletebrandboard",
+      "module": "brand-boards",
+      "method": "DELETE",
+      "path": "/brand-boards/{locationId}/{id}",
+      "version": "2021-07-28",
+      "summary": "Delete a Brand Board",
+      "description": "Delete a Brand Board Deletes a Brand Board [DELETE /brand-boards/{locationId}/{id}] Token: location. Scopes: brand-boards/design-kit.write.",
+      "scopes": [
+        "brand-boards/design-kit.write"
+      ],
+      "access": "location",
+      "operationClass": "delete",
+      "deprecated": false,
+      "pathFields": [
+        "locationId",
+        "id"
+      ],
+      "queryFields": [],
+      "bodyFields": [],
+      "bodyWrapped": false,
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "locationId": {
+            "type": "string",
+            "description": "Location ID where the brand board exists"
+          },
+          "id": {
+            "type": "string",
+            "description": "Brand board ID to update, retrieve, or delete"
+          }
+        },
+        "required": [
+          "locationId",
+          "id"
+        ]
+      }
+    },
+    {
+      "name": "brand_boards_createbrandboard",
+      "module": "brand-boards",
+      "method": "POST",
+      "path": "/brand-boards/",
+      "version": "2021-07-28",
+      "summary": "Create a new brand board",
+      "description": "Create a new brand board Creates a new brand board with logos, colors, and fonts [POST /brand-boards/] Token: location. Scopes: brand-boards/design-kit.write.",
+      "scopes": [
+        "brand-boards/design-kit.write"
+      ],
+      "access": "location",
+      "operationClass": "write",
+      "deprecated": false,
+      "contentType": "application/json",
+      "pathFields": [],
+      "queryFields": [],
+      "bodyFields": [
+        "locationId",
+        "name",
+        "logos",
+        "colors",
+        "fonts",
+        "default",
+        "brandBoardId",
+        "parentId",
+        "type"
+      ],
+      "bodyWrapped": false,
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "locationId": {
+            "type": "string",
+            "description": "Location ID where the brand board will be created"
+          },
+          "name": {
+            "type": "string",
+            "description": "Name of the brand board"
+          },
+          "logos": {
+            "description": "Array of logos for the brand board",
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "id": {
+                  "type": "string",
+                  "description": "Unique identifier for the logo"
+                },
+                "url": {
+                  "type": "string",
+                  "description": "Public URL of the logo image. Used for uploading to the brand board folder in media library"
+                },
+                "label": {
+                  "type": "string",
+                  "description": "Display label for the logo (e.g., Primary, Secondary)"
+                },
+                "path": {
+                  "type": "string",
+                  "description": "Storage path of the logo in the media library"
+                }
+              },
+              "required": [
+                "id",
+                "url",
+                "label",
+                "path"
+              ]
+            }
+          },
+          "colors": {
+            "description": "Array of colors for the brand board",
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "id": {
+                  "type": "string",
+                  "description": "Unique identifier for the color"
+                },
+                "hexa": {
+                  "type": "string",
+                  "description": "Color in HEXA format (with alpha)"
+                },
+                "rgba": {
+                  "type": "string",
+                  "description": "Color in RGBA format"
+                },
+                "hex": {
+                  "type": "string",
+                  "description": "Color in HEX format"
+                },
+                "rgb": {
+                  "type": "string",
+                  "description": "Color in RGB format"
+                },
+                "label": {
+                  "type": "string",
+                  "description": "Display label for the color"
+                }
+              },
+              "required": [
+                "id",
+                "hexa",
+                "rgba",
+                "hex",
+                "rgb",
+                "label"
+              ]
+            }
+          },
+          "fonts": {
+            "description": "Array of fonts for the brand board",
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "id": {
+                  "type": "string",
+                  "description": "Unique identifier for the font"
+                },
+                "font": {
+                  "type": "string",
+                  "description": "Font family name"
+                },
+                "fallback": {
+                  "type": "string",
+                  "description": "Fallback font family"
+                },
+                "label": {
+                  "type": "string",
+                  "description": "Display label for the font"
+                }
+              },
+              "required": [
+                "id",
+                "font",
+                "fallback",
+                "label"
+              ]
+            }
+          },
+          "default": {
+            "type": "boolean",
+            "description": "Set as the default brand board for this location"
+          },
+          "brandBoardId": {
+            "type": "string",
+            "description": "Source brand board ID to copy from (creates a new brand board based on this template)"
+          },
+          "parentId": {
+            "type": "string",
+            "description": "Parent folder ID in media library for organizing brand boards"
+          },
+          "type": {
+            "type": "string",
+            "description": "Source type indicating how the brand board was created",
+            "enum": [
+              "template",
+              "blank",
+              "snapshot"
+            ]
+          }
+        },
+        "required": [
+          "locationId",
+          "name"
+        ]
+      }
+    }
+  ]
+}

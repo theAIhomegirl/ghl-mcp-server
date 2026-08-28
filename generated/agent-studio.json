@@ -1,0 +1,751 @@
+{
+  "module": "agent-studio",
+  "endpoints": [
+    {
+      "name": "agent_studio_getagents",
+      "module": "agent-studio",
+      "method": "GET",
+      "path": "/agent-studio/agent",
+      "version": "2021-04-15",
+      "summary": "List Agents",
+      "description": "List Agents Lists all active agents for the specified location. locationId is required parameter to ensure optimal performance. Supports pagination using limit and offset. Optionally filter by isPublished=true to return only agents with a published production version. [GET /agent-studio/agent] Token: location. Scopes: agent-studio.readonly.",
+      "scopes": [
+        "agent-studio.readonly"
+      ],
+      "access": "location",
+      "operationClass": "read",
+      "deprecated": false,
+      "pathFields": [],
+      "queryFields": [
+        "locationId",
+        "isPublished",
+        "limit",
+        "offset",
+        "source"
+      ],
+      "bodyFields": [],
+      "bodyWrapped": false,
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "locationId": {
+            "type": "string"
+          },
+          "isPublished": {
+            "type": "string",
+            "description": "Optional filter to return only agents with a published production version"
+          },
+          "limit": {
+            "type": "string"
+          },
+          "offset": {
+            "type": "string"
+          },
+          "source": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "locationId",
+          "limit",
+          "offset"
+        ]
+      }
+    },
+    {
+      "name": "agent_studio_createagent",
+      "module": "agent-studio",
+      "method": "POST",
+      "path": "/agent-studio/agent",
+      "version": "2021-04-15",
+      "summary": "Create Agent",
+      "description": "Create Agent Creates a new agent with staging version. The agent will be created with an initial staging version that can later be promoted to production. [POST /agent-studio/agent] Token: location. Scopes: agent-studio.write.",
+      "scopes": [
+        "agent-studio.write"
+      ],
+      "access": "location",
+      "operationClass": "write",
+      "deprecated": false,
+      "contentType": "application/json",
+      "pathFields": [],
+      "queryFields": [
+        "source"
+      ],
+      "bodyFields": [
+        "locationId",
+        "name",
+        "description",
+        "agencyId",
+        "authorId",
+        "authorName",
+        "authorEmail",
+        "status",
+        "version",
+        "nodes",
+        "edges"
+      ],
+      "bodyWrapped": false,
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "source": {
+            "type": "string"
+          },
+          "locationId": {
+            "type": "string",
+            "description": "Location ID"
+          },
+          "name": {
+            "type": "string",
+            "description": "Name of the agent"
+          },
+          "description": {
+            "type": "string",
+            "description": "Description of the agent"
+          },
+          "agencyId": {
+            "type": "string",
+            "description": "Agency ID"
+          },
+          "authorId": {
+            "type": "string",
+            "description": "Author ID"
+          },
+          "authorName": {
+            "type": "string",
+            "description": "Author name"
+          },
+          "authorEmail": {
+            "type": "string",
+            "description": "Author email"
+          },
+          "status": {
+            "type": "string",
+            "description": "Status of the agent",
+            "enum": [
+              "active",
+              "inactive",
+              "archived"
+            ]
+          },
+          "version": {
+            "type": "object",
+            "description": "Version data for the agent including nodes, edges, and configuration"
+          },
+          "nodes": {
+            "description": "Nodes array (deprecated, prefer using version.nodes)",
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "edges": {
+            "description": "Edges array (deprecated, prefer using version.edges)",
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          }
+        },
+        "required": [
+          "locationId",
+          "status",
+          "version"
+        ]
+      }
+    },
+    {
+      "name": "agent_studio_updateagentversion",
+      "module": "agent-studio",
+      "method": "PATCH",
+      "path": "/agent-studio/agent/versions/{versionId}",
+      "version": "2021-04-15",
+      "summary": "Update Agent",
+      "description": "Update Agent Updates a specific agent version by versionId. Supports updating nodes, edges, variables, and configuration. [PATCH /agent-studio/agent/versions/{versionId}] Token: location. Scopes: agent-studio.write.",
+      "scopes": [
+        "agent-studio.write"
+      ],
+      "access": "location",
+      "operationClass": "write",
+      "deprecated": false,
+      "contentType": "application/json",
+      "pathFields": [
+        "versionId"
+      ],
+      "queryFields": [
+        "source"
+      ],
+      "bodyFields": [
+        "locationId",
+        "versionName",
+        "description",
+        "nodes",
+        "edges",
+        "globalVariables",
+        "inputVariables",
+        "runtimeVariables",
+        "globalConfig",
+        "userId",
+        "userName"
+      ],
+      "bodyWrapped": false,
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "versionId": {
+            "type": "string"
+          },
+          "source": {
+            "type": "string"
+          },
+          "locationId": {
+            "type": "string",
+            "description": "Location ID for authorization"
+          },
+          "versionName": {
+            "type": "string",
+            "description": "Version name"
+          },
+          "description": {
+            "type": "string",
+            "description": "Description of the version"
+          },
+          "nodes": {
+            "description": "Complete array of nodes for the agent workflow. Provide all nodes including unchanged ones.",
+            "type": "array",
+            "items": {
+              "type": "object"
+            }
+          },
+          "edges": {
+            "description": "Complete array of edges connecting the nodes. Provide all edges including unchanged ones.",
+            "type": "array",
+            "items": {
+              "type": "object"
+            }
+          },
+          "globalVariables": {
+            "description": "Global variables accessible throughout the agent workflow",
+            "type": "array",
+            "items": {
+              "type": "object"
+            }
+          },
+          "inputVariables": {
+            "description": "Input variables required from user at execution time",
+            "type": "array",
+            "items": {
+              "type": "object"
+            }
+          },
+          "runtimeVariables": {
+            "description": "Runtime variables generated during agent execution",
+            "type": "array",
+            "items": {
+              "type": "object"
+            }
+          },
+          "globalConfig": {
+            "type": "object",
+            "description": "Global configuration including prompts and settings"
+          },
+          "userId": {
+            "type": "string",
+            "description": "User ID performing the update"
+          },
+          "userName": {
+            "type": "string",
+            "description": "User name performing the update"
+          }
+        },
+        "required": [
+          "versionId",
+          "locationId"
+        ]
+      }
+    },
+    {
+      "name": "agent_studio_getagentbyid",
+      "module": "agent-studio",
+      "method": "GET",
+      "path": "/agent-studio/agent/{agentId}",
+      "version": "2021-04-15",
+      "summary": "Get Agent",
+      "description": "Get Agent Gets a specific agent by its ID for the specified location with all its versions. Returns complete agent metadata and all non-deleted versions (draft, staging, production). locationId is required parameter. The agent must have active status. [GET /agent-studio/agent/{agentId}] Token: location. Scopes: agent-studio.readonly.",
+      "scopes": [
+        "agent-studio.readonly"
+      ],
+      "access": "location",
+      "operationClass": "read",
+      "deprecated": false,
+      "pathFields": [
+        "agentId"
+      ],
+      "queryFields": [
+        "locationId",
+        "source"
+      ],
+      "bodyFields": [],
+      "bodyWrapped": false,
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "agentId": {
+            "type": "string"
+          },
+          "locationId": {
+            "type": "string"
+          },
+          "source": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "agentId",
+          "locationId"
+        ]
+      }
+    },
+    {
+      "name": "agent_studio_updateagentmetadata",
+      "module": "agent-studio",
+      "method": "PATCH",
+      "path": "/agent-studio/agent/{agentId}",
+      "version": "2021-04-15",
+      "summary": "Update Agent Metadata",
+      "description": "Update Agent Metadata Updates agent metadata such as name, description, and status. [PATCH /agent-studio/agent/{agentId}] Token: location. Scopes: agent-studio.write.",
+      "scopes": [
+        "agent-studio.write"
+      ],
+      "access": "location",
+      "operationClass": "write",
+      "deprecated": false,
+      "contentType": "application/json",
+      "pathFields": [
+        "agentId"
+      ],
+      "queryFields": [
+        "source"
+      ],
+      "bodyFields": [
+        "locationId",
+        "name",
+        "description",
+        "status"
+      ],
+      "bodyWrapped": false,
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "agentId": {
+            "type": "string"
+          },
+          "source": {
+            "type": "string"
+          },
+          "locationId": {
+            "type": "string",
+            "description": "Location ID for authorization (cannot be updated)"
+          },
+          "name": {
+            "type": "string",
+            "description": "Name of the agent"
+          },
+          "description": {
+            "type": "string",
+            "description": "Description of the agent"
+          },
+          "status": {
+            "type": "string",
+            "description": "Status of the agent",
+            "enum": [
+              "active",
+              "inactive",
+              "archived"
+            ]
+          }
+        },
+        "required": [
+          "agentId",
+          "locationId"
+        ]
+      }
+    },
+    {
+      "name": "agent_studio_deleteagent",
+      "module": "agent-studio",
+      "method": "DELETE",
+      "path": "/agent-studio/agent/{agentId}",
+      "version": "2021-04-15",
+      "summary": "Delete Agent",
+      "description": "Delete Agent Deletes an agent and all its versions. [DELETE /agent-studio/agent/{agentId}] Token: location. Scopes: agent-studio.write.",
+      "scopes": [
+        "agent-studio.write"
+      ],
+      "access": "location",
+      "operationClass": "delete",
+      "deprecated": false,
+      "pathFields": [
+        "agentId"
+      ],
+      "queryFields": [
+        "locationId",
+        "source"
+      ],
+      "bodyFields": [],
+      "bodyWrapped": false,
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "agentId": {
+            "type": "string"
+          },
+          "locationId": {
+            "type": "string"
+          },
+          "source": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "agentId",
+          "locationId"
+        ]
+      }
+    },
+    {
+      "name": "agent_studio_promoteandpublish",
+      "module": "agent-studio",
+      "method": "POST",
+      "path": "/agent-studio/agent/versions/{versionId}/publish",
+      "version": "2021-04-15",
+      "summary": "Promote to Production",
+      "description": "Promote to Production Promotes a draft version to production. [POST /agent-studio/agent/versions/{versionId}/publish] Token: location. Scopes: agent-studio.write.",
+      "scopes": [
+        "agent-studio.write"
+      ],
+      "access": "location",
+      "operationClass": "write",
+      "deprecated": false,
+      "contentType": "application/json",
+      "pathFields": [
+        "versionId"
+      ],
+      "queryFields": [
+        "source"
+      ],
+      "bodyFields": [
+        "locationId",
+        "userId",
+        "userName",
+        "userEmail"
+      ],
+      "bodyWrapped": false,
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "versionId": {
+            "type": "string"
+          },
+          "source": {
+            "type": "string"
+          },
+          "locationId": {
+            "type": "string",
+            "description": "Location ID for authorization"
+          },
+          "userId": {
+            "type": "string",
+            "description": "User ID performing the promotion action"
+          },
+          "userName": {
+            "type": "string",
+            "description": "User name performing the promotion action"
+          },
+          "userEmail": {
+            "type": "string",
+            "description": "User email performing the promotion action"
+          }
+        },
+        "required": [
+          "versionId",
+          "locationId"
+        ]
+      }
+    },
+    {
+      "name": "agent_studio_executeagent",
+      "module": "agent-studio",
+      "method": "POST",
+      "path": "/agent-studio/agent/{agentId}/execute",
+      "version": "2021-04-15",
+      "summary": "Execute Agent",
+      "description": "Execute Agent Executes the specified agent and returns a non-streaming JSON response with the complete agent output. The agent must be in active status and belong to the specified location. locationId is required in the request body. **Session Management:** - For the first message in a new session, do not include the `executionId` in the request payload. - The API will return an `executionId` along with the ag… [POST /agent-studio/agent/{agentId}/execute] Token: location. Scopes: agent-studio.write.",
+      "scopes": [
+        "agent-studio.write"
+      ],
+      "access": "location",
+      "operationClass": "write",
+      "deprecated": false,
+      "contentType": "application/json",
+      "pathFields": [
+        "agentId"
+      ],
+      "queryFields": [
+        "source"
+      ],
+      "bodyFields": [
+        "message",
+        "executionId",
+        "inputVariables",
+        "versionId",
+        "attachments",
+        "locationId",
+        "contactId"
+      ],
+      "bodyWrapped": false,
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "agentId": {
+            "type": "string"
+          },
+          "source": {
+            "type": "string"
+          },
+          "message": {
+            "type": "string",
+            "description": "Message to send to the agent"
+          },
+          "executionId": {
+            "type": "string",
+            "description": "Unique session identifier that maintains conversational context across multiple interactions within the same agent session. Omit this field for the first message in a new session. Include the executionId returned from the previous response to maintain context in subsequent messages."
+          },
+          "inputVariables": {
+            "type": "object",
+            "description": "Input variables to pass to the agent. These should match the input variables defined in the agent configuration."
+          },
+          "versionId": {
+            "type": "string",
+            "description": "Published version ID to execute. If not provided, the latest published production version will be used."
+          },
+          "attachments": {
+            "description": "Attachments for the message",
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "type": {
+                  "type": "string",
+                  "description": "Type of attachment"
+                },
+                "imageUrl": {
+                  "type": "string",
+                  "description": "URL of the image attachment"
+                }
+              },
+              "required": [
+                "type",
+                "imageUrl"
+              ]
+            }
+          },
+          "locationId": {
+            "type": "string",
+            "description": "Location ID"
+          },
+          "contactId": {
+            "type": "string",
+            "description": "Contact ID to associate with this execution. When provided, contact data will be hydrated and made available to the agent."
+          }
+        },
+        "required": [
+          "agentId",
+          "message",
+          "locationId"
+        ]
+      }
+    },
+    {
+      "name": "agent_studio_getagents_deprecated",
+      "module": "agent-studio",
+      "method": "GET",
+      "path": "/agent-studio/public-api/agents",
+      "version": "2021-04-15",
+      "summary": "List Agents (Deprecated)",
+      "description": "List Agents (Deprecated) **Deprecated endpoint - use GET /agent instead.** Lists all active agents that have a published production version for the specified location. locationId is required parameter. Supports pagination using limit and offset. [GET /agent-studio/public-api/agents] Token: location. Scopes: agent-studio.readonly. DEPRECATED.",
+      "scopes": [
+        "agent-studio.readonly"
+      ],
+      "access": "location",
+      "operationClass": "read",
+      "deprecated": true,
+      "pathFields": [],
+      "queryFields": [
+        "locationId",
+        "limit",
+        "offset",
+        "source"
+      ],
+      "bodyFields": [],
+      "bodyWrapped": false,
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "locationId": {
+            "type": "string"
+          },
+          "limit": {
+            "type": "string"
+          },
+          "offset": {
+            "type": "string"
+          },
+          "source": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "locationId",
+          "limit",
+          "offset"
+        ]
+      }
+    },
+    {
+      "name": "agent_studio_getagentbyid_deprecated",
+      "module": "agent-studio",
+      "method": "GET",
+      "path": "/agent-studio/public-api/agents/{agentId}",
+      "version": "2021-04-15",
+      "summary": "Get Agent (Deprecated)",
+      "description": "Get Agent (Deprecated) **Deprecated endpoint - use GET /agent/:agentId instead.** Gets a specific agent by its ID for the specified location with all its versions. locationId is required parameter. The agent must have active status. [GET /agent-studio/public-api/agents/{agentId}] Token: location. Scopes: agent-studio.readonly. DEPRECATED.",
+      "scopes": [
+        "agent-studio.readonly"
+      ],
+      "access": "location",
+      "operationClass": "read",
+      "deprecated": true,
+      "pathFields": [
+        "agentId"
+      ],
+      "queryFields": [
+        "locationId",
+        "source"
+      ],
+      "bodyFields": [],
+      "bodyWrapped": false,
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "agentId": {
+            "type": "string"
+          },
+          "locationId": {
+            "type": "string"
+          },
+          "source": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "agentId",
+          "locationId"
+        ]
+      }
+    },
+    {
+      "name": "agent_studio_executeagent_deprecated",
+      "module": "agent-studio",
+      "method": "POST",
+      "path": "/agent-studio/public-api/agents/{agentId}/execute",
+      "version": "2021-04-15",
+      "summary": "Execute Agent (Deprecated)",
+      "description": "Execute Agent (Deprecated) **Deprecated endpoint - use POST /agent/:agentId/execute instead.** Executes the specified agent and returns a non-streaming JSON response with the complete agent output. The agent must be in active status and belong to the specified location. locationId is required in the request body. **Session Management:** - For the first message in a new session, do not include the `executionId` in the reque… [POST /agent-studio/public-api/agents/{agentId}/execute] Token: location. Scopes: agent-studio.write. DEPRECATED.",
+      "scopes": [
+        "agent-studio.write"
+      ],
+      "access": "location",
+      "operationClass": "write",
+      "deprecated": true,
+      "contentType": "application/json",
+      "pathFields": [
+        "agentId"
+      ],
+      "queryFields": [
+        "source"
+      ],
+      "bodyFields": [
+        "message",
+        "executionId",
+        "inputVariables",
+        "versionId",
+        "attachments",
+        "locationId",
+        "contactId"
+      ],
+      "bodyWrapped": false,
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "agentId": {
+            "type": "string"
+          },
+          "source": {
+            "type": "string"
+          },
+          "message": {
+            "type": "string",
+            "description": "Message to send to the agent"
+          },
+          "executionId": {
+            "type": "string",
+            "description": "Unique session identifier that maintains conversational context across multiple interactions within the same agent session. Omit this field for the first message in a new session. Include the executionId returned from the previous response to maintain context in subsequent messages."
+          },
+          "inputVariables": {
+            "type": "object",
+            "description": "Input variables to pass to the agent. These should match the input variables defined in the agent configuration."
+          },
+          "versionId": {
+            "type": "string",
+            "description": "Published version ID to execute. If not provided, the latest published production version will be used."
+          },
+          "attachments": {
+            "description": "Attachments for the message",
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "type": {
+                  "type": "string",
+                  "description": "Type of attachment"
+                },
+                "imageUrl": {
+                  "type": "string",
+                  "description": "URL of the image attachment"
+                }
+              },
+              "required": [
+                "type",
+                "imageUrl"
+              ]
+            }
+          },
+          "locationId": {
+            "type": "string",
+            "description": "Location ID"
+          },
+          "contactId": {
+            "type": "string",
+            "description": "Contact ID to associate with this execution. When provided, contact data will be hydrated and made available to the agent."
+          }
+        },
+        "required": [
+          "agentId",
+          "message",
+          "locationId"
+        ]
+      }
+    }
+  ]
+}

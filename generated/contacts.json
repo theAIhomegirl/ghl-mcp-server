@@ -1,0 +1,2713 @@
+{
+  "module": "contacts",
+  "endpoints": [
+    {
+      "name": "contacts_search_contacts_advanced",
+      "module": "contacts",
+      "method": "POST",
+      "path": "/contacts/search",
+      "version": "2021-07-28",
+      "summary": "Search Contacts",
+      "description": "Search Contacts Search contacts based on combinations of advanced filters. Documentation Link - https://doc.clickup.com/8631005/d/h/87cpx-158396/6e629989abe7fad [POST /contacts/search] Scopes: contacts.readonly.",
+      "scopes": [
+        "contacts.readonly"
+      ],
+      "access": "unknown",
+      "operationClass": "read",
+      "deprecated": false,
+      "contentType": "application/json",
+      "pathFields": [],
+      "queryFields": [],
+      "bodyFields": [],
+      "bodyWrapped": true,
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "body": {
+            "type": "object",
+            "properties": {},
+            "description": "Full request body"
+          }
+        },
+        "required": [
+          "body"
+        ]
+      }
+    },
+    {
+      "name": "contacts_get_duplicate_contact",
+      "module": "contacts",
+      "method": "GET",
+      "path": "/contacts/search/duplicate",
+      "version": "2021-07-28",
+      "summary": "Get Duplicate Contact",
+      "description": "Get Duplicate Contact .<br/><br/>If `Allow Duplicate Contact` is disabled under Settings, the global unique identifier will be used for searching the contact. If the setting is enabled, first priority for search is `email` and the second priority will be `phone`. [GET /contacts/search/duplicate] Scopes: contacts.readonly.",
+      "scopes": [
+        "contacts.readonly"
+      ],
+      "access": "unknown",
+      "operationClass": "read",
+      "deprecated": false,
+      "pathFields": [],
+      "queryFields": [
+        "locationId",
+        "number",
+        "email"
+      ],
+      "bodyFields": [],
+      "bodyWrapped": false,
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "locationId": {
+            "type": "string",
+            "description": "Location Id"
+          },
+          "number": {
+            "type": "string",
+            "description": "Phone Number - Pass in URL Encoded form. i.e +1423164516 will become `%2B1423164516`"
+          },
+          "email": {
+            "type": "string",
+            "description": "Email - Pass in URL Encoded form. i.e test+abc@gmail.com will become `test%2Babc%40gmail.com`"
+          }
+        },
+        "required": [
+          "locationId"
+        ]
+      }
+    },
+    {
+      "name": "contacts_get_all_tasks",
+      "module": "contacts",
+      "method": "GET",
+      "path": "/contacts/{contactId}/tasks",
+      "version": "2021-07-28",
+      "summary": "Get all Tasks",
+      "description": "Get all Tasks [GET /contacts/{contactId}/tasks] Scopes: contacts.readonly.",
+      "scopes": [
+        "contacts.readonly"
+      ],
+      "access": "unknown",
+      "operationClass": "read",
+      "deprecated": false,
+      "pathFields": [
+        "contactId"
+      ],
+      "queryFields": [],
+      "bodyFields": [],
+      "bodyWrapped": false,
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "contactId": {
+            "type": "string",
+            "description": "Contact Id"
+          }
+        },
+        "required": [
+          "contactId"
+        ]
+      }
+    },
+    {
+      "name": "contacts_create_task",
+      "module": "contacts",
+      "method": "POST",
+      "path": "/contacts/{contactId}/tasks",
+      "version": "2021-07-28",
+      "summary": "Create Task",
+      "description": "Create Task [POST /contacts/{contactId}/tasks] Scopes: contacts.write.",
+      "scopes": [
+        "contacts.write"
+      ],
+      "access": "unknown",
+      "operationClass": "write",
+      "deprecated": false,
+      "contentType": "application/json",
+      "pathFields": [
+        "contactId"
+      ],
+      "queryFields": [],
+      "bodyFields": [
+        "title",
+        "body",
+        "dueDate",
+        "completed",
+        "assignedTo"
+      ],
+      "bodyWrapped": false,
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "contactId": {
+            "type": "string",
+            "description": "Contact Id"
+          },
+          "title": {
+            "type": "string"
+          },
+          "body": {
+            "type": "string"
+          },
+          "dueDate": {
+            "type": "string"
+          },
+          "completed": {
+            "type": "boolean"
+          },
+          "assignedTo": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "contactId",
+          "title",
+          "dueDate",
+          "completed"
+        ]
+      }
+    },
+    {
+      "name": "contacts_get_task",
+      "module": "contacts",
+      "method": "GET",
+      "path": "/contacts/{contactId}/tasks/{taskId}",
+      "version": "2021-07-28",
+      "summary": "Get Task",
+      "description": "Get Task [GET /contacts/{contactId}/tasks/{taskId}] Scopes: contacts.readonly.",
+      "scopes": [
+        "contacts.readonly"
+      ],
+      "access": "unknown",
+      "operationClass": "read",
+      "deprecated": false,
+      "pathFields": [
+        "contactId",
+        "taskId"
+      ],
+      "queryFields": [],
+      "bodyFields": [],
+      "bodyWrapped": false,
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "contactId": {
+            "type": "string",
+            "description": "Contact Id"
+          },
+          "taskId": {
+            "type": "string",
+            "description": "Task Id"
+          }
+        },
+        "required": [
+          "contactId",
+          "taskId"
+        ]
+      }
+    },
+    {
+      "name": "contacts_update_task",
+      "module": "contacts",
+      "method": "PUT",
+      "path": "/contacts/{contactId}/tasks/{taskId}",
+      "version": "2021-07-28",
+      "summary": "Update Task",
+      "description": "Update Task [PUT /contacts/{contactId}/tasks/{taskId}] Scopes: contacts.write.",
+      "scopes": [
+        "contacts.write"
+      ],
+      "access": "unknown",
+      "operationClass": "write",
+      "deprecated": false,
+      "contentType": "application/json",
+      "pathFields": [
+        "contactId",
+        "taskId"
+      ],
+      "queryFields": [],
+      "bodyFields": [
+        "title",
+        "body",
+        "dueDate",
+        "completed",
+        "assignedTo"
+      ],
+      "bodyWrapped": false,
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "contactId": {
+            "type": "string",
+            "description": "Contact Id"
+          },
+          "taskId": {
+            "type": "string",
+            "description": "Task Id"
+          },
+          "title": {
+            "type": "string"
+          },
+          "body": {
+            "type": "string"
+          },
+          "dueDate": {
+            "type": "string"
+          },
+          "completed": {
+            "type": "boolean"
+          },
+          "assignedTo": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "contactId",
+          "taskId"
+        ]
+      }
+    },
+    {
+      "name": "contacts_delete_task",
+      "module": "contacts",
+      "method": "DELETE",
+      "path": "/contacts/{contactId}/tasks/{taskId}",
+      "version": "2021-07-28",
+      "summary": "Delete Task",
+      "description": "Delete Task [DELETE /contacts/{contactId}/tasks/{taskId}] Scopes: contacts.write.",
+      "scopes": [
+        "contacts.write"
+      ],
+      "access": "unknown",
+      "operationClass": "delete",
+      "deprecated": false,
+      "pathFields": [
+        "contactId",
+        "taskId"
+      ],
+      "queryFields": [],
+      "bodyFields": [],
+      "bodyWrapped": false,
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "contactId": {
+            "type": "string",
+            "description": "Contact Id"
+          },
+          "taskId": {
+            "type": "string",
+            "description": "Task Id"
+          }
+        },
+        "required": [
+          "contactId",
+          "taskId"
+        ]
+      }
+    },
+    {
+      "name": "contacts_update_task_completed",
+      "module": "contacts",
+      "method": "PUT",
+      "path": "/contacts/{contactId}/tasks/{taskId}/completed",
+      "version": "2021-07-28",
+      "summary": "Update Task Completed",
+      "description": "Update Task Completed [PUT /contacts/{contactId}/tasks/{taskId}/completed] Scopes: contacts.write.",
+      "scopes": [
+        "contacts.write"
+      ],
+      "access": "unknown",
+      "operationClass": "write",
+      "deprecated": false,
+      "contentType": "application/json",
+      "pathFields": [
+        "contactId",
+        "taskId"
+      ],
+      "queryFields": [],
+      "bodyFields": [
+        "completed"
+      ],
+      "bodyWrapped": false,
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "contactId": {
+            "type": "string",
+            "description": "Contact Id"
+          },
+          "taskId": {
+            "type": "string",
+            "description": "Task Id"
+          },
+          "completed": {
+            "type": "boolean"
+          }
+        },
+        "required": [
+          "contactId",
+          "taskId",
+          "completed"
+        ]
+      }
+    },
+    {
+      "name": "contacts_get_appointments_for_contact",
+      "module": "contacts",
+      "method": "GET",
+      "path": "/contacts/{contactId}/appointments",
+      "version": "2021-07-28",
+      "summary": "Get Appointments for Contact",
+      "description": "Get Appointments for Contact [GET /contacts/{contactId}/appointments] Scopes: contacts.readonly.",
+      "scopes": [
+        "contacts.readonly"
+      ],
+      "access": "unknown",
+      "operationClass": "read",
+      "deprecated": false,
+      "pathFields": [
+        "contactId"
+      ],
+      "queryFields": [],
+      "bodyFields": [],
+      "bodyWrapped": false,
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "contactId": {
+            "type": "string",
+            "description": "Contact Id"
+          }
+        },
+        "required": [
+          "contactId"
+        ]
+      }
+    },
+    {
+      "name": "contacts_add_tags",
+      "module": "contacts",
+      "method": "POST",
+      "path": "/contacts/{contactId}/tags",
+      "version": "2021-07-28",
+      "summary": "Add Tags",
+      "description": "Add Tags [POST /contacts/{contactId}/tags] Scopes: contacts.write.",
+      "scopes": [
+        "contacts.write"
+      ],
+      "access": "unknown",
+      "operationClass": "write",
+      "deprecated": false,
+      "contentType": "application/json",
+      "pathFields": [
+        "contactId"
+      ],
+      "queryFields": [],
+      "bodyFields": [
+        "tags"
+      ],
+      "bodyWrapped": false,
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "contactId": {
+            "type": "string",
+            "description": "Contact Id"
+          },
+          "tags": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          }
+        },
+        "required": [
+          "contactId",
+          "tags"
+        ]
+      }
+    },
+    {
+      "name": "contacts_remove_tags",
+      "module": "contacts",
+      "method": "DELETE",
+      "path": "/contacts/{contactId}/tags",
+      "version": "2021-07-28",
+      "summary": "Remove Tags",
+      "description": "Remove Tags [DELETE /contacts/{contactId}/tags] Scopes: contacts.write.",
+      "scopes": [
+        "contacts.write"
+      ],
+      "access": "unknown",
+      "operationClass": "delete",
+      "deprecated": false,
+      "contentType": "application/json",
+      "pathFields": [
+        "contactId"
+      ],
+      "queryFields": [],
+      "bodyFields": [
+        "tags"
+      ],
+      "bodyWrapped": false,
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "contactId": {
+            "type": "string",
+            "description": "Contact Id"
+          },
+          "tags": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          }
+        },
+        "required": [
+          "contactId",
+          "tags"
+        ]
+      }
+    },
+    {
+      "name": "contacts_get_all_notes",
+      "module": "contacts",
+      "method": "GET",
+      "path": "/contacts/{contactId}/notes",
+      "version": "2021-07-28",
+      "summary": "Get All Notes",
+      "description": "Get All Notes [GET /contacts/{contactId}/notes] Scopes: contacts.readonly.",
+      "scopes": [
+        "contacts.readonly"
+      ],
+      "access": "unknown",
+      "operationClass": "read",
+      "deprecated": false,
+      "pathFields": [
+        "contactId"
+      ],
+      "queryFields": [],
+      "bodyFields": [],
+      "bodyWrapped": false,
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "contactId": {
+            "type": "string",
+            "description": "Contact Id"
+          }
+        },
+        "required": [
+          "contactId"
+        ]
+      }
+    },
+    {
+      "name": "contacts_create_note",
+      "module": "contacts",
+      "method": "POST",
+      "path": "/contacts/{contactId}/notes",
+      "version": "2021-07-28",
+      "summary": "Create Note",
+      "description": "Create Note [POST /contacts/{contactId}/notes] Scopes: contacts.write.",
+      "scopes": [
+        "contacts.write"
+      ],
+      "access": "unknown",
+      "operationClass": "write",
+      "deprecated": false,
+      "contentType": "application/json",
+      "pathFields": [
+        "contactId"
+      ],
+      "queryFields": [],
+      "bodyFields": [
+        "userId",
+        "body",
+        "title",
+        "color",
+        "pinned"
+      ],
+      "bodyWrapped": false,
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "contactId": {
+            "type": "string",
+            "description": "Contact Id"
+          },
+          "userId": {
+            "type": "string"
+          },
+          "body": {
+            "type": "string"
+          },
+          "title": {
+            "type": "string"
+          },
+          "color": {
+            "type": "string"
+          },
+          "pinned": {
+            "type": "boolean"
+          }
+        },
+        "required": [
+          "contactId",
+          "body"
+        ]
+      }
+    },
+    {
+      "name": "contacts_get_note",
+      "module": "contacts",
+      "method": "GET",
+      "path": "/contacts/{contactId}/notes/{id}",
+      "version": "2021-07-28",
+      "summary": "Get Note",
+      "description": "Get Note [GET /contacts/{contactId}/notes/{id}] Scopes: contacts.readonly.",
+      "scopes": [
+        "contacts.readonly"
+      ],
+      "access": "unknown",
+      "operationClass": "read",
+      "deprecated": false,
+      "pathFields": [
+        "contactId",
+        "id"
+      ],
+      "queryFields": [],
+      "bodyFields": [],
+      "bodyWrapped": false,
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "contactId": {
+            "type": "string",
+            "description": "Contact Id"
+          },
+          "id": {
+            "type": "string",
+            "description": "Note Id"
+          }
+        },
+        "required": [
+          "contactId",
+          "id"
+        ]
+      }
+    },
+    {
+      "name": "contacts_update_note",
+      "module": "contacts",
+      "method": "PUT",
+      "path": "/contacts/{contactId}/notes/{id}",
+      "version": "2021-07-28",
+      "summary": "Update Note",
+      "description": "Update Note [PUT /contacts/{contactId}/notes/{id}] Scopes: contacts.write.",
+      "scopes": [
+        "contacts.write"
+      ],
+      "access": "unknown",
+      "operationClass": "write",
+      "deprecated": false,
+      "contentType": "application/json",
+      "pathFields": [
+        "contactId",
+        "id"
+      ],
+      "queryFields": [],
+      "bodyFields": [
+        "userId",
+        "body",
+        "title",
+        "color",
+        "pinned"
+      ],
+      "bodyWrapped": false,
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "contactId": {
+            "type": "string",
+            "description": "Contact Id"
+          },
+          "id": {
+            "type": "string",
+            "description": "Note Id"
+          },
+          "userId": {
+            "type": "string"
+          },
+          "body": {
+            "type": "string"
+          },
+          "title": {
+            "type": "string"
+          },
+          "color": {
+            "type": "string"
+          },
+          "pinned": {
+            "type": "boolean"
+          }
+        },
+        "required": [
+          "contactId",
+          "id"
+        ]
+      }
+    },
+    {
+      "name": "contacts_delete_note",
+      "module": "contacts",
+      "method": "DELETE",
+      "path": "/contacts/{contactId}/notes/{id}",
+      "version": "2021-07-28",
+      "summary": "Delete Note",
+      "description": "Delete Note [DELETE /contacts/{contactId}/notes/{id}] Scopes: contacts.write.",
+      "scopes": [
+        "contacts.write"
+      ],
+      "access": "unknown",
+      "operationClass": "delete",
+      "deprecated": false,
+      "pathFields": [
+        "contactId",
+        "id"
+      ],
+      "queryFields": [],
+      "bodyFields": [],
+      "bodyWrapped": false,
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "contactId": {
+            "type": "string",
+            "description": "Contact Id"
+          },
+          "id": {
+            "type": "string",
+            "description": "Note Id"
+          }
+        },
+        "required": [
+          "contactId",
+          "id"
+        ]
+      }
+    },
+    {
+      "name": "contacts_create_association",
+      "module": "contacts",
+      "method": "POST",
+      "path": "/contacts/bulk/tags/update/{type}",
+      "version": "2021-07-28",
+      "summary": "Update Contacts Tags",
+      "description": "Update Contacts Tags Allows you to update tags to multiple contacts at once, you can add or remove tags from the contacts [POST /contacts/bulk/tags/update/{type}]",
+      "scopes": [],
+      "access": "unknown",
+      "operationClass": "write",
+      "deprecated": false,
+      "contentType": "application/json",
+      "pathFields": [],
+      "queryFields": [],
+      "bodyFields": [
+        "contacts",
+        "tags",
+        "locationId",
+        "removeAllTags"
+      ],
+      "bodyWrapped": false,
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "contacts": {
+            "description": "list of contact ids to be processed",
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "tags": {
+            "description": "list of tags to be added or removed",
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "locationId": {
+            "type": "string",
+            "description": "location id from where the bulk request is executed"
+          },
+          "removeAllTags": {
+            "type": "boolean",
+            "description": "Option to implement remove all tags. if true, all tags will be removed from the contacts. Can only be used with remove type."
+          }
+        },
+        "required": [
+          "contacts",
+          "tags",
+          "locationId"
+        ]
+      }
+    },
+    {
+      "name": "contacts_add_remove_contact_from_business",
+      "module": "contacts",
+      "method": "POST",
+      "path": "/contacts/bulk/business",
+      "version": "2021-07-28",
+      "summary": "Add/Remove Contacts From Business",
+      "description": "Add/Remove Contacts From Business . Passing a `null` businessId will remove the businessId from the contacts [POST /contacts/bulk/business]",
+      "scopes": [],
+      "access": "unknown",
+      "operationClass": "write",
+      "deprecated": false,
+      "contentType": "application/json",
+      "pathFields": [],
+      "queryFields": [],
+      "bodyFields": [
+        "locationId",
+        "ids",
+        "businessId"
+      ],
+      "bodyWrapped": false,
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "locationId": {
+            "type": "string"
+          },
+          "ids": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "maxLength": 50
+            }
+          },
+          "businessId": {
+            "type": [
+              "string",
+              "null"
+            ]
+          }
+        },
+        "required": [
+          "locationId",
+          "ids",
+          "businessId"
+        ]
+      }
+    },
+    {
+      "name": "contacts_get_contact",
+      "module": "contacts",
+      "method": "GET",
+      "path": "/contacts/{contactId}",
+      "version": "2021-07-28",
+      "summary": "Get Contact",
+      "description": "Get Contact [GET /contacts/{contactId}] Scopes: contacts.readonly.",
+      "scopes": [
+        "contacts.readonly"
+      ],
+      "access": "unknown",
+      "operationClass": "read",
+      "deprecated": false,
+      "pathFields": [
+        "contactId"
+      ],
+      "queryFields": [],
+      "bodyFields": [],
+      "bodyWrapped": false,
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "contactId": {
+            "type": "string",
+            "description": "Contact Id"
+          }
+        },
+        "required": [
+          "contactId"
+        ]
+      }
+    },
+    {
+      "name": "contacts_update_contact",
+      "module": "contacts",
+      "method": "PUT",
+      "path": "/contacts/{contactId}",
+      "version": "2021-07-28",
+      "summary": "Update Contact",
+      "description": "Update Contact Please find the list of acceptable values for the `country` field <a href=\"https://highlevel.stoplight.io/docs/integrations/ZG9jOjI4MzUzNDIy-country-list\" target=\"_blank\">here</a> [PUT /contacts/{contactId}] Scopes: contacts.write.",
+      "scopes": [
+        "contacts.write"
+      ],
+      "access": "unknown",
+      "operationClass": "write",
+      "deprecated": false,
+      "contentType": "application/json",
+      "pathFields": [
+        "contactId"
+      ],
+      "queryFields": [],
+      "bodyFields": [
+        "firstName",
+        "lastName",
+        "name",
+        "email",
+        "phone",
+        "address1",
+        "city",
+        "state",
+        "postalCode",
+        "website",
+        "timezone",
+        "dnd",
+        "dndSettings",
+        "inboundDndSettings",
+        "tags",
+        "customFields",
+        "source",
+        "dateOfBirth",
+        "country",
+        "assignedTo"
+      ],
+      "bodyWrapped": false,
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "contactId": {
+            "type": "string",
+            "description": "Contact Id"
+          },
+          "firstName": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "lastName": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "name": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "email": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "phone": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "address1": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "city": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "state": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "postalCode": {
+            "type": "string"
+          },
+          "website": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "timezone": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "dnd": {
+            "type": "boolean"
+          },
+          "dndSettings": {
+            "type": "object",
+            "properties": {
+              "Call": {
+                "type": "object",
+                "properties": {
+                  "status": {
+                    "type": "string",
+                    "enum": [
+                      "active",
+                      "inactive",
+                      "permanent"
+                    ]
+                  },
+                  "message": {
+                    "type": "string"
+                  },
+                  "code": {
+                    "type": "string"
+                  }
+                },
+                "required": [
+                  "status"
+                ]
+              },
+              "Email": {
+                "type": "object",
+                "properties": {
+                  "status": {
+                    "type": "string",
+                    "enum": [
+                      "active",
+                      "inactive",
+                      "permanent"
+                    ]
+                  },
+                  "message": {
+                    "type": "string"
+                  },
+                  "code": {
+                    "type": "string"
+                  }
+                },
+                "required": [
+                  "status"
+                ]
+              },
+              "SMS": {
+                "type": "object",
+                "properties": {
+                  "status": {
+                    "type": "string",
+                    "enum": [
+                      "active",
+                      "inactive",
+                      "permanent"
+                    ]
+                  },
+                  "message": {
+                    "type": "string"
+                  },
+                  "code": {
+                    "type": "string"
+                  }
+                },
+                "required": [
+                  "status"
+                ]
+              },
+              "WhatsApp": {
+                "type": "object",
+                "properties": {
+                  "status": {
+                    "type": "string",
+                    "enum": [
+                      "active",
+                      "inactive",
+                      "permanent"
+                    ]
+                  },
+                  "message": {
+                    "type": "string"
+                  },
+                  "code": {
+                    "type": "string"
+                  }
+                },
+                "required": [
+                  "status"
+                ]
+              },
+              "GMB": {
+                "type": "object",
+                "properties": {
+                  "status": {
+                    "type": "string",
+                    "enum": [
+                      "active",
+                      "inactive",
+                      "permanent"
+                    ]
+                  },
+                  "message": {
+                    "type": "string"
+                  },
+                  "code": {
+                    "type": "string"
+                  }
+                },
+                "required": [
+                  "status"
+                ]
+              },
+              "FB": {
+                "type": "object",
+                "properties": {
+                  "status": {
+                    "type": "string",
+                    "enum": [
+                      "active",
+                      "inactive",
+                      "permanent"
+                    ]
+                  },
+                  "message": {
+                    "type": "string"
+                  },
+                  "code": {
+                    "type": "string"
+                  }
+                },
+                "required": [
+                  "status"
+                ]
+              }
+            }
+          },
+          "inboundDndSettings": {
+            "type": "object",
+            "properties": {
+              "all": {
+                "type": "object",
+                "properties": {
+                  "status": {
+                    "type": "string",
+                    "enum": [
+                      "active",
+                      "inactive"
+                    ]
+                  },
+                  "message": {
+                    "type": "string"
+                  }
+                },
+                "required": [
+                  "status"
+                ]
+              }
+            }
+          },
+          "tags": {
+            "description": "This field will overwrite all current tags associated with the contact. To update a tags, it is recommended to use the Add Tag or Remove Tag API instead.",
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "customFields": {
+            "type": "array",
+            "items": {
+              "anyOf": [
+                {
+                  "type": "object",
+                  "properties": {
+                    "id": {
+                      "type": "string"
+                    },
+                    "key": {
+                      "type": "string"
+                    },
+                    "field_value": {
+                      "type": "string"
+                    }
+                  },
+                  "required": [
+                    "id"
+                  ]
+                },
+                {
+                  "type": "object",
+                  "properties": {
+                    "id": {
+                      "type": "string"
+                    },
+                    "key": {
+                      "type": "string"
+                    },
+                    "field_value": {
+                      "type": "string"
+                    }
+                  },
+                  "required": [
+                    "id"
+                  ]
+                },
+                {
+                  "type": "object",
+                  "properties": {
+                    "id": {
+                      "type": "string"
+                    },
+                    "key": {
+                      "type": "string"
+                    },
+                    "field_value": {
+                      "type": "string"
+                    }
+                  },
+                  "required": [
+                    "id"
+                  ]
+                },
+                {
+                  "type": "object",
+                  "properties": {
+                    "id": {
+                      "type": "string"
+                    },
+                    "key": {
+                      "type": "string"
+                    },
+                    "field_value": {
+                      "type": "string"
+                    }
+                  },
+                  "required": [
+                    "id"
+                  ]
+                },
+                {
+                  "type": "object",
+                  "properties": {
+                    "id": {
+                      "type": "string"
+                    },
+                    "key": {
+                      "type": "string"
+                    },
+                    "field_value": {
+                      "type": "object"
+                    }
+                  },
+                  "required": [
+                    "id"
+                  ]
+                },
+                {
+                  "type": "object",
+                  "properties": {
+                    "id": {
+                      "type": "string"
+                    },
+                    "key": {
+                      "type": "string"
+                    },
+                    "field_value": {
+                      "type": "object"
+                    }
+                  },
+                  "required": [
+                    "id"
+                  ]
+                },
+                {
+                  "type": "object",
+                  "properties": {
+                    "id": {
+                      "type": "string"
+                    },
+                    "key": {
+                      "type": "string"
+                    },
+                    "field_value": {
+                      "type": "array",
+                      "items": {
+                        "type": "string"
+                      }
+                    }
+                  },
+                  "required": [
+                    "id"
+                  ]
+                },
+                {
+                  "type": "object",
+                  "properties": {
+                    "id": {
+                      "type": "string"
+                    },
+                    "key": {
+                      "type": "string"
+                    },
+                    "field_value": {
+                      "type": "array",
+                      "items": {
+                        "type": "string"
+                      }
+                    }
+                  },
+                  "required": [
+                    "id"
+                  ]
+                },
+                {
+                  "type": "object",
+                  "properties": {
+                    "id": {
+                      "type": "string"
+                    },
+                    "key": {
+                      "type": "string"
+                    },
+                    "field_value": {
+                      "type": "object"
+                    }
+                  },
+                  "required": [
+                    "id"
+                  ]
+                }
+              ]
+            }
+          },
+          "source": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "dateOfBirth": {
+            "type": [
+              "object",
+              "null"
+            ],
+            "description": "The birth date of the contact. Supported formats: YYYY/MM/DD, MM/DD/YYYY, YYYY-MM-DD, MM-DD-YYYY, YYYY.MM.DD, MM.DD.YYYY, YYYY_MM_DD, MM_DD_YYYY"
+          },
+          "country": {
+            "type": "string"
+          },
+          "assignedTo": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "description": "User's Id"
+          }
+        },
+        "required": [
+          "contactId"
+        ]
+      }
+    },
+    {
+      "name": "contacts_delete_contact",
+      "module": "contacts",
+      "method": "DELETE",
+      "path": "/contacts/{contactId}",
+      "version": "2021-07-28",
+      "summary": "Delete Contact",
+      "description": "Delete Contact [DELETE /contacts/{contactId}] Scopes: contacts.write.",
+      "scopes": [
+        "contacts.write"
+      ],
+      "access": "unknown",
+      "operationClass": "delete",
+      "deprecated": false,
+      "pathFields": [
+        "contactId"
+      ],
+      "queryFields": [],
+      "bodyFields": [],
+      "bodyWrapped": false,
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "contactId": {
+            "type": "string",
+            "description": "Contact Id"
+          }
+        },
+        "required": [
+          "contactId"
+        ]
+      }
+    },
+    {
+      "name": "contacts_upsert_contact",
+      "module": "contacts",
+      "method": "POST",
+      "path": "/contacts/upsert",
+      "version": "2021-07-28",
+      "summary": "Upsert Contact",
+      "description": "Upsert Contact Please find the list of acceptable values for the `country` field <a href=\"https://highlevel.stoplight.io/docs/integrations/ZG9jOjI4MzUzNDIy-country-list\" target=\"_blank\">here</a><br/><br/>The Upsert API will adhere to the configuration defined under the “Allow Duplicate Contact” setting at the Location level. If the setting is configured to check both Email and Phone, the API will attempt to ide… [POST /contacts/upsert] Scopes: contacts.write.",
+      "scopes": [
+        "contacts.write"
+      ],
+      "access": "unknown",
+      "operationClass": "write",
+      "deprecated": false,
+      "contentType": "application/json",
+      "pathFields": [],
+      "queryFields": [],
+      "bodyFields": [
+        "firstName",
+        "lastName",
+        "name",
+        "email",
+        "locationId",
+        "gender",
+        "phone",
+        "address1",
+        "city",
+        "state",
+        "postalCode",
+        "website",
+        "timezone",
+        "dnd",
+        "dndSettings",
+        "inboundDndSettings",
+        "tags",
+        "customFields",
+        "source",
+        "dateOfBirth",
+        "country",
+        "companyName",
+        "assignedTo",
+        "createNewIfDuplicateAllowed"
+      ],
+      "bodyWrapped": false,
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "firstName": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "lastName": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "name": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "email": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "locationId": {
+            "type": "string"
+          },
+          "gender": {
+            "type": "string"
+          },
+          "phone": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "address1": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "city": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "state": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "postalCode": {
+            "type": "string"
+          },
+          "website": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "timezone": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "dnd": {
+            "type": "boolean"
+          },
+          "dndSettings": {
+            "type": "object",
+            "properties": {
+              "Call": {
+                "type": "object",
+                "properties": {
+                  "status": {
+                    "type": "string",
+                    "enum": [
+                      "active",
+                      "inactive",
+                      "permanent"
+                    ]
+                  },
+                  "message": {
+                    "type": "string"
+                  },
+                  "code": {
+                    "type": "string"
+                  }
+                },
+                "required": [
+                  "status"
+                ]
+              },
+              "Email": {
+                "type": "object",
+                "properties": {
+                  "status": {
+                    "type": "string",
+                    "enum": [
+                      "active",
+                      "inactive",
+                      "permanent"
+                    ]
+                  },
+                  "message": {
+                    "type": "string"
+                  },
+                  "code": {
+                    "type": "string"
+                  }
+                },
+                "required": [
+                  "status"
+                ]
+              },
+              "SMS": {
+                "type": "object",
+                "properties": {
+                  "status": {
+                    "type": "string",
+                    "enum": [
+                      "active",
+                      "inactive",
+                      "permanent"
+                    ]
+                  },
+                  "message": {
+                    "type": "string"
+                  },
+                  "code": {
+                    "type": "string"
+                  }
+                },
+                "required": [
+                  "status"
+                ]
+              },
+              "WhatsApp": {
+                "type": "object",
+                "properties": {
+                  "status": {
+                    "type": "string",
+                    "enum": [
+                      "active",
+                      "inactive",
+                      "permanent"
+                    ]
+                  },
+                  "message": {
+                    "type": "string"
+                  },
+                  "code": {
+                    "type": "string"
+                  }
+                },
+                "required": [
+                  "status"
+                ]
+              },
+              "GMB": {
+                "type": "object",
+                "properties": {
+                  "status": {
+                    "type": "string",
+                    "enum": [
+                      "active",
+                      "inactive",
+                      "permanent"
+                    ]
+                  },
+                  "message": {
+                    "type": "string"
+                  },
+                  "code": {
+                    "type": "string"
+                  }
+                },
+                "required": [
+                  "status"
+                ]
+              },
+              "FB": {
+                "type": "object",
+                "properties": {
+                  "status": {
+                    "type": "string",
+                    "enum": [
+                      "active",
+                      "inactive",
+                      "permanent"
+                    ]
+                  },
+                  "message": {
+                    "type": "string"
+                  },
+                  "code": {
+                    "type": "string"
+                  }
+                },
+                "required": [
+                  "status"
+                ]
+              }
+            }
+          },
+          "inboundDndSettings": {
+            "type": "object",
+            "properties": {
+              "all": {
+                "type": "object",
+                "properties": {
+                  "status": {
+                    "type": "string",
+                    "enum": [
+                      "active",
+                      "inactive"
+                    ]
+                  },
+                  "message": {
+                    "type": "string"
+                  }
+                },
+                "required": [
+                  "status"
+                ]
+              }
+            }
+          },
+          "tags": {
+            "description": "This field will overwrite all current tags associated with the contact. To update a tags, it is recommended to use the Add Tag or Remove Tag API instead.",
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "customFields": {
+            "type": "array",
+            "items": {
+              "anyOf": [
+                {
+                  "type": "object",
+                  "properties": {
+                    "id": {
+                      "type": "string"
+                    },
+                    "key": {
+                      "type": "string"
+                    },
+                    "field_value": {
+                      "type": "string"
+                    }
+                  },
+                  "required": [
+                    "id"
+                  ]
+                },
+                {
+                  "type": "object",
+                  "properties": {
+                    "id": {
+                      "type": "string"
+                    },
+                    "key": {
+                      "type": "string"
+                    },
+                    "field_value": {
+                      "type": "string"
+                    }
+                  },
+                  "required": [
+                    "id"
+                  ]
+                },
+                {
+                  "type": "object",
+                  "properties": {
+                    "id": {
+                      "type": "string"
+                    },
+                    "key": {
+                      "type": "string"
+                    },
+                    "field_value": {
+                      "type": "string"
+                    }
+                  },
+                  "required": [
+                    "id"
+                  ]
+                },
+                {
+                  "type": "object",
+                  "properties": {
+                    "id": {
+                      "type": "string"
+                    },
+                    "key": {
+                      "type": "string"
+                    },
+                    "field_value": {
+                      "type": "string"
+                    }
+                  },
+                  "required": [
+                    "id"
+                  ]
+                },
+                {
+                  "type": "object",
+                  "properties": {
+                    "id": {
+                      "type": "string"
+                    },
+                    "key": {
+                      "type": "string"
+                    },
+                    "field_value": {
+                      "type": "object"
+                    }
+                  },
+                  "required": [
+                    "id"
+                  ]
+                },
+                {
+                  "type": "object",
+                  "properties": {
+                    "id": {
+                      "type": "string"
+                    },
+                    "key": {
+                      "type": "string"
+                    },
+                    "field_value": {
+                      "type": "object"
+                    }
+                  },
+                  "required": [
+                    "id"
+                  ]
+                },
+                {
+                  "type": "object",
+                  "properties": {
+                    "id": {
+                      "type": "string"
+                    },
+                    "key": {
+                      "type": "string"
+                    },
+                    "field_value": {
+                      "type": "array",
+                      "items": {
+                        "type": "string"
+                      }
+                    }
+                  },
+                  "required": [
+                    "id"
+                  ]
+                },
+                {
+                  "type": "object",
+                  "properties": {
+                    "id": {
+                      "type": "string"
+                    },
+                    "key": {
+                      "type": "string"
+                    },
+                    "field_value": {
+                      "type": "array",
+                      "items": {
+                        "type": "string"
+                      }
+                    }
+                  },
+                  "required": [
+                    "id"
+                  ]
+                },
+                {
+                  "type": "object",
+                  "properties": {
+                    "id": {
+                      "type": "string"
+                    },
+                    "key": {
+                      "type": "string"
+                    },
+                    "field_value": {
+                      "type": "object"
+                    }
+                  },
+                  "required": [
+                    "id"
+                  ]
+                }
+              ]
+            }
+          },
+          "source": {
+            "type": "string"
+          },
+          "dateOfBirth": {
+            "type": [
+              "object",
+              "null"
+            ],
+            "description": "The birth date of the contact. Supported formats: YYYY/MM/DD, MM/DD/YYYY, YYYY-MM-DD, MM-DD-YYYY, YYYY.MM.DD, MM.DD.YYYY, YYYY_MM_DD, MM_DD_YYYY"
+          },
+          "country": {
+            "type": "string"
+          },
+          "companyName": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "assignedTo": {
+            "type": "string",
+            "description": "User's Id"
+          },
+          "createNewIfDuplicateAllowed": {
+            "type": "boolean",
+            "description": "Controls whether to create a new contact or update an existing duplicate. **Scenario 1:** If this value is `true` and the location allows duplicate contacts, a new contact will be created immediately without checking for duplicates. **Scenario 2:** If this value is `true` but the location does not allow duplicate contacts, this field is ignored and the normal upsert behavior applies: the API will search for an existing duplicate contact, update it if found, or create a new contact if not found. **Scenario 3:** If this value is `false` or not provided, the normal upsert behavior applies regardless of the location's duplicate contact setting. (default: false)"
+          }
+        },
+        "required": [
+          "locationId"
+        ]
+      }
+    },
+    {
+      "name": "contacts_get_contacts_by_businessid",
+      "module": "contacts",
+      "method": "GET",
+      "path": "/contacts/business/{businessId}",
+      "version": "2021-07-28",
+      "summary": "Get Contacts By BusinessId",
+      "description": "Get Contacts By BusinessId [GET /contacts/business/{businessId}] Scopes: contacts.readonly.",
+      "scopes": [
+        "contacts.readonly"
+      ],
+      "access": "unknown",
+      "operationClass": "read",
+      "deprecated": false,
+      "pathFields": [
+        "businessId"
+      ],
+      "queryFields": [
+        "limit",
+        "locationId",
+        "skip",
+        "query"
+      ],
+      "bodyFields": [],
+      "bodyWrapped": false,
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "businessId": {
+            "type": "string"
+          },
+          "limit": {
+            "type": "string",
+            "description": "(default: \"25\")"
+          },
+          "locationId": {
+            "type": "string"
+          },
+          "skip": {
+            "type": "string",
+            "description": "(default: \"0\")"
+          },
+          "query": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "businessId",
+          "locationId"
+        ]
+      }
+    },
+    {
+      "name": "contacts_add_followers_contact",
+      "module": "contacts",
+      "method": "POST",
+      "path": "/contacts/{contactId}/followers",
+      "version": "2021-07-28",
+      "summary": "Add Followers",
+      "description": "Add Followers [POST /contacts/{contactId}/followers] Scopes: contacts.write.",
+      "scopes": [
+        "contacts.write"
+      ],
+      "access": "unknown",
+      "operationClass": "write",
+      "deprecated": false,
+      "contentType": "application/json",
+      "pathFields": [
+        "contactId"
+      ],
+      "queryFields": [],
+      "bodyFields": [
+        "followers"
+      ],
+      "bodyWrapped": false,
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "contactId": {
+            "type": "string",
+            "description": "Contact Id"
+          },
+          "followers": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          }
+        },
+        "required": [
+          "contactId",
+          "followers"
+        ]
+      }
+    },
+    {
+      "name": "contacts_remove_followers_contact",
+      "module": "contacts",
+      "method": "DELETE",
+      "path": "/contacts/{contactId}/followers",
+      "version": "2021-07-28",
+      "summary": "Remove Followers",
+      "description": "Remove Followers [DELETE /contacts/{contactId}/followers] Scopes: contacts.write.",
+      "scopes": [
+        "contacts.write"
+      ],
+      "access": "unknown",
+      "operationClass": "delete",
+      "deprecated": false,
+      "contentType": "application/json",
+      "pathFields": [
+        "contactId"
+      ],
+      "queryFields": [],
+      "bodyFields": [
+        "followers"
+      ],
+      "bodyWrapped": false,
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "contactId": {
+            "type": "string",
+            "description": "Contact Id"
+          },
+          "followers": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          }
+        },
+        "required": [
+          "contactId",
+          "followers"
+        ]
+      }
+    },
+    {
+      "name": "contacts_add_contact_to_campaign",
+      "module": "contacts",
+      "method": "POST",
+      "path": "/contacts/{contactId}/campaigns/{campaignId}",
+      "version": "2021-07-28",
+      "summary": "Add Contact to Campaign",
+      "description": "Add Contact to Campaign Add contact to Campaign [POST /contacts/{contactId}/campaigns/{campaignId}] Scopes: contacts.write.",
+      "scopes": [
+        "contacts.write"
+      ],
+      "access": "unknown",
+      "operationClass": "write",
+      "deprecated": false,
+      "contentType": "application/json",
+      "pathFields": [
+        "contactId",
+        "campaignId"
+      ],
+      "queryFields": [],
+      "bodyFields": [],
+      "bodyWrapped": true,
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "contactId": {
+            "type": "string",
+            "description": "Contact Id"
+          },
+          "campaignId": {
+            "type": "string",
+            "description": "Campaigns Id"
+          },
+          "body": {
+            "type": "object",
+            "properties": {},
+            "description": "Full request body"
+          }
+        },
+        "required": [
+          "contactId",
+          "campaignId",
+          "body"
+        ]
+      }
+    },
+    {
+      "name": "contacts_remove_contact_from_campaign",
+      "module": "contacts",
+      "method": "DELETE",
+      "path": "/contacts/{contactId}/campaigns/{campaignId}",
+      "version": "2021-07-28",
+      "summary": "Remove Contact From Campaign",
+      "description": "Remove Contact From Campaign [DELETE /contacts/{contactId}/campaigns/{campaignId}] Scopes: contacts.write.",
+      "scopes": [
+        "contacts.write"
+      ],
+      "access": "unknown",
+      "operationClass": "delete",
+      "deprecated": false,
+      "pathFields": [
+        "contactId",
+        "campaignId"
+      ],
+      "queryFields": [],
+      "bodyFields": [],
+      "bodyWrapped": false,
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "contactId": {
+            "type": "string",
+            "description": "Contact Id"
+          },
+          "campaignId": {
+            "type": "string",
+            "description": "Campaigns Id"
+          }
+        },
+        "required": [
+          "contactId",
+          "campaignId"
+        ]
+      }
+    },
+    {
+      "name": "contacts_remove_contact_from_every_campaign",
+      "module": "contacts",
+      "method": "DELETE",
+      "path": "/contacts/{contactId}/campaigns/removeAll",
+      "version": "2021-07-28",
+      "summary": "Remove Contact From Every Campaign",
+      "description": "Remove Contact From Every Campaign [DELETE /contacts/{contactId}/campaigns/removeAll] Scopes: contacts.write.",
+      "scopes": [
+        "contacts.write"
+      ],
+      "access": "unknown",
+      "operationClass": "delete",
+      "deprecated": false,
+      "pathFields": [
+        "contactId"
+      ],
+      "queryFields": [],
+      "bodyFields": [],
+      "bodyWrapped": false,
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "contactId": {
+            "type": "string",
+            "description": "Contact Id"
+          }
+        },
+        "required": [
+          "contactId"
+        ]
+      }
+    },
+    {
+      "name": "contacts_add_contact_to_workflow",
+      "module": "contacts",
+      "method": "POST",
+      "path": "/contacts/{contactId}/workflow/{workflowId}",
+      "version": "2021-07-28",
+      "summary": "Add Contact to Workflow",
+      "description": "Add Contact to Workflow [POST /contacts/{contactId}/workflow/{workflowId}] Scopes: contacts.write.",
+      "scopes": [
+        "contacts.write"
+      ],
+      "access": "unknown",
+      "operationClass": "write",
+      "deprecated": false,
+      "contentType": "application/json",
+      "pathFields": [
+        "contactId",
+        "workflowId"
+      ],
+      "queryFields": [],
+      "bodyFields": [
+        "eventStartTime"
+      ],
+      "bodyWrapped": false,
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "contactId": {
+            "type": "string",
+            "description": "Contact Id"
+          },
+          "workflowId": {
+            "type": "string",
+            "description": "Workflow Id"
+          },
+          "eventStartTime": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "contactId",
+          "workflowId"
+        ]
+      }
+    },
+    {
+      "name": "contacts_delete_contact_from_workflow",
+      "module": "contacts",
+      "method": "DELETE",
+      "path": "/contacts/{contactId}/workflow/{workflowId}",
+      "version": "2021-07-28",
+      "summary": "Delete Contact from Workflow",
+      "description": "Delete Contact from Workflow [DELETE /contacts/{contactId}/workflow/{workflowId}] Scopes: contacts.write.",
+      "scopes": [
+        "contacts.write"
+      ],
+      "access": "unknown",
+      "operationClass": "delete",
+      "deprecated": false,
+      "contentType": "application/json",
+      "pathFields": [
+        "contactId",
+        "workflowId"
+      ],
+      "queryFields": [],
+      "bodyFields": [
+        "eventStartTime"
+      ],
+      "bodyWrapped": false,
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "contactId": {
+            "type": "string",
+            "description": "Contact Id"
+          },
+          "workflowId": {
+            "type": "string",
+            "description": "Workflow Id"
+          },
+          "eventStartTime": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "contactId",
+          "workflowId"
+        ]
+      }
+    },
+    {
+      "name": "contacts_get_contacts",
+      "module": "contacts",
+      "method": "GET",
+      "path": "/contacts/",
+      "version": "2021-07-28",
+      "summary": "Get Contacts",
+      "description": "Get Contacts **Note:** This API endpoint is deprecated. Please use the [Search Contacts](https://marketplace.gohighlevel.com/docs/ghl/contacts/search-contacts-advanced) endpoint instead. [GET /contacts/] Scopes: contacts.readonly. DEPRECATED.",
+      "scopes": [
+        "contacts.readonly"
+      ],
+      "access": "unknown",
+      "operationClass": "read",
+      "deprecated": true,
+      "pathFields": [],
+      "queryFields": [
+        "locationId",
+        "startAfterId",
+        "startAfter",
+        "query",
+        "limit"
+      ],
+      "bodyFields": [],
+      "bodyWrapped": false,
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "locationId": {
+            "type": "string",
+            "description": "Location Id"
+          },
+          "startAfterId": {
+            "type": "string",
+            "description": "Start After Id"
+          },
+          "startAfter": {
+            "type": "number",
+            "description": "Start Afte"
+          },
+          "query": {
+            "type": "string",
+            "description": "Contact Query"
+          },
+          "limit": {
+            "type": "number",
+            "description": "(default: 20)"
+          }
+        },
+        "required": [
+          "locationId"
+        ]
+      }
+    },
+    {
+      "name": "contacts_create_contact",
+      "module": "contacts",
+      "method": "POST",
+      "path": "/contacts/",
+      "version": "2021-07-28",
+      "summary": "Create Contact",
+      "description": "Create Contact Please find the list of acceptable values for the `country` field <a href=\"https://highlevel.stoplight.io/docs/integrations/ZG9jOjI4MzUzNDIy-country-list\" target=\"_blank\">here</a> [POST /contacts/] Scopes: contacts.write.",
+      "scopes": [
+        "contacts.write"
+      ],
+      "access": "unknown",
+      "operationClass": "write",
+      "deprecated": false,
+      "contentType": "application/json",
+      "pathFields": [],
+      "queryFields": [],
+      "bodyFields": [
+        "firstName",
+        "lastName",
+        "name",
+        "email",
+        "locationId",
+        "gender",
+        "phone",
+        "address1",
+        "city",
+        "state",
+        "postalCode",
+        "website",
+        "timezone",
+        "dnd",
+        "dndSettings",
+        "inboundDndSettings",
+        "tags",
+        "customFields",
+        "source",
+        "dateOfBirth",
+        "country",
+        "companyName",
+        "assignedTo"
+      ],
+      "bodyWrapped": false,
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "firstName": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "lastName": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "name": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "email": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "locationId": {
+            "type": "string"
+          },
+          "gender": {
+            "type": "string"
+          },
+          "phone": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "address1": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "city": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "state": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "postalCode": {
+            "type": "string"
+          },
+          "website": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "timezone": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "dnd": {
+            "type": "boolean"
+          },
+          "dndSettings": {
+            "type": "object",
+            "properties": {
+              "Call": {
+                "type": "object",
+                "properties": {
+                  "status": {
+                    "type": "string",
+                    "enum": [
+                      "active",
+                      "inactive",
+                      "permanent"
+                    ]
+                  },
+                  "message": {
+                    "type": "string"
+                  },
+                  "code": {
+                    "type": "string"
+                  }
+                },
+                "required": [
+                  "status"
+                ]
+              },
+              "Email": {
+                "type": "object",
+                "properties": {
+                  "status": {
+                    "type": "string",
+                    "enum": [
+                      "active",
+                      "inactive",
+                      "permanent"
+                    ]
+                  },
+                  "message": {
+                    "type": "string"
+                  },
+                  "code": {
+                    "type": "string"
+                  }
+                },
+                "required": [
+                  "status"
+                ]
+              },
+              "SMS": {
+                "type": "object",
+                "properties": {
+                  "status": {
+                    "type": "string",
+                    "enum": [
+                      "active",
+                      "inactive",
+                      "permanent"
+                    ]
+                  },
+                  "message": {
+                    "type": "string"
+                  },
+                  "code": {
+                    "type": "string"
+                  }
+                },
+                "required": [
+                  "status"
+                ]
+              },
+              "WhatsApp": {
+                "type": "object",
+                "properties": {
+                  "status": {
+                    "type": "string",
+                    "enum": [
+                      "active",
+                      "inactive",
+                      "permanent"
+                    ]
+                  },
+                  "message": {
+                    "type": "string"
+                  },
+                  "code": {
+                    "type": "string"
+                  }
+                },
+                "required": [
+                  "status"
+                ]
+              },
+              "GMB": {
+                "type": "object",
+                "properties": {
+                  "status": {
+                    "type": "string",
+                    "enum": [
+                      "active",
+                      "inactive",
+                      "permanent"
+                    ]
+                  },
+                  "message": {
+                    "type": "string"
+                  },
+                  "code": {
+                    "type": "string"
+                  }
+                },
+                "required": [
+                  "status"
+                ]
+              },
+              "FB": {
+                "type": "object",
+                "properties": {
+                  "status": {
+                    "type": "string",
+                    "enum": [
+                      "active",
+                      "inactive",
+                      "permanent"
+                    ]
+                  },
+                  "message": {
+                    "type": "string"
+                  },
+                  "code": {
+                    "type": "string"
+                  }
+                },
+                "required": [
+                  "status"
+                ]
+              }
+            }
+          },
+          "inboundDndSettings": {
+            "type": "object",
+            "properties": {
+              "all": {
+                "type": "object",
+                "properties": {
+                  "status": {
+                    "type": "string",
+                    "enum": [
+                      "active",
+                      "inactive"
+                    ]
+                  },
+                  "message": {
+                    "type": "string"
+                  }
+                },
+                "required": [
+                  "status"
+                ]
+              }
+            }
+          },
+          "tags": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "customFields": {
+            "type": "array",
+            "items": {
+              "anyOf": [
+                {
+                  "type": "object",
+                  "properties": {
+                    "id": {
+                      "type": "string"
+                    },
+                    "key": {
+                      "type": "string"
+                    },
+                    "field_value": {
+                      "type": "string"
+                    }
+                  },
+                  "required": [
+                    "id"
+                  ]
+                },
+                {
+                  "type": "object",
+                  "properties": {
+                    "id": {
+                      "type": "string"
+                    },
+                    "key": {
+                      "type": "string"
+                    },
+                    "field_value": {
+                      "type": "string"
+                    }
+                  },
+                  "required": [
+                    "id"
+                  ]
+                },
+                {
+                  "type": "object",
+                  "properties": {
+                    "id": {
+                      "type": "string"
+                    },
+                    "key": {
+                      "type": "string"
+                    },
+                    "field_value": {
+                      "type": "string"
+                    }
+                  },
+                  "required": [
+                    "id"
+                  ]
+                },
+                {
+                  "type": "object",
+                  "properties": {
+                    "id": {
+                      "type": "string"
+                    },
+                    "key": {
+                      "type": "string"
+                    },
+                    "field_value": {
+                      "type": "string"
+                    }
+                  },
+                  "required": [
+                    "id"
+                  ]
+                },
+                {
+                  "type": "object",
+                  "properties": {
+                    "id": {
+                      "type": "string"
+                    },
+                    "key": {
+                      "type": "string"
+                    },
+                    "field_value": {
+                      "type": "object"
+                    }
+                  },
+                  "required": [
+                    "id"
+                  ]
+                },
+                {
+                  "type": "object",
+                  "properties": {
+                    "id": {
+                      "type": "string"
+                    },
+                    "key": {
+                      "type": "string"
+                    },
+                    "field_value": {
+                      "type": "object"
+                    }
+                  },
+                  "required": [
+                    "id"
+                  ]
+                },
+                {
+                  "type": "object",
+                  "properties": {
+                    "id": {
+                      "type": "string"
+                    },
+                    "key": {
+                      "type": "string"
+                    },
+                    "field_value": {
+                      "type": "array",
+                      "items": {
+                        "type": "string"
+                      }
+                    }
+                  },
+                  "required": [
+                    "id"
+                  ]
+                },
+                {
+                  "type": "object",
+                  "properties": {
+                    "id": {
+                      "type": "string"
+                    },
+                    "key": {
+                      "type": "string"
+                    },
+                    "field_value": {
+                      "type": "array",
+                      "items": {
+                        "type": "string"
+                      }
+                    }
+                  },
+                  "required": [
+                    "id"
+                  ]
+                },
+                {
+                  "type": "object",
+                  "properties": {
+                    "id": {
+                      "type": "string"
+                    },
+                    "key": {
+                      "type": "string"
+                    },
+                    "field_value": {
+                      "type": "object"
+                    }
+                  },
+                  "required": [
+                    "id"
+                  ]
+                }
+              ]
+            }
+          },
+          "source": {
+            "type": "string"
+          },
+          "dateOfBirth": {
+            "type": [
+              "object",
+              "null"
+            ],
+            "description": "The birth date of the contact. Supported formats: YYYY/MM/DD, MM/DD/YYYY, YYYY-MM-DD, MM-DD-YYYY, YYYY.MM.DD, MM.DD.YYYY, YYYY_MM_DD, MM_DD_YYYY"
+          },
+          "country": {
+            "type": "string"
+          },
+          "companyName": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "assignedTo": {
+            "type": "string",
+            "description": "User's Id"
+          }
+        },
+        "required": [
+          "locationId"
+        ]
+      }
+    }
+  ]
+}

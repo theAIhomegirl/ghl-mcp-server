@@ -1,0 +1,242 @@
+{
+  "module": "links",
+  "endpoints": [
+    {
+      "name": "links_get_link_by_id",
+      "module": "links",
+      "method": "GET",
+      "path": "/links/id/{linkId}",
+      "version": "2021-07-28",
+      "summary": "Get Link by ID",
+      "description": "Get Link by ID Get a single link by its ID [GET /links/id/{linkId}]",
+      "scopes": [],
+      "access": "unknown",
+      "operationClass": "read",
+      "deprecated": false,
+      "pathFields": [
+        "linkId"
+      ],
+      "queryFields": [
+        "locationId"
+      ],
+      "bodyFields": [],
+      "bodyWrapped": false,
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "locationId": {
+            "type": "string",
+            "description": "Location Id"
+          },
+          "linkId": {
+            "type": "string",
+            "description": "Link Id"
+          }
+        },
+        "required": [
+          "locationId",
+          "linkId"
+        ]
+      }
+    },
+    {
+      "name": "links_update_link",
+      "module": "links",
+      "method": "PUT",
+      "path": "/links/{linkId}",
+      "version": "2021-07-28",
+      "summary": "Update Link",
+      "description": "Update Link [PUT /links/{linkId}] Scopes: links.write.",
+      "scopes": [
+        "links.write"
+      ],
+      "access": "unknown",
+      "operationClass": "write",
+      "deprecated": false,
+      "contentType": "application/json",
+      "pathFields": [
+        "linkId"
+      ],
+      "queryFields": [],
+      "bodyFields": [
+        "name",
+        "redirectTo"
+      ],
+      "bodyWrapped": false,
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "linkId": {
+            "type": "string",
+            "description": "Link Id"
+          },
+          "name": {
+            "type": "string"
+          },
+          "redirectTo": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "linkId",
+          "name",
+          "redirectTo"
+        ]
+      }
+    },
+    {
+      "name": "links_delete_link",
+      "module": "links",
+      "method": "DELETE",
+      "path": "/links/{linkId}",
+      "version": "2021-07-28",
+      "summary": "Delete Link",
+      "description": "Delete Link [DELETE /links/{linkId}] Scopes: links.write.",
+      "scopes": [
+        "links.write"
+      ],
+      "access": "unknown",
+      "operationClass": "delete",
+      "deprecated": false,
+      "pathFields": [
+        "linkId"
+      ],
+      "queryFields": [],
+      "bodyFields": [],
+      "bodyWrapped": false,
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "linkId": {
+            "type": "string",
+            "description": "Link Id"
+          }
+        },
+        "required": [
+          "linkId"
+        ]
+      }
+    },
+    {
+      "name": "links_search_trigger_links",
+      "module": "links",
+      "method": "GET",
+      "path": "/links/search",
+      "version": "2021-04-15",
+      "summary": "Search Trigger Links",
+      "description": "Search Trigger Links Get list of links by searching [GET /links/search]",
+      "scopes": [],
+      "access": "unknown",
+      "operationClass": "read",
+      "deprecated": false,
+      "pathFields": [],
+      "queryFields": [
+        "locationId",
+        "query",
+        "skip",
+        "limit"
+      ],
+      "bodyFields": [],
+      "bodyWrapped": false,
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "locationId": {
+            "type": "string",
+            "description": "Location Id"
+          },
+          "query": {
+            "type": "string",
+            "description": "Search query as a string"
+          },
+          "skip": {
+            "type": "number",
+            "description": "(default: 0)"
+          },
+          "limit": {
+            "type": "number",
+            "description": "(default: 20)"
+          }
+        },
+        "required": [
+          "locationId"
+        ]
+      }
+    },
+    {
+      "name": "links_get_links",
+      "module": "links",
+      "method": "GET",
+      "path": "/links/",
+      "version": "2021-07-28",
+      "summary": "Get Links",
+      "description": "Get Links [GET /links/] Scopes: links.readonly.",
+      "scopes": [
+        "links.readonly"
+      ],
+      "access": "unknown",
+      "operationClass": "read",
+      "deprecated": false,
+      "pathFields": [],
+      "queryFields": [
+        "locationId"
+      ],
+      "bodyFields": [],
+      "bodyWrapped": false,
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "locationId": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "locationId"
+        ]
+      }
+    },
+    {
+      "name": "links_create_link",
+      "module": "links",
+      "method": "POST",
+      "path": "/links/",
+      "version": "2021-07-28",
+      "summary": "Create Link",
+      "description": "Create Link [POST /links/] Scopes: links.write.",
+      "scopes": [
+        "links.write"
+      ],
+      "access": "unknown",
+      "operationClass": "write",
+      "deprecated": false,
+      "contentType": "application/json",
+      "pathFields": [],
+      "queryFields": [],
+      "bodyFields": [
+        "locationId",
+        "name",
+        "redirectTo"
+      ],
+      "bodyWrapped": false,
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "locationId": {
+            "type": "string"
+          },
+          "name": {
+            "type": "string"
+          },
+          "redirectTo": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "locationId",
+          "name",
+          "redirectTo"
+        ]
+      }
+    }
+  ]
+}

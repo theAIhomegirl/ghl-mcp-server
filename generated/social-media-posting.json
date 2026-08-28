@@ -1,0 +1,2490 @@
+{
+  "module": "social-media-posting",
+  "endpoints": [
+    {
+      "name": "social_media_posting_start_google_oauth",
+      "module": "social-media-posting",
+      "method": "GET",
+      "path": "/social-media-posting/oauth/google/start",
+      "version": "2021-07-28",
+      "summary": "Starts OAuth For Google Account",
+      "description": "Starts OAuth For Google Account Open the API in a window with appropriate params and headers instead of using the Curl. User is navigated to Google login OAuth screen. On successful login, listen on window object for message where event listener returns data in its callback function. ### Sample code to listen to event data: window.addEventListener('message', function(e) { if (e.data && e.data.page === 'social_media_posting') { … [GET /social-media-posting/oauth/google/start] Scopes: socialplanner/oauth.readonly.",
+      "scopes": [
+        "socialplanner/oauth.readonly"
+      ],
+      "access": "unknown",
+      "operationClass": "read",
+      "deprecated": false,
+      "pathFields": [],
+      "queryFields": [
+        "locationId",
+        "userId",
+        "page",
+        "reconnect"
+      ],
+      "bodyFields": [],
+      "bodyWrapped": false,
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "locationId": {
+            "type": "string",
+            "description": "Location Id"
+          },
+          "userId": {
+            "type": "string",
+            "description": "User Id"
+          },
+          "page": {
+            "type": "string",
+            "description": "Page"
+          },
+          "reconnect": {
+            "type": "string",
+            "description": "Reconnect"
+          }
+        },
+        "required": [
+          "locationId",
+          "userId"
+        ]
+      }
+    },
+    {
+      "name": "social_media_posting_get_google_locations",
+      "module": "social-media-posting",
+      "method": "GET",
+      "path": "/social-media-posting/oauth/{locationId}/google/locations/{accountId}",
+      "version": "2021-07-28",
+      "summary": "Get google business locations",
+      "description": "Get google business locations [GET /social-media-posting/oauth/{locationId}/google/locations/{accountId}]",
+      "scopes": [],
+      "access": "unknown",
+      "operationClass": "read",
+      "deprecated": false,
+      "pathFields": [
+        "locationId",
+        "accountId"
+      ],
+      "queryFields": [],
+      "bodyFields": [],
+      "bodyWrapped": false,
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "locationId": {
+            "type": "string",
+            "description": "Account Location Id"
+          },
+          "accountId": {
+            "type": "string",
+            "description": "Account Id"
+          }
+        },
+        "required": [
+          "locationId",
+          "accountId"
+        ]
+      }
+    },
+    {
+      "name": "social_media_posting_set_google_locations",
+      "module": "social-media-posting",
+      "method": "POST",
+      "path": "/social-media-posting/oauth/{locationId}/google/locations/{accountId}",
+      "version": "2021-07-28",
+      "summary": "Set google business locations",
+      "description": "Set google business locations [POST /social-media-posting/oauth/{locationId}/google/locations/{accountId}]",
+      "scopes": [],
+      "access": "unknown",
+      "operationClass": "write",
+      "deprecated": false,
+      "contentType": "application/json",
+      "pathFields": [
+        "locationId",
+        "accountId"
+      ],
+      "queryFields": [],
+      "bodyFields": [
+        "location",
+        "account",
+        "companyId"
+      ],
+      "bodyWrapped": false,
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "locationId": {
+            "type": "string",
+            "description": "Account Location Id"
+          },
+          "accountId": {
+            "type": "string",
+            "description": "Account Id"
+          },
+          "location": {
+            "type": "object"
+          },
+          "account": {
+            "type": "object"
+          },
+          "companyId": {
+            "type": "string",
+            "description": "Company ID"
+          }
+        },
+        "required": [
+          "locationId",
+          "accountId"
+        ]
+      }
+    },
+    {
+      "name": "social_media_posting_get_posts",
+      "module": "social-media-posting",
+      "method": "POST",
+      "path": "/social-media-posting/{locationId}/posts/list",
+      "version": "2021-07-28",
+      "summary": "Get posts",
+      "description": "Get posts Get Posts [POST /social-media-posting/{locationId}/posts/list] Scopes: socialplanner/post.readonly.",
+      "scopes": [
+        "socialplanner/post.readonly"
+      ],
+      "access": "unknown",
+      "operationClass": "read",
+      "deprecated": false,
+      "contentType": "application/json",
+      "pathFields": [
+        "locationId"
+      ],
+      "queryFields": [],
+      "bodyFields": [
+        "type",
+        "accounts",
+        "skip",
+        "limit",
+        "fromDate",
+        "toDate",
+        "includeUsers",
+        "postType"
+      ],
+      "bodyWrapped": false,
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "locationId": {
+            "type": "string",
+            "description": "Location Id"
+          },
+          "type": {
+            "type": "string",
+            "description": "type must be one of the following values: recent, all, scheduled, draft, failed, in_review, published, in_progress and deleted (default: \"all\")"
+          },
+          "accounts": {
+            "type": "string",
+            "description": "List of account Ids seperated by comma as a string"
+          },
+          "skip": {
+            "type": "string",
+            "description": "(default: \"0\")"
+          },
+          "limit": {
+            "type": "string",
+            "description": "(default: \"10\")"
+          },
+          "fromDate": {
+            "type": "string",
+            "description": "From Date"
+          },
+          "toDate": {
+            "type": "string",
+            "description": "To Date"
+          },
+          "includeUsers": {
+            "type": "string",
+            "description": "Include User Data"
+          },
+          "postType": {
+            "type": "object",
+            "description": "Post Type must be one of the following values: - post, story, reel"
+          }
+        },
+        "required": [
+          "locationId",
+          "skip",
+          "limit",
+          "fromDate",
+          "toDate",
+          "includeUsers"
+        ]
+      }
+    },
+    {
+      "name": "social_media_posting_create_post",
+      "module": "social-media-posting",
+      "method": "POST",
+      "path": "/social-media-posting/{locationId}/posts",
+      "version": "2021-07-28",
+      "summary": "Create post",
+      "description": "Create post s for all supported platforms. It is possible to create customized posts per channel by using the same platform account IDs in a request and hitting the create post API multiple times with different summaries and account IDs per platform. The content and media limitations, as well as platform rate limiters corresponding to the respective platforms, are provided in the following referen… [POST /social-media-posting/{locationId}/posts] Scopes: socialplanner/post.write.",
+      "scopes": [
+        "socialplanner/post.write"
+      ],
+      "access": "unknown",
+      "operationClass": "write",
+      "deprecated": false,
+      "contentType": "application/json",
+      "pathFields": [
+        "locationId"
+      ],
+      "queryFields": [],
+      "bodyFields": [
+        "accountIds",
+        "summary",
+        "media",
+        "status",
+        "scheduleDate",
+        "createdBy",
+        "followUpComment",
+        "ogTagsDetails",
+        "type",
+        "postApprovalDetails",
+        "scheduleTimeUpdated",
+        "tags",
+        "categoryId",
+        "tiktokPostDetails",
+        "gmbPostDetails",
+        "userId"
+      ],
+      "bodyWrapped": false,
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "locationId": {
+            "type": "string",
+            "description": "Location Id"
+          },
+          "accountIds": {
+            "description": "Account Ids",
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "summary": {
+            "type": "string",
+            "description": "Post Content \n The limitations of content as per the platforms is provided through the reference link in API description. The summary will be trimmed based on the limit"
+          },
+          "media": {
+            "description": "Post Media Data \n The limitations of media as per the platforms is provided through the reference link in API description",
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "url": {
+                  "type": "string"
+                },
+                "caption": {
+                  "type": "string"
+                },
+                "type": {
+                  "type": "string"
+                },
+                "thumbnail": {
+                  "type": "string"
+                },
+                "defaultThumb": {
+                  "type": "string"
+                },
+                "id": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "url"
+              ]
+            }
+          },
+          "status": {
+            "type": "object",
+            "description": "Status must be one of the following values: null, in_progress, draft, failed, published, scheduled, in_review, notification_sent, deleted"
+          },
+          "scheduleDate": {
+            "type": "string",
+            "description": "Schedule Date"
+          },
+          "createdBy": {
+            "type": "string",
+            "description": "Created By"
+          },
+          "followUpComment": {
+            "type": "string",
+            "description": "Follow Up Comment on platform. It is not allowed on Tiktok and GMB accounts and there is a limit of 280 charecters for twitter account"
+          },
+          "ogTagsDetails": {
+            "type": "object",
+            "properties": {
+              "metaImage": {
+                "type": "string",
+                "description": "Meta Image"
+              },
+              "metaLink": {
+                "type": "string",
+                "description": "Meta Link"
+              }
+            },
+            "description": "Og Tags Meta Data"
+          },
+          "type": {
+            "type": "object",
+            "description": "Post Type must be one of the following values: - post, story, reel"
+          },
+          "postApprovalDetails": {
+            "type": "object",
+            "properties": {
+              "approver": {
+                "type": "string",
+                "description": "Approver"
+              },
+              "requesterNote": {
+                "type": "string",
+                "description": "Requester Notes"
+              },
+              "approverNote": {
+                "type": "string",
+                "description": "Approver Notes"
+              },
+              "approvalStatus": {
+                "type": "object",
+                "description": "Approval Status must be one of the following values: pending, approved, rejected, not_required"
+              }
+            },
+            "description": "Post Approval Details"
+          },
+          "scheduleTimeUpdated": {
+            "type": "boolean",
+            "description": "if schedule datetime is updated"
+          },
+          "tags": {
+            "description": "Array of Tag Value",
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "categoryId": {
+            "type": "string",
+            "description": "Category Id"
+          },
+          "tiktokPostDetails": {
+            "type": "object",
+            "properties": {
+              "privacyLevel": {
+                "type": "object",
+                "description": "privacy level is an enum and must be one of the following values: PUBLIC_TO_EVERYONE, MUTUAL_FOLLOW_FRIENDS, SELF_ONLY"
+              },
+              "promoteOtherBrand": {
+                "type": "boolean",
+                "description": "promote other brand"
+              },
+              "enableComment": {
+                "type": "boolean",
+                "description": "enable comment"
+              },
+              "enableDuet": {
+                "type": "boolean",
+                "description": "enable duet"
+              },
+              "enableStitch": {
+                "type": "boolean",
+                "description": "enable stitch"
+              },
+              "videoDisclosure": {
+                "type": "boolean",
+                "description": "video disclosure"
+              },
+              "promoteYourBrand": {
+                "type": "boolean",
+                "description": "promote your brand"
+              }
+            },
+            "description": "Tiktok Post Details"
+          },
+          "gmbPostDetails": {
+            "type": "object",
+            "properties": {
+              "gmbEventType": {
+                "type": "string",
+                "description": "gmbEventType must be one of the following values: STANDARD, EVENT, OFFER"
+              },
+              "title": {
+                "type": "string",
+                "description": "Title"
+              },
+              "offerTitle": {
+                "type": "string",
+                "description": "Offer Title"
+              },
+              "startDate": {
+                "type": "object",
+                "properties": {
+                  "startDate": {
+                    "type": "object",
+                    "properties": {
+                      "year": {
+                        "type": "number"
+                      },
+                      "month": {
+                        "type": "number"
+                      },
+                      "day": {
+                        "type": "number"
+                      }
+                    },
+                    "required": [
+                      "year",
+                      "month",
+                      "day"
+                    ],
+                    "description": "Start Date"
+                  },
+                  "startTime": {
+                    "type": "object",
+                    "properties": {
+                      "hours": {
+                        "type": "number"
+                      },
+                      "minutes": {
+                        "type": "number"
+                      },
+                      "seconds": {
+                        "type": "number"
+                      }
+                    },
+                    "required": [
+                      "hours",
+                      "minutes",
+                      "seconds"
+                    ],
+                    "description": "Start Time"
+                  }
+                },
+                "description": "Start Date"
+              },
+              "endDate": {
+                "type": "object",
+                "properties": {
+                  "endDate": {
+                    "type": "object",
+                    "properties": {
+                      "year": {
+                        "type": "number"
+                      },
+                      "month": {
+                        "type": "number"
+                      },
+                      "day": {
+                        "type": "number"
+                      }
+                    },
+                    "required": [
+                      "year",
+                      "month",
+                      "day"
+                    ],
+                    "description": "End Date"
+                  },
+                  "endTime": {
+                    "type": "object",
+                    "properties": {
+                      "hours": {
+                        "type": "number"
+                      },
+                      "minutes": {
+                        "type": "number"
+                      },
+                      "seconds": {
+                        "type": "number"
+                      }
+                    },
+                    "required": [
+                      "hours",
+                      "minutes",
+                      "seconds"
+                    ],
+                    "description": "End Time"
+                  }
+                },
+                "description": "End Date"
+              },
+              "termsConditions": {
+                "type": "string",
+                "description": "Terms Condition Url"
+              },
+              "url": {
+                "type": "string",
+                "description": "Url"
+              },
+              "couponCode": {
+                "type": "string",
+                "description": "Coupon Code"
+              },
+              "redeemOnlineUrl": {
+                "type": "string",
+                "description": "Redeem Online Url"
+              },
+              "actionType": {
+                "type": "object",
+                "description": "Action Type must be one of the following values: none, order, book, shop, learn_more, call, sign_up"
+              }
+            },
+            "description": "GMB Post Details"
+          },
+          "userId": {
+            "type": "string",
+            "description": "User ID"
+          }
+        },
+        "required": [
+          "locationId",
+          "type",
+          "accountIds",
+          "userId"
+        ]
+      }
+    },
+    {
+      "name": "social_media_posting_get_post",
+      "module": "social-media-posting",
+      "method": "GET",
+      "path": "/social-media-posting/{locationId}/posts/{id}",
+      "version": "2021-07-28",
+      "summary": "Get post",
+      "description": "Get post [GET /social-media-posting/{locationId}/posts/{id}]",
+      "scopes": [],
+      "access": "unknown",
+      "operationClass": "read",
+      "deprecated": false,
+      "pathFields": [
+        "locationId",
+        "id"
+      ],
+      "queryFields": [],
+      "bodyFields": [],
+      "bodyWrapped": false,
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "locationId": {
+            "type": "string",
+            "description": "Location Id"
+          },
+          "id": {
+            "type": "string",
+            "description": "Post Id"
+          }
+        },
+        "required": [
+          "locationId",
+          "id"
+        ]
+      }
+    },
+    {
+      "name": "social_media_posting_edit_post",
+      "module": "social-media-posting",
+      "method": "PUT",
+      "path": "/social-media-posting/{locationId}/posts/{id}",
+      "version": "2021-07-28",
+      "summary": "Edit post",
+      "description": "Edit post Create posts for all supported platforms. It is possible to create customized posts per channel by using the same platform account IDs in a request and hitting the create post API multiple times with different summaries and account IDs per platform. The content and media limitations, as well as platform rate limiters corresponding to the respective platforms, are provided in the following referen… [PUT /social-media-posting/{locationId}/posts/{id}]",
+      "scopes": [],
+      "access": "unknown",
+      "operationClass": "write",
+      "deprecated": false,
+      "contentType": "application/json",
+      "pathFields": [
+        "locationId",
+        "id"
+      ],
+      "queryFields": [],
+      "bodyFields": [
+        "accountIds",
+        "summary",
+        "media",
+        "status",
+        "scheduleDate",
+        "createdBy",
+        "followUpComment",
+        "ogTagsDetails",
+        "type",
+        "postApprovalDetails",
+        "scheduleTimeUpdated",
+        "tags",
+        "categoryId",
+        "tiktokPostDetails",
+        "gmbPostDetails",
+        "userId"
+      ],
+      "bodyWrapped": false,
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "locationId": {
+            "type": "string",
+            "description": "Location Id"
+          },
+          "id": {
+            "type": "string",
+            "description": "Post Id"
+          },
+          "accountIds": {
+            "description": "Account Ids",
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "summary": {
+            "type": "string",
+            "description": "Post Content \n The limitations of content as per the platforms is provided through the reference link in API description"
+          },
+          "media": {
+            "description": "Post Media Data \n The limitations of media as per the platforms is provided through the reference link in API description",
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "url": {
+                  "type": "string"
+                },
+                "caption": {
+                  "type": "string"
+                },
+                "type": {
+                  "type": "string"
+                },
+                "thumbnail": {
+                  "type": "string"
+                },
+                "defaultThumb": {
+                  "type": "string"
+                },
+                "id": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "url"
+              ]
+            }
+          },
+          "status": {
+            "type": "object",
+            "description": "Status must be one of the following values: in_progress, draft, failed, published, scheduled, in_review, notification_sent, deleted"
+          },
+          "scheduleDate": {
+            "type": "string",
+            "description": "Schedule Date"
+          },
+          "createdBy": {
+            "type": "string",
+            "description": "Created By"
+          },
+          "followUpComment": {
+            "type": "string",
+            "description": "Follow Up Comment on platform. It is not allowed on Tiktok and GMB accounts and there is a limit of 280 charecters for twitter account"
+          },
+          "ogTagsDetails": {
+            "type": "object",
+            "properties": {
+              "metaImage": {
+                "type": "string",
+                "description": "Meta Image"
+              },
+              "metaLink": {
+                "type": "string",
+                "description": "Meta Link"
+              }
+            },
+            "description": "Og Tags Meta Data"
+          },
+          "type": {
+            "type": "object",
+            "description": "Post Type must be one of the following values: - post, story, reel"
+          },
+          "postApprovalDetails": {
+            "type": "object",
+            "properties": {
+              "approver": {
+                "type": "string",
+                "description": "Approver"
+              },
+              "requesterNote": {
+                "type": "string",
+                "description": "Requester Notes"
+              },
+              "approverNote": {
+                "type": "string",
+                "description": "Approver Notes"
+              },
+              "approvalStatus": {
+                "type": "object",
+                "description": "Approval Status must be one of the following values: pending, approved, rejected, not_required"
+              }
+            },
+            "description": "Post Approval Details"
+          },
+          "scheduleTimeUpdated": {
+            "type": "boolean",
+            "description": "if schedule datetime is updated"
+          },
+          "tags": {
+            "description": "Array of Tag Value",
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "categoryId": {
+            "type": "string",
+            "description": "Category Id"
+          },
+          "tiktokPostDetails": {
+            "type": "object",
+            "properties": {
+              "privacyLevel": {
+                "type": "object",
+                "description": "privacy level is an enum and must be one of the following values: PUBLIC_TO_EVERYONE, MUTUAL_FOLLOW_FRIENDS, SELF_ONLY"
+              },
+              "promoteOtherBrand": {
+                "type": "boolean",
+                "description": "promote other brand"
+              },
+              "enableComment": {
+                "type": "boolean",
+                "description": "enable comment"
+              },
+              "enableDuet": {
+                "type": "boolean",
+                "description": "enable duet"
+              },
+              "enableStitch": {
+                "type": "boolean",
+                "description": "enable stitch"
+              },
+              "videoDisclosure": {
+                "type": "boolean",
+                "description": "video disclosure"
+              },
+              "promoteYourBrand": {
+                "type": "boolean",
+                "description": "promote your brand"
+              }
+            },
+            "description": "Tiktok Post Details"
+          },
+          "gmbPostDetails": {
+            "type": "object",
+            "properties": {
+              "gmbEventType": {
+                "type": "string",
+                "description": "gmbEventType must be one of the following values: STANDARD, EVENT, OFFER"
+              },
+              "title": {
+                "type": "string",
+                "description": "Title"
+              },
+              "offerTitle": {
+                "type": "string",
+                "description": "Offer Title"
+              },
+              "startDate": {
+                "type": "object",
+                "properties": {
+                  "startDate": {
+                    "type": "object",
+                    "properties": {
+                      "year": {
+                        "type": "number"
+                      },
+                      "month": {
+                        "type": "number"
+                      },
+                      "day": {
+                        "type": "number"
+                      }
+                    },
+                    "required": [
+                      "year",
+                      "month",
+                      "day"
+                    ],
+                    "description": "Start Date"
+                  },
+                  "startTime": {
+                    "type": "object",
+                    "properties": {
+                      "hours": {
+                        "type": "number"
+                      },
+                      "minutes": {
+                        "type": "number"
+                      },
+                      "seconds": {
+                        "type": "number"
+                      }
+                    },
+                    "required": [
+                      "hours",
+                      "minutes",
+                      "seconds"
+                    ],
+                    "description": "Start Time"
+                  }
+                },
+                "description": "Start Date"
+              },
+              "endDate": {
+                "type": "object",
+                "properties": {
+                  "endDate": {
+                    "type": "object",
+                    "properties": {
+                      "year": {
+                        "type": "number"
+                      },
+                      "month": {
+                        "type": "number"
+                      },
+                      "day": {
+                        "type": "number"
+                      }
+                    },
+                    "required": [
+                      "year",
+                      "month",
+                      "day"
+                    ],
+                    "description": "End Date"
+                  },
+                  "endTime": {
+                    "type": "object",
+                    "properties": {
+                      "hours": {
+                        "type": "number"
+                      },
+                      "minutes": {
+                        "type": "number"
+                      },
+                      "seconds": {
+                        "type": "number"
+                      }
+                    },
+                    "required": [
+                      "hours",
+                      "minutes",
+                      "seconds"
+                    ],
+                    "description": "End Time"
+                  }
+                },
+                "description": "End Date"
+              },
+              "termsConditions": {
+                "type": "string",
+                "description": "Terms Condition Url"
+              },
+              "url": {
+                "type": "string",
+                "description": "Url"
+              },
+              "couponCode": {
+                "type": "string",
+                "description": "Coupon Code"
+              },
+              "redeemOnlineUrl": {
+                "type": "string",
+                "description": "Redeem Online Url"
+              },
+              "actionType": {
+                "type": "object",
+                "description": "Action Type must be one of the following values: none, order, book, shop, learn_more, call, sign_up"
+              }
+            },
+            "description": "GMB Post Details"
+          },
+          "userId": {
+            "type": "string",
+            "description": "User ID"
+          }
+        },
+        "required": [
+          "locationId",
+          "id",
+          "type"
+        ]
+      }
+    },
+    {
+      "name": "social_media_posting_delete_post",
+      "module": "social-media-posting",
+      "method": "DELETE",
+      "path": "/social-media-posting/{locationId}/posts/{id}",
+      "version": "2021-07-28",
+      "summary": "Delete Post",
+      "description": "Delete Post [DELETE /social-media-posting/{locationId}/posts/{id}]",
+      "scopes": [],
+      "access": "unknown",
+      "operationClass": "delete",
+      "deprecated": false,
+      "pathFields": [
+        "locationId",
+        "id"
+      ],
+      "queryFields": [],
+      "bodyFields": [],
+      "bodyWrapped": false,
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "locationId": {
+            "type": "string",
+            "description": "Location Id"
+          },
+          "id": {
+            "type": "string",
+            "description": "Post Id"
+          }
+        },
+        "required": [
+          "locationId",
+          "id"
+        ]
+      }
+    },
+    {
+      "name": "social_media_posting_bulk_delete_social_planner_posts",
+      "module": "social-media-posting",
+      "method": "POST",
+      "path": "/social-media-posting/{locationId}/posts/bulk-delete",
+      "version": "2021-07-28",
+      "summary": "Bulk Delete Social Planner Posts",
+      "description": "Bulk Delete Social Planner Posts Deletes multiple posts based on the provided list of post IDs. This operation is useful for clearing up large numbers of posts efficiently. Note: 1.The maximum number of posts that can be deleted in a single request is '50'. 2.However, It will only get deleted in Highlevel database but still it is recommended to be cautious of this operation. [POST /social-media-posting/{locationId}/posts/bulk-delete]",
+      "scopes": [],
+      "access": "unknown",
+      "operationClass": "write",
+      "deprecated": false,
+      "contentType": "application/json",
+      "pathFields": [],
+      "queryFields": [],
+      "bodyFields": [
+        "postIds"
+      ],
+      "bodyWrapped": false,
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "postIds": {
+            "description": "Requested Results",
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          }
+        }
+      }
+    },
+    {
+      "name": "social_media_posting_get_account",
+      "module": "social-media-posting",
+      "method": "GET",
+      "path": "/social-media-posting/{locationId}/accounts",
+      "version": "2021-07-28",
+      "summary": "Get Accounts",
+      "description": "Get Accounts Get list of accounts and groups [GET /social-media-posting/{locationId}/accounts] Scopes: socialplanner/account.readonly.",
+      "scopes": [
+        "socialplanner/account.readonly"
+      ],
+      "access": "unknown",
+      "operationClass": "read",
+      "deprecated": false,
+      "pathFields": [
+        "locationId"
+      ],
+      "queryFields": [],
+      "bodyFields": [],
+      "bodyWrapped": false,
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "locationId": {
+            "type": "string",
+            "description": "Location Id"
+          }
+        },
+        "required": [
+          "locationId"
+        ]
+      }
+    },
+    {
+      "name": "social_media_posting_delete_account",
+      "module": "social-media-posting",
+      "method": "DELETE",
+      "path": "/social-media-posting/{locationId}/accounts/{id}",
+      "version": "2021-07-28",
+      "summary": "Delete Account",
+      "description": "Delete Account Delete account and account from group [DELETE /social-media-posting/{locationId}/accounts/{id}]",
+      "scopes": [],
+      "access": "unknown",
+      "operationClass": "delete",
+      "deprecated": false,
+      "pathFields": [
+        "locationId",
+        "id"
+      ],
+      "queryFields": [
+        "companyId",
+        "userId"
+      ],
+      "bodyFields": [],
+      "bodyWrapped": false,
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "locationId": {
+            "type": "string",
+            "description": "Location Id"
+          },
+          "id": {
+            "type": "string",
+            "description": "Id"
+          },
+          "companyId": {
+            "type": "string",
+            "description": "Company ID"
+          },
+          "userId": {
+            "type": "string",
+            "description": "User ID"
+          }
+        },
+        "required": [
+          "locationId",
+          "id"
+        ]
+      }
+    },
+    {
+      "name": "social_media_posting_start_facebook_oauth",
+      "module": "social-media-posting",
+      "method": "GET",
+      "path": "/social-media-posting/oauth/facebook/start",
+      "version": "2021-07-28",
+      "summary": "Starts OAuth For Facebook Account",
+      "description": "Starts OAuth For Facebook Account Open the API in a window with appropriate params and headers instead of using the Curl. User is navigated to Facebook login OAuth screen. On successful login, listen on window object for message where event listener returns data in its callback function. ### Sample code to listen to event data: window.addEventListener('message', function(e) { if (e.data && e.data.page === 'social_media_posting') … [GET /social-media-posting/oauth/facebook/start]",
+      "scopes": [],
+      "access": "unknown",
+      "operationClass": "read",
+      "deprecated": false,
+      "pathFields": [],
+      "queryFields": [
+        "locationId",
+        "userId",
+        "page",
+        "reconnect"
+      ],
+      "bodyFields": [],
+      "bodyWrapped": false,
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "locationId": {
+            "type": "string",
+            "description": "Account Location Id"
+          },
+          "userId": {
+            "type": "string",
+            "description": "User ID"
+          },
+          "page": {
+            "type": "string",
+            "description": "Facebook Page"
+          },
+          "reconnect": {
+            "type": "string",
+            "description": "Reconnect boolean as string"
+          }
+        },
+        "required": [
+          "locationId",
+          "userId"
+        ]
+      }
+    },
+    {
+      "name": "social_media_posting_get_facebook_page_group",
+      "module": "social-media-posting",
+      "method": "GET",
+      "path": "/social-media-posting/oauth/{locationId}/facebook/accounts/{accountId}",
+      "version": "2021-07-28",
+      "summary": "Get facebook pages",
+      "description": "Get facebook pages [GET /social-media-posting/oauth/{locationId}/facebook/accounts/{accountId}]",
+      "scopes": [],
+      "access": "unknown",
+      "operationClass": "read",
+      "deprecated": false,
+      "pathFields": [
+        "locationId",
+        "accountId"
+      ],
+      "queryFields": [],
+      "bodyFields": [],
+      "bodyWrapped": false,
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "locationId": {
+            "type": "string",
+            "description": "Account Location Id"
+          },
+          "accountId": {
+            "type": "string",
+            "description": "Account Id"
+          }
+        },
+        "required": [
+          "locationId",
+          "accountId"
+        ]
+      }
+    },
+    {
+      "name": "social_media_posting_attach_facebook_page_group",
+      "module": "social-media-posting",
+      "method": "POST",
+      "path": "/social-media-posting/oauth/{locationId}/facebook/accounts/{accountId}",
+      "version": "2021-07-28",
+      "summary": "Attach facebook pages",
+      "description": "Attach facebook pages [POST /social-media-posting/oauth/{locationId}/facebook/accounts/{accountId}]",
+      "scopes": [],
+      "access": "unknown",
+      "operationClass": "write",
+      "deprecated": false,
+      "contentType": "application/json",
+      "pathFields": [
+        "locationId",
+        "accountId"
+      ],
+      "queryFields": [],
+      "bodyFields": [
+        "type",
+        "originId",
+        "name",
+        "avatar",
+        "companyId"
+      ],
+      "bodyWrapped": false,
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "locationId": {
+            "type": "string",
+            "description": "Account Location Id"
+          },
+          "accountId": {
+            "type": "string",
+            "description": "Account Id"
+          },
+          "type": {
+            "type": "object"
+          },
+          "originId": {
+            "type": "string"
+          },
+          "name": {
+            "type": "string"
+          },
+          "avatar": {
+            "type": "string"
+          },
+          "companyId": {
+            "type": "string",
+            "description": "Company ID"
+          }
+        },
+        "required": [
+          "locationId",
+          "accountId"
+        ]
+      }
+    },
+    {
+      "name": "social_media_posting_start_instagram_oauth",
+      "module": "social-media-posting",
+      "method": "GET",
+      "path": "/social-media-posting/oauth/instagram/start",
+      "version": "2021-07-28",
+      "summary": "Starts OAuth For Instagram Account",
+      "description": "Starts OAuth For Instagram Account Open the API in a window with appropriate params and headers instead of using the Curl. User is navigated to Instagram login OAuth screen. On successful login, listen on window object for message where event listener returns data in its callback function. ### Sample code to listen to event data: window.addEventListener('message', function(e) { if (e.data && e.data.page === 'social_media_posting')… [GET /social-media-posting/oauth/instagram/start] Scopes: socialplanner/oauth.readonly.",
+      "scopes": [
+        "socialplanner/oauth.readonly"
+      ],
+      "access": "unknown",
+      "operationClass": "read",
+      "deprecated": false,
+      "pathFields": [],
+      "queryFields": [
+        "locationId",
+        "userId",
+        "page",
+        "reconnect"
+      ],
+      "bodyFields": [],
+      "bodyWrapped": false,
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "locationId": {
+            "type": "string",
+            "description": "Location Id"
+          },
+          "userId": {
+            "type": "string",
+            "description": "User Id"
+          },
+          "page": {
+            "type": "string",
+            "description": "Page"
+          },
+          "reconnect": {
+            "type": "string",
+            "description": "Reconnect"
+          }
+        },
+        "required": [
+          "locationId",
+          "userId"
+        ]
+      }
+    },
+    {
+      "name": "social_media_posting_get_instagram_page_group",
+      "module": "social-media-posting",
+      "method": "GET",
+      "path": "/social-media-posting/oauth/{locationId}/instagram/accounts/{accountId}",
+      "version": "2021-07-28",
+      "summary": "Get Instagram Professional Accounts",
+      "description": "Get Instagram Professional Accounts [GET /social-media-posting/oauth/{locationId}/instagram/accounts/{accountId}]",
+      "scopes": [],
+      "access": "unknown",
+      "operationClass": "read",
+      "deprecated": false,
+      "pathFields": [
+        "locationId",
+        "accountId"
+      ],
+      "queryFields": [],
+      "bodyFields": [],
+      "bodyWrapped": false,
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "locationId": {
+            "type": "string",
+            "description": "Account Location Id"
+          },
+          "accountId": {
+            "type": "string",
+            "description": "Account Id"
+          }
+        },
+        "required": [
+          "locationId",
+          "accountId"
+        ]
+      }
+    },
+    {
+      "name": "social_media_posting_attach_instagram_page_group",
+      "module": "social-media-posting",
+      "method": "POST",
+      "path": "/social-media-posting/oauth/{locationId}/instagram/accounts/{accountId}",
+      "version": "2021-07-28",
+      "summary": "Attach Instagram Professional Accounts",
+      "description": "Attach Instagram Professional Accounts [POST /social-media-posting/oauth/{locationId}/instagram/accounts/{accountId}]",
+      "scopes": [],
+      "access": "unknown",
+      "operationClass": "write",
+      "deprecated": false,
+      "contentType": "application/json",
+      "pathFields": [
+        "locationId",
+        "accountId"
+      ],
+      "queryFields": [],
+      "bodyFields": [
+        "originId",
+        "name",
+        "avatar",
+        "pageId",
+        "companyId"
+      ],
+      "bodyWrapped": false,
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "locationId": {
+            "type": "string",
+            "description": "Account Location Id"
+          },
+          "accountId": {
+            "type": "string",
+            "description": "Account Id"
+          },
+          "originId": {
+            "type": "string"
+          },
+          "name": {
+            "type": "string"
+          },
+          "avatar": {
+            "type": "string"
+          },
+          "pageId": {
+            "type": "string"
+          },
+          "companyId": {
+            "type": "string",
+            "description": "Company ID"
+          }
+        },
+        "required": [
+          "locationId",
+          "accountId",
+          "pageId"
+        ]
+      }
+    },
+    {
+      "name": "social_media_posting_start_linkedin_oauth",
+      "module": "social-media-posting",
+      "method": "GET",
+      "path": "/social-media-posting/oauth/linkedin/start",
+      "version": "2021-07-28",
+      "summary": "Starts OAuth For LinkedIn Account",
+      "description": "Starts OAuth For LinkedIn Account Open the API in a window with appropriate params and headers instead of using the Curl. User is navigated to LinkedIn login OAuth screen. On successful login, listen on window object for message where event listener returns data in its callback function. ### Sample code to listen to event data: window.addEventListener('message', function(e) { if (e.data && e.data.page === 'social_media_posting') … [GET /social-media-posting/oauth/linkedin/start]",
+      "scopes": [],
+      "access": "unknown",
+      "operationClass": "read",
+      "deprecated": false,
+      "pathFields": [],
+      "queryFields": [
+        "locationId",
+        "userId",
+        "page",
+        "reconnect"
+      ],
+      "bodyFields": [],
+      "bodyWrapped": false,
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "locationId": {
+            "type": "string",
+            "description": "Location Id"
+          },
+          "userId": {
+            "type": "string",
+            "description": "User Id"
+          },
+          "page": {
+            "type": "string",
+            "description": "Page"
+          },
+          "reconnect": {
+            "type": "string",
+            "description": "Reconnect"
+          }
+        },
+        "required": [
+          "locationId",
+          "userId"
+        ]
+      }
+    },
+    {
+      "name": "social_media_posting_get_linkedin_page_profile",
+      "module": "social-media-posting",
+      "method": "GET",
+      "path": "/social-media-posting/oauth/{locationId}/linkedin/accounts/{accountId}",
+      "version": "2021-07-28",
+      "summary": "Get Linkedin pages and profile",
+      "description": "Get Linkedin pages and profile [GET /social-media-posting/oauth/{locationId}/linkedin/accounts/{accountId}]",
+      "scopes": [],
+      "access": "unknown",
+      "operationClass": "read",
+      "deprecated": false,
+      "pathFields": [
+        "locationId",
+        "accountId"
+      ],
+      "queryFields": [],
+      "bodyFields": [],
+      "bodyWrapped": false,
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "locationId": {
+            "type": "string",
+            "description": "Account Location Id"
+          },
+          "accountId": {
+            "type": "string",
+            "description": "Account Id"
+          }
+        },
+        "required": [
+          "locationId",
+          "accountId"
+        ]
+      }
+    },
+    {
+      "name": "social_media_posting_attach_linkedin_page_profile",
+      "module": "social-media-posting",
+      "method": "POST",
+      "path": "/social-media-posting/oauth/{locationId}/linkedin/accounts/{accountId}",
+      "version": "2021-07-28",
+      "summary": "Attach linkedin pages and profile",
+      "description": "Attach linkedin pages and profile [POST /social-media-posting/oauth/{locationId}/linkedin/accounts/{accountId}]",
+      "scopes": [],
+      "access": "unknown",
+      "operationClass": "write",
+      "deprecated": false,
+      "contentType": "application/json",
+      "pathFields": [
+        "locationId",
+        "accountId"
+      ],
+      "queryFields": [],
+      "bodyFields": [
+        "type",
+        "originId",
+        "name",
+        "avatar",
+        "urn",
+        "companyId"
+      ],
+      "bodyWrapped": false,
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "locationId": {
+            "type": "string",
+            "description": "Account Location Id"
+          },
+          "accountId": {
+            "type": "string",
+            "description": "Account Id"
+          },
+          "type": {
+            "type": "string",
+            "enum": [
+              "page",
+              "group",
+              "profile",
+              "location",
+              "business"
+            ]
+          },
+          "originId": {
+            "type": "string"
+          },
+          "name": {
+            "type": "string"
+          },
+          "avatar": {
+            "type": "string"
+          },
+          "urn": {
+            "type": "string"
+          },
+          "companyId": {
+            "type": "string",
+            "description": "Company ID"
+          }
+        },
+        "required": [
+          "locationId",
+          "accountId"
+        ]
+      }
+    },
+    {
+      "name": "social_media_posting_start_twitter_oauth",
+      "module": "social-media-posting",
+      "method": "GET",
+      "path": "/social-media-posting/oauth/twitter/start",
+      "version": "2021-07-28",
+      "summary": "Starts OAuth For Twitter Account",
+      "description": "Starts OAuth For Twitter Account <div><div> <span style= \"display: inline-block; width: 25px; height: 25px; background-color: red; color: black; font-weight: bold; font-size: 24px; text-align: center; line-height: 20px; border: 2px solid black; border-radius: 20%; margin-right: 10px;\"> ! </span> <span><strong>As of December 4, 2024, X (formerly Twitter) is no longer supported. We apologise for any inconvenience.</strong></span> … [GET /social-media-posting/oauth/twitter/start] Scopes: socialplanner/oauth.readonly. DEPRECATED.",
+      "scopes": [
+        "socialplanner/oauth.readonly"
+      ],
+      "access": "unknown",
+      "operationClass": "read",
+      "deprecated": true,
+      "pathFields": [],
+      "queryFields": [
+        "locationId",
+        "userId",
+        "page",
+        "reconnect"
+      ],
+      "bodyFields": [],
+      "bodyWrapped": false,
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "locationId": {
+            "type": "string",
+            "description": "Location Id"
+          },
+          "userId": {
+            "type": "string",
+            "description": "User Id"
+          },
+          "page": {
+            "type": "string",
+            "description": "Page"
+          },
+          "reconnect": {
+            "type": "string",
+            "description": "Reconnect"
+          }
+        },
+        "required": [
+          "locationId",
+          "userId"
+        ]
+      }
+    },
+    {
+      "name": "social_media_posting_get_twitter_profile",
+      "module": "social-media-posting",
+      "method": "GET",
+      "path": "/social-media-posting/oauth/{locationId}/twitter/accounts/{accountId}",
+      "version": "2021-07-28",
+      "summary": "Get Twitter profile",
+      "description": "Get Twitter profile <div><div> <span style= \"display: inline-block; width: 25px; height: 25px; background-color: red; color: black; font-weight: bold; font-size: 24px; text-align: center; line-height: 20px; border: 2px solid black; border-radius: 20%; margin-right: 10px;\"> ! </span> <span><strong>As of December 4, 2024, X (formerly Twitter) is no longer supported. We apologise for any inconvenience.</strong></span> … [GET /social-media-posting/oauth/{locationId}/twitter/accounts/{accountId}] DEPRECATED.",
+      "scopes": [],
+      "access": "unknown",
+      "operationClass": "read",
+      "deprecated": true,
+      "pathFields": [
+        "locationId",
+        "accountId"
+      ],
+      "queryFields": [],
+      "bodyFields": [],
+      "bodyWrapped": false,
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "locationId": {
+            "type": "string",
+            "description": "Account Location Id"
+          },
+          "accountId": {
+            "type": "string",
+            "description": "Account Id"
+          }
+        },
+        "required": [
+          "locationId",
+          "accountId"
+        ]
+      }
+    },
+    {
+      "name": "social_media_posting_attach_twitter_profile",
+      "module": "social-media-posting",
+      "method": "POST",
+      "path": "/social-media-posting/oauth/{locationId}/twitter/accounts/{accountId}",
+      "version": "2021-07-28",
+      "summary": "Attach Twitter profile",
+      "description": "Attach Twitter profile <div><div> <span style= \"display: inline-block; width: 25px; height: 25px; background-color: red; color: black; font-weight: bold; font-size: 24px; text-align: center; line-height: 20px; border: 2px solid black; border-radius: 20%; margin-right: 10px;\"> ! </span> <span><strong>As of December 4, 2024, X (formerly Twitter) is no longer supported. We apologise for any inconvenience.</strong></span> … [POST /social-media-posting/oauth/{locationId}/twitter/accounts/{accountId}] DEPRECATED.",
+      "scopes": [],
+      "access": "unknown",
+      "operationClass": "write",
+      "deprecated": true,
+      "contentType": "application/json",
+      "pathFields": [
+        "locationId",
+        "accountId"
+      ],
+      "queryFields": [],
+      "bodyFields": [
+        "originId",
+        "name",
+        "username",
+        "avatar",
+        "protected",
+        "verified",
+        "companyId"
+      ],
+      "bodyWrapped": false,
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "locationId": {
+            "type": "string",
+            "description": "Account Location Id"
+          },
+          "accountId": {
+            "type": "string",
+            "description": "Account Id"
+          },
+          "originId": {
+            "type": "string"
+          },
+          "name": {
+            "type": "string"
+          },
+          "username": {
+            "type": "string"
+          },
+          "avatar": {
+            "type": "string"
+          },
+          "protected": {
+            "type": "boolean"
+          },
+          "verified": {
+            "type": "boolean"
+          },
+          "companyId": {
+            "type": "string",
+            "description": "Company ID"
+          }
+        },
+        "required": [
+          "locationId",
+          "accountId"
+        ]
+      }
+    },
+    {
+      "name": "social_media_posting_get_upload_status",
+      "module": "social-media-posting",
+      "method": "GET",
+      "path": "/social-media-posting/{locationId}/csv",
+      "version": "2021-07-28",
+      "summary": "Get Upload Status",
+      "description": "Get Upload Status [GET /social-media-posting/{locationId}/csv]",
+      "scopes": [],
+      "access": "unknown",
+      "operationClass": "read",
+      "deprecated": false,
+      "pathFields": [
+        "locationId"
+      ],
+      "queryFields": [
+        "skip",
+        "limit",
+        "includeUsers",
+        "userId"
+      ],
+      "bodyFields": [],
+      "bodyWrapped": false,
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "locationId": {
+            "type": "string",
+            "description": "Location Id"
+          },
+          "skip": {
+            "type": "string",
+            "description": "(default: \"0\")"
+          },
+          "limit": {
+            "type": "string",
+            "description": "(default: \"10\")"
+          },
+          "includeUsers": {
+            "type": "string"
+          },
+          "userId": {
+            "type": "string",
+            "description": "User ID"
+          }
+        },
+        "required": [
+          "locationId"
+        ]
+      }
+    },
+    {
+      "name": "social_media_posting_upload_csv",
+      "module": "social-media-posting",
+      "method": "POST",
+      "path": "/social-media-posting/{locationId}/csv",
+      "version": "2021-07-28",
+      "summary": "Upload CSV",
+      "description": "Upload CSV [POST /social-media-posting/{locationId}/csv] Scopes: socialplanner/csv.write.",
+      "scopes": [
+        "socialplanner/csv.write"
+      ],
+      "access": "unknown",
+      "operationClass": "write",
+      "deprecated": false,
+      "contentType": "multipart/form-data",
+      "pathFields": [
+        "locationId"
+      ],
+      "queryFields": [],
+      "bodyFields": [
+        "file"
+      ],
+      "bodyWrapped": false,
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "locationId": {
+            "type": "string",
+            "description": "Location Id"
+          },
+          "file": {
+            "type": "string",
+            "format": "binary"
+          }
+        },
+        "required": [
+          "locationId"
+        ]
+      }
+    },
+    {
+      "name": "social_media_posting_set_accounts",
+      "module": "social-media-posting",
+      "method": "POST",
+      "path": "/social-media-posting/{locationId}/set-accounts",
+      "version": "2021-07-28",
+      "summary": "Set Accounts",
+      "description": "Set Accounts [POST /social-media-posting/{locationId}/set-accounts] Scopes: socialplanner/csv.write.",
+      "scopes": [
+        "socialplanner/csv.write"
+      ],
+      "access": "unknown",
+      "operationClass": "write",
+      "deprecated": false,
+      "contentType": "application/json",
+      "pathFields": [
+        "locationId"
+      ],
+      "queryFields": [],
+      "bodyFields": [
+        "accountIds",
+        "filePath",
+        "rowsCount",
+        "fileName",
+        "approver",
+        "userId"
+      ],
+      "bodyWrapped": false,
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "locationId": {
+            "type": "string",
+            "description": "Location Id"
+          },
+          "accountIds": {
+            "description": "Account Ids",
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "filePath": {
+            "type": "string",
+            "description": "File path"
+          },
+          "rowsCount": {
+            "type": "number",
+            "description": "Entires Count. rowcCount must be between 1 and number of posts in CSV"
+          },
+          "fileName": {
+            "type": "string",
+            "description": "Name of file"
+          },
+          "approver": {
+            "type": "string"
+          },
+          "userId": {
+            "type": "string",
+            "description": "User ID"
+          }
+        },
+        "required": [
+          "locationId",
+          "accountIds",
+          "filePath",
+          "rowsCount",
+          "fileName"
+        ]
+      }
+    },
+    {
+      "name": "social_media_posting_get_csv_post",
+      "module": "social-media-posting",
+      "method": "GET",
+      "path": "/social-media-posting/{locationId}/csv/{id}",
+      "version": "2021-07-28",
+      "summary": "Get CSV Post",
+      "description": "Get CSV Post [GET /social-media-posting/{locationId}/csv/{id}]",
+      "scopes": [],
+      "access": "unknown",
+      "operationClass": "read",
+      "deprecated": false,
+      "pathFields": [
+        "locationId",
+        "id"
+      ],
+      "queryFields": [
+        "skip",
+        "limit"
+      ],
+      "bodyFields": [],
+      "bodyWrapped": false,
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "locationId": {
+            "type": "string"
+          },
+          "id": {
+            "type": "string",
+            "description": "CSV Id"
+          },
+          "skip": {
+            "type": "string"
+          },
+          "limit": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "locationId",
+          "id"
+        ]
+      }
+    },
+    {
+      "name": "social_media_posting_start_csv_finalize",
+      "module": "social-media-posting",
+      "method": "PATCH",
+      "path": "/social-media-posting/{locationId}/csv/{id}",
+      "version": "2021-07-28",
+      "summary": "Start CSV Finalize",
+      "description": "Start CSV Finalize [PATCH /social-media-posting/{locationId}/csv/{id}]",
+      "scopes": [],
+      "access": "unknown",
+      "operationClass": "write",
+      "deprecated": false,
+      "contentType": "application/json",
+      "pathFields": [
+        "locationId",
+        "id"
+      ],
+      "queryFields": [],
+      "bodyFields": [
+        "userId"
+      ],
+      "bodyWrapped": false,
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "locationId": {
+            "type": "string"
+          },
+          "id": {
+            "type": "string",
+            "description": "CSV Id"
+          },
+          "userId": {
+            "type": "string",
+            "description": "User ID"
+          }
+        },
+        "required": [
+          "locationId",
+          "id"
+        ]
+      }
+    },
+    {
+      "name": "social_media_posting_delete_csv",
+      "module": "social-media-posting",
+      "method": "DELETE",
+      "path": "/social-media-posting/{locationId}/csv/{id}",
+      "version": "2021-07-28",
+      "summary": "Delete CSV",
+      "description": "Delete CSV [DELETE /social-media-posting/{locationId}/csv/{id}]",
+      "scopes": [],
+      "access": "unknown",
+      "operationClass": "delete",
+      "deprecated": false,
+      "pathFields": [
+        "locationId",
+        "id"
+      ],
+      "queryFields": [],
+      "bodyFields": [],
+      "bodyWrapped": false,
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "locationId": {
+            "type": "string"
+          },
+          "id": {
+            "type": "string",
+            "description": "CSV Id"
+          }
+        },
+        "required": [
+          "locationId",
+          "id"
+        ]
+      }
+    },
+    {
+      "name": "social_media_posting_delete_csv_post",
+      "module": "social-media-posting",
+      "method": "DELETE",
+      "path": "/social-media-posting/{locationId}/csv/{csvId}/post/{postId}",
+      "version": "2021-07-28",
+      "summary": "Delete CSV Post",
+      "description": "Delete CSV Post [DELETE /social-media-posting/{locationId}/csv/{csvId}/post/{postId}]",
+      "scopes": [],
+      "access": "unknown",
+      "operationClass": "delete",
+      "deprecated": false,
+      "pathFields": [
+        "locationId",
+        "postId",
+        "csvId"
+      ],
+      "queryFields": [],
+      "bodyFields": [],
+      "bodyWrapped": false,
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "locationId": {
+            "type": "string"
+          },
+          "postId": {
+            "type": "string",
+            "description": "CSV Post Id"
+          },
+          "csvId": {
+            "type": "string",
+            "description": "CSV Id"
+          }
+        },
+        "required": [
+          "locationId",
+          "postId",
+          "csvId"
+        ]
+      }
+    },
+    {
+      "name": "social_media_posting_start_tiktok_oauth",
+      "module": "social-media-posting",
+      "method": "GET",
+      "path": "/social-media-posting/oauth/tiktok/start",
+      "version": "2021-07-28",
+      "summary": "Starts OAuth For Tiktok Account",
+      "description": "Starts OAuth For Tiktok Account Open the API in a window with appropriate params and headers instead of using the Curl. User is navigated to Tiktok login OAuth screen. On successful login, listen on window object for message where event listener returns data in its callback function. ### Sample code to listen to event data: window.addEventListener('message', function(e) { if (e.data && e.data.page === 'social_media_posting') { … [GET /social-media-posting/oauth/tiktok/start] Scopes: socialplanner/oauth.readonly.",
+      "scopes": [
+        "socialplanner/oauth.readonly"
+      ],
+      "access": "unknown",
+      "operationClass": "read",
+      "deprecated": false,
+      "pathFields": [],
+      "queryFields": [
+        "locationId",
+        "userId",
+        "page",
+        "reconnect"
+      ],
+      "bodyFields": [],
+      "bodyWrapped": false,
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "locationId": {
+            "type": "string",
+            "description": "Location Id"
+          },
+          "userId": {
+            "type": "string",
+            "description": "User Id"
+          },
+          "page": {
+            "type": "string",
+            "description": "Page"
+          },
+          "reconnect": {
+            "type": "string",
+            "description": "Reconnect"
+          }
+        },
+        "required": [
+          "locationId",
+          "userId"
+        ]
+      }
+    },
+    {
+      "name": "social_media_posting_get_tiktok_profile",
+      "module": "social-media-posting",
+      "method": "GET",
+      "path": "/social-media-posting/oauth/{locationId}/tiktok/accounts/{accountId}",
+      "version": "2021-07-28",
+      "summary": "Get Tiktok profile",
+      "description": "Get Tiktok profile [GET /social-media-posting/oauth/{locationId}/tiktok/accounts/{accountId}]",
+      "scopes": [],
+      "access": "unknown",
+      "operationClass": "read",
+      "deprecated": false,
+      "pathFields": [
+        "locationId",
+        "accountId"
+      ],
+      "queryFields": [],
+      "bodyFields": [],
+      "bodyWrapped": false,
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "locationId": {
+            "type": "string",
+            "description": "Account Location Id"
+          },
+          "accountId": {
+            "type": "string",
+            "description": "Account Id"
+          }
+        },
+        "required": [
+          "locationId",
+          "accountId"
+        ]
+      }
+    },
+    {
+      "name": "social_media_posting_attach_tiktok_profile",
+      "module": "social-media-posting",
+      "method": "POST",
+      "path": "/social-media-posting/oauth/{locationId}/tiktok/accounts/{accountId}",
+      "version": "2021-07-28",
+      "summary": "Attach Tiktok profile",
+      "description": "Attach Tiktok profile [POST /social-media-posting/oauth/{locationId}/tiktok/accounts/{accountId}]",
+      "scopes": [],
+      "access": "unknown",
+      "operationClass": "write",
+      "deprecated": false,
+      "contentType": "application/json",
+      "pathFields": [
+        "locationId",
+        "accountId"
+      ],
+      "queryFields": [],
+      "bodyFields": [
+        "type",
+        "originId",
+        "name",
+        "avatar",
+        "verified",
+        "username",
+        "companyId"
+      ],
+      "bodyWrapped": false,
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "locationId": {
+            "type": "string",
+            "description": "Account Location Id"
+          },
+          "accountId": {
+            "type": "string",
+            "description": "Account Id"
+          },
+          "type": {
+            "type": "string",
+            "enum": [
+              "page",
+              "group",
+              "profile",
+              "location",
+              "business"
+            ]
+          },
+          "originId": {
+            "type": "string"
+          },
+          "name": {
+            "type": "string"
+          },
+          "avatar": {
+            "type": "string"
+          },
+          "verified": {
+            "type": "boolean"
+          },
+          "username": {
+            "type": "string"
+          },
+          "companyId": {
+            "type": "string",
+            "description": "Company ID"
+          }
+        },
+        "required": [
+          "locationId",
+          "accountId"
+        ]
+      }
+    },
+    {
+      "name": "social_media_posting_start_tiktok_business_oauth",
+      "module": "social-media-posting",
+      "method": "GET",
+      "path": "/social-media-posting/oauth/tiktok-business/start",
+      "version": "2021-07-28",
+      "summary": "Starts OAuth For Tiktok Business Account",
+      "description": "Starts OAuth For Tiktok Business Account Open the API in a window with appropriate params and headers instead of using the Curl. User is navigated to Tiktok-Business login OAuth screen. On successful login, listen on window object for message where event listener returns data in its callback function. ### Sample code to listen to event data: window.addEventListener('message', function(e) { if (e.data && e.data.page === 'social_media_pos… [GET /social-media-posting/oauth/tiktok-business/start] Scopes: socialplanner/oauth.readonly.",
+      "scopes": [
+        "socialplanner/oauth.readonly"
+      ],
+      "access": "unknown",
+      "operationClass": "read",
+      "deprecated": false,
+      "pathFields": [],
+      "queryFields": [
+        "locationId",
+        "userId",
+        "page",
+        "reconnect"
+      ],
+      "bodyFields": [],
+      "bodyWrapped": false,
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "locationId": {
+            "type": "string",
+            "description": "Location Id"
+          },
+          "userId": {
+            "type": "string",
+            "description": "User Id"
+          },
+          "page": {
+            "type": "string",
+            "description": "Page"
+          },
+          "reconnect": {
+            "type": "string",
+            "description": "Reconnect"
+          }
+        },
+        "required": [
+          "locationId",
+          "userId"
+        ]
+      }
+    },
+    {
+      "name": "social_media_posting_get_tiktok_business_profile",
+      "module": "social-media-posting",
+      "method": "GET",
+      "path": "/social-media-posting/oauth/{locationId}/tiktok-business/accounts/{accountId}",
+      "version": "2021-07-28",
+      "summary": "Get Tiktok Business profile",
+      "description": "Get Tiktok Business profile [GET /social-media-posting/oauth/{locationId}/tiktok-business/accounts/{accountId}]",
+      "scopes": [],
+      "access": "unknown",
+      "operationClass": "read",
+      "deprecated": false,
+      "pathFields": [
+        "locationId",
+        "accountId"
+      ],
+      "queryFields": [],
+      "bodyFields": [],
+      "bodyWrapped": false,
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "locationId": {
+            "type": "string",
+            "description": "Account Location Id"
+          },
+          "accountId": {
+            "type": "string",
+            "description": "Account Id"
+          }
+        },
+        "required": [
+          "locationId",
+          "accountId"
+        ]
+      }
+    },
+    {
+      "name": "social_media_posting_get_categories_location_id",
+      "module": "social-media-posting",
+      "method": "GET",
+      "path": "/social-media-posting/{locationId}/categories",
+      "version": "2021-07-28",
+      "summary": "Get categories by location id",
+      "description": "Get categories by location id [GET /social-media-posting/{locationId}/categories] Scopes: socialplanner/category.readonly.",
+      "scopes": [
+        "socialplanner/category.readonly"
+      ],
+      "access": "unknown",
+      "operationClass": "read",
+      "deprecated": false,
+      "pathFields": [
+        "locationId"
+      ],
+      "queryFields": [
+        "searchText",
+        "limit",
+        "skip"
+      ],
+      "bodyFields": [],
+      "bodyWrapped": false,
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "locationId": {
+            "type": "string",
+            "description": "Location Id"
+          },
+          "searchText": {
+            "type": "string",
+            "description": "Search text string"
+          },
+          "limit": {
+            "type": "string",
+            "description": "Limit"
+          },
+          "skip": {
+            "type": "string",
+            "description": "Skip"
+          }
+        },
+        "required": [
+          "locationId"
+        ]
+      }
+    },
+    {
+      "name": "social_media_posting_get_categories_id",
+      "module": "social-media-posting",
+      "method": "GET",
+      "path": "/social-media-posting/{locationId}/categories/{id}",
+      "version": "2021-07-28",
+      "summary": "Get categories by id",
+      "description": "Get categories by id [GET /social-media-posting/{locationId}/categories/{id}]",
+      "scopes": [],
+      "access": "unknown",
+      "operationClass": "read",
+      "deprecated": false,
+      "pathFields": [
+        "id",
+        "locationId"
+      ],
+      "queryFields": [],
+      "bodyFields": [],
+      "bodyWrapped": false,
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "Category Id"
+          },
+          "locationId": {
+            "type": "string",
+            "description": "Location Id"
+          }
+        },
+        "required": [
+          "id",
+          "locationId"
+        ]
+      }
+    },
+    {
+      "name": "social_media_posting_get_tags_location_id",
+      "module": "social-media-posting",
+      "method": "GET",
+      "path": "/social-media-posting/{locationId}/tags",
+      "version": "2021-07-28",
+      "summary": "Get tags by location id",
+      "description": "Get tags by location id [GET /social-media-posting/{locationId}/tags]",
+      "scopes": [],
+      "access": "unknown",
+      "operationClass": "read",
+      "deprecated": false,
+      "pathFields": [
+        "locationId"
+      ],
+      "queryFields": [
+        "searchText",
+        "limit",
+        "skip"
+      ],
+      "bodyFields": [],
+      "bodyWrapped": false,
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "locationId": {
+            "type": "string",
+            "description": "Location Id"
+          },
+          "searchText": {
+            "type": "string",
+            "description": "Search text string"
+          },
+          "limit": {
+            "type": "string",
+            "description": "Limit"
+          },
+          "skip": {
+            "type": "string",
+            "description": "Skip"
+          }
+        },
+        "required": [
+          "locationId"
+        ]
+      }
+    },
+    {
+      "name": "social_media_posting_get_tags_by_ids",
+      "module": "social-media-posting",
+      "method": "POST",
+      "path": "/social-media-posting/{locationId}/tags/details",
+      "version": "2021-07-28",
+      "summary": "Get tags by ids",
+      "description": "Get tags by ids [POST /social-media-posting/{locationId}/tags/details]",
+      "scopes": [],
+      "access": "unknown",
+      "operationClass": "read",
+      "deprecated": false,
+      "contentType": "application/json",
+      "pathFields": [
+        "locationId"
+      ],
+      "queryFields": [],
+      "bodyFields": [
+        "tagIds"
+      ],
+      "bodyWrapped": false,
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "locationId": {
+            "type": "string",
+            "description": "Location Id"
+          },
+          "tagIds": {
+            "description": "Array of Tag Ids",
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          }
+        },
+        "required": [
+          "locationId",
+          "tagIds"
+        ]
+      }
+    },
+    {
+      "name": "social_media_posting_get_social_media_statistics",
+      "module": "social-media-posting",
+      "method": "POST",
+      "path": "/social-media-posting/statistics",
+      "version": "2021-07-28",
+      "summary": "Get Social Media Statistics",
+      "description": "Get Social Media Statistics Retrieve analytics data for multiple social media accounts. Provides metrics for the last 7 days with comparison to the previous 7 days. Supports filtering by platforms and specific connected accounts. [POST /social-media-posting/statistics]",
+      "scopes": [],
+      "access": "unknown",
+      "operationClass": "read",
+      "deprecated": false,
+      "contentType": "application/json",
+      "pathFields": [],
+      "queryFields": [
+        "locationId"
+      ],
+      "bodyFields": [
+        "profileIds",
+        "platforms"
+      ],
+      "bodyWrapped": false,
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "locationId": {
+            "type": "string",
+            "description": "Location ID"
+          },
+          "profileIds": {
+            "type": "array",
+            "description": "Array of connected social media account IDs to fetch analytics for. This can be found as 'profileId' in /accounts api.",
+            "items": {
+              "type": "string"
+            },
+            "minItems": 1
+          },
+          "platforms": {
+            "type": "array",
+            "description": "Array of social media platforms to filter analytics by. If not provided, all platforms will be included. NOTE: Linkedin (PAGE only) and Tiktok (BUSINESS only) are supported.",
+            "items": {
+              "type": "string",
+              "enum": [
+                "facebook",
+                "instagram",
+                "linkedin",
+                "google",
+                "pinterest",
+                "youtube",
+                "tiktok"
+              ]
+            }
+          }
+        },
+        "required": [
+          "locationId",
+          "profileIds"
+        ]
+      }
+    }
+  ]
+}

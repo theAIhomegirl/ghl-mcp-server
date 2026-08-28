@@ -1,0 +1,54 @@
+{
+  "module": "email-isv",
+  "endpoints": [
+    {
+      "name": "email_isv_verify_email",
+      "module": "email-isv",
+      "method": "POST",
+      "path": "/email/verify",
+      "version": "2021-07-28",
+      "summary": "Email Verification",
+      "description": "Email Verification Verify Email [POST /email/verify] Token: location.",
+      "scopes": [],
+      "access": "location",
+      "operationClass": "write",
+      "deprecated": false,
+      "contentType": "application/json",
+      "pathFields": [],
+      "queryFields": [
+        "locationId"
+      ],
+      "bodyFields": [
+        "type",
+        "verify"
+      ],
+      "bodyWrapped": false,
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "locationId": {
+            "type": "string",
+            "description": "Location Id, The email verification charges will be deducted from this location (if rebilling is enabled) / company wallet"
+          },
+          "type": {
+            "type": "string",
+            "enum": [
+              "email",
+              "contact"
+            ],
+            "description": "Email Verification type"
+          },
+          "verify": {
+            "type": "string",
+            "description": "Email Verification recepient (email address / contactId)"
+          }
+        },
+        "required": [
+          "locationId",
+          "type",
+          "verify"
+        ]
+      }
+    }
+  ]
+}

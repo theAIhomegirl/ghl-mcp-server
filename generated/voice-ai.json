@@ -1,0 +1,1613 @@
+{
+  "module": "voice-ai",
+  "endpoints": [
+    {
+      "name": "voice_ai_get_agents",
+      "module": "voice-ai",
+      "method": "GET",
+      "path": "/voice-ai/agents",
+      "version": "2021-04-15",
+      "summary": "List Agents",
+      "description": "List Agents Retrieve a paginated list of agents for given location. [GET /voice-ai/agents] Scopes: voice-ai-agents.readonly.",
+      "scopes": [
+        "voice-ai-agents.readonly"
+      ],
+      "access": "unknown",
+      "operationClass": "read",
+      "deprecated": false,
+      "pathFields": [],
+      "queryFields": [
+        "page",
+        "pageSize",
+        "locationId",
+        "query"
+      ],
+      "bodyFields": [],
+      "bodyWrapped": false,
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "page": {
+            "minimum": 1,
+            "maximum": 5000,
+            "type": "number",
+            "description": "(default: 1)"
+          },
+          "pageSize": {
+            "minimum": 1,
+            "maximum": 50,
+            "type": "number",
+            "description": "(default: 10)"
+          },
+          "locationId": {
+            "type": "string",
+            "description": "Location ID"
+          },
+          "query": {
+            "type": "string",
+            "description": "Query"
+          }
+        },
+        "required": [
+          "locationId"
+        ]
+      }
+    },
+    {
+      "name": "voice_ai_create_agent",
+      "module": "voice-ai",
+      "method": "POST",
+      "path": "/voice-ai/agents",
+      "version": "2021-04-15",
+      "summary": "Create Agent",
+      "description": "Create Agent Create a new voice AI agent configuration and settings [POST /voice-ai/agents] Scopes: voice-ai-agents.write.",
+      "scopes": [
+        "voice-ai-agents.write"
+      ],
+      "access": "unknown",
+      "operationClass": "write",
+      "deprecated": false,
+      "contentType": "application/json",
+      "pathFields": [],
+      "queryFields": [],
+      "bodyFields": [
+        "locationId",
+        "agentName",
+        "businessName",
+        "welcomeMessage",
+        "agentPrompt",
+        "voiceId",
+        "language",
+        "patienceLevel",
+        "maxCallDuration",
+        "sendUserIdleReminders",
+        "reminderAfterIdleTimeSeconds",
+        "inboundNumber",
+        "numberPoolId",
+        "callEndWorkflowIds",
+        "sendPostCallNotificationTo",
+        "agentWorkingHours",
+        "timezone",
+        "isAgentAsBackupDisabled",
+        "translation"
+      ],
+      "bodyWrapped": false,
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "locationId": {
+            "type": "string",
+            "description": "Unique identifier for the location where this agent will operate"
+          },
+          "agentName": {
+            "type": "string",
+            "description": "Display name for the voice AI agent, between 1-40 characters. Default: \"My Agent {random 3 digit number}\"",
+            "maxLength": 40,
+            "minLength": 1
+          },
+          "businessName": {
+            "type": "string",
+            "description": "Name of the business this agent represents. Default: Uses location name",
+            "minLength": 1
+          },
+          "welcomeMessage": {
+            "type": "string",
+            "description": "Initial greeting spoken when the agent answers calls. Default: Auto generated",
+            "maxLength": 190,
+            "minLength": 1
+          },
+          "agentPrompt": {
+            "type": "string",
+            "description": "Custom instructions defining the agent's behavior and personality. Default: Basic prompt generated automatically"
+          },
+          "voiceId": {
+            "type": "string",
+            "description": "Identifier for the speech synthesis voice from available voice options. Default: Auto generated"
+          },
+          "language": {
+            "type": "string",
+            "description": "Language code for the agent's speech and understanding. Default: \"en-US\"",
+            "enum": [
+              "en-US",
+              "pt-BR",
+              "es",
+              "fr",
+              "de",
+              "it",
+              "nl-NL",
+              "multi"
+            ]
+          },
+          "patienceLevel": {
+            "type": "string",
+            "description": "Tolerance level for caller response delays. Default: \"high\"",
+            "enum": [
+              "low",
+              "medium",
+              "high"
+            ]
+          },
+          "maxCallDuration": {
+            "type": "number",
+            "description": "Maximum call duration in seconds, between 180-900 (3-15 minutes). Default: 300 seconds (5 minutes)",
+            "minimum": 180,
+            "maximum": 900
+          },
+          "sendUserIdleReminders": {
+            "type": "boolean",
+            "description": "Enables automatic reminders when callers are silent. Default: true"
+          },
+          "reminderAfterIdleTimeSeconds": {
+            "type": "number",
+            "description": "Seconds to wait before sending idle reminders, between 1-20. Default: 8 seconds",
+            "minimum": 1,
+            "maximum": 20
+          },
+          "inboundNumber": {
+            "type": "string",
+            "description": "Phone number for receiving inbound calls to this agent. Default: null"
+          },
+          "numberPoolId": {
+            "type": "string",
+            "description": "Identifier for the number pool managing phone number allocation. Default: null"
+          },
+          "callEndWorkflowIds": {
+            "description": "Array of workflow IDs to trigger automatically when calls end. Default: []",
+            "maxItems": 10,
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "sendPostCallNotificationTo": {
+            "type": "object",
+            "properties": {
+              "admins": {
+                "type": "boolean",
+                "description": "Enables post-call notifications to all admin users in the location. Default: true"
+              },
+              "allUsers": {
+                "type": "boolean",
+                "description": "Enables post-call notifications to all users in the location. Default: false"
+              },
+              "contactAssignedUser": {
+                "type": "boolean",
+                "description": "Enables post-call notifications to the user assigned to the contact. Default: false"
+              },
+              "specificUsers": {
+                "description": "Array of specific user IDs to receive post-call notifications. Default: []",
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              },
+              "customEmails": {
+                "description": "Array of custom email addresses to receive post-call notifications. Default: []",
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              }
+            },
+            "required": [
+              "admins",
+              "allUsers",
+              "contactAssignedUser",
+              "specificUsers",
+              "customEmails"
+            ],
+            "description": "Configuration for post-call email notifications to various recipients. Default: []"
+          },
+          "agentWorkingHours": {
+            "description": "Time intervals defining when the agent accepts calls, organized by day of week. Default: [] (available 24/7)",
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "dayOfTheWeek": {
+                  "type": "number",
+                  "enum": [
+                    1,
+                    2,
+                    3,
+                    4,
+                    5,
+                    6,
+                    7
+                  ],
+                  "description": "Day of the week for this working hours configuration (Monday=1 to Sunday=7)"
+                },
+                "intervals": {
+                  "description": "Array of time intervals when the agent is available on this day",
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "startHour": {
+                        "type": "number",
+                        "description": "Starting hour of the working interval in 24-hour format (0-23)",
+                        "minimum": 0,
+                        "maximum": 23
+                      },
+                      "endHour": {
+                        "type": "number",
+                        "description": "Ending hour of the working interval in 24-hour format (0-23)",
+                        "minimum": 0,
+                        "maximum": 23
+                      },
+                      "startMinute": {
+                        "type": "number",
+                        "description": "Starting minute of the working interval (0-59)",
+                        "minimum": 0,
+                        "maximum": 59
+                      },
+                      "endMinute": {
+                        "type": "number",
+                        "description": "Ending minute of the working interval (0-59)",
+                        "minimum": 0,
+                        "maximum": 59
+                      }
+                    },
+                    "required": [
+                      "startHour",
+                      "endHour",
+                      "startMinute",
+                      "endMinute"
+                    ]
+                  }
+                }
+              },
+              "required": [
+                "dayOfTheWeek",
+                "intervals"
+              ]
+            }
+          },
+          "timezone": {
+            "type": "string",
+            "description": "IANA timezone identifier affecting working hours and scheduling. Default: Location timezone",
+            "pattern": "^[A-Za-z_]+/[A-Za-z_]+$"
+          },
+          "isAgentAsBackupDisabled": {
+            "type": "boolean",
+            "description": "Prevents this agent from being used as a fallback option. Default: false (Available as backup agent)"
+          },
+          "translation": {
+            "type": "object",
+            "properties": {
+              "enabled": {
+                "type": "boolean",
+                "description": "Enables language translation for agent conversations. Default: false"
+              },
+              "language": {
+                "type": "string",
+                "description": "Target language code for translation (e.g., \"es\" for Spanish, \"fr\" for French)."
+              }
+            },
+            "required": [
+              "enabled"
+            ],
+            "description": "Language translation settings including enablement flag and target language code. Rules: (1) translation.enabled can only be true if the agent's language is not en-US; (2) when enabled, translation.language must be either the agent's language or en-US; (3) when enabled, translation.language is required."
+          }
+        },
+        "required": [
+          "locationId"
+        ]
+      }
+    },
+    {
+      "name": "voice_ai_get_agent",
+      "module": "voice-ai",
+      "method": "GET",
+      "path": "/voice-ai/agents/{agentId}",
+      "version": "2021-04-15",
+      "summary": "Get Agent",
+      "description": "Get Agent Retrieve detailed configuration and settings for a specific voice AI agent [GET /voice-ai/agents/{agentId}] Scopes: voice-ai-agents.readonly.",
+      "scopes": [
+        "voice-ai-agents.readonly"
+      ],
+      "access": "unknown",
+      "operationClass": "read",
+      "deprecated": false,
+      "pathFields": [
+        "agentId"
+      ],
+      "queryFields": [
+        "locationId"
+      ],
+      "bodyFields": [],
+      "bodyWrapped": false,
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "agentId": {
+            "type": "string",
+            "description": "Unique agent identifier"
+          },
+          "locationId": {
+            "type": "string",
+            "description": "Location ID"
+          }
+        },
+        "required": [
+          "agentId",
+          "locationId"
+        ]
+      }
+    },
+    {
+      "name": "voice_ai_patch_agent",
+      "module": "voice-ai",
+      "method": "PATCH",
+      "path": "/voice-ai/agents/{agentId}",
+      "version": "2021-04-15",
+      "summary": "Patch Agent",
+      "description": "Patch Agent Partially update an existing voice AI agent [PATCH /voice-ai/agents/{agentId}] Scopes: voice-ai-agents.write.",
+      "scopes": [
+        "voice-ai-agents.write"
+      ],
+      "access": "unknown",
+      "operationClass": "write",
+      "deprecated": false,
+      "contentType": "application/json",
+      "pathFields": [
+        "agentId"
+      ],
+      "queryFields": [
+        "locationId"
+      ],
+      "bodyFields": [
+        "agentName",
+        "businessName",
+        "welcomeMessage",
+        "agentPrompt",
+        "voiceId",
+        "language",
+        "patienceLevel",
+        "maxCallDuration",
+        "sendUserIdleReminders",
+        "reminderAfterIdleTimeSeconds",
+        "inboundNumber",
+        "numberPoolId",
+        "callEndWorkflowIds",
+        "sendPostCallNotificationTo",
+        "agentWorkingHours",
+        "timezone",
+        "isAgentAsBackupDisabled",
+        "translation"
+      ],
+      "bodyWrapped": false,
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "agentId": {
+            "type": "string",
+            "description": "Unique agent identifier"
+          },
+          "locationId": {
+            "type": "string",
+            "description": "Location ID"
+          },
+          "agentName": {
+            "type": "string",
+            "description": "Display name for the voice AI agent, between 1-40 characters. Default: \"My Agent {random 3 digit number}\"",
+            "maxLength": 40,
+            "minLength": 1
+          },
+          "businessName": {
+            "type": "string",
+            "description": "Name of the business this agent represents. Default: Uses location name",
+            "minLength": 1
+          },
+          "welcomeMessage": {
+            "type": "string",
+            "description": "Initial greeting spoken when the agent answers calls. Default: Auto generated",
+            "maxLength": 190,
+            "minLength": 1
+          },
+          "agentPrompt": {
+            "type": "string",
+            "description": "Custom instructions defining the agent's behavior and personality. Default: Basic prompt generated automatically"
+          },
+          "voiceId": {
+            "type": "string",
+            "description": "Identifier for the speech synthesis voice from available voice options. Default: Auto generated"
+          },
+          "language": {
+            "type": "string",
+            "description": "Language code for the agent's speech and understanding. Default: \"en-US\"",
+            "enum": [
+              "en-US",
+              "pt-BR",
+              "es",
+              "fr",
+              "de",
+              "it",
+              "nl-NL",
+              "multi"
+            ]
+          },
+          "patienceLevel": {
+            "type": "string",
+            "description": "Tolerance level for caller response delays. Default: \"high\"",
+            "enum": [
+              "low",
+              "medium",
+              "high"
+            ]
+          },
+          "maxCallDuration": {
+            "type": "number",
+            "description": "Maximum call duration in seconds, between 180-900 (3-15 minutes). Default: 300 seconds (5 minutes)",
+            "minimum": 180,
+            "maximum": 900
+          },
+          "sendUserIdleReminders": {
+            "type": "boolean",
+            "description": "Enables automatic reminders when callers are silent. Default: true"
+          },
+          "reminderAfterIdleTimeSeconds": {
+            "type": "number",
+            "description": "Seconds to wait before sending idle reminders, between 1-20. Default: 8 seconds",
+            "minimum": 1,
+            "maximum": 20
+          },
+          "inboundNumber": {
+            "type": "string",
+            "description": "Phone number for receiving inbound calls to this agent. Default: null"
+          },
+          "numberPoolId": {
+            "type": "string",
+            "description": "Identifier for the number pool managing phone number allocation. Default: null"
+          },
+          "callEndWorkflowIds": {
+            "description": "Array of workflow IDs to trigger automatically when calls end. Default: []",
+            "maxItems": 10,
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "sendPostCallNotificationTo": {
+            "type": "object",
+            "properties": {
+              "admins": {
+                "type": "boolean",
+                "description": "Enables post-call notifications to all admin users in the location. Default: true"
+              },
+              "allUsers": {
+                "type": "boolean",
+                "description": "Enables post-call notifications to all users in the location. Default: false"
+              },
+              "contactAssignedUser": {
+                "type": "boolean",
+                "description": "Enables post-call notifications to the user assigned to the contact. Default: false"
+              },
+              "specificUsers": {
+                "description": "Array of specific user IDs to receive post-call notifications. Default: []",
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              },
+              "customEmails": {
+                "description": "Array of custom email addresses to receive post-call notifications. Default: []",
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              }
+            },
+            "required": [
+              "admins",
+              "allUsers",
+              "contactAssignedUser",
+              "specificUsers",
+              "customEmails"
+            ],
+            "description": "Configuration for post-call email notifications to various recipients. Default: []"
+          },
+          "agentWorkingHours": {
+            "description": "Time intervals defining when the agent accepts calls, organized by day of week. Default: [] (available 24/7)",
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "dayOfTheWeek": {
+                  "type": "number",
+                  "enum": [
+                    1,
+                    2,
+                    3,
+                    4,
+                    5,
+                    6,
+                    7
+                  ],
+                  "description": "Day of the week for this working hours configuration (Monday=1 to Sunday=7)"
+                },
+                "intervals": {
+                  "description": "Array of time intervals when the agent is available on this day",
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "startHour": {
+                        "type": "number",
+                        "description": "Starting hour of the working interval in 24-hour format (0-23)",
+                        "minimum": 0,
+                        "maximum": 23
+                      },
+                      "endHour": {
+                        "type": "number",
+                        "description": "Ending hour of the working interval in 24-hour format (0-23)",
+                        "minimum": 0,
+                        "maximum": 23
+                      },
+                      "startMinute": {
+                        "type": "number",
+                        "description": "Starting minute of the working interval (0-59)",
+                        "minimum": 0,
+                        "maximum": 59
+                      },
+                      "endMinute": {
+                        "type": "number",
+                        "description": "Ending minute of the working interval (0-59)",
+                        "minimum": 0,
+                        "maximum": 59
+                      }
+                    },
+                    "required": [
+                      "startHour",
+                      "endHour",
+                      "startMinute",
+                      "endMinute"
+                    ]
+                  }
+                }
+              },
+              "required": [
+                "dayOfTheWeek",
+                "intervals"
+              ]
+            }
+          },
+          "timezone": {
+            "type": "string",
+            "description": "IANA timezone identifier affecting working hours and scheduling. Default: Location timezone",
+            "pattern": "^[A-Za-z_]+/[A-Za-z_]+$"
+          },
+          "isAgentAsBackupDisabled": {
+            "type": "boolean",
+            "description": "Prevents this agent from being used as a fallback option. Default: false (Available as backup agent)"
+          },
+          "translation": {
+            "type": "object",
+            "properties": {
+              "enabled": {
+                "type": "boolean",
+                "description": "Enables language translation for agent conversations. Default: false"
+              },
+              "language": {
+                "type": "string",
+                "description": "Target language code for translation (e.g., \"es\" for Spanish, \"fr\" for French)."
+              }
+            },
+            "required": [
+              "enabled"
+            ],
+            "description": "Language translation settings including enablement flag and target language code. Rules: (1) translation.enabled can only be true if the agent's language is not en-US; (2) when enabled, translation.language must be either the agent's language or en-US; (3) when enabled, translation.language is required."
+          }
+        },
+        "required": [
+          "agentId",
+          "locationId"
+        ]
+      }
+    },
+    {
+      "name": "voice_ai_delete_agent",
+      "module": "voice-ai",
+      "method": "DELETE",
+      "path": "/voice-ai/agents/{agentId}",
+      "version": "2021-04-15",
+      "summary": "Delete Agent",
+      "description": "Delete Agent Delete a voice AI agent and all its configurations [DELETE /voice-ai/agents/{agentId}] Scopes: voice-ai-agents.write.",
+      "scopes": [
+        "voice-ai-agents.write"
+      ],
+      "access": "unknown",
+      "operationClass": "delete",
+      "deprecated": false,
+      "pathFields": [
+        "agentId"
+      ],
+      "queryFields": [
+        "locationId"
+      ],
+      "bodyFields": [],
+      "bodyWrapped": false,
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "agentId": {
+            "type": "string",
+            "description": "Unique agent identifier"
+          },
+          "locationId": {
+            "type": "string",
+            "description": "Location ID"
+          }
+        },
+        "required": [
+          "agentId",
+          "locationId"
+        ]
+      }
+    },
+    {
+      "name": "voice_ai_get_call_logs",
+      "module": "voice-ai",
+      "method": "GET",
+      "path": "/voice-ai/dashboard/call-logs",
+      "version": "2021-04-15",
+      "summary": "List Call Logs",
+      "description": "List Call Logs Returns call logs for Voice AI agents scoped to a location. Supports filtering by agent, contact, call type, action types, and date range (interpreted in the provided IANA timezone). Also supports sorting and 1-based pagination. [GET /voice-ai/dashboard/call-logs] Scopes: voice-ai-dashboard.readonly.",
+      "scopes": [
+        "voice-ai-dashboard.readonly"
+      ],
+      "access": "unknown",
+      "operationClass": "read",
+      "deprecated": false,
+      "pathFields": [],
+      "queryFields": [
+        "locationId",
+        "agentId",
+        "contactId",
+        "callType",
+        "startDate",
+        "endDate",
+        "actionType",
+        "sortBy",
+        "sort",
+        "page",
+        "pageSize"
+      ],
+      "bodyFields": [],
+      "bodyWrapped": false,
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "locationId": {
+            "type": "string",
+            "description": "Location identifier. Filters results to this location."
+          },
+          "agentId": {
+            "type": "string",
+            "description": "Agent identifier. When provided, returns logs for this agent only."
+          },
+          "contactId": {
+            "type": "string",
+            "description": "Contact IDs (comma-separated) to filter by."
+          },
+          "callType": {
+            "enum": [
+              "LIVE",
+              "TRIAL"
+            ],
+            "type": "string",
+            "description": "Call type filter."
+          },
+          "startDate": {
+            "type": "number",
+            "description": "Start date filter (Unix timestamp). Must be less than endDate. Both startDate and endDate must be provided together."
+          },
+          "endDate": {
+            "type": "number",
+            "description": "End date filter (Unix timestamp). Must be greater than startDate. Both startDate and endDate must be provided together."
+          },
+          "actionType": {
+            "enum": [
+              "CALL_TRANSFER",
+              "DATA_EXTRACTION",
+              "IN_CALL_DATA_EXTRACTION",
+              "WORKFLOW_TRIGGER",
+              "SMS",
+              "APPOINTMENT_BOOKING",
+              "CUSTOM_ACTION",
+              "KNOWLEDGE_BASE"
+            ],
+            "type": "string",
+            "description": "Action type filter for call logs (comma-separated ACTION_TYPE values)"
+          },
+          "sortBy": {
+            "enum": [
+              "duration",
+              "createdAt"
+            ],
+            "type": "string",
+            "description": "Field to sort by. Defaults to newest if omitted."
+          },
+          "sort": {
+            "enum": [
+              "ascend",
+              "descend"
+            ],
+            "type": "string",
+            "description": "Sort direction. Applies only when sortBy is provided."
+          },
+          "page": {
+            "type": "number",
+            "description": "(default: 1)"
+          },
+          "pageSize": {
+            "type": "number",
+            "description": "(default: 10)"
+          }
+        },
+        "required": [
+          "locationId"
+        ]
+      }
+    },
+    {
+      "name": "voice_ai_getcalllog",
+      "module": "voice-ai",
+      "method": "GET",
+      "path": "/voice-ai/dashboard/call-logs/{callId}",
+      "version": "2021-04-15",
+      "summary": "Get Call Log",
+      "description": "Get Call Log Returns a call log by callId. [GET /voice-ai/dashboard/call-logs/{callId}] Scopes: voice-ai-dashboard.readonly.",
+      "scopes": [
+        "voice-ai-dashboard.readonly"
+      ],
+      "access": "unknown",
+      "operationClass": "read",
+      "deprecated": false,
+      "pathFields": [
+        "callId"
+      ],
+      "queryFields": [
+        "locationId"
+      ],
+      "bodyFields": [],
+      "bodyWrapped": false,
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "callId": {
+            "type": "string",
+            "description": "Call ID"
+          },
+          "locationId": {
+            "type": "string",
+            "description": "Location ID"
+          }
+        },
+        "required": [
+          "callId",
+          "locationId"
+        ]
+      }
+    },
+    {
+      "name": "voice_ai_create_action",
+      "module": "voice-ai",
+      "method": "POST",
+      "path": "/voice-ai/actions",
+      "version": "2021-04-15",
+      "summary": "Create Agent Action",
+      "description": "Create Agent Action Create a new action for a voice AI agent. Actions define specific behaviors and capabilities for the agent during calls. [POST /voice-ai/actions] Scopes: voice-ai-agent-goals.write.",
+      "scopes": [
+        "voice-ai-agent-goals.write"
+      ],
+      "access": "unknown",
+      "operationClass": "write",
+      "deprecated": false,
+      "contentType": "application/json",
+      "pathFields": [],
+      "queryFields": [],
+      "bodyFields": [
+        "agentId",
+        "locationId",
+        "actionType",
+        "name",
+        "actionParameters"
+      ],
+      "bodyWrapped": false,
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "agentId": {
+            "type": "string",
+            "description": "Agent ID to attach the action to"
+          },
+          "locationId": {
+            "type": "string",
+            "description": "Location ID"
+          },
+          "actionType": {
+            "type": "string",
+            "description": "Type of action",
+            "enum": [
+              "CALL_TRANSFER",
+              "DATA_EXTRACTION",
+              "IN_CALL_DATA_EXTRACTION",
+              "WORKFLOW_TRIGGER",
+              "SMS",
+              "APPOINTMENT_BOOKING",
+              "CUSTOM_ACTION",
+              "KNOWLEDGE_BASE"
+            ]
+          },
+          "name": {
+            "type": "string",
+            "description": "Human-readable name for this action"
+          },
+          "actionParameters": {
+            "description": "Action parameters - structure varies by actionType",
+            "oneOf": [
+              {
+                "type": "object",
+                "properties": {
+                  "triggerPrompt": {
+                    "type": "string",
+                    "description": "When to trigger this action during the call"
+                  },
+                  "transferToType": {
+                    "type": "string",
+                    "description": "Type of transfer destination (currently only \"number\" is supported)",
+                    "enum": [
+                      "number"
+                    ]
+                  },
+                  "transferToValue": {
+                    "type": "string",
+                    "description": "Phone number to transfer to. Must start with +, include country code, contain only numbers, and be 11-16 characters long (e.g., +12345678901)."
+                  },
+                  "triggerMessage": {
+                    "type": "string",
+                    "description": "Message to tell the caller before transferring"
+                  },
+                  "hearWhisperMessage": {
+                    "type": "boolean",
+                    "description": "Whether to play whisper message to the receiving party"
+                  }
+                },
+                "required": [
+                  "triggerPrompt",
+                  "transferToType",
+                  "transferToValue",
+                  "triggerMessage"
+                ]
+              },
+              {
+                "type": "object",
+                "properties": {
+                  "contactFieldId": {
+                    "type": "string",
+                    "description": "ID of the contact field to be updated with the extracted data"
+                  },
+                  "description": {
+                    "type": "string",
+                    "description": "Description of what data to extract"
+                  },
+                  "examples": {
+                    "description": "Example values to help Agent understand the expected format. At least one example is required, maximum 5 examples allowed.",
+                    "type": "array",
+                    "items": {
+                      "type": "string"
+                    }
+                  },
+                  "overwriteExistingValue": {
+                    "type": "boolean",
+                    "description": "Whether to overwrite existing field value if already set, default is false (default: false)"
+                  }
+                },
+                "required": [
+                  "contactFieldId",
+                  "description",
+                  "examples"
+                ]
+              },
+              {
+                "type": "object",
+                "properties": {
+                  "contactFieldId": {
+                    "type": "string",
+                    "description": "ID of the contact field to be updated with the extracted data"
+                  },
+                  "description": {
+                    "type": "string",
+                    "description": "Description of what data to extract"
+                  },
+                  "examples": {
+                    "description": "Example values to help Agent understand the expected format. At least one example is required, maximum 5 examples allowed.",
+                    "type": "array",
+                    "items": {
+                      "type": "string"
+                    }
+                  },
+                  "overwriteExistingValue": {
+                    "type": "boolean",
+                    "description": "Whether to overwrite existing field value if already set, default is false (default: false)"
+                  }
+                },
+                "required": [
+                  "contactFieldId",
+                  "description",
+                  "examples"
+                ]
+              },
+              {
+                "type": "object",
+                "properties": {
+                  "triggerPrompt": {
+                    "type": "string",
+                    "description": "When to trigger this workflow"
+                  },
+                  "triggerMessage": {
+                    "type": "string",
+                    "description": "Message to tell the caller"
+                  },
+                  "workflowId": {
+                    "type": "string",
+                    "description": "Workflow ID to trigger"
+                  }
+                },
+                "required": [
+                  "triggerPrompt",
+                  "triggerMessage",
+                  "workflowId"
+                ]
+              },
+              {
+                "type": "object",
+                "properties": {
+                  "triggerPrompt": {
+                    "type": "string",
+                    "description": "When to send the SMS"
+                  },
+                  "triggerMessage": {
+                    "type": "string",
+                    "description": "Message to tell the caller"
+                  },
+                  "messageBody": {
+                    "type": "string",
+                    "description": "SMS message content to send"
+                  }
+                },
+                "required": [
+                  "triggerPrompt",
+                  "triggerMessage",
+                  "messageBody"
+                ]
+              },
+              {
+                "type": "object",
+                "properties": {
+                  "calendarId": {
+                    "type": "string",
+                    "description": "Calendar ID to book appointments in"
+                  },
+                  "daysOfOfferingDates": {
+                    "type": "number",
+                    "description": "Number of days ahead to offer booking dates"
+                  },
+                  "slotsPerDay": {
+                    "type": "number",
+                    "description": "Number of available slots per day"
+                  },
+                  "hoursBetweenSlots": {
+                    "type": "number",
+                    "description": "Hours between available slots"
+                  }
+                },
+                "required": [
+                  "calendarId",
+                  "daysOfOfferingDates",
+                  "slotsPerDay",
+                  "hoursBetweenSlots"
+                ]
+              },
+              {
+                "type": "object",
+                "properties": {
+                  "triggerPrompt": {
+                    "type": "string",
+                    "description": "When to call the custom API"
+                  },
+                  "triggerMessage": {
+                    "type": "string",
+                    "description": "Message to tell the caller"
+                  },
+                  "apiDetails": {
+                    "type": "object",
+                    "properties": {
+                      "url": {
+                        "type": "string",
+                        "description": "API endpoint URL"
+                      },
+                      "method": {
+                        "type": "string",
+                        "description": "HTTP method",
+                        "enum": [
+                          "POST",
+                          "GET"
+                        ]
+                      },
+                      "authenticationRequired": {
+                        "type": "boolean",
+                        "description": "Whether authentication is required"
+                      },
+                      "authenticationValue": {
+                        "type": "string",
+                        "description": "Authentication token or API key (required if authenticationRequired is true)"
+                      },
+                      "headers": {
+                        "description": "HTTP headers to include",
+                        "type": "array",
+                        "items": {
+                          "type": "object",
+                          "properties": {
+                            "key": {
+                              "type": "string",
+                              "description": "HTTP header name"
+                            },
+                            "value": {
+                              "type": "string",
+                              "description": "HTTP header value"
+                            }
+                          },
+                          "required": [
+                            "key",
+                            "value"
+                          ]
+                        }
+                      },
+                      "parameters": {
+                        "description": "API parameters to send",
+                        "type": "array",
+                        "items": {
+                          "type": "object",
+                          "properties": {
+                            "name": {
+                              "type": "string",
+                              "description": "Parameter name"
+                            },
+                            "description": {
+                              "type": "string",
+                              "description": "Parameter description"
+                            },
+                            "type": {
+                              "type": "string",
+                              "description": "Parameter type"
+                            },
+                            "example": {
+                              "type": "string",
+                              "description": "Example parameter value"
+                            }
+                          },
+                          "required": [
+                            "name"
+                          ]
+                        }
+                      }
+                    },
+                    "required": [
+                      "url",
+                      "method"
+                    ],
+                    "description": "API endpoint configuration"
+                  },
+                  "selectedPaths": {
+                    "description": "Selected response paths to extract from API response. Required: at least 1 value if the method is GET. Should be empty if the method is POST.",
+                    "type": "array",
+                    "items": {
+                      "type": "string"
+                    }
+                  }
+                },
+                "required": [
+                  "triggerPrompt",
+                  "triggerMessage",
+                  "apiDetails"
+                ]
+              },
+              {
+                "type": "object",
+                "properties": {
+                  "triggerPrompt": {
+                    "type": "string",
+                    "description": "When to query the knowledge base"
+                  },
+                  "knowledgeBaseId": {
+                    "type": "string",
+                    "description": "Knowledge base ID to query"
+                  }
+                },
+                "required": [
+                  "triggerPrompt",
+                  "knowledgeBaseId"
+                ]
+              }
+            ]
+          }
+        },
+        "required": [
+          "agentId",
+          "locationId",
+          "actionType",
+          "name",
+          "actionParameters"
+        ]
+      }
+    },
+    {
+      "name": "voice_ai_get_action",
+      "module": "voice-ai",
+      "method": "GET",
+      "path": "/voice-ai/actions/{actionId}",
+      "version": "2021-04-15",
+      "summary": "Get Agent Action",
+      "description": "Get Agent Action Retrieve details of a specific action by its ID. Returns the action configuration including actionParameters. [GET /voice-ai/actions/{actionId}] Scopes: voice-ai-agent-goals.readonly.",
+      "scopes": [
+        "voice-ai-agent-goals.readonly"
+      ],
+      "access": "unknown",
+      "operationClass": "read",
+      "deprecated": false,
+      "pathFields": [
+        "actionId"
+      ],
+      "queryFields": [
+        "locationId"
+      ],
+      "bodyFields": [],
+      "bodyWrapped": false,
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "actionId": {
+            "type": "string",
+            "description": "Unique identifier for the action"
+          },
+          "locationId": {
+            "type": "string",
+            "description": "Location ID"
+          }
+        },
+        "required": [
+          "actionId",
+          "locationId"
+        ]
+      }
+    },
+    {
+      "name": "voice_ai_update_action",
+      "module": "voice-ai",
+      "method": "PUT",
+      "path": "/voice-ai/actions/{actionId}",
+      "version": "2021-04-15",
+      "summary": "Update Agent Action",
+      "description": "Update Agent Action Update an existing action for a voice AI agent. Modifies the behavior and configuration of an agent action. [PUT /voice-ai/actions/{actionId}] Scopes: voice-ai-agent-goals.write.",
+      "scopes": [
+        "voice-ai-agent-goals.write"
+      ],
+      "access": "unknown",
+      "operationClass": "write",
+      "deprecated": false,
+      "contentType": "application/json",
+      "pathFields": [
+        "actionId"
+      ],
+      "queryFields": [],
+      "bodyFields": [
+        "agentId",
+        "locationId",
+        "actionType",
+        "name",
+        "actionParameters"
+      ],
+      "bodyWrapped": false,
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "actionId": {
+            "type": "string",
+            "description": "Unique identifier for the action"
+          },
+          "agentId": {
+            "type": "string",
+            "description": "Agent ID to attach the action to"
+          },
+          "locationId": {
+            "type": "string",
+            "description": "Location ID"
+          },
+          "actionType": {
+            "type": "string",
+            "description": "Type of action",
+            "enum": [
+              "CALL_TRANSFER",
+              "DATA_EXTRACTION",
+              "IN_CALL_DATA_EXTRACTION",
+              "WORKFLOW_TRIGGER",
+              "SMS",
+              "APPOINTMENT_BOOKING",
+              "CUSTOM_ACTION",
+              "KNOWLEDGE_BASE"
+            ]
+          },
+          "name": {
+            "type": "string",
+            "description": "Human-readable name for this action"
+          },
+          "actionParameters": {
+            "description": "Action parameters - structure varies by actionType",
+            "oneOf": [
+              {
+                "type": "object",
+                "properties": {
+                  "triggerPrompt": {
+                    "type": "string",
+                    "description": "When to trigger this action during the call"
+                  },
+                  "transferToType": {
+                    "type": "string",
+                    "description": "Type of transfer destination (currently only \"number\" is supported)",
+                    "enum": [
+                      "number"
+                    ]
+                  },
+                  "transferToValue": {
+                    "type": "string",
+                    "description": "Phone number to transfer to. Must start with +, include country code, contain only numbers, and be 11-16 characters long (e.g., +12345678901)."
+                  },
+                  "triggerMessage": {
+                    "type": "string",
+                    "description": "Message to tell the caller before transferring"
+                  },
+                  "hearWhisperMessage": {
+                    "type": "boolean",
+                    "description": "Whether to play whisper message to the receiving party"
+                  }
+                },
+                "required": [
+                  "triggerPrompt",
+                  "transferToType",
+                  "transferToValue",
+                  "triggerMessage"
+                ]
+              },
+              {
+                "type": "object",
+                "properties": {
+                  "contactFieldId": {
+                    "type": "string",
+                    "description": "ID of the contact field to be updated with the extracted data"
+                  },
+                  "description": {
+                    "type": "string",
+                    "description": "Description of what data to extract"
+                  },
+                  "examples": {
+                    "description": "Example values to help Agent understand the expected format. At least one example is required, maximum 5 examples allowed.",
+                    "type": "array",
+                    "items": {
+                      "type": "string"
+                    }
+                  },
+                  "overwriteExistingValue": {
+                    "type": "boolean",
+                    "description": "Whether to overwrite existing field value if already set, default is false (default: false)"
+                  }
+                },
+                "required": [
+                  "contactFieldId",
+                  "description",
+                  "examples"
+                ]
+              },
+              {
+                "type": "object",
+                "properties": {
+                  "contactFieldId": {
+                    "type": "string",
+                    "description": "ID of the contact field to be updated with the extracted data"
+                  },
+                  "description": {
+                    "type": "string",
+                    "description": "Description of what data to extract"
+                  },
+                  "examples": {
+                    "description": "Example values to help Agent understand the expected format. At least one example is required, maximum 5 examples allowed.",
+                    "type": "array",
+                    "items": {
+                      "type": "string"
+                    }
+                  },
+                  "overwriteExistingValue": {
+                    "type": "boolean",
+                    "description": "Whether to overwrite existing field value if already set, default is false (default: false)"
+                  }
+                },
+                "required": [
+                  "contactFieldId",
+                  "description",
+                  "examples"
+                ]
+              },
+              {
+                "type": "object",
+                "properties": {
+                  "triggerPrompt": {
+                    "type": "string",
+                    "description": "When to trigger this workflow"
+                  },
+                  "triggerMessage": {
+                    "type": "string",
+                    "description": "Message to tell the caller"
+                  },
+                  "workflowId": {
+                    "type": "string",
+                    "description": "Workflow ID to trigger"
+                  }
+                },
+                "required": [
+                  "triggerPrompt",
+                  "triggerMessage",
+                  "workflowId"
+                ]
+              },
+              {
+                "type": "object",
+                "properties": {
+                  "triggerPrompt": {
+                    "type": "string",
+                    "description": "When to send the SMS"
+                  },
+                  "triggerMessage": {
+                    "type": "string",
+                    "description": "Message to tell the caller"
+                  },
+                  "messageBody": {
+                    "type": "string",
+                    "description": "SMS message content to send"
+                  }
+                },
+                "required": [
+                  "triggerPrompt",
+                  "triggerMessage",
+                  "messageBody"
+                ]
+              },
+              {
+                "type": "object",
+                "properties": {
+                  "calendarId": {
+                    "type": "string",
+                    "description": "Calendar ID to book appointments in"
+                  },
+                  "daysOfOfferingDates": {
+                    "type": "number",
+                    "description": "Number of days ahead to offer booking dates"
+                  },
+                  "slotsPerDay": {
+                    "type": "number",
+                    "description": "Number of available slots per day"
+                  },
+                  "hoursBetweenSlots": {
+                    "type": "number",
+                    "description": "Hours between available slots"
+                  }
+                },
+                "required": [
+                  "calendarId",
+                  "daysOfOfferingDates",
+                  "slotsPerDay",
+                  "hoursBetweenSlots"
+                ]
+              },
+              {
+                "type": "object",
+                "properties": {
+                  "triggerPrompt": {
+                    "type": "string",
+                    "description": "When to call the custom API"
+                  },
+                  "triggerMessage": {
+                    "type": "string",
+                    "description": "Message to tell the caller"
+                  },
+                  "apiDetails": {
+                    "type": "object",
+                    "properties": {
+                      "url": {
+                        "type": "string",
+                        "description": "API endpoint URL"
+                      },
+                      "method": {
+                        "type": "string",
+                        "description": "HTTP method",
+                        "enum": [
+                          "POST",
+                          "GET"
+                        ]
+                      },
+                      "authenticationRequired": {
+                        "type": "boolean",
+                        "description": "Whether authentication is required"
+                      },
+                      "authenticationValue": {
+                        "type": "string",
+                        "description": "Authentication token or API key (required if authenticationRequired is true)"
+                      },
+                      "headers": {
+                        "description": "HTTP headers to include",
+                        "type": "array",
+                        "items": {
+                          "type": "object",
+                          "properties": {
+                            "key": {
+                              "type": "string",
+                              "description": "HTTP header name"
+                            },
+                            "value": {
+                              "type": "string",
+                              "description": "HTTP header value"
+                            }
+                          },
+                          "required": [
+                            "key",
+                            "value"
+                          ]
+                        }
+                      },
+                      "parameters": {
+                        "description": "API parameters to send",
+                        "type": "array",
+                        "items": {
+                          "type": "object",
+                          "properties": {
+                            "name": {
+                              "type": "string",
+                              "description": "Parameter name"
+                            },
+                            "description": {
+                              "type": "string",
+                              "description": "Parameter description"
+                            },
+                            "type": {
+                              "type": "string",
+                              "description": "Parameter type"
+                            },
+                            "example": {
+                              "type": "string",
+                              "description": "Example parameter value"
+                            }
+                          },
+                          "required": [
+                            "name"
+                          ]
+                        }
+                      }
+                    },
+                    "required": [
+                      "url",
+                      "method"
+                    ],
+                    "description": "API endpoint configuration"
+                  },
+                  "selectedPaths": {
+                    "description": "Selected response paths to extract from API response. Required: at least 1 value if the method is GET. Should be empty if the method is POST.",
+                    "type": "array",
+                    "items": {
+                      "type": "string"
+                    }
+                  }
+                },
+                "required": [
+                  "triggerPrompt",
+                  "triggerMessage",
+                  "apiDetails"
+                ]
+              },
+              {
+                "type": "object",
+                "properties": {
+                  "triggerPrompt": {
+                    "type": "string",
+                    "description": "When to query the knowledge base"
+                  },
+                  "knowledgeBaseId": {
+                    "type": "string",
+                    "description": "Knowledge base ID to query"
+                  }
+                },
+                "required": [
+                  "triggerPrompt",
+                  "knowledgeBaseId"
+                ]
+              }
+            ]
+          }
+        },
+        "required": [
+          "actionId",
+          "agentId",
+          "locationId",
+          "actionType",
+          "name",
+          "actionParameters"
+        ]
+      }
+    },
+    {
+      "name": "voice_ai_delete_action",
+      "module": "voice-ai",
+      "method": "DELETE",
+      "path": "/voice-ai/actions/{actionId}",
+      "version": "2021-04-15",
+      "summary": "Delete Agent Action",
+      "description": "Delete Agent Action Delete an existing action from a voice AI agent. This permanently removes the action and its configuration. [DELETE /voice-ai/actions/{actionId}] Scopes: voice-ai-agent-goals.write.",
+      "scopes": [
+        "voice-ai-agent-goals.write"
+      ],
+      "access": "unknown",
+      "operationClass": "delete",
+      "deprecated": false,
+      "pathFields": [
+        "actionId"
+      ],
+      "queryFields": [
+        "locationId",
+        "agentId"
+      ],
+      "bodyFields": [],
+      "bodyWrapped": false,
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "actionId": {
+            "type": "string",
+            "description": "Unique identifier for the action"
+          },
+          "locationId": {
+            "type": "string",
+            "description": "Location ID"
+          },
+          "agentId": {
+            "type": "string",
+            "description": "Agent ID the action is attached to"
+          }
+        },
+        "required": [
+          "actionId",
+          "locationId",
+          "agentId"
+        ]
+      }
+    }
+  ]
+}
