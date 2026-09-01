@@ -12,6 +12,10 @@
     "skipLibCheck": true,
     "declaration": false,
     "sourceMap": true,
+    // `npm run dev` runs the sources through Node's strip-only type stripping, which
+    // cannot erase enums, namespaces, or constructor parameter properties. Refusing
+    // that syntax here turns a runtime crash into a build error.
+    "erasableSyntaxOnly": true,
     "allowImportingTsExtensions": true,
     "rewriteRelativeImportExtensions": true,
     "verbatimModuleSyntax": true

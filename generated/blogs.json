@@ -57,7 +57,9 @@
       "operationClass": "write",
       "deprecated": false,
       "contentType": "application/json",
-      "pathFields": [],
+      "pathFields": [
+        "postId"
+      ],
       "queryFields": [],
       "bodyFields": [
         "title",
@@ -79,6 +81,10 @@
       "inputSchema": {
         "type": "object",
         "properties": {
+          "postId": {
+            "type": "string",
+            "description": "Path parameter \"postId\", recovered from the URL template because the spec omits it."
+          },
           "title": {
             "type": "string"
           },
@@ -139,6 +145,7 @@
           }
         },
         "required": [
+          "postId",
           "title",
           "locationId",
           "blogId",

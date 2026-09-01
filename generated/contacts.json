@@ -713,7 +713,9 @@
       "operationClass": "write",
       "deprecated": false,
       "contentType": "application/json",
-      "pathFields": [],
+      "pathFields": [
+        "type"
+      ],
       "queryFields": [],
       "bodyFields": [
         "contacts",
@@ -725,6 +727,10 @@
       "inputSchema": {
         "type": "object",
         "properties": {
+          "type": {
+            "type": "string",
+            "description": "Path parameter \"type\", recovered from the URL template because the spec omits it."
+          },
           "contacts": {
             "description": "list of contact ids to be processed",
             "type": "array",
@@ -749,6 +755,7 @@
           }
         },
         "required": [
+          "type",
           "contacts",
           "tags",
           "locationId"

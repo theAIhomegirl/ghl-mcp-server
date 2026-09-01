@@ -1,6 +1,6 @@
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
-import { convertOperation, convertSpec, toJsonSchema, toToolName, type ConvertContext, type OpenApiSpec } from '../src/generator/openapi.ts';
+import { convertOperation, convertSpec, pathPlaceholders, toJsonSchema, toToolName, type ConvertContext, type OpenApiSpec } from '../src/generator/openapi.ts';
 
 const common: OpenApiSpec = {
   paths: {},
@@ -55,6 +55,40 @@ test('toJsonSchema stops on recursive refs and drops invalid types', () => {
 
 test('toToolName is snake_case and module-prefixed', () => {
   assert.equal(toToolName('social-media-posting', 'get-Posts'), 'social_media_posting_get_posts');
+});
+
+test('convertOperation recovers path params the spec forgot to declare', () => {
+  // HighLevel declares userId on GET /users/{userId} and omits it on PUT and DELETE.
+  const endpoint = convertOperation('users', '/users/{userId}', 'PUT', { operationId: 'update-user' }, [], ctx);
+  assert.deepEqual(endpoint.pathFields, ['userId']);
+  assert.deepEqual(endpoint.inputSchema.required, ['userId']);
+  assert.match(String((endpoint.inputSchema.properties as Record<string, Record<string, unknown>>).userId.description), /recovered from the URL template/);
+});
+
+test('convertOperation keeps a declared path param over the recovered one', () => {
+  const declared = { name: 'noteId', in: 'path' as const, required: true, description: 'Note id', schema: { type: 'string' } };
+  const endpoint = convertOperation('calendars', '/calendars/{appointmentId}/notes/{noteId}', 'PUT', { operationId: 'x', parameters: [declared] }, [], ctx);
+  assert.deepEqual(endpoint.pathFields.sort(), ['appointmentId', 'noteId']);
+  const props = endpoint.inputSchema.properties as Record<string, Record<string, unknown>>;
+  assert.equal(props.noteId.description, 'Note id');
+  assert.match(String(props.appointmentId.description), /recovered/);
+});
+
+test('pathPlaceholders reads every placeholder in a template', () => {
+  assert.deepEqual(pathPlaceholders('/calendars/{appointmentId}/notes/{noteId}'), ['appointmentId', 'noteId']);
+  assert.deepEqual(pathPlaceholders('/invoices/'), []);
+});
+
+test('convertOperation turns a multipart binary field into a base64 envelope', () => {
+  const operation = {
+    operationId: 'upload-media',
+    requestBody: { content: { 'multipart/form-data': { schema: { type: 'object', properties: { file: { type: 'string', format: 'binary' }, name: { type: 'string' } } } } } },
+  };
+  const endpoint = convertOperation('medias', '/medias/upload-file', 'POST', operation, [], ctx);
+  const file = (endpoint.inputSchema.properties as Record<string, Record<string, unknown>>).file;
+  assert.equal(file.type, 'object');
+  assert.deepEqual(file.required, ['base64']);
+  assert.equal((endpoint.inputSchema.properties as Record<string, Record<string, unknown>>).name.type, 'string');
 });
 
 test('convertOperation routes params, reads Version, flattens body, and classifies', () => {

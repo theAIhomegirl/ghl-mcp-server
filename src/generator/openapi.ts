@@ -192,6 +192,27 @@ export function toJsonSchema(schema: JsonSchema | undefined, ctx: ConvertContext
   return output;
 }
 
+/** Every `{name}` placeholder in a path template, in the order it appears. */
+export function pathPlaceholders(path: string): string[] {
+  return [...path.matchAll(/\{([^}]+)\}/g)].map((match) => match[1]);
+}
+
+// A multipart file part cannot travel as a JSON string, so binary fields are
+// described (and accepted) as an explicit base64 envelope instead.
+const BINARY_FIELD_SCHEMA: JsonSchema = {
+  type: 'object',
+  properties: {
+    base64: { type: 'string', description: 'File contents, base64-encoded.' },
+    filename: { type: 'string', description: 'File name to send with the upload part.' },
+    contentType: { type: 'string', description: 'MIME type of the file. Defaults to application/octet-stream.' },
+  },
+  required: ['base64'],
+};
+
+function isBinaryField(schema: JsonSchema): boolean {
+  return schema.type === 'string' && schema.format === 'binary';
+}
+
 export function toToolName(module: string, operationId: string): string {
   return `${module}_${operationId}`
     .replace(/[^a-zA-Z0-9]+/g, '_')
@@ -278,6 +299,21 @@ export function convertOperation(
     }
   }
 
+  // HighLevel's specs sometimes declare a path parameter on one method of a path and
+  // forget it on the others, which would ship a tool with nowhere to put the ID. The
+  // URL template is the authority: anything it names has to be an argument.
+  for (const placeholder of pathPlaceholders(path)) {
+    if (pathFields.includes(placeholder)) continue;
+    pathFields.push(placeholder);
+    required.add(placeholder);
+    if (!(placeholder in properties)) {
+      properties[placeholder] = {
+        type: 'string',
+        description: `Path parameter "${placeholder}", recovered from the URL template because the spec omits it.`,
+      };
+    }
+  }
+
   const body = pickBody(operation);
   let bodyWrapped = false;
   if (body) {
@@ -286,7 +322,11 @@ export function convertOperation(
     if (bodyProperties && Object.keys(bodyProperties).length > 0) {
       for (const [fieldName, fieldSchema] of Object.entries(bodyProperties)) {
         // A field that is also a path/query param keeps the param schema; the value is sent to both places.
-        if (!(fieldName in properties)) properties[fieldName] = fieldSchema;
+        if (!(fieldName in properties)) {
+          properties[fieldName] = isBinaryField(fieldSchema)
+            ? { ...BINARY_FIELD_SCHEMA, description: fieldSchema.description ?? `Binary contents for "${fieldName}".` }
+            : fieldSchema;
+        }
         bodyFields.push(fieldName);
       }
       for (const field of (bodySchema.required as string[] | undefined) ?? []) required.add(field);

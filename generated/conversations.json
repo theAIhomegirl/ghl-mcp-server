@@ -627,13 +627,23 @@
       "access": "unknown",
       "operationClass": "read",
       "deprecated": false,
-      "pathFields": [],
+      "pathFields": [
+        "id"
+      ],
       "queryFields": [],
       "bodyFields": [],
       "bodyWrapped": false,
       "inputSchema": {
         "type": "object",
-        "properties": {}
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "Path parameter \"id\", recovered from the URL template because the spec omits it."
+          }
+        },
+        "required": [
+          "id"
+        ]
       }
     },
     {
@@ -777,13 +787,23 @@
       "access": "unknown",
       "operationClass": "read",
       "deprecated": false,
-      "pathFields": [],
+      "pathFields": [
+        "id"
+      ],
       "queryFields": [],
       "bodyFields": [],
       "bodyWrapped": false,
       "inputSchema": {
         "type": "object",
-        "properties": {}
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "Path parameter \"id\", recovered from the URL template because the spec omits it."
+          }
+        },
+        "required": [
+          "id"
+        ]
       }
     },
     {

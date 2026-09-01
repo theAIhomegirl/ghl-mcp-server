@@ -191,7 +191,9 @@
       "operationClass": "write",
       "deprecated": false,
       "contentType": "application/json",
-      "pathFields": [],
+      "pathFields": [
+        "userId"
+      ],
       "queryFields": [],
       "bodyFields": [
         "firstName",
@@ -214,6 +216,10 @@
       "inputSchema": {
         "type": "object",
         "properties": {
+          "userId": {
+            "type": "string",
+            "description": "Path parameter \"userId\", recovered from the URL template because the spec omits it."
+          },
           "firstName": {
             "type": "string"
           },
@@ -829,7 +835,10 @@
               "no"
             ]
           }
-        }
+        },
+        "required": [
+          "userId"
+        ]
       }
     },
     {
@@ -846,13 +855,23 @@
       "access": "both",
       "operationClass": "delete",
       "deprecated": false,
-      "pathFields": [],
+      "pathFields": [
+        "userId"
+      ],
       "queryFields": [],
       "bodyFields": [],
       "bodyWrapped": false,
       "inputSchema": {
         "type": "object",
-        "properties": {}
+        "properties": {
+          "userId": {
+            "type": "string",
+            "description": "Path parameter \"userId\", recovered from the URL template because the spec omits it."
+          }
+        },
+        "required": [
+          "userId"
+        ]
       }
     },
     {

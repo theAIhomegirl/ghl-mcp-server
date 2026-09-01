@@ -4,7 +4,7 @@
 import { readdir, readFile, mkdir, writeFile, rm } from 'node:fs/promises';
 import path from 'node:path';
 import { z } from 'zod';
-import { convertSpec, type EndpointDef, type OpenApiSpec } from './openapi.ts';
+import { convertSpec, pathPlaceholders, type EndpointDef, type OpenApiSpec } from './openapi.ts';
 
 const ROOT = path.resolve(import.meta.dirname, '..', '..');
 const SPEC_DIR = path.join(ROOT, 'specs');
@@ -29,16 +29,31 @@ function validateWithZod(endpoint: EndpointDef): string | undefined {
   }
 }
 
+// A tool whose URL has a placeholder with no matching argument can never be called:
+// buildUrl throws before the request leaves the process. Catch it here, not in production.
+function validatePathParams(endpoint: EndpointDef): string[] {
+  const problems: string[] = [];
+  for (const placeholder of pathPlaceholders(endpoint.path)) {
+    if (!endpoint.pathFields.includes(placeholder)) {
+      problems.push(`${endpoint.name}: path template needs {${placeholder}} but no argument supplies it`);
+    }
+  }
+  for (const field of endpoint.pathFields) {
+    if (!endpoint.path.includes(`{${field}}`)) {
+      problems.push(`${endpoint.name}: path field "${field}" does not appear in ${endpoint.path}`);
+    }
+  }
+  return problems;
+}
+
 async function main(): Promise<void> {
   const common = await readJson<OpenApiSpec>(path.join(SPEC_DIR, 'common', 'common-schemas.json'));
   const specFiles = (await readdir(SPEC_DIR)).filter((name) => name.endsWith('.json')).sort();
 
-  await rm(OUT_DIR, { recursive: true, force: true });
-  await mkdir(OUT_DIR, { recursive: true });
-
   const summaries: ModuleSummary[] = [];
   const failures: string[] = [];
   const allNames = new Set<string>();
+  const modules: Array<{ module: string; endpoints: EndpointDef[] }> = [];
 
   for (const file of specFiles) {
     const module = file.replace(/\.json$/, '');
@@ -51,25 +66,35 @@ async function main(): Promise<void> {
       if (allNames.has(endpoint.name)) failures.push(`${endpoint.name}: duplicate tool name across modules`);
       allNames.add(endpoint.name);
       if (endpoint.name.length > 64) failures.push(`${endpoint.name}: name exceeds 64 chars`);
+      failures.push(...validatePathParams(endpoint));
       const zodError = validateWithZod(endpoint);
       if (zodError) failures.push(`${endpoint.name}: ${zodError}`);
     }
 
-    await writeFile(path.join(OUT_DIR, `${module}.json`), JSON.stringify({ module, endpoints }, null, 2));
+    modules.push({ module, endpoints });
     summaries.push({ module, count: endpoints.length, byClass });
   }
 
+  // Nothing is written until every catalog passes, so a bad spec leaves the
+  // committed catalog untouched instead of half-replacing it.
+  if (failures.length) {
+    console.error(`${failures.length} problems; ${OUT_DIR} left unchanged:`);
+    failures.forEach((failure) => console.error(`  - ${failure}`));
+    process.exitCode = 1;
+    return;
+  }
+
+  await rm(OUT_DIR, { recursive: true, force: true });
+  await mkdir(OUT_DIR, { recursive: true });
+  for (const { module, endpoints } of modules) {
+    await writeFile(path.join(OUT_DIR, `${module}.json`), JSON.stringify({ module, endpoints }, null, 2));
+  }
   await writeFile(path.join(OUT_DIR, 'index.json'), JSON.stringify({ modules: summaries }, null, 2));
 
   const total = summaries.reduce((sum, summary) => sum + summary.count, 0);
   console.log(`Generated ${total} endpoints across ${summaries.length} modules -> ${OUT_DIR}`);
   for (const summary of summaries) {
     console.log(`  ${summary.module.padEnd(22)} ${String(summary.count).padStart(3)}  ${JSON.stringify(summary.byClass)}`);
-  }
-  if (failures.length) {
-    console.error(`\n${failures.length} problems:`);
-    failures.forEach((failure) => console.error(`  - ${failure}`));
-    process.exitCode = 1;
   }
 }
 

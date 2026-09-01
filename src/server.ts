@@ -2,6 +2,7 @@ import { McpServer } from '@modelcontextprotocol/sdk/server/mcp.js';
 import { loadEndpoints } from './catalog.ts';
 import { GhlClient } from './client.ts';
 import type { ServerConfig } from './config.ts';
+import type { EndpointDef } from './generator/openapi.ts';
 import { registerMetaTools } from './meta-tools.ts';
 import { registerEndpointTools } from './tools.ts';
 
@@ -11,13 +12,18 @@ export const SERVER_VERSION = '0.1.0';
 export interface CreateServerOptions {
   client?: GhlClient;
   log?: (message: string) => void;
+  /** Preloaded module endpoints. The HTTP transport builds a server per request; without
+   *  this, every request re-parses the whole generated catalog on the event loop. */
+  endpoints?: EndpointDef[];
+  /** Preloaded full catalog for the meta-tools. */
+  catalog?: EndpointDef[];
 }
 
 export function createServer(config: ServerConfig, options: CreateServerOptions = {}): McpServer {
   const client = options.client ?? new GhlClient({ apiKey: config.apiKey, baseUrl: config.baseUrl });
   const log = options.log ?? (() => {});
 
-  const selected = loadEndpoints(config.modules);
+  const selected = options.endpoints ?? loadEndpoints(config.modules);
   const gates = [
     `writes ${config.allowWrites ? 'enabled' : 'disabled'}`,
     `deletes ${config.allowDeletes ? 'enabled' : 'disabled'}`,
@@ -43,7 +49,7 @@ export function createServer(config: ServerConfig, options: CreateServerOptions 
   log(`Registered ${registered} of ${selected.length} endpoint tools (${gates}).`);
 
   if (config.metaTools) {
-    const catalog = config.modules === 'all' ? selected : loadEndpoints('all');
+    const catalog = options.catalog ?? (config.modules === 'all' ? selected : loadEndpoints('all'));
     registerMetaTools(server, catalog, client, config);
     log(`Meta-tools cover ${catalog.length} endpoints.`);
   }

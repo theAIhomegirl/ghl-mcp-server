@@ -7033,7 +7033,9 @@
       "operationClass": "write",
       "deprecated": false,
       "contentType": "application/json",
-      "pathFields": [],
+      "pathFields": [
+        "accountId"
+      ],
       "queryFields": [
         "locationId"
       ],
@@ -7052,6 +7054,10 @@
           "locationId": {
             "type": "string",
             "description": "Location identifier"
+          },
+          "accountId": {
+            "type": "string",
+            "description": "Path parameter \"accountId\", recovered from the URL template because the spec omits it."
           },
           "owner": {
             "type": "object",
@@ -7360,6 +7366,7 @@
         },
         "required": [
           "locationId",
+          "accountId",
           "owner",
           "creationLocale",
           "name",

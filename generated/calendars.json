@@ -1667,7 +1667,8 @@
       "deprecated": false,
       "contentType": "application/json",
       "pathFields": [
-        "appointmentId"
+        "appointmentId",
+        "noteId"
       ],
       "queryFields": [],
       "bodyFields": [
@@ -1682,6 +1683,10 @@
             "type": "string",
             "description": "Appointment ID"
           },
+          "noteId": {
+            "type": "string",
+            "description": "Path parameter \"noteId\", recovered from the URL template because the spec omits it."
+          },
           "userId": {
             "type": "string"
           },
@@ -1693,6 +1698,7 @@
         },
         "required": [
           "appointmentId",
+          "noteId",
           "body"
         ]
       }
@@ -1712,7 +1718,8 @@
       "operationClass": "delete",
       "deprecated": false,
       "pathFields": [
-        "appointmentId"
+        "appointmentId",
+        "noteId"
       ],
       "queryFields": [],
       "bodyFields": [],
@@ -1723,10 +1730,15 @@
           "appointmentId": {
             "type": "string",
             "description": "Appointment ID"
+          },
+          "noteId": {
+            "type": "string",
+            "description": "Path parameter \"noteId\", recovered from the URL template because the spec omits it."
           }
         },
         "required": [
-          "appointmentId"
+          "appointmentId",
+          "noteId"
         ]
       }
     },

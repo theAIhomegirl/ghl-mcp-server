@@ -5,20 +5,21 @@
   "type": "module",
   "private": true,
   "engines": {
-    "node": ">=22"
+    "node": ">=22.9"
   },
   "bin": {
     "ghl-mcp-server": "dist/src/stdio.js"
   },
   "scripts": {
     "build": "tsc",
+    "prepare": "npm run build",
     "specs:fetch": "node --experimental-strip-types scripts/fetch-specs.ts",
     "generate": "node --experimental-strip-types src/generator/cli.ts",
-    "start": "node dist/src/stdio.js",
-    "start:http": "node dist/src/http.js",
+    "start": "node --env-file-if-exists=.env dist/src/stdio.js",
+    "start:http": "node --env-file-if-exists=.env dist/src/http.js",
     "test": "tsc && node --test \"dist/test/*.test.js\"",
     "typecheck": "tsc --noEmit",
-    "dev": "node --experimental-strip-types src/stdio.ts"
+    "dev": "node --env-file-if-exists=.env --experimental-strip-types src/stdio.ts"
   },
   "license": "MIT",
   "dependencies": {

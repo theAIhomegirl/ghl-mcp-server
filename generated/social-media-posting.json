@@ -976,7 +976,9 @@
       "operationClass": "write",
       "deprecated": false,
       "contentType": "application/json",
-      "pathFields": [],
+      "pathFields": [
+        "locationId"
+      ],
       "queryFields": [],
       "bodyFields": [
         "postIds"
@@ -985,6 +987,10 @@
       "inputSchema": {
         "type": "object",
         "properties": {
+          "locationId": {
+            "type": "string",
+            "description": "Path parameter \"locationId\", recovered from the URL template because the spec omits it."
+          },
           "postIds": {
             "description": "Requested Results",
             "type": "array",
@@ -992,7 +998,10 @@
               "type": "string"
             }
           }
-        }
+        },
+        "required": [
+          "locationId"
+        ]
       }
     },
     {
@@ -1758,8 +1767,25 @@
             "description": "Location Id"
           },
           "file": {
-            "type": "string",
-            "format": "binary"
+            "type": "object",
+            "properties": {
+              "base64": {
+                "type": "string",
+                "description": "File contents, base64-encoded."
+              },
+              "filename": {
+                "type": "string",
+                "description": "File name to send with the upload part."
+              },
+              "contentType": {
+                "type": "string",
+                "description": "MIME type of the file. Defaults to application/octet-stream."
+              }
+            },
+            "required": [
+              "base64"
+            ],
+            "description": "Binary contents for \"file\"."
           }
         },
         "required": [

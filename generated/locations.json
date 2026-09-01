@@ -1809,13 +1809,23 @@
       "access": "location",
       "operationClass": "read",
       "deprecated": false,
-      "pathFields": [],
+      "pathFields": [
+        "locationId"
+      ],
       "queryFields": [],
       "bodyFields": [],
       "bodyWrapped": false,
       "inputSchema": {
         "type": "object",
-        "properties": {}
+        "properties": {
+          "locationId": {
+            "type": "string",
+            "description": "Path parameter \"locationId\", recovered from the URL template because the spec omits it."
+          }
+        },
+        "required": [
+          "locationId"
+        ]
       }
     },
     {

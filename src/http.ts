@@ -1,6 +1,7 @@
 import { createServer as createHttpServer, type IncomingMessage, type ServerResponse } from 'node:http';
 import { timingSafeEqual } from 'node:crypto';
 import { StreamableHTTPServerTransport } from '@modelcontextprotocol/sdk/server/streamableHttp.js';
+import { loadEndpoints } from './catalog.ts';
 import { loadConfig } from './config.ts';
 import { createServer } from './server.ts';
 
@@ -53,6 +54,27 @@ if (!authToken) {
 
 const config = loadConfig();
 const port = Number(process.env.PORT ?? 3000);
+// listen() without a host binds every interface, which put a full-CRM proxy on the
+// LAN while the startup line claimed localhost. Loopback unless asked otherwise.
+const host = process.env.MCP_BIND_HOST?.trim() || '127.0.0.1';
+const LOOPBACK_HOSTS = new Set(['127.0.0.1', 'localhost', '::1']);
+
+// Parsed once: createServer runs per request, and loadEndpoints is a synchronous
+// multi-megabyte JSON parse that would block the event loop on every call.
+const endpoints = loadEndpoints(config.modules);
+const catalog = config.metaTools && config.modules !== 'all' ? loadEndpoints('all') : endpoints;
+
+// DNS rebinding: a hostile page can make a browser resolve its own domain to this
+// address, but it cannot forge the Host header. An empty allowedOrigins list is a
+// no-op in the SDK, so the Host allowlist is what actually holds.
+const allowedHosts = [
+  ...new Set([
+    `${host}:${port}`,
+    `localhost:${port}`,
+    `127.0.0.1:${port}`,
+    ...(process.env.MCP_ALLOWED_HOSTS?.split(',').map((entry) => entry.trim()).filter(Boolean) ?? []),
+  ]),
+];
 
 const httpServer = createHttpServer(async (req, res) => {
   const url = new URL(req.url ?? '/', 'http://localhost');
@@ -77,8 +99,12 @@ const httpServer = createHttpServer(async (req, res) => {
   try {
     const body = await readJsonBody(req);
     // A fresh server + transport per request keeps JSON-RPC ids from colliding across clients.
-    const server = createServer(config);
-    const transport = new StreamableHTTPServerTransport({ sessionIdGenerator: undefined });
+    const server = createServer(config, { endpoints, catalog });
+    const transport = new StreamableHTTPServerTransport({
+      sessionIdGenerator: undefined,
+      enableDnsRebindingProtection: true,
+      allowedHosts,
+    });
     res.on('close', () => {
       void transport.close();
       void server.close();
@@ -91,6 +117,10 @@ const httpServer = createHttpServer(async (req, res) => {
   }
 });
 
-httpServer.listen(port, () => {
-  log(`Streamable HTTP listening on http://localhost:${port}/mcp`);
+httpServer.listen(port, host, () => {
+  log(`Streamable HTTP listening on http://${host}:${port}/mcp`);
+  log(`Accepted Host headers: ${allowedHosts.join(', ')} (add more with MCP_ALLOWED_HOSTS).`);
+  if (!LOOPBACK_HOSTS.has(host)) {
+    log(`MCP_BIND_HOST=${host} exposes this process beyond the machine. Terminate TLS in front of it: the bearer token and every CRM record cross the wire in cleartext otherwise.`);
+  }
 });
